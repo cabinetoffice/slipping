@@ -1,0 +1,18 @@
+Feature: PAWS2-1 - MP Log in
+
+Scenario: MP First Succesful Log in
+Given I try to log in for the first time
+When I enter the correct username, password and third ID factor
+Then I will be given access to the Slipping form 
+
+Feature: PAWS2-3 - MP Return Log in
+
+Scenario: MP Returns to Log in 
+Given I want to access the Slipping form again after my first log in
+When I enter my Parliamentary ID number
+Then I will see the rest of my log in detaiils pre-populated on the log in screen and will be able to access the Slipping form
+
+Scenario: MP Return Log In Fail
+Given I want to access the Slipping form again after my first log in
+When I enter an incorrect Parliamentary ID number
+Then I will see an error message that says my request has been decline and I must correct the error
