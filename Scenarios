@@ -5,14 +5,56 @@ Given I try to log in for the first time
 When I enter the correct username, password and third ID factor
 Then I will be given access to the Slipping form 
 
+Scenario: MP Log in Fail- Incorrect Password
+Given I try to log in for the first time
+When I enter the wrong password
+Then I will see an error message that says my request has been declined and I must correct the error to be granted access
+
+Scenario: MP Log in Fail- Incorrect Username
+Given I try to log in for the first time
+When I enter the wrong username
+Then I will see an error message that says my request has been declined and I must correct the error to be granted access
+
+Scenario: MP Log in Fail- Incorrect User ID
+Given I try to log in for the first time
+When I enter the wrong user ID 
+Then I will see an error message that says my request has been declined and I must correct the error to be granted access
+
 Feature: PAWS2-3 - MP Return Log in
 
-Scenario: MP Returns to Log in 
-Given I want to access the Slipping form again after my first log in
+Scenario: MP Returns to Log in Success- Correct ID
+Given I want to access the Slipping form again after signing out from my first session
 When I enter my Parliamentary ID number
 Then I will see the rest of my log in detaiils pre-populated on the log in screen and will be able to access the Slipping form
 
-Scenario: MP Return Log In Fail
+Scenario: MP Returns to Log In - Fail- Incorrect ID
 Given I want to access the Slipping form again after my first log in
 When I enter an incorrect Parliamentary ID number
-Then I will see an error message that says my request has been decline and I must correct the error
+Then I will be prompted to complete the empty fields before I am granted access to the Slipping form.
+
+Scenarios: Nominated Users (Could be diary secretary) -First Succesful Log in
+Given I try to log in for the first time
+When I enter the correct username, password and third ID factor
+Then I will be given access to the Slipping form
+
+Scenario: Nominated Users (Could be diary secretary)- Log in Fail- Incorrect Password
+Given I try to log in for the first time
+When I enter the wrong password
+Then I will see an error message that says my request has been declined and I must correct the error to be granted access
+
+Scenario: Nominated Users (Could be diary secretary) - Log in Fail- Incorrect Username
+Given I try to log in for the first time
+When I enter the wrong username
+Then I will see an error message that says my request has been declined and I must correct the error to be granted access
+
+Scenario: Nominated Users (Could be diary secretary)  Log in Fail- Incorrect User ID
+Given I try to log in for the first time
+When I enter the wrong user ID 
+Then I will see an error message that says my request has been declined and I must correct the error to be granted access
+
+Scenario: MP First Succesful Log in
+Given I try to log in for the first time
+When I enter the correct username, password and third ID factor
+Then I will be given access to the Slipping form 
+
+Scenarios: PAWS (back end)
