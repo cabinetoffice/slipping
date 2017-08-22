@@ -1,0 +1,59 @@
+{% extends "layout.html" %}
+
+{% block page_title %}
+  Task list
+{% endblock %}
+
+{% block content %}
+
+<main id="content" role="main">
+
+  <div class="grid-row">
+    <div class="column-full">
+
+    {% include "includes/phase_banner_alpha.html" %}
+
+    <div class="grid-row">
+    <div class="column-two-thirds column-minimum">
+
+    <a class="link-back" href="page-cancel-confirmation">Back</a>
+
+      <h1 class="heading-large">
+        Damian Green MP
+      </h1>
+
+      <ol class="task-list">
+        <li>
+          <h2 class="task-list-section">
+          </h2>
+          <ul class="task-list-items">
+            <li class="task-list-item">
+              <a class="task-name" href="#" aria-describedby="eligibility-completed">
+                Slipping request 15/08/2017
+              </a>
+              <strong class="task-completed" id="eligibility-completed">Deferred</strong>
+            </li>
+            <li class="task-list-item">
+              <a class="task-name" href="#" aria-describedby="read-declaration-completed">
+                Slipping request 10/10/2017
+              </a>
+              <strong class="task-completed" id="read-declaration-completed">Rejected</strong>
+            </li>
+            <li class="task-list-item">
+              <a class="task-name" href="#" aria-describedby="read-declaration-completed">
+                Slipping request 01/06/2017
+              </a>
+              <strong class="task-completed" id="read-declaration-completed">Approved</strong>
+            </li>
+          </ul>
+        </ol>
+
+        <p>
+        <a class="button" href="page-date-time-1" role="button">New slipping request</a>
+      </p>
+
+    </div>
+  </div>
+</main>
+
+{% endblock %}

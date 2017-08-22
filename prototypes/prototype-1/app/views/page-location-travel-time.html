@@ -1,0 +1,59 @@
+{% extends "layout.html" %}
+
+{% block page_title %}
+  Question page
+{% endblock %}
+
+{% block content %}
+
+<main id="content" role="main">
+  <div class="grid-row">
+    <div class="column-two-thirds">
+
+    {% include "includes/phase_banner_alpha.html" %}
+
+      <a class="link-back" href="page-date-time-2">Back</a>
+
+      <h1 class="heading-large">
+        Where are you going?
+      </h1>
+
+      
+      <form class="form" action="page-reason">
+  <div class="form-group">
+    <fieldset>
+
+      <div class="form-group">
+  <label class="form-label" for="location">
+  Location
+  <span class="form-hint">
+    This can be a city,town or village
+  </span>
+</label>
+<input class="form-control" id="location" type="text" name="location">
+
+<br>
+</br>
+
+<label class="form-label" for="travel-time">
+  How long will it take from your location to get to Westminster?
+  <span class="form-hint">
+   Please provide an estimated time in hours only
+  </span>
+</label>
+<input class="form-control" id="travel-time" type="text" name="travel-time" style= "width: 50px;" >
+
+<br>
+</br>
+
+       <div class="form-group">
+          <input class="button" type="submit" value="Continue">
+        </div>
+
+      </form>
+
+    </div>
+  </div>
+</main>
+
+{% endblock %}

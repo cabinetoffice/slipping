@@ -1,0 +1,44 @@
+{% extends "layout.html" %}
+
+{% block page_title %}
+  GOV.UK prototype kit
+{% endblock %}
+
+{% block content %}
+
+
+<main id="content" role="main">
+
+  <div class="grid-row">
+    <div class="column-full">
+
+    {% include "includes/phase_banner_alpha.html" %}
+
+    <div class="grid-row">
+    <div class="column-two-thirds column-minimum">
+
+      <h1 class="heading-xlarge">
+        {% if serviceName %} {{ serviceName }} {% endif %}
+      </h1>
+
+  <p>Before you start, you will need:</p>
+
+      <ul class="list list-bullet">
+        <li>Location of your slipping</li>
+        <li>Reason for your slipping</li>
+        <li>List of MP's you are going with</li>
+      </uL>
+
+      <p>This service takes less than 5 minutes to complete</p>
+
+      <p>
+        <a class="button button-start" href="page-select-mp" role="button">Start</a>
+      </p>
+
+    </div>
+  
+  </div>
+
+</main>
+
+{% endblock %}

@@ -1,0 +1,71 @@
+{% extends "layout.html" %}
+
+{% block page_title %}
+  Question page
+{% endblock %}
+
+{% block content %}
+
+<main id="content" role="main">
+  <div class="grid-row">
+    <div class="column-full">
+
+    {% include "includes/phase_banner_alpha.html" %}
+
+    <div class="grid-row">
+    <div class="column-two-thirds column-minimum">
+      <a class="link-back" href="page-date-time-1">Back</a>
+
+      <h1 class="heading-large">
+        When are you coming back? 
+      </h1>
+
+      <form class="form" action="page-location-travel-time">
+
+<div class="form-group">
+  <label class="form-label" for="date-to">Date</label>
+  <input class="form-control" id="date-to" name="date-to" type="date">
+</div>
+
+<div class="form-group">
+  <label class="form-label" for="select-box">Time</label>
+  <select class="form-control" id="time-to" name="time-to">
+     <option>Select a time</option>
+    <option>00:00</option>
+    <option>01:00</option>
+    <option>02:00</option>
+    <option>03:00</option>
+    <option>04:00</option>
+    <option>05:00</option>
+    <option>06:00</option>
+    <option>07:00</option>
+    <option>08:00</option>
+    <option>09:00</option>
+    <option>10:00</option>
+    <option>11:00</option>
+    <option>12:00</option>
+    <option>13:00</option>
+    <option>14:00</option>
+    <option>15:00</option>
+    <option>16:00</option>
+    <option>17:00</option>
+    <option>18:00</option>
+    <option>19:00</option>
+    <option>20:00</option>
+    <option>21:00</option>
+    <option>22:00</option>
+    <option>23:00</option>
+  </select>
+</div>
+
+        <div class="form-group">
+          <input class="button" type="submit" value="Continue">
+        </div>
+
+      </form>
+
+    </div>
+  </div>
+</main>
+
+{% endblock %}

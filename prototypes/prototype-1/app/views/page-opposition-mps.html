@@ -1,0 +1,99 @@
+{% extends "layout.html" %}
+
+{% block page_title %}
+  Question page
+{% endblock %}
+
+{% block content %}
+
+<main id="content" role="main">
+  <div class="grid-row">
+    <div class="column-full">
+
+    {% include "includes/phase_banner_alpha.html" %}
+
+    <div class="grid-row">
+    <div class="column-two-thirds column-minimum">
+      <a class="link-back" href="page-location-travel-time">Back</a>
+
+      <h1 class="heading-large">
+        Are there any opposition MPs in attendance? 
+      </h1>
+
+      <form class="form" action="page-opposition-mps">
+        <div class="form-group">
+<fieldset>
+   
+      <div class="multiple-choice" data-target="yes-add-mps">
+        <input id="yes" type="radio" name="radio-group" value="Yes">
+        <label for="yes">Yes</label>
+      </div>
+      <div class="panel panel-border-narrow js-hidden" id="yes-add-mps">
+        
+<form>
+      <div class="grid-row">
+        <div class="form-group-compound list-item-wrapper">
+          <h2 class="heading-medium">Item 1</h2>
+
+          <fieldset>
+            <div class="column-one-third no-padding">
+              <div class="form-group list-item">
+                <label class="form-label" for="field-1">
+                  Field label
+                </label>
+                <input type="text" class="form-control" id="field-1" name="field-1">
+              </div>
+            </div>
+
+            <div class="column-one-third no-padding">
+              <div class="form-group list-item">
+                <label class="form-label" for="field-2">
+                  Field label
+                </label>
+                <input type="text" class="form-control" id="field-2" name="field-2">
+              </div>
+            </div>
+
+            <div class="column-one-third no-padding">
+              <div class="list-item">
+              </div>
+            </div>
+          </fieldset>
+
+          <hr/>
+        </div>
+      </div>
+
+      <div class="grid-row">
+        <div class="column-two-thirds">
+          <div class="form-group">
+            <button id="add-button" class="button button-add-another">Add another</button>
+          </div>
+        </div>
+      </div>
+    </form>
+                
+
+</div>
+
+
+
+      
+
+
+<p class="form-block"></p>
+<p class="form-block"></p>
+
+        <div class="form-group">
+          <input class="button" type="submit" value="Continue">
+        </div>
+
+        </fieldset>
+
+      </form>
+
+    </div>
+  </div>
+</main>
+
+{% endblock %}

@@ -1,0 +1,95 @@
+// Path to assets for use with the file-url function
+// in the govuk frontend toolkit's url-helpers partial
+$path: "/public/images/";
+
+// Import GOV.UK elements from /govuk-modules/, this will import the frontend toolkit and some base styles.
+// Take a look in /govuk-modules/_govuk-elements.scss to see which files are imported.
+@import 'govuk-elements';
+
+// If you need to create a page as part of your journey, but without GOV.UK branding
+// See localhost:3000/examples/unbranded/
+
+// Override the govuk_frontend_toolkit's font stack
+// https://github.com/alphagov/govuk_frontend_toolkit/blob/master/stylesheets/_font_stack.scss#L13
+$toolkit-font-stack: $helvetica-regular;
+
+.unbranded {
+  background: $white;
+
+  // Use the universal selector and !important to *ALWAYS OVERRIDE* GDS Transport
+  * {
+
+    font-family: $toolkit-font-stack !important;
+  }
+
+  // Remove GOV.UK footer styles
+  #footer {
+    border: 0;
+    background: $white;
+  }
+}
+
+.no-padding {
+      padding-left: 0;
+      padding-right: 0;
+
+      @media (max-width: 640px) {
+        padding-left: 20px;
+        padding-right: 20px;
+      }
+    }
+
+    .remove-list-item {
+      display: inline-block;
+      margin-top: 1.6em;
+    }
+
+    .list-item-wrapper {
+      padding-left: 20px;
+      padding-right: 20px;
+
+      .heading-small,
+      .heading-medium,
+      .heading-large,
+      .heading-xlarge {
+        margin-top: 0;
+      }
+
+      .column-one-third {
+        .list-item {
+          width: 100%;
+        }
+
+        input {
+          width: 90%;
+
+          @media (max-width: 640px) {
+            width: 100%;
+          }
+        }
+      }
+    }
+
+    .button-add-another {
+      background-color: #eee;
+      color: #000;
+      box-shadow: 0 2px 0 #666;
+
+      &:hover {
+        background-color: #ccc;
+        color: #000;
+        box-shadow: 0 2px 0 #666;
+      }
+
+      &:focus {
+        background-color: #ccc;
+        color: #000;
+        box-shadow: 0 2px 0 #666;
+      }
+
+      @media (max-width: 640px) {
+        width: 90%;
+        margin: auto;
+        display: block;
+      }
+    }

@@ -1,0 +1,162 @@
+// Path to assets for use with the file-url function
+// in the govuk frontend toolkit's url-helpers partial
+$path: "/public/images/";
+
+// Import GOV.UK elements from /govuk-modules/, this will import the frontend toolkit and some base styles.
+// Take a look in /govuk-modules/_govuk-elements.scss to see which files are imported.
+@import 'govuk-elements';
+
+// Take a look at in app/assets/sass/patterns/ to see which files are imported.
+@import 'patterns/check-your-answers';
+@import 'patterns/task-list';
+
+// Related items
+// (These styles will be moved to GOV.UK elements, duplicating here for now.)
+.govuk-related-items {
+  margin-top: $gutter;
+  border-top: 10px solid $govuk-blue;
+  padding-top: 5px;
+
+  .heading-medium {
+    margin-top: 0.3em;
+    margin-bottom: 0.5em;
+  }
+
+  li {
+    margin-bottom: 10px;
+    list-style-type: none;
+  }
+}
+
+.no-padding {
+      padding-left: 0;
+      padding-right: 0;
+    }
+
+    .remove-list-item {
+      display: inline-block;
+      margin-top: 1.6em;
+    }
+
+    .list-item-wrapper {
+      padding-left: 20px;
+      padding-right: 20px;
+    }
+
+    .list-item-wrapper .heading-small,
+    .list-item-wrapper .heading-medium,
+    .list-item-wrapper .heading-large,
+    .list-item-wrapper .heading-xlarge {
+      margin-top: 0;
+    }
+
+    .list-item-wrapper .column-one-third .list-item {
+      width: 100%;
+    }
+
+    .list-item-wrapper .column-one-third input {
+      width: 90%;
+    }
+
+    .button-add-another {
+      background-color: #eee;
+      color: #000;
+      box-shadow: 0 2px 0 #666;
+    }
+
+    .button-add-another:hover {
+      background-color: #ccc;
+      color: #000;
+      box-shadow: 0 2px 0 #666;
+    }
+
+    .button-add-another:focus {
+      background-color: #ccc;
+      color: #000;
+      box-shadow: 0 2px 0 #666;
+    }
+
+    @media (max-width: 640px) {
+      .list-item-wrapper .column-one-third input {
+        width: 100%;
+      }
+
+      .no-padding {
+        padding-left: 20px;
+        padding-right: 20px;
+      }
+
+      .button-add-another {
+        width: 90%;
+        margin: auto;
+        display: block;
+      }
+    }
+
+// Add extra styles here, or re-organise the Sass files in whichever way makes most sense to you
+
+  .no-padding {
+      padding-left: 0;
+      padding-right: 0;
+
+      @media (max-width: 640px) {
+        padding-left: 20px;
+        padding-right: 20px;
+      }
+    }
+
+    .remove-list-item {
+      display: inline-block;
+      margin-top: 1.6em;
+    }
+
+    .list-item-wrapper {
+      padding-left: 20px;
+      padding-right: 20px;
+
+      .heading-small,
+      .heading-medium,
+      .heading-large,
+      .heading-xlarge {
+        margin-top: 0;
+      }
+
+      .column-one-third {
+        .list-item {
+          width: 100%;
+        }
+
+        input {
+          width: 90%;
+
+          @media (max-width: 640px) {
+            width: 100%;
+          }
+        }
+      }
+    }
+
+    .button-add-another {
+      background-color: #eee;
+      color: #000;
+      box-shadow: 0 2px 0 #666;
+
+      &:hover {
+        background-color: #ccc;
+        color: #000;
+        box-shadow: 0 2px 0 #666;
+      }
+
+      &:focus {
+        background-color: #ccc;
+        color: #000;
+        box-shadow: 0 2px 0 #666;
+      }
+
+      @media (max-width: 640px) {
+        width: 90%;
+        margin: auto;
+        display: block;
+      }
+    }
+
