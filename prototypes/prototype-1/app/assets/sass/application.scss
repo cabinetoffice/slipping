@@ -28,6 +28,19 @@ $path: "/public/images/";
   }
 }
 
+hr {
+    display: block;
+    height: 1px;
+    margin-top: 30px;
+    margin-bottom: 30px !important;
+    background: rgb(191, 193, 195);
+    border-width: 0px;
+    border-style: initial;
+    border-color: initial;
+    border-image: initial;
+    padding: 0px; 
+}
+
 .no-padding {
       padding-left: 0;
       padding-right: 0;
@@ -95,7 +108,7 @@ $path: "/public/images/";
 
 // Add extra styles here, or re-organise the Sass files in whichever way makes most sense to you
 
-  .no-padding {
+ .no-padding {
       padding-left: 0;
       padding-right: 0;
 
@@ -107,7 +120,7 @@ $path: "/public/images/";
 
     .remove-list-item {
       display: inline-block;
-      margin-top: 1.6em;
+      margin-top: 1.6em !important;
     }
 
     .list-item-wrapper {
@@ -140,6 +153,7 @@ $path: "/public/images/";
       background-color: #eee;
       color: #000;
       box-shadow: 0 2px 0 #666;
+      margin-bottom: 30px !important;
 
       &:hover {
         background-color: #ccc;
@@ -160,3 +174,4 @@ $path: "/public/images/";
       }
     }
 
+  

@@ -18,8 +18,8 @@ $(document).ready(function () {
   showHideContent.init()
 })
 
-   $(document).on('click', '.button-add-another', function (e) {
-      var beforeThis = $(this).parents('.grid-row');
+    $(document).on('click', '.button-add-another', function (e) {
+      var beforeThis = $(this).closest('.grid-row');
       e.preventDefault();
       insertFields(beforeThis);
       sortFields();
@@ -95,5 +95,3 @@ $(document).ready(function () {
         $('.remove-list-item').remove();
       }
     }
-
-                
