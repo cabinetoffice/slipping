@@ -35,22 +35,14 @@ $(document).ready(function () {
       element.before(
         '<div class="grid-row">' +
           '<div class="form-group-compound list-item-wrapper">' +
-            '<h2 class="heading-medium">Item 1</h2>' +
+            '<h2 class="heading-medium">MP 1</h2>' +
             '<fieldset>' +
               '<div class="column-one-third no-padding">' +
                 '<div class="form-group list-item">' +
                   '<label class="form-label" for="field-x">' +
-                    'Field label' +
+                    'Full name' +
                   '</label>' +
-                  '<input type="text" class="form-control" id="field-x" name="field-x">' +
-                '</div>' +
-              '</div>' +
-              '<div class="column-one-third no-padding">' +
-                '<div class="form-group list-item">' +
-                  '<label class="form-label" for="field-x">' +
-                    'Field label' +
-                  '</label>' +
-                  '<input type="text" class="form-control" id="field-x" name="field-x">' +
+                  '<input type="text" class="form-control" id="field-x" name="field"> ' +
                 '</div>' +
               '</div>' +
               '<div class="column-one-third no-padding">' +
@@ -69,7 +61,7 @@ $(document).ready(function () {
       var inputCounter = 1;
 
       $(document).find('.list-item-wrapper').each(function () {
-        $(this).find('h2').text('Item ' + listCounter);
+        $(this).find('h2').text('MP' + listCounter);
 
         if ($(this).find('.remove-list-item').length === 0) {
           $(this).find('.list-item:last').append('<a id="remove-item-' + listCounter + '" class="remove-list-item" href="#">Remove this</a>');
@@ -85,7 +77,7 @@ $(document).ready(function () {
         $(this).find('.list-item').children('input').each(function () {
           var labelNo = $(this).parent().find('label').attr('for').split('-').pop();
           $(this).attr('id', 'field-' + labelNo);
-          $(this).attr('name', 'field-' + labelNo);
+          
         });
 
         listCounter++;

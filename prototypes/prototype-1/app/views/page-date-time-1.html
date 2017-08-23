@@ -25,12 +25,12 @@
 
 <div class="form-group">
   <label class="form-label" for="date-from">Date</label>
-  <input class="form-control" id="date-from" name="date-from" type="date">
+  <input class="form-control" id="date-from" name="date-from" type="date" value="{{ data['date-from'] }}">
 </div>
 
 <div class="form-group">
   <label class="form-label" for="select-box">Time</label>
-  <select class="form-control" id="time-from" name="time-from">
+  <select class="form-control" id="time-from" name="time-from" value="{{ data['time-from'] }}">
      <option>Select a time</option>
     <option>00:00</option>
     <option>01:00</option>

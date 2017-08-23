@@ -15,10 +15,10 @@
     <div class="grid-row">
     <div class="column-two-thirds column-minimum">
 
-    <a class="link-back" href="page-damian-green">Back</a>
+    <a class="link-back" href="page-opposition-mps">Back</a>
 
       <h1 class="heading-large">
-       Slipping request 10/08/2017
+       Check your answers before submitting your slipping request
       </h1>
       <!-- only add a heading for a list if there is more than one list -->
       <br>
@@ -34,9 +34,12 @@
             From
           </dt>
           <dd class="cya-answer">
-            10/08/2017 <br>14:00</br>
+             {{ data['date-from'] }} <br>{{ data['time-from'] }}</br>
           </dd>
           <dd class="cya-change">
+          <a href="page-date-time-1">
+              Change<span class="visually-hidden">name</span>
+            </a>
           </dd>
         </div>
 
@@ -45,9 +48,12 @@
            To
           </dt>
           <dd class="cya-answer">
-           12/08/2017 <br>19:00</br>
+           {{ data['date-to'] }} <br>{{ data['time-to'] }}</br>
           </dd>
           <dd class="cya-change">
+          <a href="page-date-time-2">
+              Change<span class="visually-hidden">name</span>
+            </a>
           </dd>
         </div>
 
@@ -56,9 +62,12 @@
             Location
           </dt>
           <dd class="cya-answer">
-            Belfast
+            {{ data['location'] }}
           </dd>
           <dd class="cya-change">
+          <a href="page-location-travel-time">
+              Change<span class="visually-hidden">name</span>
+            </a>
           </dd>
         </div>
 
@@ -67,34 +76,40 @@
             Travel time to Westminster
           </dt>
           <dd class="cya-answer">
-            24 hours
+            {{ data['travel-time'] }} hours
           </dd>
           <dd class="cya-change">
-          <a href="page-location-trave-time">
+          <a href="page-location-travel-time">
               Change<span class="visually-hidden">name</span>
             </a>
           </dd>
         </div>
 
-        <div>
+      <div>
           <dt class="cya-question">
             Reason
           </dt>
           <dd class="cya-answer">
-            Personal 
+            {{ data['radio-group'] }}
           </dd>
           <dd class="cya-change">
+          <a href="page-reason">
+              Change<span class="visually-hidden">name</span>
+            </a>
           </dd>
-          </div>
+        </div>
 
           <div>
           <dt class="cya-question">
             Details
           </dt>
           <dd class="cya-answer">
-            Going to Belfast for a holiday. By submitting this notification you are confirming that, to the best of your knowledge, the details you are providing are correct. By submitting this notification you are confirming that, to the best of your knowledge, the details you are providing are correct.
+           {{ data['reason-details'] }}
           </dd>
           <dd class="cya-change">
+          <a href="page-reason">
+              Change<span class="visually-hidden">name</span>
+            </a>
           </dd>
           </div>
 
@@ -103,33 +118,22 @@
             Any opposition MPs in attendance?
           </dt>
           <dd class="cya-answer">
-            No
+            {{ data['radio-group-add-mps'] }} <br>{{ data['field'] }}</br>
           </dd>
           <dd class="cya-change">
+          <a href="page-opposition-mps">
+              Change<span class="visually-hidden">name</span>
+            </a>
           </dd>
           </div>
 
-
-          <div>
-          <dt class="cya-question">
-            Status
-          </dt>
-          <dd class="cya-answer">
-            Approved
-          </dd>
-          <dd class="cya-change">
-          </dd>
       </dl>
 
-
-      <h2 class="heading-medium">Want to cancel your slipping request?</h2>
-
-      <p class="text">
-        By submitting this notification you are confirming that, to the best of your knowledge, the details you are providing are correct.
-      </p>
+      <br>
+      </br>
 
       <div class="form-group">
-        <a href="page-cancel-confirmation" class="button">Cancel my slipping request</a>
+        <a href="page-confirmation" class="button">Submit slipping request</a>
       </div>
 
     </div>
