@@ -6,7 +6,6 @@ using System.Web.Mvc;
 
 namespace Triad.CabinetOffice.Slipping.Web.Controllers
 {
-    [Authorize]
     public class HomeController : Controller
     {
         public ActionResult Index()

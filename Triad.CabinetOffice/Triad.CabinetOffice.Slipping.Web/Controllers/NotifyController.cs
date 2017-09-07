@@ -9,6 +9,7 @@ using Notify.Models.Responses;
 
 namespace Triad.CabinetOffice.Slipping.Web.Controllers
 {
+    [Authorize]
     public class NotifyController : Controller
     {
         // GET: Notify
@@ -30,7 +31,7 @@ namespace Triad.CabinetOffice.Slipping.Web.Controllers
             {
                 { "name", "David Preston" },
                 { "absence_date", new DateTime(2017,10,14).ToShortDateString() },
-                { "reference", "1234" }
+                { "reference", "Please forward to Andrew so I can see what it looks like!" }
             };
             EmailNotificationResponse response = client.SendEmail(emailAddress, templateId, personalisations);
             return View();

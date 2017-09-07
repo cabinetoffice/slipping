@@ -25,7 +25,10 @@ namespace Triad.CabinetOffice.Slipping.Web
 
             bundles.Add(new StyleBundle("~/Content/css").Include(
                       "~/Content/bootstrap.css",
-                      "~/Content/site.css"));
+                      "~/Content/site.css",
+                      "~/Content/govuk-template.css",
+                      "~/Content/govuk-elements-styles.css",
+                      "~/Content/check-your-answers.css"));
         }
     }
 }
