@@ -1,0 +1,49 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Schema Namespace="Model.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012.Azure" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+  <EntityType Name="Absence Request">
+    <Key>
+      <PropertyRef Name="ID" />
+    </Key>
+    <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="Govt MP" Type="int" Nullable="false" />
+    <Property Name="Reason" Type="int" Nullable="false" />
+    <Property Name="Details" Type="nvarchar" MaxLength="220" />
+    <Property Name="Date Created" Type="datetime2" Precision="3" Nullable="false" />
+    <Property Name="Status" Type="int" Nullable="false" />
+    <Property Name="From Time" Type="time" Precision="3" Nullable="false" />
+    <Property Name="To Time" Type="time" Precision="3" Nullable="false" />
+    <Property Name="From Date" Type="date" Nullable="false" />
+    <Property Name="To Date" Type="date" Nullable="false" />
+    <Property Name="From Date Time" Type="datetime2" Precision="0" StoreGeneratedPattern="Computed" />
+    <Property Name="To Date Time" Type="datetime2" Precision="0" StoreGeneratedPattern="Computed" />
+    <Property Name="Decision Notes" Type="nvarchar" MaxLength="220" />
+  </EntityType>
+  <EntityType Name="Members of Parliament">
+    <Key>
+      <PropertyRef Name="ID" />
+    </Key>
+    <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="Title" Type="nvarchar" MaxLength="220" />
+    <Property Name="Forenames" Type="nvarchar" MaxLength="50" Nullable="false" />
+    <Property Name="Surname" Type="nvarchar" MaxLength="50" Nullable="false" />
+    <Property Name="From Date" Type="datetime2" Precision="3" Nullable="false" />
+    <Property Name="To Date" Type="datetime2" Precision="3" />
+    <Property Name="Email Address" Type="nvarchar" MaxLength="100" />
+    <Property Name="Mobile" Type="nvarchar" MaxLength="20" />
+    <Property Name="Government Position" Type="nvarchar" MaxLength="150" />
+    <Property Name="Notes" Type="nvarchar(max)" />
+    <Property Name="Status" Type="int" />
+    <Property Name="Role" Type="int" />
+    <Property Name="Constituency" Type="int" />
+    <Property Name="Party" Type="int" Nullable="false" />
+    <Property Name="List As" Type="nvarchar" MaxLength="102" StoreGeneratedPattern="Computed" Nullable="false" />
+    <Property Name="Member_Id" Type="nvarchar" MaxLength="10" />
+    <Property Name="Dods_Id" Type="nvarchar" MaxLength="10" />
+    <Property Name="Pims_Id" Type="nvarchar" MaxLength="10" />
+    <Property Name="Full Name" Type="nvarchar" MaxLength="322" StoreGeneratedPattern="Computed" />
+  </EntityType>
+  <EntityContainer Name="ModelStoreContainer">
+    <EntitySet Name="Absence Request" EntityType="Self.Absence Request" Schema="Access" store:Type="Tables" />
+    <EntitySet Name="Members of Parliament" EntityType="Self.Members of Parliament" Schema="Access" store:Type="Tables" />
+  </EntityContainer>
+</Schema>

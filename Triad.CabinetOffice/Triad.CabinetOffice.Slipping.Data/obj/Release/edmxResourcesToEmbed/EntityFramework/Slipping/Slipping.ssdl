@@ -1,0 +1,107 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Schema Namespace="Model.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012.Azure" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+  <EntityType Name="AbsenceRequest">
+    <Key>
+      <PropertyRef Name="ID" />
+    </Key>
+    <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="MPID" Type="int" />
+    <Property Name="ReasonID" Type="int" />
+    <Property Name="Details" Type="nvarchar" MaxLength="220" />
+    <Property Name="StatusID" Type="int" Nullable="false" />
+    <Property Name="FromDate" Type="datetime" Nullable="false" />
+    <Property Name="ToDate" Type="datetime" Nullable="false" />
+    <Property Name="DecisionNotes" Type="nvarchar" MaxLength="220" />
+    <Property Name="CreatedBy" Type="int" Nullable="false" />
+    <Property Name="CreatedDate" Type="datetime" Nullable="false" />
+    <Property Name="LastChangedBy" Type="int" Nullable="false" />
+    <Property Name="LastChangedDate" Type="datetime" Nullable="false" />
+  </EntityType>
+  <EntityType Name="User">
+    <Key>
+      <PropertyRef Name="ID" />
+    </Key>
+    <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="Username" Type="varchar" MaxLength="255" Nullable="false" />
+    <Property Name="CreatedBy" Type="int" Nullable="false" />
+    <Property Name="CreateDate" Type="datetime" Nullable="false" />
+  </EntityType>
+  <EntityType Name="UserMP">
+    <Key>
+      <PropertyRef Name="ID" />
+    </Key>
+    <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="MPID" Type="int" Nullable="false" />
+    <Property Name="CreatedBy" Type="int" Nullable="false" />
+    <Property Name="CreatedDate" Type="datetime" Nullable="false" />
+  </EntityType>
+  <Association Name="FK_AbsenceRequest_User_CreatedBy">
+    <End Role="User" Type="Self.User" Multiplicity="1" />
+    <End Role="AbsenceRequest" Type="Self.AbsenceRequest" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="User">
+        <PropertyRef Name="ID" />
+      </Principal>
+      <Dependent Role="AbsenceRequest">
+        <PropertyRef Name="CreatedBy" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_AbsenceRequest_User_LastChangedBy">
+    <End Role="User" Type="Self.User" Multiplicity="1" />
+    <End Role="AbsenceRequest" Type="Self.AbsenceRequest" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="User">
+        <PropertyRef Name="ID" />
+      </Principal>
+      <Dependent Role="AbsenceRequest">
+        <PropertyRef Name="LastChangedBy" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_User_User">
+    <End Role="User" Type="Self.User" Multiplicity="1" />
+    <End Role="User1" Type="Self.User" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="User">
+        <PropertyRef Name="ID" />
+      </Principal>
+      <Dependent Role="User1">
+        <PropertyRef Name="CreatedBy" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_UserMP_User">
+    <End Role="User" Type="Self.User" Multiplicity="1" />
+    <End Role="UserMP" Type="Self.UserMP" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="User">
+        <PropertyRef Name="ID" />
+      </Principal>
+      <Dependent Role="UserMP">
+        <PropertyRef Name="CreatedBy" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <EntityContainer Name="ModelStoreContainer">
+    <EntitySet Name="AbsenceRequest" EntityType="Self.AbsenceRequest" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="User" EntityType="Self.User" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="UserMP" EntityType="Self.UserMP" Schema="dbo" store:Type="Tables" />
+    <AssociationSet Name="FK_AbsenceRequest_User_CreatedBy" Association="Self.FK_AbsenceRequest_User_CreatedBy">
+      <End Role="User" EntitySet="User" />
+      <End Role="AbsenceRequest" EntitySet="AbsenceRequest" />
+    </AssociationSet>
+    <AssociationSet Name="FK_AbsenceRequest_User_LastChangedBy" Association="Self.FK_AbsenceRequest_User_LastChangedBy">
+      <End Role="User" EntitySet="User" />
+      <End Role="AbsenceRequest" EntitySet="AbsenceRequest" />
+    </AssociationSet>
+    <AssociationSet Name="FK_User_User" Association="Self.FK_User_User">
+      <End Role="User" EntitySet="User" />
+      <End Role="User1" EntitySet="User" />
+    </AssociationSet>
+    <AssociationSet Name="FK_UserMP_User" Association="Self.FK_UserMP_User">
+      <End Role="User" EntitySet="User" />
+      <End Role="UserMP" EntitySet="UserMP" />
+    </AssociationSet>
+  </EntityContainer>
+</Schema>
