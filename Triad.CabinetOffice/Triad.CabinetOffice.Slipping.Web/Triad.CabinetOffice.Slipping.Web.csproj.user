@@ -17,6 +17,8 @@
     <IISExpressUseClassicPipelineMode />
     <UseGlobalApplicationHostFile />
     <ProjectView>ProjectFiles</ProjectView>
+    <WebStackScaffolding_DbContextTypeFullName>Triad.CabinetOffice.Slipping.Web.Models.PAWS2Entities</WebStackScaffolding_DbContextTypeFullName>
+    <WebStackScaffolding_IsViewGenerationSelected>True</WebStackScaffolding_IsViewGenerationSelected>
   </PropertyGroup>
   <ProjectExtensions>
     <VisualStudio>

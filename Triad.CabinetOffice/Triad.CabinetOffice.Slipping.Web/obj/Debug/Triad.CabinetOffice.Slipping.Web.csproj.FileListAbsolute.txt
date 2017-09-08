@@ -249,3 +249,7 @@ C:\Users\alott\Source\Repos\pairs-and-whipping\Triad.CabinetOffice\Triad.Cabinet
 C:\Users\alott\Source\Repos\pairs-and-whipping\Triad.CabinetOffice\Triad.CabinetOffice.Slipping.Web\obj\Debug\Triad.CabinetOffice.Slipping.Web.csproj.CoreCompileInputs.cache
 C:\Users\alott\Source\Repos\pairs-and-whipping\Triad.CabinetOffice\Triad.CabinetOffice.Slipping.Web\obj\Debug\Triad.CabinetOffice.Slipping.Web.dll
 C:\Users\alott\Source\Repos\pairs-and-whipping\Triad.CabinetOffice\Triad.CabinetOffice.Slipping.Web\obj\Debug\Triad.CabinetOffice.Slipping.Web.pdb
+C:\Users\alott\Source\Repos\pairs-and-whipping\Triad.CabinetOffice\Triad.CabinetOffice.Slipping.Web\bin\EntityFramework.dll
+C:\Users\alott\Source\Repos\pairs-and-whipping\Triad.CabinetOffice\Triad.CabinetOffice.Slipping.Web\bin\EntityFramework.SqlServer.dll
+C:\Users\alott\Source\Repos\pairs-and-whipping\Triad.CabinetOffice\Triad.CabinetOffice.Slipping.Web\bin\EntityFramework.xml
+C:\Users\alott\Source\Repos\pairs-and-whipping\Triad.CabinetOffice\Triad.CabinetOffice.Slipping.Web\bin\EntityFramework.SqlServer.xml

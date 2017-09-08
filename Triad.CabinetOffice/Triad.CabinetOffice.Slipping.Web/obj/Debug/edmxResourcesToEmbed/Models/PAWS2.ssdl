@@ -1,0 +1,1032 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Schema Namespace="PAWS2Model.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+  <EntityType Name="Absence Exception">
+    <Key>
+      <PropertyRef Name="ID" />
+    </Key>
+    <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="Decision" Type="nvarchar" MaxLength="220" />
+  </EntityType>
+  <EntityType Name="Absence Exception?Images">
+    <Key>
+      <PropertyRef Name="ID" />
+    </Key>
+    <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="Image" Type="varbinary(max)" />
+    <Property Name="SrcID" Type="int" />
+  </EntityType>
+  <EntityType Name="Absence Request">
+    <Key>
+      <PropertyRef Name="ID" />
+    </Key>
+    <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="Govt MP" Type="int" Nullable="false" />
+    <Property Name="Reason" Type="int" />
+    <Property Name="Details" Type="nvarchar" MaxLength="220" />
+    <Property Name="Date Created" Type="datetime2" Precision="3" Nullable="false" />
+    <Property Name="Status" Type="int" Nullable="false" />
+    <Property Name="From Time" Type="time" Precision="3" Nullable="false" />
+    <Property Name="To Time" Type="time" Precision="3" />
+    <Property Name="From Date" Type="date" Nullable="false" />
+    <Property Name="To Date" Type="date" />
+    <Property Name="From Date Time" Type="datetime2" Precision="0" StoreGeneratedPattern="Computed" />
+    <Property Name="To Date Time" Type="datetime2" Precision="0" StoreGeneratedPattern="Computed" />
+    <Property Name="Decision Notes" Type="nvarchar" MaxLength="220" />
+  </EntityType>
+  <EntityType Name="Absence Request Exceptions">
+    <Key>
+      <PropertyRef Name="ID" />
+    </Key>
+    <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="Absence Request" Type="int" Nullable="false" />
+    <Property Name="Exception" Type="int" Nullable="false" />
+    <Property Name="Opposition MP" Type="int" />
+    <Property Name="Notes" Type="nvarchar(max)" />
+    <Property Name="To Date" Type="date" Nullable="false" />
+    <Property Name="From Date" Type="date" Nullable="false" />
+    <Property Name="From Time" Type="time" Precision="3" Nullable="false" />
+    <Property Name="To Time" Type="time" Precision="3" Nullable="false" />
+    <Property Name="From Date Time" Type="datetime2" Precision="0" StoreGeneratedPattern="Computed" />
+    <Property Name="To Date Time" Type="datetime2" Precision="0" StoreGeneratedPattern="Computed" />
+  </EntityType>
+  <EntityType Name="Absence Request Exceptions?Images">
+    <Key>
+      <PropertyRef Name="ID" />
+    </Key>
+    <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="Image" Type="varbinary(max)" />
+    <Property Name="SrcID" Type="int" />
+  </EntityType>
+  <EntityType Name="Absence Request Reason">
+    <Key>
+      <PropertyRef Name="ID" />
+    </Key>
+    <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="Reason" Type="nvarchar" MaxLength="255" />
+  </EntityType>
+  <EntityType Name="Absence Request Reason?Images">
+    <Key>
+      <PropertyRef Name="ID" />
+    </Key>
+    <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="Image" Type="varbinary(max)" />
+    <Property Name="SrcID" Type="int" />
+  </EntityType>
+  <EntityType Name="Absence Request Status">
+    <Key>
+      <PropertyRef Name="ID" />
+    </Key>
+    <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="Status" Type="nvarchar" MaxLength="255" />
+  </EntityType>
+  <EntityType Name="Absence Request Status?Images">
+    <Key>
+      <PropertyRef Name="ID" />
+    </Key>
+    <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="Image" Type="varbinary(max)" />
+    <Property Name="SrcID" Type="int" />
+  </EntityType>
+  <EntityType Name="Absence Request?Images">
+    <Key>
+      <PropertyRef Name="ID" />
+    </Key>
+    <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="Image" Type="varbinary(max)" />
+    <Property Name="SrcID" Type="int" />
+  </EntityType>
+  <EntityType Name="ActionEventArguments?">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="EventId" Type="int" Nullable="false" />
+    <Property Name="Key" Type="nvarchar" MaxLength="100" Nullable="false" />
+    <Property Name="Value" Type="nvarchar(max)" />
+    <Property Name="DataType" Type="int" Nullable="false" />
+  </EntityType>
+  <EntityType Name="ActionEvents?">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="Type" Type="int" Nullable="false" />
+    <Property Name="Status" Type="int" Nullable="false" />
+    <Property Name="CreatedOn" Type="datetime2" Precision="3" Nullable="false" />
+    <Property Name="CompletedOn" Type="datetime2" Precision="3" />
+    <Property Name="LockedAt" Type="datetime2" Precision="3" />
+    <Property Name="RetryCount" Type="int" Nullable="false" />
+  </EntityType>
+  <EntityType Name="Committee">
+    <Key>
+      <PropertyRef Name="ID" />
+    </Key>
+    <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="Title" Type="nvarchar" MaxLength="220" Nullable="false" />
+    <Property Name="Subject" Type="nvarchar" MaxLength="220" />
+    <Property Name="Start Date" Type="date" Nullable="false" />
+    <Property Name="End Date" Type="date" Nullable="false" />
+    <Property Name="Type" Type="int" Nullable="false" />
+  </EntityType>
+  <EntityType Name="Committee Attendance Type">
+    <Key>
+      <PropertyRef Name="ID" />
+    </Key>
+    <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="Attendance" Type="nvarchar" MaxLength="220" />
+  </EntityType>
+  <EntityType Name="Committee Attendance Type?Images">
+    <Key>
+      <PropertyRef Name="ID" />
+    </Key>
+    <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="Image" Type="varbinary(max)" />
+    <Property Name="SrcID" Type="int" />
+  </EntityType>
+  <EntityType Name="Committee Meeting">
+    <Key>
+      <PropertyRef Name="ID" />
+    </Key>
+    <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="Committee" Type="int" Nullable="false" />
+    <Property Name="Start Date" Type="date" Nullable="false" />
+    <Property Name="Start Time" Type="time" Precision="3" Nullable="false" />
+    <Property Name="End Time" Type="time" Precision="3" Nullable="false" />
+    <Property Name="Start Date Time" Type="datetime2" Precision="0" StoreGeneratedPattern="Computed" />
+    <Property Name="End Date Time" Type="datetime2" Precision="0" StoreGeneratedPattern="Computed" />
+  </EntityType>
+  <EntityType Name="Committee Meeting Attendance">
+    <Key>
+      <PropertyRef Name="ID" />
+    </Key>
+    <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="Committee Meeting" Type="int" Nullable="false" />
+    <Property Name="Committee Member" Type="int" Nullable="false" />
+    <Property Name="Attendance" Type="int" />
+  </EntityType>
+  <EntityType Name="Committee Meeting Attendance?Images">
+    <Key>
+      <PropertyRef Name="ID" />
+    </Key>
+    <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="Image" Type="varbinary(max)" />
+    <Property Name="SrcID" Type="int" />
+  </EntityType>
+  <EntityType Name="Committee Meeting?Images">
+    <Key>
+      <PropertyRef Name="ID" />
+    </Key>
+    <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="Image" Type="varbinary(max)" />
+    <Property Name="SrcID" Type="int" />
+  </EntityType>
+  <EntityType Name="Committee Member">
+    <Key>
+      <PropertyRef Name="ID" />
+    </Key>
+    <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="Committee" Type="int" Nullable="false" />
+    <Property Name="Member" Type="int" Nullable="false" />
+  </EntityType>
+  <EntityType Name="Committee Member?Images">
+    <Key>
+      <PropertyRef Name="ID" />
+    </Key>
+    <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="Image" Type="varbinary(max)" />
+    <Property Name="SrcID" Type="int" />
+  </EntityType>
+  <EntityType Name="Committee Type">
+    <Key>
+      <PropertyRef Name="ID" />
+    </Key>
+    <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="Type" Type="nvarchar" MaxLength="220" />
+  </EntityType>
+  <EntityType Name="Committee Type?Images">
+    <Key>
+      <PropertyRef Name="ID" />
+    </Key>
+    <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="Image" Type="varbinary(max)" />
+    <Property Name="SrcID" Type="int" />
+  </EntityType>
+  <EntityType Name="Committee?Images">
+    <Key>
+      <PropertyRef Name="ID" />
+    </Key>
+    <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="Image" Type="varbinary(max)" />
+    <Property Name="SrcID" Type="int" />
+  </EntityType>
+  <EntityType Name="Constituency">
+    <Key>
+      <PropertyRef Name="ID" />
+    </Key>
+    <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="Constituency" Type="nvarchar" MaxLength="50" Nullable="false" />
+    <Property Name="Region" Type="int" Nullable="false" />
+  </EntityType>
+  <EntityType Name="Constituency?Images">
+    <Key>
+      <PropertyRef Name="ID" />
+    </Key>
+    <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="Image" Type="varbinary(max)" />
+    <Property Name="SrcID" Type="int" />
+  </EntityType>
+  <EntityType Name="Country">
+    <Key>
+      <PropertyRef Name="ID" />
+    </Key>
+    <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="Title" Type="nvarchar" MaxLength="50" Nullable="false" />
+  </EntityType>
+  <EntityType Name="Country?Images">
+    <Key>
+      <PropertyRef Name="ID" />
+    </Key>
+    <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="Image" Type="varbinary(max)" />
+    <Property Name="SrcID" Type="int" />
+  </EntityType>
+  <EntityType Name="DateDimension">
+    <Key>
+      <PropertyRef Name="DateID" />
+    </Key>
+    <Property Name="DateID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="DimensionDate" Type="date" Nullable="false" />
+  </EntityType>
+  <EntityType Name="DateDimension?Images">
+    <Key>
+      <PropertyRef Name="ID" />
+    </Key>
+    <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="Image" Type="varbinary(max)" />
+    <Property Name="SrcID" Type="int" />
+  </EntityType>
+  <EntityType Name="DateDimensionHour">
+    <Key>
+      <PropertyRef Name="HourID" />
+    </Key>
+    <Property Name="HourID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="HourDimension" Type="time" Precision="3" />
+  </EntityType>
+  <EntityType Name="DateDimensionHour?Images">
+    <Key>
+      <PropertyRef Name="ID" />
+    </Key>
+    <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="Image" Type="varbinary(max)" />
+    <Property Name="SrcID" Type="int" />
+  </EntityType>
+  <EntityType Name="Divisions">
+    <Key>
+      <PropertyRef Name="ID" />
+    </Key>
+    <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="Number" Type="int" Nullable="false" />
+    <Property Name="Date Time" Type="datetime2" Precision="3" Nullable="false" />
+    <Property Name="Title" Type="nvarchar" MaxLength="255" Nullable="false" />
+    <Property Name="Govt Line" Type="nvarchar" MaxLength="220" Nullable="false" />
+    <Property Name="Ayes" Type="float" />
+    <Property Name="Noes" Type="float" />
+    <Property Name="Deferred Division" Type="bit" Nullable="false" />
+    <Property Name="Session" Type="int" Nullable="false" />
+    <Property Name="Whipping" Type="int" Nullable="false" />
+    <Property Name="Subject" Type="nvarchar" MaxLength="220" />
+    <Property Name="Teller1 for Ayes" Type="int" />
+    <Property Name="Teller2 for Ayes" Type="int" />
+    <Property Name="Teller1 for Noes" Type="int" />
+    <Property Name="Teller2 for Noes" Type="int" />
+  </EntityType>
+  <EntityType Name="Divisions?Images">
+    <Key>
+      <PropertyRef Name="ID" />
+    </Key>
+    <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="Image" Type="varbinary(max)" />
+    <Property Name="SrcID" Type="int" />
+  </EntityType>
+  <EntityType Name="Flock">
+    <Key>
+      <PropertyRef Name="ID" />
+    </Key>
+    <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="Flock Owner" Type="int" Nullable="false" />
+  </EntityType>
+  <EntityType Name="Flock Members">
+    <Key>
+      <PropertyRef Name="ID" />
+    </Key>
+    <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="Flock ID" Type="int" Nullable="false" />
+    <Property Name="Member ID" Type="int" Nullable="false" />
+  </EntityType>
+  <EntityType Name="Flock Members?Images">
+    <Key>
+      <PropertyRef Name="ID" />
+    </Key>
+    <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="Image" Type="varbinary(max)" />
+    <Property Name="SrcID" Type="int" />
+  </EntityType>
+  <EntityType Name="Flock?Images">
+    <Key>
+      <PropertyRef Name="ID" />
+    </Key>
+    <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="Image" Type="varbinary(max)" />
+    <Property Name="SrcID" Type="int" />
+  </EntityType>
+  <EntityType Name="Majority RAG Threshholds">
+    <Key>
+      <PropertyRef Name="ID" />
+    </Key>
+    <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="Red" Type="int" />
+    <Property Name="Amber" Type="int" Nullable="false" />
+  </EntityType>
+  <EntityType Name="Majority RAG Threshholds?Images">
+    <Key>
+      <PropertyRef Name="ID" />
+    </Key>
+    <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="Image" Type="varbinary(max)" />
+    <Property Name="SrcID" Type="int" />
+  </EntityType>
+  <EntityType Name="Members of Parliament">
+    <Key>
+      <PropertyRef Name="ID" />
+    </Key>
+    <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="Title" Type="nvarchar" MaxLength="220" />
+    <Property Name="Forenames" Type="nvarchar" MaxLength="50" Nullable="false" />
+    <Property Name="Surname" Type="nvarchar" MaxLength="50" Nullable="false" />
+    <Property Name="From Date" Type="datetime2" Precision="3" Nullable="false" />
+    <Property Name="To Date" Type="datetime2" Precision="3" />
+    <Property Name="Email Address" Type="nvarchar" MaxLength="100" />
+    <Property Name="Mobile" Type="nvarchar" MaxLength="20" />
+    <Property Name="Government Position" Type="nvarchar" MaxLength="150" />
+    <Property Name="Notes" Type="nvarchar(max)" />
+    <Property Name="Status" Type="int" />
+    <Property Name="Role" Type="int" />
+    <Property Name="Constituency" Type="int" />
+    <Property Name="Party" Type="int" Nullable="false" />
+    <Property Name="List As" Type="nvarchar" MaxLength="102" StoreGeneratedPattern="Computed" Nullable="false" />
+    <Property Name="Member_Id" Type="nvarchar" MaxLength="10" />
+    <Property Name="Dods_Id" Type="nvarchar" MaxLength="10" />
+    <Property Name="Pims_Id" Type="nvarchar" MaxLength="10" />
+    <Property Name="Full Name" Type="nvarchar" MaxLength="322" StoreGeneratedPattern="Computed" />
+  </EntityType>
+  <EntityType Name="Members of Parliament?Images">
+    <Key>
+      <PropertyRef Name="ID" />
+    </Key>
+    <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="Image" Type="varbinary(max)" />
+    <Property Name="SrcID" Type="int" />
+  </EntityType>
+  <EntityType Name="MP Role">
+    <Key>
+      <PropertyRef Name="ID" />
+    </Key>
+    <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="MP Role" Type="nvarchar" MaxLength="255" />
+  </EntityType>
+  <EntityType Name="MP Role?Images">
+    <Key>
+      <PropertyRef Name="ID" />
+    </Key>
+    <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="Image" Type="varbinary(max)" />
+    <Property Name="SrcID" Type="int" />
+  </EntityType>
+  <EntityType Name="MP Status">
+    <Key>
+      <PropertyRef Name="ID" />
+    </Key>
+    <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="MP Status" Type="nvarchar" MaxLength="255" />
+  </EntityType>
+  <EntityType Name="MP Status?Images">
+    <Key>
+      <PropertyRef Name="ID" />
+    </Key>
+    <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="Image" Type="varbinary(max)" />
+    <Property Name="SrcID" Type="int" />
+  </EntityType>
+  <EntityType Name="Party">
+    <Key>
+      <PropertyRef Name="ID" />
+    </Key>
+    <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="Party" Type="nvarchar" MaxLength="10" />
+    <Property Name="Party Name" Type="nvarchar" MaxLength="50" />
+    <Property Name="Govt Flag" Type="bit" Nullable="false" />
+  </EntityType>
+  <EntityType Name="Party?Images">
+    <Key>
+      <PropertyRef Name="ID" />
+    </Key>
+    <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="Image" Type="varbinary(max)" />
+    <Property Name="SrcID" Type="int" />
+  </EntityType>
+  <EntityType Name="Region">
+    <Key>
+      <PropertyRef Name="ID" />
+    </Key>
+    <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="Region" Type="nvarchar" MaxLength="50" Nullable="false" />
+    <Property Name="Country" Type="int" Nullable="false" />
+  </EntityType>
+  <EntityType Name="Region?Images">
+    <Key>
+      <PropertyRef Name="ID" />
+    </Key>
+    <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="Image" Type="varbinary(max)" />
+    <Property Name="SrcID" Type="int" />
+  </EntityType>
+  <EntityType Name="Sessions">
+    <Key>
+      <PropertyRef Name="ID" />
+    </Key>
+    <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="Session Title" Type="nvarchar" MaxLength="50" Nullable="false" />
+    <Property Name="From Date" Type="datetime2" Precision="3" Nullable="false" />
+    <Property Name="To Date" Type="datetime2" Precision="3" Nullable="false" />
+  </EntityType>
+  <EntityType Name="Sessions?Images">
+    <Key>
+      <PropertyRef Name="ID" />
+    </Key>
+    <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="Image" Type="varbinary(max)" />
+    <Property Name="SrcID" Type="int" />
+  </EntityType>
+  <EntityType Name="Trace">
+    <Key>
+      <PropertyRef Name="ID" />
+    </Key>
+    <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="MacroName" Type="nvarchar" MaxLength="128" />
+    <Property Name="ActionName" Type="nvarchar" MaxLength="128" />
+    <Property Name="Operand" Type="nvarchar" MaxLength="4000" />
+    <Property Name="Output" Type="nvarchar(max)" />
+    <Property Name="TargetRow" Type="nvarchar" MaxLength="4000" />
+    <Property Name="Timestamp" Type="datetime2" Precision="3" Nullable="false" />
+    <Property Name="RuntimeErrorMessage" Type="nvarchar" MaxLength="4000" />
+  </EntityType>
+  <EntityType Name="Votes">
+    <Key>
+      <PropertyRef Name="ID" />
+    </Key>
+    <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="Division" Type="int" Nullable="false" />
+    <Property Name="MP" Type="int" Nullable="false" />
+    <Property Name="Aye" Type="bit" Nullable="false" />
+    <Property Name="No" Type="bit" Nullable="false" />
+  </EntityType>
+  <EntityType Name="Votes?Images">
+    <Key>
+      <PropertyRef Name="ID" />
+    </Key>
+    <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="Image" Type="varbinary(max)" />
+    <Property Name="SrcID" Type="int" />
+  </EntityType>
+  <EntityType Name="Voting Behaviour">
+    <Key>
+      <PropertyRef Name="ID" />
+    </Key>
+    <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="Behaviour" Type="nvarchar" MaxLength="50" />
+  </EntityType>
+  <EntityType Name="Voting Behaviour?Images">
+    <Key>
+      <PropertyRef Name="ID" />
+    </Key>
+    <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="Image" Type="varbinary(max)" />
+    <Property Name="SrcID" Type="int" />
+  </EntityType>
+  <EntityType Name="Whipping">
+    <Key>
+      <PropertyRef Name="ID" />
+    </Key>
+    <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="Whipping" Type="nvarchar" MaxLength="255" />
+  </EntityType>
+  <EntityType Name="Whipping?Images">
+    <Key>
+      <PropertyRef Name="ID" />
+    </Key>
+    <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="Image" Type="varbinary(max)" />
+    <Property Name="SrcID" Type="int" />
+  </EntityType>
+  <Association Name="FK_Absence_Request_4D7AF5E8_BB24_42F4_B3E7_1B551FCABB1E">
+    <End Role="Absence Request Reason" Type="Self.Absence Request Reason" Multiplicity="0..1" />
+    <End Role="Absence Request" Type="Self.Absence Request" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Absence Request Reason">
+        <PropertyRef Name="ID" />
+      </Principal>
+      <Dependent Role="Absence Request">
+        <PropertyRef Name="Reason" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_Absence_Request_D3626684_2ADD_4611_BA06_3DBB23C03243">
+    <End Role="Absence Request Status" Type="Self.Absence Request Status" Multiplicity="1" />
+    <End Role="Absence Request" Type="Self.Absence Request" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Absence Request Status">
+        <PropertyRef Name="ID" />
+      </Principal>
+      <Dependent Role="Absence Request">
+        <PropertyRef Name="Status" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_Absence_Request_Decision_078E635F_580F_4AD1_9A8E_6DA477972D07">
+    <End Role="Absence Exception" Type="Self.Absence Exception" Multiplicity="1" />
+    <End Role="Absence Request Exceptions" Type="Self.Absence Request Exceptions" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Absence Exception">
+        <PropertyRef Name="ID" />
+      </Principal>
+      <Dependent Role="Absence Request Exceptions">
+        <PropertyRef Name="Exception" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_Absence_Request_Decision_6516C229_F568_4AE5_A3DA_A5EE623638A5">
+    <End Role="Absence Request" Type="Self.Absence Request" Multiplicity="1" />
+    <End Role="Absence Request Exceptions" Type="Self.Absence Request Exceptions" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Absence Request">
+        <PropertyRef Name="ID" />
+      </Principal>
+      <Dependent Role="Absence Request Exceptions">
+        <PropertyRef Name="Absence Request" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_ActionEventArguments?_ActionEvents?">
+    <End Role="ActionEvents?" Type="Self.ActionEvents?" Multiplicity="1">
+      <OnDelete Action="Cascade" />
+    </End>
+    <End Role="ActionEventArguments?" Type="Self.ActionEventArguments?" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="ActionEvents?">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="ActionEventArguments?">
+        <PropertyRef Name="EventId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_Committee_4954972A_3EFC_4BCF_AAC2_703D435821F7">
+    <End Role="Committee Type" Type="Self.Committee Type" Multiplicity="1" />
+    <End Role="Committee" Type="Self.Committee" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Committee Type">
+        <PropertyRef Name="ID" />
+      </Principal>
+      <Dependent Role="Committee">
+        <PropertyRef Name="Type" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_Committee_Meeting_8D00F18B_8385_4FA9_B714_2E3815D05B8B">
+    <End Role="Committee" Type="Self.Committee" Multiplicity="1" />
+    <End Role="Committee Meeting" Type="Self.Committee Meeting" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Committee">
+        <PropertyRef Name="ID" />
+      </Principal>
+      <Dependent Role="Committee Meeting">
+        <PropertyRef Name="Committee" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_Committee_Member_26C19B0E_E93B_4186_8F61_B9B9D6E5184E">
+    <End Role="Committee" Type="Self.Committee" Multiplicity="1" />
+    <End Role="Committee Member" Type="Self.Committee Member" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Committee">
+        <PropertyRef Name="ID" />
+      </Principal>
+      <Dependent Role="Committee Member">
+        <PropertyRef Name="Committee" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_Committee_Member_8AC0599A_2D63_4E5E_B347_3EE7198F529B">
+    <End Role="Members of Parliament" Type="Self.Members of Parliament" Multiplicity="1" />
+    <End Role="Committee Member" Type="Self.Committee Member" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Members of Parliament">
+        <PropertyRef Name="ID" />
+      </Principal>
+      <Dependent Role="Committee Member">
+        <PropertyRef Name="Member" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_Constituency_186DA6E8_5BDE_4103_8CE9_8D7FBF6E0D5E">
+    <End Role="Region" Type="Self.Region" Multiplicity="1" />
+    <End Role="Constituency" Type="Self.Constituency" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Region">
+        <PropertyRef Name="ID" />
+      </Principal>
+      <Dependent Role="Constituency">
+        <PropertyRef Name="Region" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_Divisions_064F9DAC_CF87_4A99_B1FE_585969FE6D13">
+    <End Role="Members of Parliament" Type="Self.Members of Parliament" Multiplicity="0..1" />
+    <End Role="Divisions" Type="Self.Divisions" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Members of Parliament">
+        <PropertyRef Name="ID" />
+      </Principal>
+      <Dependent Role="Divisions">
+        <PropertyRef Name="Teller2 for Noes" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_Divisions_3F859CCA_DB90_4E79_A787_E3A25D47573A">
+    <End Role="Members of Parliament" Type="Self.Members of Parliament" Multiplicity="0..1" />
+    <End Role="Divisions" Type="Self.Divisions" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Members of Parliament">
+        <PropertyRef Name="ID" />
+      </Principal>
+      <Dependent Role="Divisions">
+        <PropertyRef Name="Teller1 for Ayes" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_Divisions_635165F5_C08A_44B1_9E89_C876BBFC4276">
+    <End Role="Whipping" Type="Self.Whipping" Multiplicity="1" />
+    <End Role="Divisions" Type="Self.Divisions" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Whipping">
+        <PropertyRef Name="ID" />
+      </Principal>
+      <Dependent Role="Divisions">
+        <PropertyRef Name="Whipping" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_Divisions_ECD0AF5B_F2BA_4742_A912_994812877AA2">
+    <End Role="Members of Parliament" Type="Self.Members of Parliament" Multiplicity="0..1" />
+    <End Role="Divisions" Type="Self.Divisions" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Members of Parliament">
+        <PropertyRef Name="ID" />
+      </Principal>
+      <Dependent Role="Divisions">
+        <PropertyRef Name="Teller2 for Ayes" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_Divisions_FBCC8F52_66C7_4D68_BB82_A2214F1C1F33">
+    <End Role="Sessions" Type="Self.Sessions" Multiplicity="1" />
+    <End Role="Divisions" Type="Self.Divisions" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Sessions">
+        <PropertyRef Name="ID" />
+      </Principal>
+      <Dependent Role="Divisions">
+        <PropertyRef Name="Session" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_Divisions_FFAFD48C_D2AA_453F_9286_B9A217F3CCCF">
+    <End Role="Members of Parliament" Type="Self.Members of Parliament" Multiplicity="0..1" />
+    <End Role="Divisions" Type="Self.Divisions" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Members of Parliament">
+        <PropertyRef Name="ID" />
+      </Principal>
+      <Dependent Role="Divisions">
+        <PropertyRef Name="Teller1 for Noes" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_Flock_Members_D072ED89_37E9_4B3F_AA7E_54822969CB13">
+    <End Role="Flock" Type="Self.Flock" Multiplicity="1">
+      <OnDelete Action="Cascade" />
+    </End>
+    <End Role="Flock Members" Type="Self.Flock Members" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Flock">
+        <PropertyRef Name="ID" />
+      </Principal>
+      <Dependent Role="Flock Members">
+        <PropertyRef Name="Flock ID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_Meeting_Attendance_367147E3_0414_4636_AA20_D38219DA563E">
+    <End Role="Members of Parliament" Type="Self.Members of Parliament" Multiplicity="1" />
+    <End Role="Committee Meeting Attendance" Type="Self.Committee Meeting Attendance" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Members of Parliament">
+        <PropertyRef Name="ID" />
+      </Principal>
+      <Dependent Role="Committee Meeting Attendance">
+        <PropertyRef Name="Committee Member" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_Meeting_Attendance_794B4B17_406C_46E5_AEE9_E936B3E2181D">
+    <End Role="Committee Meeting" Type="Self.Committee Meeting" Multiplicity="1">
+      <OnDelete Action="Cascade" />
+    </End>
+    <End Role="Committee Meeting Attendance" Type="Self.Committee Meeting Attendance" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Committee Meeting">
+        <PropertyRef Name="ID" />
+      </Principal>
+      <Dependent Role="Committee Meeting Attendance">
+        <PropertyRef Name="Committee Meeting" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_Meeting_Attendance_AEF5188A_2840_4A27_B0E5_64191851A946">
+    <End Role="Committee Attendance Type" Type="Self.Committee Attendance Type" Multiplicity="0..1" />
+    <End Role="Committee Meeting Attendance" Type="Self.Committee Meeting Attendance" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Committee Attendance Type">
+        <PropertyRef Name="ID" />
+      </Principal>
+      <Dependent Role="Committee Meeting Attendance">
+        <PropertyRef Name="Attendance" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_Members_of_Parliament_01422E9D_4B6E_4E7A_9D57_A56C0F3ACBCC">
+    <End Role="MP Role" Type="Self.MP Role" Multiplicity="0..1" />
+    <End Role="Members of Parliament" Type="Self.Members of Parliament" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="MP Role">
+        <PropertyRef Name="ID" />
+      </Principal>
+      <Dependent Role="Members of Parliament">
+        <PropertyRef Name="Role" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_Members_of_Parliament_043A5CB0_0A7C_42D7_AD8D_D3F72E439C55">
+    <End Role="Constituency" Type="Self.Constituency" Multiplicity="0..1" />
+    <End Role="Members of Parliament" Type="Self.Members of Parliament" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Constituency">
+        <PropertyRef Name="ID" />
+      </Principal>
+      <Dependent Role="Members of Parliament">
+        <PropertyRef Name="Constituency" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_Members_of_Parliament_0CFE20CE_8CEB_4949_837D_B57FF34EFF6F">
+    <End Role="Party" Type="Self.Party" Multiplicity="1" />
+    <End Role="Members of Parliament" Type="Self.Members of Parliament" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Party">
+        <PropertyRef Name="ID" />
+      </Principal>
+      <Dependent Role="Members of Parliament">
+        <PropertyRef Name="Party" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_Members_of_Parliament_1C958734_EACD_4F81_8994_81FC57C1D5AD">
+    <End Role="MP Status" Type="Self.MP Status" Multiplicity="0..1" />
+    <End Role="Members of Parliament" Type="Self.Members of Parliament" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="MP Status">
+        <PropertyRef Name="ID" />
+      </Principal>
+      <Dependent Role="Members of Parliament">
+        <PropertyRef Name="Status" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_Region_17FA57E8_4C9D_4406_B1B5_268BA8F59135">
+    <End Role="Country" Type="Self.Country" Multiplicity="1" />
+    <End Role="Region" Type="Self.Region" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Country">
+        <PropertyRef Name="ID" />
+      </Principal>
+      <Dependent Role="Region">
+        <PropertyRef Name="Country" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_Votes_244FDD09_63A1_450E_B209_02230844DC4F">
+    <End Role="Divisions" Type="Self.Divisions" Multiplicity="1">
+      <OnDelete Action="Cascade" />
+    </End>
+    <End Role="Votes" Type="Self.Votes" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Divisions">
+        <PropertyRef Name="ID" />
+      </Principal>
+      <Dependent Role="Votes">
+        <PropertyRef Name="Division" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_Votes_8D1D656C_DE55_404D_9B99_BAFDEE77A894">
+    <End Role="Members of Parliament" Type="Self.Members of Parliament" Multiplicity="1" />
+    <End Role="Votes" Type="Self.Votes" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Members of Parliament">
+        <PropertyRef Name="ID" />
+      </Principal>
+      <Dependent Role="Votes">
+        <PropertyRef Name="MP" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <EntityContainer Name="PAWS2ModelStoreContainer">
+    <EntitySet Name="Absence Exception" EntityType="Self.Absence Exception" Schema="Access" store:Type="Tables" />
+    <EntitySet Name="Absence Exception?Images" EntityType="Self.Absence Exception?Images" Schema="Access" store:Type="Tables" />
+    <EntitySet Name="Absence Request" EntityType="Self.Absence Request" Schema="Access" store:Type="Tables" />
+    <EntitySet Name="Absence Request Exceptions" EntityType="Self.Absence Request Exceptions" Schema="Access" store:Type="Tables" />
+    <EntitySet Name="Absence Request Exceptions?Images" EntityType="Self.Absence Request Exceptions?Images" Schema="Access" store:Type="Tables" />
+    <EntitySet Name="Absence Request Reason" EntityType="Self.Absence Request Reason" Schema="Access" store:Type="Tables" />
+    <EntitySet Name="Absence Request Reason?Images" EntityType="Self.Absence Request Reason?Images" Schema="Access" store:Type="Tables" />
+    <EntitySet Name="Absence Request Status" EntityType="Self.Absence Request Status" Schema="Access" store:Type="Tables" />
+    <EntitySet Name="Absence Request Status?Images" EntityType="Self.Absence Request Status?Images" Schema="Access" store:Type="Tables" />
+    <EntitySet Name="Absence Request?Images" EntityType="Self.Absence Request?Images" Schema="Access" store:Type="Tables" />
+    <EntitySet Name="ActionEventArguments?" EntityType="Self.ActionEventArguments?" Schema="Access" store:Type="Tables" />
+    <EntitySet Name="ActionEvents?" EntityType="Self.ActionEvents?" Schema="Access" store:Type="Tables" />
+    <EntitySet Name="Committee" EntityType="Self.Committee" Schema="Access" store:Type="Tables" />
+    <EntitySet Name="Committee Attendance Type" EntityType="Self.Committee Attendance Type" Schema="Access" store:Type="Tables" />
+    <EntitySet Name="Committee Attendance Type?Images" EntityType="Self.Committee Attendance Type?Images" Schema="Access" store:Type="Tables" />
+    <EntitySet Name="Committee Meeting" EntityType="Self.Committee Meeting" Schema="Access" store:Type="Tables" />
+    <EntitySet Name="Committee Meeting Attendance" EntityType="Self.Committee Meeting Attendance" Schema="Access" store:Type="Tables" />
+    <EntitySet Name="Committee Meeting Attendance?Images" EntityType="Self.Committee Meeting Attendance?Images" Schema="Access" store:Type="Tables" />
+    <EntitySet Name="Committee Meeting?Images" EntityType="Self.Committee Meeting?Images" Schema="Access" store:Type="Tables" />
+    <EntitySet Name="Committee Member" EntityType="Self.Committee Member" Schema="Access" store:Type="Tables" />
+    <EntitySet Name="Committee Member?Images" EntityType="Self.Committee Member?Images" Schema="Access" store:Type="Tables" />
+    <EntitySet Name="Committee Type" EntityType="Self.Committee Type" Schema="Access" store:Type="Tables" />
+    <EntitySet Name="Committee Type?Images" EntityType="Self.Committee Type?Images" Schema="Access" store:Type="Tables" />
+    <EntitySet Name="Committee?Images" EntityType="Self.Committee?Images" Schema="Access" store:Type="Tables" />
+    <EntitySet Name="Constituency" EntityType="Self.Constituency" Schema="Access" store:Type="Tables" />
+    <EntitySet Name="Constituency?Images" EntityType="Self.Constituency?Images" Schema="Access" store:Type="Tables" />
+    <EntitySet Name="Country" EntityType="Self.Country" Schema="Access" store:Type="Tables" />
+    <EntitySet Name="Country?Images" EntityType="Self.Country?Images" Schema="Access" store:Type="Tables" />
+    <EntitySet Name="DateDimension" EntityType="Self.DateDimension" Schema="Access" store:Type="Tables" />
+    <EntitySet Name="DateDimension?Images" EntityType="Self.DateDimension?Images" Schema="Access" store:Type="Tables" />
+    <EntitySet Name="DateDimensionHour" EntityType="Self.DateDimensionHour" Schema="Access" store:Type="Tables" />
+    <EntitySet Name="DateDimensionHour?Images" EntityType="Self.DateDimensionHour?Images" Schema="Access" store:Type="Tables" />
+    <EntitySet Name="Divisions" EntityType="Self.Divisions" Schema="Access" store:Type="Tables" />
+    <EntitySet Name="Divisions?Images" EntityType="Self.Divisions?Images" Schema="Access" store:Type="Tables" />
+    <EntitySet Name="Flock" EntityType="Self.Flock" Schema="Access" store:Type="Tables" />
+    <EntitySet Name="Flock Members" EntityType="Self.Flock Members" Schema="Access" store:Type="Tables" />
+    <EntitySet Name="Flock Members?Images" EntityType="Self.Flock Members?Images" Schema="Access" store:Type="Tables" />
+    <EntitySet Name="Flock?Images" EntityType="Self.Flock?Images" Schema="Access" store:Type="Tables" />
+    <EntitySet Name="Majority RAG Threshholds" EntityType="Self.Majority RAG Threshholds" Schema="Access" store:Type="Tables" />
+    <EntitySet Name="Majority RAG Threshholds?Images" EntityType="Self.Majority RAG Threshholds?Images" Schema="Access" store:Type="Tables" />
+    <EntitySet Name="Members of Parliament" EntityType="Self.Members of Parliament" Schema="Access" store:Type="Tables" />
+    <EntitySet Name="Members of Parliament?Images" EntityType="Self.Members of Parliament?Images" Schema="Access" store:Type="Tables" />
+    <EntitySet Name="MP Role" EntityType="Self.MP Role" Schema="Access" store:Type="Tables" />
+    <EntitySet Name="MP Role?Images" EntityType="Self.MP Role?Images" Schema="Access" store:Type="Tables" />
+    <EntitySet Name="MP Status" EntityType="Self.MP Status" Schema="Access" store:Type="Tables" />
+    <EntitySet Name="MP Status?Images" EntityType="Self.MP Status?Images" Schema="Access" store:Type="Tables" />
+    <EntitySet Name="Party" EntityType="Self.Party" Schema="Access" store:Type="Tables" />
+    <EntitySet Name="Party?Images" EntityType="Self.Party?Images" Schema="Access" store:Type="Tables" />
+    <EntitySet Name="Region" EntityType="Self.Region" Schema="Access" store:Type="Tables" />
+    <EntitySet Name="Region?Images" EntityType="Self.Region?Images" Schema="Access" store:Type="Tables" />
+    <EntitySet Name="Sessions" EntityType="Self.Sessions" Schema="Access" store:Type="Tables" />
+    <EntitySet Name="Sessions?Images" EntityType="Self.Sessions?Images" Schema="Access" store:Type="Tables" />
+    <EntitySet Name="Trace" EntityType="Self.Trace" Schema="Access" store:Type="Tables" />
+    <EntitySet Name="Votes" EntityType="Self.Votes" Schema="Access" store:Type="Tables" />
+    <EntitySet Name="Votes?Images" EntityType="Self.Votes?Images" Schema="Access" store:Type="Tables" />
+    <EntitySet Name="Voting Behaviour" EntityType="Self.Voting Behaviour" Schema="Access" store:Type="Tables" />
+    <EntitySet Name="Voting Behaviour?Images" EntityType="Self.Voting Behaviour?Images" Schema="Access" store:Type="Tables" />
+    <EntitySet Name="Whipping" EntityType="Self.Whipping" Schema="Access" store:Type="Tables" />
+    <EntitySet Name="Whipping?Images" EntityType="Self.Whipping?Images" Schema="Access" store:Type="Tables" />
+    <AssociationSet Name="FK_Absence_Request_4D7AF5E8_BB24_42F4_B3E7_1B551FCABB1E" Association="Self.FK_Absence_Request_4D7AF5E8_BB24_42F4_B3E7_1B551FCABB1E">
+      <End Role="Absence Request Reason" EntitySet="Absence Request Reason" />
+      <End Role="Absence Request" EntitySet="Absence Request" />
+    </AssociationSet>
+    <AssociationSet Name="FK_Absence_Request_D3626684_2ADD_4611_BA06_3DBB23C03243" Association="Self.FK_Absence_Request_D3626684_2ADD_4611_BA06_3DBB23C03243">
+      <End Role="Absence Request Status" EntitySet="Absence Request Status" />
+      <End Role="Absence Request" EntitySet="Absence Request" />
+    </AssociationSet>
+    <AssociationSet Name="FK_Absence_Request_Decision_078E635F_580F_4AD1_9A8E_6DA477972D07" Association="Self.FK_Absence_Request_Decision_078E635F_580F_4AD1_9A8E_6DA477972D07">
+      <End Role="Absence Exception" EntitySet="Absence Exception" />
+      <End Role="Absence Request Exceptions" EntitySet="Absence Request Exceptions" />
+    </AssociationSet>
+    <AssociationSet Name="FK_Absence_Request_Decision_6516C229_F568_4AE5_A3DA_A5EE623638A5" Association="Self.FK_Absence_Request_Decision_6516C229_F568_4AE5_A3DA_A5EE623638A5">
+      <End Role="Absence Request" EntitySet="Absence Request" />
+      <End Role="Absence Request Exceptions" EntitySet="Absence Request Exceptions" />
+    </AssociationSet>
+    <AssociationSet Name="FK_ActionEventArguments?_ActionEvents?" Association="Self.FK_ActionEventArguments?_ActionEvents?">
+      <End Role="ActionEvents?" EntitySet="ActionEvents?" />
+      <End Role="ActionEventArguments?" EntitySet="ActionEventArguments?" />
+    </AssociationSet>
+    <AssociationSet Name="FK_Committee_4954972A_3EFC_4BCF_AAC2_703D435821F7" Association="Self.FK_Committee_4954972A_3EFC_4BCF_AAC2_703D435821F7">
+      <End Role="Committee Type" EntitySet="Committee Type" />
+      <End Role="Committee" EntitySet="Committee" />
+    </AssociationSet>
+    <AssociationSet Name="FK_Committee_Meeting_8D00F18B_8385_4FA9_B714_2E3815D05B8B" Association="Self.FK_Committee_Meeting_8D00F18B_8385_4FA9_B714_2E3815D05B8B">
+      <End Role="Committee" EntitySet="Committee" />
+      <End Role="Committee Meeting" EntitySet="Committee Meeting" />
+    </AssociationSet>
+    <AssociationSet Name="FK_Committee_Member_26C19B0E_E93B_4186_8F61_B9B9D6E5184E" Association="Self.FK_Committee_Member_26C19B0E_E93B_4186_8F61_B9B9D6E5184E">
+      <End Role="Committee" EntitySet="Committee" />
+      <End Role="Committee Member" EntitySet="Committee Member" />
+    </AssociationSet>
+    <AssociationSet Name="FK_Committee_Member_8AC0599A_2D63_4E5E_B347_3EE7198F529B" Association="Self.FK_Committee_Member_8AC0599A_2D63_4E5E_B347_3EE7198F529B">
+      <End Role="Members of Parliament" EntitySet="Members of Parliament" />
+      <End Role="Committee Member" EntitySet="Committee Member" />
+    </AssociationSet>
+    <AssociationSet Name="FK_Constituency_186DA6E8_5BDE_4103_8CE9_8D7FBF6E0D5E" Association="Self.FK_Constituency_186DA6E8_5BDE_4103_8CE9_8D7FBF6E0D5E">
+      <End Role="Region" EntitySet="Region" />
+      <End Role="Constituency" EntitySet="Constituency" />
+    </AssociationSet>
+    <AssociationSet Name="FK_Divisions_064F9DAC_CF87_4A99_B1FE_585969FE6D13" Association="Self.FK_Divisions_064F9DAC_CF87_4A99_B1FE_585969FE6D13">
+      <End Role="Members of Parliament" EntitySet="Members of Parliament" />
+      <End Role="Divisions" EntitySet="Divisions" />
+    </AssociationSet>
+    <AssociationSet Name="FK_Divisions_3F859CCA_DB90_4E79_A787_E3A25D47573A" Association="Self.FK_Divisions_3F859CCA_DB90_4E79_A787_E3A25D47573A">
+      <End Role="Members of Parliament" EntitySet="Members of Parliament" />
+      <End Role="Divisions" EntitySet="Divisions" />
+    </AssociationSet>
+    <AssociationSet Name="FK_Divisions_635165F5_C08A_44B1_9E89_C876BBFC4276" Association="Self.FK_Divisions_635165F5_C08A_44B1_9E89_C876BBFC4276">
+      <End Role="Whipping" EntitySet="Whipping" />
+      <End Role="Divisions" EntitySet="Divisions" />
+    </AssociationSet>
+    <AssociationSet Name="FK_Divisions_ECD0AF5B_F2BA_4742_A912_994812877AA2" Association="Self.FK_Divisions_ECD0AF5B_F2BA_4742_A912_994812877AA2">
+      <End Role="Members of Parliament" EntitySet="Members of Parliament" />
+      <End Role="Divisions" EntitySet="Divisions" />
+    </AssociationSet>
+    <AssociationSet Name="FK_Divisions_FBCC8F52_66C7_4D68_BB82_A2214F1C1F33" Association="Self.FK_Divisions_FBCC8F52_66C7_4D68_BB82_A2214F1C1F33">
+      <End Role="Sessions" EntitySet="Sessions" />
+      <End Role="Divisions" EntitySet="Divisions" />
+    </AssociationSet>
+    <AssociationSet Name="FK_Divisions_FFAFD48C_D2AA_453F_9286_B9A217F3CCCF" Association="Self.FK_Divisions_FFAFD48C_D2AA_453F_9286_B9A217F3CCCF">
+      <End Role="Members of Parliament" EntitySet="Members of Parliament" />
+      <End Role="Divisions" EntitySet="Divisions" />
+    </AssociationSet>
+    <AssociationSet Name="FK_Flock_Members_D072ED89_37E9_4B3F_AA7E_54822969CB13" Association="Self.FK_Flock_Members_D072ED89_37E9_4B3F_AA7E_54822969CB13">
+      <End Role="Flock" EntitySet="Flock" />
+      <End Role="Flock Members" EntitySet="Flock Members" />
+    </AssociationSet>
+    <AssociationSet Name="FK_Meeting_Attendance_367147E3_0414_4636_AA20_D38219DA563E" Association="Self.FK_Meeting_Attendance_367147E3_0414_4636_AA20_D38219DA563E">
+      <End Role="Members of Parliament" EntitySet="Members of Parliament" />
+      <End Role="Committee Meeting Attendance" EntitySet="Committee Meeting Attendance" />
+    </AssociationSet>
+    <AssociationSet Name="FK_Meeting_Attendance_794B4B17_406C_46E5_AEE9_E936B3E2181D" Association="Self.FK_Meeting_Attendance_794B4B17_406C_46E5_AEE9_E936B3E2181D">
+      <End Role="Committee Meeting" EntitySet="Committee Meeting" />
+      <End Role="Committee Meeting Attendance" EntitySet="Committee Meeting Attendance" />
+    </AssociationSet>
+    <AssociationSet Name="FK_Meeting_Attendance_AEF5188A_2840_4A27_B0E5_64191851A946" Association="Self.FK_Meeting_Attendance_AEF5188A_2840_4A27_B0E5_64191851A946">
+      <End Role="Committee Attendance Type" EntitySet="Committee Attendance Type" />
+      <End Role="Committee Meeting Attendance" EntitySet="Committee Meeting Attendance" />
+    </AssociationSet>
+    <AssociationSet Name="FK_Members_of_Parliament_01422E9D_4B6E_4E7A_9D57_A56C0F3ACBCC" Association="Self.FK_Members_of_Parliament_01422E9D_4B6E_4E7A_9D57_A56C0F3ACBCC">
+      <End Role="MP Role" EntitySet="MP Role" />
+      <End Role="Members of Parliament" EntitySet="Members of Parliament" />
+    </AssociationSet>
+    <AssociationSet Name="FK_Members_of_Parliament_043A5CB0_0A7C_42D7_AD8D_D3F72E439C55" Association="Self.FK_Members_of_Parliament_043A5CB0_0A7C_42D7_AD8D_D3F72E439C55">
+      <End Role="Constituency" EntitySet="Constituency" />
+      <End Role="Members of Parliament" EntitySet="Members of Parliament" />
+    </AssociationSet>
+    <AssociationSet Name="FK_Members_of_Parliament_0CFE20CE_8CEB_4949_837D_B57FF34EFF6F" Association="Self.FK_Members_of_Parliament_0CFE20CE_8CEB_4949_837D_B57FF34EFF6F">
+      <End Role="Party" EntitySet="Party" />
+      <End Role="Members of Parliament" EntitySet="Members of Parliament" />
+    </AssociationSet>
+    <AssociationSet Name="FK_Members_of_Parliament_1C958734_EACD_4F81_8994_81FC57C1D5AD" Association="Self.FK_Members_of_Parliament_1C958734_EACD_4F81_8994_81FC57C1D5AD">
+      <End Role="MP Status" EntitySet="MP Status" />
+      <End Role="Members of Parliament" EntitySet="Members of Parliament" />
+    </AssociationSet>
+    <AssociationSet Name="FK_Region_17FA57E8_4C9D_4406_B1B5_268BA8F59135" Association="Self.FK_Region_17FA57E8_4C9D_4406_B1B5_268BA8F59135">
+      <End Role="Country" EntitySet="Country" />
+      <End Role="Region" EntitySet="Region" />
+    </AssociationSet>
+    <AssociationSet Name="FK_Votes_244FDD09_63A1_450E_B209_02230844DC4F" Association="Self.FK_Votes_244FDD09_63A1_450E_B209_02230844DC4F">
+      <End Role="Divisions" EntitySet="Divisions" />
+      <End Role="Votes" EntitySet="Votes" />
+    </AssociationSet>
+    <AssociationSet Name="FK_Votes_8D1D656C_DE55_404D_9B99_BAFDEE77A894" Association="Self.FK_Votes_8D1D656C_DE55_404D_9B99_BAFDEE77A894">
+      <End Role="Members of Parliament" EntitySet="Members of Parliament" />
+      <End Role="Votes" EntitySet="Votes" />
+    </AssociationSet>
+  </EntityContainer>
+</Schema>
