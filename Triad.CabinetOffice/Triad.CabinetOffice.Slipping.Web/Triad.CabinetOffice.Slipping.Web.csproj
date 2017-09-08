@@ -244,6 +244,7 @@
     <None Include="compilerconfig.json.defaults">
       <DependentUpon>compilerconfig.json</DependentUpon>
     </None>
+    <Content Include="NuGet.config" />
     <None Include="Properties\PublishProfiles\slipping-dev - FTP.pubxml" />
     <None Include="Properties\PublishProfiles\slipping-dev - Web Deploy.pubxml" />
     <Content Include="Scripts\errors.json" />
