@@ -1,4 +1,4 @@
-﻿@model Triad.CabinetOffice.Slipping.Web.Models.Absence_Request
+﻿@model Triad.CabinetOffice.Slipping.Data.EntityFramework.Slipping.AbsenceRequest
 
 @{
     ViewBag.Title = "When are you coming back?";
@@ -19,11 +19,11 @@
                         <!-- at Html.AntiForgeryToken()-->
                         <div class="form-group">
                             <label class="form-label" for="date-to">Date</label>
-                            @Html.EditorFor(model => model.To_Date, new { htmlAttributes = new { @class = "form-control" } })
+                            @Html.EditorFor(model => model.ToDate, new { htmlAttributes = new { @class = "form-control" } })
                         </div>
                         <div class="form-group">
                             <label class="form-label" for="select-box">Time</label>
-                            @Html.EditorFor(model => model.To_Time, new { htmlAttributes = new { @class = "form-control" } })
+                            @Html.EditorFor(model => model.ToDate, new { htmlAttributes = new { @class = "form-control" } })
                         </div>
 
                         <div class="form-group">

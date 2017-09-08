@@ -1054,6 +1054,12 @@
   <ItemGroup>
     <Service Include="{508349B6-6B84-4DF5-91F0-309BEEBAD82D}" />
   </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\Triad.CabinetOffice.Slipping.Data\Triad.CabinetOffice.Slipping.Data.csproj">
+      <Project>{75ed7b5b-513f-47ac-806f-b881e05200ee}</Project>
+      <Name>Triad.CabinetOffice.Slipping.Data</Name>
+    </ProjectReference>
+  </ItemGroup>
   <PropertyGroup>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>
     <VSToolsPath Condition="'$(VSToolsPath)' == ''">$(MSBuildExtensionsPath32)\Microsoft\VisualStudio\v$(VisualStudioVersion)</VSToolsPath>

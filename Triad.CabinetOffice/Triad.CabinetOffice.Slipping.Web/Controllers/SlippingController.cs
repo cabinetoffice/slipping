@@ -3,21 +3,20 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Web;
 using System.Web.Mvc;
-using Triad.CabinetOffice.Slipping.Web.Models;
+using Triad.CabinetOffice.Slipping.Data.EntityFramework.Slipping;
 
 namespace Triad.CabinetOffice.Slipping.Web.Controllers
 {
     [Authorize]
     public class SlippingController : Controller
     {
-        private PAWS2Entities db = new PAWS2Entities();
+        private SlippingEntities db = new SlippingEntities();
 
         // GET: Slipping
         public ActionResult Index()
         {
             return View();
         }
-
         
         public ActionResult FromDateAndTime()
         {
@@ -34,23 +33,23 @@ namespace Triad.CabinetOffice.Slipping.Web.Controllers
         // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult FromDateAndTime([Bind(Include = "From_Time,From_Date")] Absence_Request absence_Request)
+        public ActionResult FromDateAndTime([Bind(Include = "FromDate")] AbsenceRequest absenceRequest)
         {
-            absence_Request.Govt_MP = 1;
-            absence_Request.Date_Created = DateTime.Now;
-            absence_Request.Status = 1;
-
+            absenceRequest.CreatedDate = DateTime.Now;
+            absenceRequest.CreatedBy = 1;
+            absenceRequest.StatusID = 1;
+            absenceRequest.LastChangedDate = DateTime.Now;
+            absenceRequest.LastChangedBy = 1;
+            absenceRequest.ToDate = DateTime.Now;
 
             if (ModelState.IsValid)
             {
-                db.Absence_Request.Add(absence_Request);
+                db.AbsenceRequests.Add(absenceRequest);
                 db.SaveChanges();
                 return RedirectToAction("ToDateAndTime");
             }
 
-            ViewBag.Reason = new SelectList(db.Absence_Request_Reason, "ID", "Reason", absence_Request.Reason);
-            ViewBag.Status = new SelectList(db.Absence_Request_Status, "ID", "Status", absence_Request.Status);
-            return View(absence_Request);
+            return View(absenceRequest);
         }
 
         // POST: Slipping/Create
@@ -58,23 +57,17 @@ namespace Triad.CabinetOffice.Slipping.Web.Controllers
         // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult ToDateAndTime([Bind(Include = "To_Time,To_Date")] Absence_Request absence_Request)
+        public ActionResult ToDateAndTime([Bind(Include = "ToDate")] AbsenceRequest absenceRequest)
         {
-            absence_Request.Govt_MP = 1;
-            absence_Request.Date_Created = DateTime.Now;
-            absence_Request.Status = 1;
-
 
             if (ModelState.IsValid)
             {
-                db.Absence_Request.Add(absence_Request);
+                db.AbsenceRequests.Add(absenceRequest);
                 db.SaveChanges();
                 return RedirectToAction("Index");
             }
 
-            ViewBag.Reason = new SelectList(db.Absence_Request_Reason, "ID", "Reason", absence_Request.Reason);
-            ViewBag.Status = new SelectList(db.Absence_Request_Status, "ID", "Status", absence_Request.Status);
-            return View(absence_Request);
+            return View(absenceRequest);
         }
     }
 }
