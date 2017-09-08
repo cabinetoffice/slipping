@@ -1,0 +1,9 @@
+﻿CREATE TABLE [dbo].[User]
+(
+	[ID] INT NOT NULL IDENTITY(1,1),
+	[Username] VARCHAR(255) NOT NULL,
+	[CreatedBy] INT NOT NULL,
+	[CreateDate] DATETIME NOT NULL
+	CONSTRAINT PK_User PRIMARY KEY (ID),
+	CONSTRAINT FK_User_User FOREIGN KEY (CreatedBy) REFERENCES [dbo].[User](ID)
+)
