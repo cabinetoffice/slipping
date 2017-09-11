@@ -1,4 +1,5 @@
 ﻿@model Triad.CabinetOffice.Slipping.Web.ViewModels.FromDateAndTime
+@using Triad.CabinetOffice.Slipping.Web.Extensions
 
 @{
     ViewBag.Title = "When will you be going?";
@@ -13,12 +14,14 @@
         @using (Html.BeginForm())
         {
             @Html.AntiForgeryToken()
-            <div class="form-group">
+            <div class="form-group @Html.ValidationErrorClassFor(model => model.FromDate, "form-group-error") ">
                 <label class="form-label" for="date-from">Date</label>
+                <span class="error-message">@Html.ValidationMessageFor(model => model.FromDate)</span>
                 @Html.EditorFor(model => model.FromDate, new { htmlAttributes = new { @class = "form-control", @type = "date" } })
             </div>
-            <div class="form-group">
+            <div class="form-group @Html.ValidationErrorClassFor(model => model.FromTime, "form-group-error") ">
                 <label class="form-label" for="select-box">Time</label>
+                <span class="error-message">@Html.ValidationMessageFor(model => model.FromTime)</span>
                 @Html.DropDownListFor(model => model.FromTime, Model.Times, new { @class = "form-control" })
             </div>
 

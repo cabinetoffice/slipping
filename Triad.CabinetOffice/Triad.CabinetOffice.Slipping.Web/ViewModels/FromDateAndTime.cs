@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations;
 using System.Linq;
 using System.Web;
 using System.Web.Mvc;
@@ -8,7 +9,15 @@ namespace Triad.CabinetOffice.Slipping.Web.ViewModels
 {
     public class FromDateAndTime
     {
-        public string FromDate { get; set; }
+        [Display(Name = "Date")]
+        [Required]
+        [DataType(DataType.Date, ErrorMessage = "Date must be in format dd/mm/yyyy")]
+        [DisplayFormat(DataFormatString = "{0:dd/MM/yyyy}", ApplyFormatInEditMode = true)]
+        public DateTime FromDate { get; set; }
+
+        [Display(Name = "Time")]
+        [Required]
+        [RegularExpression("^[0-2][0-9]:00$", ErrorMessage = "Time must be in format hh:00")]
         public string FromTime { get; set; }
 
         public IEnumerable<SelectListItem> Times = new List<SelectListItem>()
@@ -41,23 +50,20 @@ namespace Triad.CabinetOffice.Slipping.Web.ViewModels
 
         public FromDateAndTime()
         {
-            this.FromDate = DateTime.Now.ToShortDateString();
+            this.FromDate = DateTime.Now;
             this.FromTime = "00:00";
         }
 
         public DateTime GetFromDateTime()
         {
-            DateTime result;
+            DateTime result = this.FromDate;
 
-            if (DateTime.TryParse(this.FromDate, out result))
+            if (!string.IsNullOrEmpty(this.FromTime))
             {
-                if (!string.IsNullOrEmpty(this.FromTime))
+                int hours;
+                if (int.TryParse(this.FromTime.Substring(0, 2), out hours))
                 {
-                    int hours;
-                    if (int.TryParse(this.FromTime.Substring(0, 2), out hours))
-                    {
-                        result = result.AddHours(hours);
-                    }
+                    result = result.AddHours(hours);
                 }
             }
 
