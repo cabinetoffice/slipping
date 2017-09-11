@@ -8,8 +8,9 @@ namespace Triad.CabinetOffice.Slipping.Web.ViewModels
 {
     public class FromDateAndTime
     {
-        public string FromDate = DateTime.Now.ToShortDateString();
-        public string FromTime = "00:00";
+        public string FromDate { get; set; }
+        public string FromTime { get; set; }
+
         public IEnumerable<SelectListItem> Times = new List<SelectListItem>()
         {
             new SelectListItem(){ Text="00:00", Value="00:00"},
@@ -38,6 +39,12 @@ namespace Triad.CabinetOffice.Slipping.Web.ViewModels
             new SelectListItem(){ Text="23:00", Value="23:00"}
         };
 
+        public FromDateAndTime()
+        {
+            this.FromDate = DateTime.Now.ToShortDateString();
+            this.FromTime = "00:00";
+        }
+
         public DateTime GetFromDateTime()
         {
             DateTime result;
@@ -49,7 +56,7 @@ namespace Triad.CabinetOffice.Slipping.Web.ViewModels
                     int hours;
                     if (int.TryParse(this.FromTime.Substring(0, 2), out hours))
                     {
-                        result.AddHours(hours);
+                        result = result.AddHours(hours);
                     }
                 }
             }
