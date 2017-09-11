@@ -87,3 +87,9 @@ $(document).ready(function () {
         $('.remove-list-item').remove();
       }
     }
+
+    var charCount = new GOVUK.CharCount()
+charCount.init({
+  selector: '.js-word-count',
+  wordCount: true
+})

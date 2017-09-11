@@ -17,7 +17,7 @@
       <a class="link-back" href="page-location-travel-time">Back</a>
 
       <h1 class="heading-large">
-        What is the reason for your slip?
+        What is the reason for your request?
       </h1>
 
       <form class="form" action="page-opposition-mps">
@@ -26,14 +26,22 @@
    
       <div class="multiple-choice" data-target="government-work-reason">
         <input id="government-work" type="radio" name="radio-group" value="Government Work">
-        <label for="government-work">Government Work</label>
+        <label for="government-work">Government Work (Secretaries of State / Ministers of State only)</label>
       </div>
       <div class="panel panel-border-narrow js-hidden" id="government-work-reason">
-        <label class="form-label" for="government-work-reason">Please provide details</label>
+
+       <label class="form-label" for="government-work-reason">Please provide a description for your reason</label>
         <span class="form-hint">
-   What type of government work is it? Who are you going with? etc
+
+  for example: Select Committee Trip, Delegation on behalf of a group, an All Party Parliamentary related trip
+         
+<label class="form-label" for="parliamentary-campaigning-activity-reason">What will be the repercussions of the slip being revoked at last minute?</label>
+
+     <label class="form-label" for="parliamentary-campaigning-activity-reason">Please state if the trip has been approved by Number 10</label>
+
   </span>
-         <textarea class="form-control form-control-3-4" name="reason-details" id="government-work-reason" rows="5"></textarea>
+         <textarea class="form-control form-control-3-4" name="reason-details" id="government-work-reason" rows="5" style="width:100%"></textarea>
+         <span id="description-field-info" class="form-hint js-count-message" aria-live="polite">200 words remaining</span>
       </div>
 
 
@@ -42,11 +50,18 @@
         <label for="constituency-engagement">Constituency Engagement</label>
       </div>
       <div class="panel panel-border-narrow js-hidden" id="constituency-engagement-reason">
-        <label class="form-label" for="constituency-engagement-reason">Please provide details</label>
+        <label class="form-label" for="constituency-engagement-reason">What type of constituency engagement is it?</label>
         <span class="form-hint">
-   What type of constituency engagement is it? Who are you visiting? etc
+
+   for example: fundraising, charity event or surgery appointments with constituents. 
+
+
+<label class="form-label" for="constituency-engagement-reason">Please also provide the estimated size of the event</label>
+   
+
   </span>
-         <textarea class="form-control form-control-3-4" name="reason-details" id="constituency-engagement-reason" rows="5"></textarea>
+         <textarea class="form-control form-control-3-4" name="reason-details" id="constituency-engagement-reason" rows="5" style="width:100%"></textarea>
+         <span id="description-field-info" class="form-hint js-count-message" aria-live="polite">200 words remaining</span>
       </div>
 
          <div class="multiple-choice" data-target="parliamentary-campaigning-activity-reason">
@@ -54,11 +69,21 @@
         <label for="parliamentary-campaigning-activity">Parliamentary Campaigning Activity</label>
       </div>
       <div class="panel panel-border-narrow js-hidden" id="parliamentary-campaigning-activity-reason">
-        <label class="form-label" for="parliamentary-campaigning-activity-reason">Please provide details</label>
+        <label class="form-label" for="parliamentary-campaigning-activity-reason">Please provide a description for your reason</label>
         <span class="form-hint">
-   What type of campaigning acitvity is it? Who are you visiting? etc
+
+  for example: Select Committee Trip, Delegation on behalf of a group, an All Party Parliamentary related trip
+         
+<label class="form-label" for="parliamentary-campaigning-activity-reason">What will be the repercussions of the slip being revoked at last minute?</label>
+
+     <label class="form-label" for="parliamentary-campaigning-activity-reason">Can the event be held on the Parliamentary Estate if necessary?</label>
+
+
+
   </span>
-         <textarea class="form-control form-control-3-4" name="reason-details" id="parliamentary-campaigning-activity-reason" rows="5"></textarea>
+
+         <textarea class="form-control form-control-3-4" name="reason-details" id="parliamentary-campaigning-activity-reason" rows="5" style="width:100%"></textarea>
+         <span id="description-field-info" class="form-hint js-count-message" aria-live="polite">200 words remaining</span>
       </div>
 
        <div class="multiple-choice" data-target="personal-other-reason">
@@ -66,11 +91,17 @@
         <label for="personal-other">Personal/Other</label>
       </div>
       <div class="panel panel-border-narrow js-hidden" id="personal-other-reason">
-        <label class="form-label" for="personal-other-reason">Please provide details</label>
+
+    
+
+        <label class="form-label" for="personal-other-reason">What is the personal/other reason?</label>
+
         <span class="form-hint">
-   Dentist? Funeral? etc
+   For example dentist, funeral or wedding.  If you do not wish to mention the reason to us, please just write ‘Personal’ and let your Whip know
   </span>
-         <textarea class="form-control form-control-3-4" name="reason-details" id="personal-other-reason" rows="5"></textarea>
+
+         <textarea class="form-control form-control-3-4" name="reason-details" id="personal-other-reason" rows="5" style="width:100%"></textarea>
+         <span id="description-field-info" class="form-hint js-count-message" aria-live="polite">100 words remaining</span>
       </div>
 
 

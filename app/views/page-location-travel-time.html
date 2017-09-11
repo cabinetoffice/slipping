@@ -8,9 +8,12 @@
 
 <main id="content" role="main">
   <div class="grid-row">
-    <div class="column-two-thirds">
+    <div class="column-full">
 
     {% include "includes/phase_banner_alpha.html" %}
+
+<div class="grid-row">
+    <div class="column-two-thirds column-minimum">
 
       <a class="link-back" href="page-date-time-2">Back</a>
 
@@ -27,7 +30,7 @@
   <label class="form-label" for="location">
   Location
   <span class="form-hint">
-    This can be a city, town or village
+    This can be a city,town or village
   </span>
 </label>
 <input class="form-control" id="location" type="text" name="location" value="{{ data['location'] }}">
