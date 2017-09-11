@@ -4,11 +4,12 @@ using System.Linq;
 using System.Web;
 using System.Web.Mvc;
 using Triad.CabinetOffice.Slipping.Data.EntityFramework.Slipping;
+using Triad.CabinetOffice.Slipping.Web.Attributes;
 using Triad.CabinetOffice.Slipping.Web.ViewModels;
 
 namespace Triad.CabinetOffice.Slipping.Web.Controllers
 {
-    [Authorize]
+    [SlippingAuthorize]
     public class SlippingController : Controller
     {
         private SlippingEntities db = new SlippingEntities();
