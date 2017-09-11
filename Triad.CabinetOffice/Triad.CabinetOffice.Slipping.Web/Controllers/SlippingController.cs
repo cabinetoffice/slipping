@@ -4,6 +4,7 @@ using System.Linq;
 using System.Web;
 using System.Web.Mvc;
 using Triad.CabinetOffice.Slipping.Data.EntityFramework.Slipping;
+using Triad.CabinetOffice.Slipping.Web.ViewModels;
 
 namespace Triad.CabinetOffice.Slipping.Web.Controllers
 {
@@ -20,7 +21,8 @@ namespace Triad.CabinetOffice.Slipping.Web.Controllers
         
         public ActionResult FromDateAndTime()
         {
-            return View();
+            var model = new FromDateAndTime();
+            return View(model);
         }
 
         public ActionResult ToDateAndTime()
@@ -33,23 +35,28 @@ namespace Triad.CabinetOffice.Slipping.Web.Controllers
         // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult FromDateAndTime([Bind(Include = "FromDate")] AbsenceRequest absenceRequest)
+        public ActionResult FromDateAndTime(FromDateAndTime model)
         {
-            absenceRequest.CreatedDate = DateTime.Now;
-            absenceRequest.CreatedBy = 1;
-            absenceRequest.StatusID = 1;
-            absenceRequest.LastChangedDate = DateTime.Now;
-            absenceRequest.LastChangedBy = 1;
-            absenceRequest.ToDate = DateTime.Now;
-
             if (ModelState.IsValid)
             {
+                AbsenceRequest absenceRequest = new AbsenceRequest();
+                absenceRequest.CreatedDate = DateTime.Now;
+                absenceRequest.CreatedBy = 1;
+                absenceRequest.StatusID = 1;
+                absenceRequest.LastChangedDate = DateTime.Now;
+                absenceRequest.LastChangedBy = 1;
+
+                absenceRequest.FromDate = model.GetFromDateTime();
+                absenceRequest.ToDate = DateTime.Now;
+
                 db.AbsenceRequests.Add(absenceRequest);
                 db.SaveChanges();
                 return RedirectToAction("ToDateAndTime");
             }
-
-            return View(absenceRequest);
+            else
+            {
+                return View(model);
+            }
         }
 
         // POST: Slipping/Create
