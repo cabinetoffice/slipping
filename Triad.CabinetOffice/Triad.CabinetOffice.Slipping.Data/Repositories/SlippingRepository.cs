@@ -9,65 +9,69 @@ using Triad.CabinetOffice.Slipping.Data.Models;
 
 namespace Triad.CabinetOffice.Slipping.Data.Repositories
 {
-    public class SlippingRepository:RepositoryBase
+    public class SlippingRepository : RepositoryBase
     {
-        public SlippingRepository():base()
+        public SlippingRepository() : base()
         {
         }
-        public SlippingRepository(SlippingEntities context):base(context)
-        {
-        }
-        public SlippingRequest Get(int id)
-        {
-            // Check that there is one, and only one, matching contact
-            if (Exists(id))
-            {
-                AbsenceRequest absenceRequest = db.AbsenceRequests.Find(id);
-                SlippingRequest slippingRequest = GetSlippingRequest(absenceRequest);
 
+        public SlippingRepository(SlippingEntities context) : base(context)
+        {
+        }
+
+        public SlippingRequest Get(int requestId, int userId)
+        {
+            if (Exists(requestId, userId))
+            {
+                AbsenceRequest absenceRequest = db.AbsenceRequests.Find(requestId);
+                SlippingRequest slippingRequest = GetSlippingRequest(absenceRequest);
                 return slippingRequest;
             }
             else
             {
                 return null;
             }
-
         }
-        public int CreateOrUpdate(SlippingRequest slippingRequest,int userId)
+
+        public int CreateOrUpdate(SlippingRequest slippingRequest, int userId)
         {
-            try
+            AbsenceRequest absenceRequest = GetAbsenceRequest(slippingRequest, userId);
+            if (absenceRequest.ID == 0)
             {
-               AbsenceRequest absenceRquest = GetAbsenceRequest(slippingRequest, userId);
-                if(absenceRquest.ID==0)
-                {
-                    db.AbsenceRequests.Add(absenceRquest);
-                }
-                else
-                {
-                    db.Entry(absenceRquest).State = EntityState.Modified;
-                }
-
-                db.SaveChanges();
-
-                return absenceRquest.ID;
-
+                db.AbsenceRequests.Add(absenceRequest);
             }
-            catch (Exception ex)
+            else
             {
-                 throw ex;
+                db.Entry(absenceRequest).State = EntityState.Modified;
             }
 
+            db.SaveChanges();
+
+            return absenceRequest.ID;
         }
-        private AbsenceRequest GetAbsenceRequest(SlippingRequest slippingRequest,int userId)
+
+        private AbsenceRequest GetAbsenceRequest(SlippingRequest slippingRequest, int userId)
         {
             AbsenceRequest absenceRequest;
 
-            if(slippingRequest.ID==0)
+            if (slippingRequest.ID == 0)
             {
+                // Find the MP for the current User
+                // Assume that there is only on MP per user
+                int MPID = 0;
+                UserMP userMP = this.db.UserMPs
+                    .FirstOrDefault(ump => ump.UserID == userId);
+
+                if (userMP != null)
+                {
+                    MPID = userMP.MPID;
+                }
+
                 absenceRequest = new AbsenceRequest()
                 {
                     CreatedBy = userId,
-                    CreatedDate = DateTime.Now
+                    CreatedDate = DateTime.Now,
+                    MPID = MPID
                 };
             }
             else
@@ -75,45 +79,50 @@ namespace Triad.CabinetOffice.Slipping.Data.Repositories
                 absenceRequest = db.AbsenceRequests.Find(slippingRequest.ID);
             }
 
-            absenceRequest.LastChangedBy = userId;
-            absenceRequest.LastChangedDate = DateTime.Now;
-            absenceRequest.MPID = slippingRequest.MPID;
-            absenceRequest.ReasonID = slippingRequest.ReasonID;
-            absenceRequest.Details = slippingRequest.Details;
-            absenceRequest.StatusID = slippingRequest.StatusID;
-            absenceRequest.FromDate = slippingRequest.FromDate;
-            absenceRequest.ToDate = slippingRequest.ToDate;
-            absenceRequest.DecisionNotes = slippingRequest.DecisionNotes;
+            if (absenceRequest != null)
+            {
+                absenceRequest.LastChangedBy = userId;
+                absenceRequest.LastChangedDate = DateTime.Now;
+                absenceRequest.ReasonID = slippingRequest.ReasonID;
+                absenceRequest.Details = slippingRequest.Details;
+                absenceRequest.StatusID = slippingRequest.StatusID;
+                absenceRequest.FromDate = slippingRequest.FromDate;
+                absenceRequest.ToDate = slippingRequest.ToDate;
+                absenceRequest.DecisionNotes = slippingRequest.DecisionNotes;
+            }
 
-             return absenceRequest;
+            return absenceRequest;
         }
-        internal bool Exists(int id)
+
+        internal bool Exists(int requestId, int userId)
         {
-            AbsenceRequest absenceRequest = db.AbsenceRequests.Find(id);
+            AbsenceRequest absenceRequest = db.AbsenceRequests.Find(requestId);
 
             if (absenceRequest != null)
             {
-                return true;
+                // Check that the Absence Request belongs to an MP that the user can edit
+                return db.UserMPs.Count(ump => ump.UserID == userId && ump.MPID == absenceRequest.MPID) > 0;
             }
             else
             {
                 return false;
             }
         }
+
         private SlippingRequest GetSlippingRequest(AbsenceRequest absenceRequest)
         {
             SlippingRequest slippingRequest = new SlippingRequest()
             {
-                ID= absenceRequest.ID,
-                MPID=absenceRequest.MPID,
-                ReasonID=absenceRequest.ReasonID,
-                Details=absenceRequest.Details,
-                StatusID=absenceRequest.StatusID,
-                FromDate=absenceRequest.FromDate,
-                ToDate=absenceRequest.ToDate,
-                DecisionNotes=absenceRequest.DecisionNotes,
-                CreatedBy=absenceRequest.CreatedBy,
-                LastChangedBy=absenceRequest.LastChangedBy
+                ID = absenceRequest.ID,
+                MPID = absenceRequest.MPID,
+                ReasonID = absenceRequest.ReasonID,
+                Details = absenceRequest.Details,
+                StatusID = absenceRequest.StatusID,
+                FromDate = absenceRequest.FromDate,
+                ToDate = absenceRequest.ToDate,
+                DecisionNotes = absenceRequest.DecisionNotes,
+                CreatedBy = absenceRequest.CreatedBy,
+                LastChangedBy = absenceRequest.LastChangedBy
             };
 
             return slippingRequest;

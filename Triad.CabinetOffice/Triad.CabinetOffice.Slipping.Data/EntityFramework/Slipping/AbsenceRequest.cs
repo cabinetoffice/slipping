@@ -15,7 +15,7 @@ namespace Triad.CabinetOffice.Slipping.Data.EntityFramework.Slipping
     public partial class AbsenceRequest
     {
         public int ID { get; set; }
-        public Nullable<int> MPID { get; set; }
+        public int MPID { get; set; }
         public Nullable<int> ReasonID { get; set; }
         public string Details { get; set; }
         public int StatusID { get; set; }
@@ -26,6 +26,8 @@ namespace Triad.CabinetOffice.Slipping.Data.EntityFramework.Slipping
         public System.DateTime CreatedDate { get; set; }
         public int LastChangedBy { get; set; }
         public System.DateTime LastChangedDate { get; set; }
+        public string Location { get; set; }
+        public Nullable<int> TravelTimeInHours { get; set; }
     
         public virtual User User { get; set; }
         public virtual User User1 { get; set; }

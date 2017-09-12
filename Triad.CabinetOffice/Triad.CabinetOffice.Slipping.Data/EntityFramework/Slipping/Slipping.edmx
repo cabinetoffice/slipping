@@ -10,7 +10,7 @@
             <PropertyRef Name="ID" />
           </Key>
           <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
-          <Property Name="MPID" Type="int" />
+          <Property Name="MPID" Type="int" Nullable="false" />
           <Property Name="ReasonID" Type="int" />
           <Property Name="Details" Type="nvarchar" MaxLength="220" />
           <Property Name="StatusID" Type="int" Nullable="false" />
@@ -21,6 +21,8 @@
           <Property Name="CreatedDate" Type="datetime" Nullable="false" />
           <Property Name="LastChangedBy" Type="int" Nullable="false" />
           <Property Name="LastChangedDate" Type="datetime" Nullable="false" />
+          <Property Name="Location" Type="nvarchar" MaxLength="100" />
+          <Property Name="TravelTimeInHours" Type="int" />
         </EntityType>
         <EntityType Name="User">
           <Key>
@@ -36,6 +38,7 @@
             <PropertyRef Name="ID" />
           </Key>
           <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="UserID" Type="int" Nullable="false" />
           <Property Name="MPID" Type="int" Nullable="false" />
           <Property Name="CreatedBy" Type="int" Nullable="false" />
           <Property Name="CreatedDate" Type="datetime" Nullable="false" />
@@ -76,7 +79,7 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="FK_UserMP_User">
+        <Association Name="FK_UserMP_CreatedBy">
           <End Role="User" Type="Self.User" Multiplicity="1" />
           <End Role="UserMP" Type="Self.UserMP" Multiplicity="*" />
           <ReferentialConstraint>
@@ -85,6 +88,18 @@
             </Principal>
             <Dependent Role="UserMP">
               <PropertyRef Name="CreatedBy" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_UserMP_UserID">
+          <End Role="User" Type="Self.User" Multiplicity="1" />
+          <End Role="UserMP" Type="Self.UserMP" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="User">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="UserMP">
+              <PropertyRef Name="UserID" />
             </Dependent>
           </ReferentialConstraint>
         </Association>
@@ -104,7 +119,11 @@
             <End Role="User" EntitySet="User" />
             <End Role="User1" EntitySet="User" />
           </AssociationSet>
-          <AssociationSet Name="FK_UserMP_User" Association="Self.FK_UserMP_User">
+          <AssociationSet Name="FK_UserMP_CreatedBy" Association="Self.FK_UserMP_CreatedBy">
+            <End Role="User" EntitySet="User" />
+            <End Role="UserMP" EntitySet="UserMP" />
+          </AssociationSet>
+          <AssociationSet Name="FK_UserMP_UserID" Association="Self.FK_UserMP_UserID">
             <End Role="User" EntitySet="User" />
             <End Role="UserMP" EntitySet="UserMP" />
           </AssociationSet>
@@ -133,13 +152,17 @@
             <End Role="User" EntitySet="Users" />
             <End Role="UserMP" EntitySet="UserMPs" />
           </AssociationSet>
+          <AssociationSet Name="FK_UserMP_UserID" Association="Model.FK_UserMP_UserID">
+            <End Role="User" EntitySet="Users" />
+            <End Role="UserMP" EntitySet="UserMPs" />
+          </AssociationSet>
         </EntityContainer>
         <EntityType Name="AbsenceRequest">
           <Key>
             <PropertyRef Name="ID" />
           </Key>
           <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-          <Property Name="MPID" Type="Int32" />
+          <Property Name="MPID" Type="Int32" Nullable="false" />
           <Property Name="ReasonID" Type="Int32" />
           <Property Name="Details" Type="String" MaxLength="220" FixedLength="false" Unicode="true" />
           <Property Name="StatusID" Type="Int32" Nullable="false" />
@@ -152,6 +175,8 @@
           <Property Name="LastChangedDate" Type="DateTime" Nullable="false" Precision="3" />
           <NavigationProperty Name="User" Relationship="Model.FK_AbsenceRequest_User_CreatedBy" FromRole="AbsenceRequest" ToRole="User" />
           <NavigationProperty Name="User1" Relationship="Model.FK_AbsenceRequest_User_LastChangedBy" FromRole="AbsenceRequest" ToRole="User" />
+          <Property Name="Location" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
+          <Property Name="TravelTimeInHours" Type="Int32" />
         </EntityType>
         <EntityType Name="User">
           <Key>
@@ -166,6 +191,7 @@
           <NavigationProperty Name="User2" Relationship="Model.FK_User_User" FromRole="User1" ToRole="User" />
           <NavigationProperty Name="UserMPs" Relationship="Model.FK_UserMP_User" FromRole="User" ToRole="UserMP" />
           <Property Name="CreatedDate" Type="DateTime" Nullable="false" Precision="3" />
+          <NavigationProperty Name="UserMPs1" Relationship="Model.FK_UserMP_UserID" FromRole="User" ToRole="UserMP" />
         </EntityType>
         <EntityType Name="UserMP">
           <Key>
@@ -176,6 +202,8 @@
           <Property Name="CreatedBy" Type="Int32" Nullable="false" />
           <Property Name="CreatedDate" Type="DateTime" Nullable="false" Precision="3" />
           <NavigationProperty Name="User" Relationship="Model.FK_UserMP_User" FromRole="UserMP" ToRole="User" />
+          <Property Name="UserID" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="User1" Relationship="Model.FK_UserMP_UserID" FromRole="UserMP" ToRole="User" />
         </EntityType>
         <Association Name="FK_AbsenceRequest_User_CreatedBy">
           <End Type="Model.User" Role="User" Multiplicity="1" />
@@ -225,6 +253,18 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
+        <Association Name="FK_UserMP_UserID">
+          <End Type="Model.User" Role="User" Multiplicity="1" />
+          <End Type="Model.UserMP" Role="UserMP" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="User">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="UserMP">
+              <PropertyRef Name="UserID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
         </Schema>
     </edmx:ConceptualModels>
     <!-- C-S mapping content -->
@@ -234,6 +274,8 @@
           <EntitySetMapping Name="AbsenceRequests">
             <EntityTypeMapping TypeName="Model.AbsenceRequest">
               <MappingFragment StoreEntitySet="AbsenceRequest">
+                <ScalarProperty Name="TravelTimeInHours" ColumnName="TravelTimeInHours" />
+                <ScalarProperty Name="Location" ColumnName="Location" />
                 <ScalarProperty Name="LastChangedDate" ColumnName="LastChangedDate" />
                 <ScalarProperty Name="LastChangedBy" ColumnName="LastChangedBy" />
                 <ScalarProperty Name="CreatedDate" ColumnName="CreatedDate" />
@@ -262,6 +304,7 @@
           <EntitySetMapping Name="UserMPs">
             <EntityTypeMapping TypeName="Model.UserMP">
               <MappingFragment StoreEntitySet="UserMP">
+                <ScalarProperty Name="UserID" ColumnName="UserID" />
                 <ScalarProperty Name="CreatedDate" ColumnName="CreatedDate" />
                 <ScalarProperty Name="CreatedBy" ColumnName="CreatedBy" />
                 <ScalarProperty Name="MPID" ColumnName="MPID" />
