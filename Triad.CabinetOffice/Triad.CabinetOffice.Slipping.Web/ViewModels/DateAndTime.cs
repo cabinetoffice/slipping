@@ -7,18 +7,20 @@ using System.Web.Mvc;
 
 namespace Triad.CabinetOffice.Slipping.Web.ViewModels
 {
-    public class FromDateAndTime
+    public class DateAndTime
     {
+        public int ID { get; set; }
+
         [Display(Name = "Date")]
         [Required]
         [DataType(DataType.Date, ErrorMessage = "Date must be in format dd/mm/yyyy")]
         [DisplayFormat(DataFormatString = "{0:dd/MM/yyyy}", ApplyFormatInEditMode = true)]
-        public DateTime FromDate { get; set; }
+        public DateTime Date { get; set; }
 
         [Display(Name = "Time")]
         [Required]
         [RegularExpression("^[0-2][0-9]:00$", ErrorMessage = "Time must be in format hh:00")]
-        public string FromTime { get; set; }
+        public string Time { get; set; }
 
         public IEnumerable<SelectListItem> Times = new List<SelectListItem>()
         {
@@ -48,20 +50,20 @@ namespace Triad.CabinetOffice.Slipping.Web.ViewModels
             new SelectListItem(){ Text="23:00", Value="23:00"}
         };
 
-        public FromDateAndTime()
+        public DateAndTime()
         {
-            this.FromDate = DateTime.Now;
-            this.FromTime = "00:00";
+            this.Date = DateTime.Now;
+            this.Time = "00:00";
         }
 
-        public DateTime GetFromDateTime()
+        public DateTime GetDateTime()
         {
-            DateTime result = this.FromDate;
+            DateTime result = this.Date;
 
-            if (!string.IsNullOrEmpty(this.FromTime))
+            if (!string.IsNullOrEmpty(this.Time))
             {
                 int hours;
-                if (int.TryParse(this.FromTime.Substring(0, 2), out hours))
+                if (int.TryParse(this.Time.Substring(0, 2), out hours))
                 {
                     result = result.AddHours(hours);
                 }
