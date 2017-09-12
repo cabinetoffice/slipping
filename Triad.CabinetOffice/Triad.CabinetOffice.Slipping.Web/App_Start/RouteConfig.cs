@@ -14,6 +14,18 @@ namespace Triad.CabinetOffice.Slipping.Web
             routes.IgnoreRoute("{resource}.axd/{*pathInfo}");
 
             routes.MapRoute(
+                name: "Create Slipping Request",
+                url: "Slipping/Create",
+                defaults: new { controller = "Slipping", action = "FromDateAndTime", id = UrlParameter.Optional }
+            );
+
+            routes.MapRoute(
+                name: "Edit Slipping Request",
+                url: "Slipping/Edit/{id}/{action}",
+                defaults: new { controller = "Slipping" }
+            );
+
+            routes.MapRoute(
                 name: "Default",
                 url: "{controller}/{action}/{id}",
                 defaults: new { controller = "Home", action = "Index", id = UrlParameter.Optional }

@@ -2,7 +2,6 @@
     ViewBag.Title = "Request absence from Parliament";
 }
 
-
 <div class="grid-row">
     <div class="column-two-thirds column-minimum">
         <h1 class="heading-xlarge">
@@ -15,7 +14,7 @@
         </ul>
         <p>This will take less than 2 minutes to complete</p>
         <p>
-            <a class="button button-start" href="/Slipping/FromDateAndTime" role="button">Start</a>
+            @Html.ActionLink("Start", "Index", "Slipping", null, new { @class = "button button-start", @role = "button" })
         </p>
     </div>
 
