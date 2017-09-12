@@ -6,7 +6,7 @@
 	[Details] NVARCHAR(220) NULL,
 	[StatusID] INT NOT NULL,
 	[FromDate] DATETIME NOT NULL,
-	[ToDate] DATETIME NOT NULL,
+	[ToDate] DATETIME NULL,
 	[DecisionNotes] NVARCHAR(220) NULL,
 	[CreatedBy] INT NOT NULL,
 	[CreatedDate] DATETIME NOT NULL,

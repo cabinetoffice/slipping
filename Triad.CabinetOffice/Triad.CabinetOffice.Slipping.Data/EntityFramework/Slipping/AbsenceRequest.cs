@@ -20,7 +20,7 @@ namespace Triad.CabinetOffice.Slipping.Data.EntityFramework.Slipping
         public string Details { get; set; }
         public int StatusID { get; set; }
         public System.DateTime FromDate { get; set; }
-        public System.DateTime ToDate { get; set; }
+        public Nullable<System.DateTime> ToDate { get; set; }
         public string DecisionNotes { get; set; }
         public int CreatedBy { get; set; }
         public System.DateTime CreatedDate { get; set; }
