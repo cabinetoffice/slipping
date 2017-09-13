@@ -10,7 +10,7 @@ namespace Triad.CabinetOffice.Slipping.Data.Models
     {
         //smiliar to AbsenceRequest
         public int ID { get; set; }
-        public Nullable<int> MPID { get; set; }
+        public int MPID { get; set; }
         public Nullable<int> ReasonID { get; set; }
         public string Details { get; set; }
         public int StatusID { get; set; }

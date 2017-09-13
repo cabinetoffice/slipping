@@ -82,13 +82,14 @@ namespace Triad.CabinetOffice.Slipping.Data.Repositories
             {
                 absenceRequest.LastChangedBy = userId;
                 absenceRequest.LastChangedDate = DateTime.Now;
-                absenceRequest.MPID = slippingRequest.MPID;
                 absenceRequest.ReasonID = slippingRequest.ReasonID;
                 absenceRequest.Details = slippingRequest.Details;
                 absenceRequest.StatusID = slippingRequest.StatusID;
                 absenceRequest.FromDate = slippingRequest.FromDate;
                 absenceRequest.ToDate = slippingRequest.ToDate;
                 absenceRequest.DecisionNotes = slippingRequest.DecisionNotes;
+                absenceRequest.Location = slippingRequest.Location;
+                absenceRequest.TravelTimeInHours = slippingRequest.TravelTimeInHours;
             }
             return absenceRequest;
         }
