@@ -1,0 +1,17 @@
+﻿
+@{
+    ViewBag.Title = "Slipping request not found";
+}
+
+<div class="grid-row">
+    <div class="column-two-thirds column-minimum">
+        <h1 class="heading-xlarge">
+            Slipping request not found
+        </h1>
+        <p>The system could not find the slipping request.  Please click the link below to see your slipping requests.</p>
+        <p>
+            @Html.ActionLink("View Slipping Requests", "Index", "Slipping", null, new { @class = "button button-start", @role = "button" })
+        </p>
+    </div>
+</div>
+

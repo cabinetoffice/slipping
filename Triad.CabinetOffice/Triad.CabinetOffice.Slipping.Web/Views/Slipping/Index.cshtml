@@ -1,0 +1,74 @@
+﻿
+@{
+    ViewBag.Title = "History";
+}
+
+<main id="content" role="main">
+
+    <div class="grid-row">
+
+        <div class="column-two-thirds">
+
+            <h1 class="heading-large">
+                Damian Green MP slipping requests
+            </h1>
+
+            <ol class="task-list">
+                <li>
+                    <ul class="task-list-items">
+                        <li class="task-list-item">
+                            <a class="task-name" href="#" aria-describedby="eligibility-completed">
+                                Slipping request 15/08/2017
+                            </a>
+                            <strong class="task-completed" id="eligibility-completed">Deferred</strong>
+                        </li>
+                        <li class="task-list-item">
+                            <a class="task-name" href="#" aria-describedby="read-declaration-completed">
+                                Slipping request 10/10/2017
+                            </a>
+                            <strong class="task-completed" id="read-declaration-completed">Rejected</strong>
+                        </li>
+                        <li class="task-list-item">
+                            <a class="task-name" href="page-slipping-request-cancel" aria-describedby="eligibility-completed">
+                                Slipping request 10/08/2017
+                            </a>
+                            <strong class="task-completed" id="eligibility-completed">Approved</strong>
+                        </li>
+                        <li class="task-list-item">
+                            <a class="task-name" href="#" aria-describedby="read-declaration-completed">
+                                Slipping request 01/06/2017
+                            </a>
+                            <strong class="task-completed" id="read-declaration-completed">Approved</strong>
+                        </li>
+                    </ul>
+            </ol>
+
+            <p>
+                @Html.ActionLink("New slipping request", "FromDate", null, new { @class = "button", @role = "button" })
+            </p>
+
+            <h2 class="heading-medium">
+                Want to nominate a user to fill-in your slipping requests?
+            </h2>
+
+            <p>
+                We need their name and email address.  You can send us these details by email or by telephone.
+            </p>
+
+            <p>
+                <span class="bold">Email:</span> pairsandwhipping@parliament.gov.uk
+            </p>
+
+            <p>
+                <span class="bold">Telephone:</span> 0208 123 4567
+            </p>
+        </div>
+
+        <div class="column-third">
+
+        </div>
+
+    </div>
+
+</main>
+

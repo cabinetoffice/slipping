@@ -5,29 +5,11 @@ using System.Web;
 using System.Web.Mvc;
 using System.Web.Routing;
 using Triad.CabinetOffice.Slipping.Data.EntityFramework.Slipping;
+using Triad.CabinetOffice.Slipping.Data.Repositories;
 using Triad.CabinetOffice.Slipping.Web.ViewModels;
 
 namespace Triad.CabinetOffice.Slipping.Web.Attributes
 {
-    public class UserRepository
-    {
-        SlippingEntities Context = new SlippingEntities();
-
-        public User GetByUsername(string username)
-        {
-            int userCount = this.Context.Users.Count(u => u.Username == username);
-
-            if (userCount == 1)
-            {
-                return this.Context.Users.Single(u => u.Username == username);
-            }
-            else
-            {
-                return null;
-            }
-        }
-    }
-
     public class SlippingAuthorizeAttribute : AuthorizeAttribute
     {
         protected override bool AuthorizeCore(HttpContextBase httpContext)

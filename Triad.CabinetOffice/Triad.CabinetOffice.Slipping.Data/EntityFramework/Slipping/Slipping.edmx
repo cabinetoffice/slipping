@@ -10,7 +10,7 @@
             <PropertyRef Name="ID" />
           </Key>
           <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
-          <Property Name="MPID" Type="int" />
+          <Property Name="MPID" Type="int" Nullable="false" />
           <Property Name="ReasonID" Type="int" />
           <Property Name="Details" Type="nvarchar" MaxLength="220" />
           <Property Name="StatusID" Type="int" Nullable="false" />
@@ -162,7 +162,7 @@
             <PropertyRef Name="ID" />
           </Key>
           <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-          <Property Name="MPID" Type="Int32" />
+          <Property Name="MPID" Type="Int32" Nullable="false" />
           <Property Name="ReasonID" Type="Int32" />
           <Property Name="Details" Type="String" MaxLength="220" FixedLength="false" Unicode="true" />
           <Property Name="StatusID" Type="Int32" Nullable="false" />

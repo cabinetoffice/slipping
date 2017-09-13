@@ -1,0 +1,43 @@
+﻿@model Triad.CabinetOffice.Slipping.Web.ViewModels.DateAndTime
+@using Triad.CabinetOffice.Slipping.Web.Extensions
+
+@{
+    ViewBag.Title = "When will you be going?";
+}
+
+<div class="grid-row">
+    <div class="column-two-thirds column-minimum">
+        <a class="link-back" href="/">Back</a>
+        <h1 class="heading-large">
+            When will you be going?
+        </h1>
+        @using (Html.BeginForm())
+        {
+            @Html.AntiForgeryToken()
+
+            <fieldset>
+                <div class="form-group @Html.ValidationErrorClassFor(model => model.Date, "form-group-error") ">
+                    <label class="form-label" for="date">Date</label>
+                    <span class="form-hint">for example: 12/04/2017</span>
+                    <span class="error-message">@Html.ValidationMessageFor(model => model.Date)</span>
+                    @Html.EditorFor(model => model.Date, new { htmlAttributes = new { @class = "form-control", @type = "date" } })
+                </div>
+            </fieldset>
+
+            <fieldset>
+                <div class="form-group @Html.ValidationErrorClassFor(model => model.Hour, "form-group-error") @Html.ValidationErrorClassFor(model => model.Minute, "form-group-error") ">
+                    <label class="form-label" for="select-box">Time</label>
+                    <span class="error-message">@Html.ValidationMessageFor(model => model.Hour)</span>
+                    <span class="error-message">@Html.ValidationMessageFor(model => model.Minute)</span>
+                    @Html.DropDownListFor(model => model.Hour, Model.Hours, new { @class = "form-control", @style = "width: 100px;" })
+                    @Html.DropDownListFor(model => model.Minute, Model.Minutes, new { @class = "form-control", @style = "width: 100px;" })
+                </div>
+            </fieldset>
+
+            <div class="form-group">
+                <input class="button" type="submit" value="Continue">
+            </div>
+        }
+    </div>
+</div>
+  

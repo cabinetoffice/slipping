@@ -183,6 +183,8 @@
     <Compile Include="App_Start\FilterConfig.cs" />
     <Compile Include="App_Start\RouteConfig.cs" />
     <Compile Include="App_Start\Startup.Auth.cs" />
+    <Compile Include="Attributes\FutureDateValidationAttribute.cs" />
+    <Compile Include="Attributes\PastDateValidationAttribute.cs" />
     <Compile Include="Attributes\SlippingAuthorizeAttribute.cs" />
     <Compile Include="Controllers\AccountController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
@@ -199,6 +201,7 @@
     <Compile Include="ViewModels\SlippingUser.cs" />
   </ItemGroup>
   <ItemGroup>
+    <Content Include="Content\application.css" />
     <Content Include="Content\bootstrap.css" />
     <Content Include="Content\bootstrap.min.css" />
     <Content Include="Content\govuk-elements-styles.css" />
@@ -870,9 +873,11 @@
     <Content Include="Views\Account\SignOutCallback.cshtml" />
     <Content Include="Views\Notify\Index.cshtml" />
     <Content Include="Scripts\version.json" />
-    <Content Include="Views\Slipping\FromDateAndTime.cshtml" />
+    <Content Include="Views\Slipping\FromDate.cshtml" />
     <Content Include="Views\View.cshtml" />
-    <Content Include="Views\Slipping\ToDateAndTime.cshtml" />
+    <Content Include="Views\Slipping\ToDate.cshtml" />
+    <Content Include="Views\Slipping\Index.cshtml" />
+    <Content Include="Views\Shared\NotFound.cshtml" />
     <Content Include="Views\Slipping\Location.cshtml" />
   </ItemGroup>
   <ItemGroup>
