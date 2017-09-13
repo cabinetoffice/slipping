@@ -17,7 +17,7 @@ Scenario: Listing slips when between one and five
           Given I have successfully logged into the SRS
           And I have submitted 5 or fewer slip requests
           Then I should see a list of up to 5 slip requests for this user
-          And I should only see slip requests which have not already expired i.e the start date is in the future
+          And I should only see slip requests which have not already expired i.e where the to date (end date) is in the future
           And each row should show the date of absence and start time of absence e.g. ‘10/01/2017 10:00am’
           And the slip request should be in order of XXX
           And I should not see a link to ‘View All’
@@ -26,7 +26,7 @@ Scenario: Listing slips when more than five
           Given I have successfully logged into the SRS
           And I have submitted more than five slip requests
           Then I should see a list of up to 5 slip requests for this user
-          And I should only see slip requests which have not already expired i.e the start date is in the future
+          And I should only see slip requests which have not already expired i.e where the to date (end date) is in the future
           And the slip request should be in order of XXX
           And I should see a link to ‘View All’
           
@@ -38,7 +38,7 @@ Scenario: Viewing All Slips
           And I see a clickable button to ‘View All’
           When I click this ‘View All’ button
           Then I should see a longer list with 6 or more submitted slip requests
-          And I should only see slip requests which have not already expired i.e the start date is in the future
+          And I should only see slip requests which have not already expired i.e where the to date (end date) is in the future
           And I should see their decision status next to each request
           
 Scenario: Instructions for nominating a user
