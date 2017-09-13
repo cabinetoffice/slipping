@@ -23,6 +23,13 @@
           <Property Name="To Date Time" Type="datetime2" Precision="0" StoreGeneratedPattern="Computed" />
           <Property Name="Decision Notes" Type="nvarchar" MaxLength="220" />
         </EntityType>
+        <EntityType Name="Absence Request Status">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Status" Type="nvarchar" MaxLength="255" />
+        </EntityType>
         <EntityType Name="Members of Parliament">
           <Key>
             <PropertyRef Name="ID" />
@@ -47,9 +54,26 @@
           <Property Name="Pims_Id" Type="nvarchar" MaxLength="10" />
           <Property Name="Full Name" Type="nvarchar" MaxLength="322" StoreGeneratedPattern="Computed" />
         </EntityType>
+        <Association Name="FK_Absence_Request_D3626684_2ADD_4611_BA06_3DBB23C03243">
+          <End Role="Absence Request Status" Type="Self.Absence Request Status" Multiplicity="1" />
+          <End Role="Absence Request" Type="Self.Absence Request" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Absence Request Status">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="Absence Request">
+              <PropertyRef Name="Status" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
         <EntityContainer Name="ModelStoreContainer">
           <EntitySet Name="Absence Request" EntityType="Self.Absence Request" Schema="Access" store:Type="Tables" />
+          <EntitySet Name="Absence Request Status" EntityType="Self.Absence Request Status" Schema="Access" store:Type="Tables" />
           <EntitySet Name="Members of Parliament" EntityType="Self.Members of Parliament" Schema="Access" store:Type="Tables" />
+          <AssociationSet Name="FK_Absence_Request_D3626684_2ADD_4611_BA06_3DBB23C03243" Association="Self.FK_Absence_Request_D3626684_2ADD_4611_BA06_3DBB23C03243">
+            <End Role="Absence Request Status" EntitySet="Absence Request Status" />
+            <End Role="Absence Request" EntitySet="Absence Request" />
+          </AssociationSet>
         </EntityContainer>
       </Schema></edmx:StorageModels>
     <!-- CSDL content -->
@@ -72,10 +96,16 @@
           <Property Name="From_Date_Time" Type="DateTime" annotation:StoreGeneratedPattern="Computed" Precision="0" />
           <Property Name="To_Date_Time" Type="DateTime" annotation:StoreGeneratedPattern="Computed" Precision="0" />
           <Property Name="Decision_Notes" Type="String" MaxLength="220" FixedLength="false" Unicode="true" />
+          <NavigationProperty Name="Absence_Request_Status" Relationship="Model.FK_Absence_Request_D3626684_2ADD_4611_BA06_3DBB23C03243" FromRole="Absence_Request" ToRole="Absence_Request_Status" />
         </EntityType>
         <EntityContainer Name="PAWSEntities" annotation:LazyLoadingEnabled="true">
           <EntitySet Name="Absence_Requests" EntityType="Self.Absence_Request" />
           <EntitySet Name="Members_of_Parliaments" EntityType="Model.Members_of_Parliament" />
+          <EntitySet Name="Absence_Request_Status" EntityType="Model.Absence_Request_Status" />
+          <AssociationSet Name="FK_Absence_Request_D3626684_2ADD_4611_BA06_3DBB23C03243" Association="Model.FK_Absence_Request_D3626684_2ADD_4611_BA06_3DBB23C03243">
+            <End Role="Absence_Request_Status" EntitySet="Absence_Request_Status" />
+            <End Role="Absence_Request" EntitySet="Absence_Requests" />
+          </AssociationSet>
         </EntityContainer>
         <EntityType Name="Members_of_Parliament">
           <Key>
@@ -101,6 +131,26 @@
           <Property Name="Pims_Id" Type="String" MaxLength="10" FixedLength="false" Unicode="true" />
           <Property Name="Full_Name" Type="String" MaxLength="322" FixedLength="false" Unicode="true" annotation:StoreGeneratedPattern="Computed" />
         </EntityType>
+        <EntityType Name="Absence_Request_Status">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Status" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
+          <NavigationProperty Name="Absence_Request" Relationship="Model.FK_Absence_Request_D3626684_2ADD_4611_BA06_3DBB23C03243" FromRole="Absence_Request_Status" ToRole="Absence_Request" />
+        </EntityType>
+        <Association Name="FK_Absence_Request_D3626684_2ADD_4611_BA06_3DBB23C03243">
+          <End Type="Model.Absence_Request_Status" Role="Absence_Request_Status" Multiplicity="1" />
+          <End Type="Model.Absence_Request" Role="Absence_Request" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Absence_Request_Status">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="Absence_Request">
+              <PropertyRef Name="Status" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
       </Schema>
     </edmx:ConceptualModels>
     <!-- C-S mapping content -->
@@ -147,6 +197,14 @@
                 <ScalarProperty Name="Surname" ColumnName="Surname" />
                 <ScalarProperty Name="Forenames" ColumnName="Forenames" />
                 <ScalarProperty Name="Title" ColumnName="Title" />
+                <ScalarProperty Name="ID" ColumnName="ID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Absence_Request_Status">
+            <EntityTypeMapping TypeName="Model.Absence_Request_Status">
+              <MappingFragment StoreEntitySet="Absence Request Status">
+                <ScalarProperty Name="Status" ColumnName="Status" />
                 <ScalarProperty Name="ID" ColumnName="ID" />
               </MappingFragment>
             </EntityTypeMapping>

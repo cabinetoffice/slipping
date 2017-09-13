@@ -11,7 +11,7 @@ namespace Triad.CabinetOffice.Slipping.Data.Models
     {
         //similar to AbsenceRequest
         public int ID { get; set; }
-        public Nullable<int> MPID { get; set; }
+        public int MPID { get; set; }
         public Nullable<int> ReasonID { get; set; }
         public string Details { get; set; }
         public int StatusID { get; set; }
@@ -20,6 +20,8 @@ namespace Triad.CabinetOffice.Slipping.Data.Models
         public string DecisionNotes { get; set; }
         public int CreatedBy { get; set; }
         public int LastChangedBy { get; set; }
+        public string Location { get; set; }
+        public Nullable<int> TravelTimeInHours { get; set; }
         public bool? OppositionMPsAttending { get; set; }
         public Dictionary<int, string> OppositionMPs { get; set; }
     }

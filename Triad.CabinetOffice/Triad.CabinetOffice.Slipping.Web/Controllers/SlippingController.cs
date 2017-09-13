@@ -1,4 +1,7 @@
 ﻿using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Web.Configuration;
 using System.Web.Mvc;
 using Triad.CabinetOffice.Slipping.Data.Models;
 using Triad.CabinetOffice.Slipping.Data.Repositories;
@@ -12,7 +15,9 @@ namespace Triad.CabinetOffice.Slipping.Web.Controllers
     {
         #region Properties
 
-        private SlippingRepository Repository { get { return new SlippingRepository(); } }
+        private SlippingRepository SlippingRepository { get { return new SlippingRepository(); } }
+
+        private MPRepository MPRepository { get { return new MPRepository(); } }
 
         private int UserID
         {
@@ -29,18 +34,20 @@ namespace Triad.CabinetOffice.Slipping.Web.Controllers
             }
         }
 
+        private int MPID { get { return Convert.ToInt32(Session["MPID"]); } }
+
         #endregion Properties
 
         #region Methods
 
         private SlippingRequest Get(int requestId)
         {
-            return Repository.Get(requestId, this.UserID);
+            return SlippingRepository.Get(requestId, this.UserID);
         }
 
         private int CreateOrUpdate(SlippingRequest slippingRequest)
         {
-            return Repository.CreateOrUpdate(slippingRequest, this.UserID);
+            return SlippingRepository.CreateOrUpdate(slippingRequest, this.MPID, this.UserID);
         }
 
         #endregion Methods
@@ -48,9 +55,23 @@ namespace Triad.CabinetOffice.Slipping.Web.Controllers
         #region Action Methods
 
         // GET: Slipping
-        public ActionResult Index()
+        public ActionResult Index(bool viewAll = false)
         {
-            return View();
+            MP mp = MPRepository.Get(this.MPID, this.UserID);
+            int initialSlippingRequestListLength = Convert.ToInt32(WebConfigurationManager.AppSettings["InitialSlippingRequestListLength"]);
+            IEnumerable<SlipSummary> slips = this.SlippingRepository.GetSummaries(this.MPID, this.UserID);
+
+            IEnumerable<SlipSummary> visibleSlips = slips
+                .Where(s => s.ToDate.Date >= DateTime.Now.Date)
+                .OrderBy(s => s.ToDate);
+            ViewBag.ShowViewAll = visibleSlips.Count() > initialSlippingRequestListLength && !viewAll;
+
+            SlippingHistory model = new SlippingHistory()
+            {
+                MPName = mp != null ? mp.Name : "Unknown",
+                Slips = viewAll ? visibleSlips : visibleSlips.Take(initialSlippingRequestListLength)
+            };
+            return View(model);
         }
 
         // GET: Slipping/Create or Slipping/Edit/ID/FromDate
@@ -144,6 +165,49 @@ namespace Triad.CabinetOffice.Slipping.Web.Controllers
                 if (ModelState.IsValid)
                 {
                     slippingRequest.ToDate = model.GetDateTime();
+                    CreateOrUpdate(slippingRequest);
+                    return RedirectToAction("Location", new { id=id});
+                }
+                else
+                {
+                    return View(model);
+                }
+            }
+            else
+            {
+                return RedirectToAction("NotFound");
+            }
+        }
+
+        // GET: Slipping/Edit/ID/Location
+        [HttpGet]
+        public ActionResult Location(int id)
+        {
+            SlippingRequest slippingRequest = Get(id);
+            var model = new LocationAndHours
+            {
+                ID = slippingRequest.ID,
+                Location = slippingRequest.Location != null ? slippingRequest.Location : string.Empty,
+                Hours = slippingRequest.TravelTimeInHours.HasValue ? slippingRequest.TravelTimeInHours.ToString() : string.Empty
+            };
+            return View(model);
+        }
+
+        // POST: Slipping/Edit/ID/ToDate
+        // To protect from overposting attacks, please enable the specific properties you want to bind to, for 
+        // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public ActionResult Location(int id, LocationAndHours model)
+        {
+            SlippingRequest slippingRequest = Get(id);
+
+            if (slippingRequest != null)
+            {
+                if (ModelState.IsValid)
+                {
+                    slippingRequest.Location = model.Location;
+                    slippingRequest.TravelTimeInHours = Convert.ToInt32(model.Hours);
                     CreateOrUpdate(slippingRequest);
                     return RedirectToAction("Location");
                 }

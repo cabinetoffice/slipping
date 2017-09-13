@@ -14,6 +14,8 @@
 	[LastChangedDate] DATETIME NOT NULL,
 	[OppositionMPsAttending] [bit] NULL,
 	CONSTRAINT PK_AbsenceRequest PRIMARY KEY (ID),
-	CONSTRAINT FK_AbsenceRequest_User_CreatedBy FOREIGN KEY (CreatedBy) REFERENCES [dbo].[User](ID),
+	[Location] NVARCHAR(100) NULL, 
+    [TravelTimeInHours] INT NULL, 
+    CONSTRAINT FK_AbsenceRequest_User_CreatedBy FOREIGN KEY (CreatedBy) REFERENCES [dbo].[User](ID),
 	CONSTRAINT FK_AbsenceRequest_User_LastChangedBy FOREIGN KEY (LastChangedBy) REFERENCES [dbo].[User](ID)
 )
