@@ -47,9 +47,3 @@ Scenario: Instructions for nominating a user
           And below this I should see a further label e.g. ‘We need their name and email address. You can send us these details by email or by telephone.’
           And below this i should see a contact email for the PAWS team e.g. ‘Email: pairsandwhipping@parliament.gov.uk’
           And below this I should see a contact number for the PAWS team e.g. ‘Telephone: 0208 123 4567’
-      
-          
-
-
-
-
