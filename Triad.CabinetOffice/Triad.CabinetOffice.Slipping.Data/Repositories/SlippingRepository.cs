@@ -70,7 +70,6 @@ namespace Triad.CabinetOffice.Slipping.Data.Repositories
             {
                 absenceRequest = db.AbsenceRequests.Find(slippingRequest.ID);
             }
-
             if (absenceRequest != null)
             {
                 absenceRequest.LastChangedBy = userId;
@@ -81,8 +80,9 @@ namespace Triad.CabinetOffice.Slipping.Data.Repositories
                 absenceRequest.FromDate = slippingRequest.FromDate;
                 absenceRequest.ToDate = slippingRequest.ToDate;
                 absenceRequest.DecisionNotes = slippingRequest.DecisionNotes;
+                absenceRequest.Location = slippingRequest.Location;
+                absenceRequest.TravelTimeInHours = slippingRequest.TravelTimeInHours;
             }
-
             return absenceRequest;
         }
 
@@ -104,16 +104,18 @@ namespace Triad.CabinetOffice.Slipping.Data.Repositories
         {
             SlippingRequest slippingRequest = new SlippingRequest()
             {
-                ID = absenceRequest.ID,
-                MPID = absenceRequest.MPID,
-                ReasonID = absenceRequest.ReasonID,
-                Details = absenceRequest.Details,
-                StatusID = absenceRequest.StatusID,
-                FromDate = absenceRequest.FromDate,
-                ToDate = absenceRequest.ToDate,
-                DecisionNotes = absenceRequest.DecisionNotes,
-                CreatedBy = absenceRequest.CreatedBy,
-                LastChangedBy = absenceRequest.LastChangedBy
+                ID= absenceRequest.ID,
+                MPID=absenceRequest.MPID,
+                ReasonID=absenceRequest.ReasonID,
+                Details=absenceRequest.Details,
+                StatusID=absenceRequest.StatusID,
+                FromDate=absenceRequest.FromDate,
+                ToDate=absenceRequest.ToDate,
+                DecisionNotes=absenceRequest.DecisionNotes,
+                CreatedBy=absenceRequest.CreatedBy,
+                LastChangedBy=absenceRequest.LastChangedBy,
+                Location=absenceRequest.Location,
+                TravelTimeInHours=absenceRequest.TravelTimeInHours
             };
 
             return slippingRequest;

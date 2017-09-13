@@ -76,6 +76,9 @@
     <Compile Include="EntityFramework\Slipping\AbsenceRequest.cs">
       <DependentUpon>Slipping.tt</DependentUpon>
     </Compile>
+    <Compile Include="EntityFramework\Slipping\AbsenceRequestOppositionMP.cs">
+      <DependentUpon>Slipping.tt</DependentUpon>
+    </Compile>
     <Compile Include="EntityFramework\Slipping\Slipping.Context.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>

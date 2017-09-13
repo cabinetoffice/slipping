@@ -92,7 +92,20 @@ namespace Triad.CabinetOffice.Slipping.Web.Controllers
             }
             return View(model);
         }
+        // GET: Slipping/ToDate/ID
+        [HttpGet]
 
+        public ActionResult Location(int id)
+        {
+            SlippingRequest slippingRequest = Get(id);
+            var model = new LocationAndHours
+            {
+                ID = slippingRequest.ID,
+                Location = slippingRequest.Location!= null ? slippingRequest.Location : "",
+                Hours = slippingRequest.TravelTimeInHours.HasValue ? slippingRequest.TravelTimeInHours.ToString() : ""
+            };
+            return View(model);
+        }
         // POST: Slipping/Create
         // To protect from overposting attacks, please enable the specific properties you want to bind to, for 
         // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
@@ -165,6 +178,36 @@ namespace Triad.CabinetOffice.Slipping.Web.Controllers
                 if (ModelState.IsValid)
                 {
                     slippingRequest.ToDate = model.GetDateTime();
+                    CreateOrUpdate(slippingRequest);
+                    return RedirectToAction("Location", new { id=id});
+                }
+                else
+                {
+                    return View(model);
+                }
+            }
+            else
+            {
+                return RedirectToAction("NotFound");
+            }
+        }
+
+        // POST: Slipping/Edit/ID/ToDate
+        // To protect from overposting attacks, please enable the specific properties you want to bind to, for 
+        // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public ActionResult Location(int id, LocationAndHours model)
+        {
+            SlippingRequest slippingRequest = Get(id);
+
+            if (slippingRequest != null)
+            {
+
+                if (ModelState.IsValid)
+                {
+                    slippingRequest.Location = model.Location;
+                    slippingRequest.TravelTimeInHours = Convert.ToInt32(model.Hours);
                     CreateOrUpdate(slippingRequest);
                     return RedirectToAction("Index");
                 }
