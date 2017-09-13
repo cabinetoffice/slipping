@@ -11,7 +11,8 @@
 	[CreatedBy] INT NOT NULL,
 	[CreatedDate] DATETIME NOT NULL,
 	[LastChangedBy] INT NOT NULL,
-	[LastChangedDate] DATETIME NOT NULL
+	[LastChangedDate] DATETIME NOT NULL,
+	[OppositionMPsAttending] [bit] NULL,
 	CONSTRAINT PK_AbsenceRequest PRIMARY KEY (ID),
 	[Location] NVARCHAR(100) NULL, 
     [TravelTimeInHours] INT NULL, 

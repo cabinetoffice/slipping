@@ -22,6 +22,8 @@ namespace Triad.CabinetOffice.Slipping.Data.EntityFramework.Slipping
             this.User1 = new HashSet<User>();
             this.UserMPs = new HashSet<UserMP>();
             this.UserMPs1 = new HashSet<UserMP>();
+            this.AbsenceRequestOppositionMPs = new HashSet<AbsenceRequestOppositionMP>();
+            this.AbsenceRequestOppositionMPs1 = new HashSet<AbsenceRequestOppositionMP>();
         }
     
         public int ID { get; set; }
@@ -40,5 +42,9 @@ namespace Triad.CabinetOffice.Slipping.Data.EntityFramework.Slipping
         public virtual ICollection<UserMP> UserMPs { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<UserMP> UserMPs1 { get; set; }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<AbsenceRequestOppositionMP> AbsenceRequestOppositionMPs { get; set; }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<AbsenceRequestOppositionMP> AbsenceRequestOppositionMPs1 { get; set; }
     }
 }
