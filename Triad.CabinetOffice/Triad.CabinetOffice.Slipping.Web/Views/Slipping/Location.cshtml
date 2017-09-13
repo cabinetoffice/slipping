@@ -1,0 +1,32 @@
+﻿@model Triad.CabinetOffice.Slipping.Web.ViewModels.LocationAndHours
+@using Triad.CabinetOffice.Slipping.Web.Extensions
+
+@{
+    ViewBag.Title = "Where are you going?";
+}
+<div class="grid-row">
+    <div class="column-two-thirds column-minimum">
+        <a class="link-back" href="/">Back</a>
+        <h1 class="heading-large">
+            Where are you going?
+        </h1>
+        @using (Html.BeginForm())
+        {
+            @Html.AntiForgeryToken()
+            <div class="form-group @Html.ValidationErrorClassFor(model => model.Location, "form-group-error") ">
+                <label class="form-label" for="date-">Location</label>
+                <span class="error-message">@Html.ValidationMessageFor(model => model.Location)</span>
+                @Html.EditorFor(model => model.Location, new { @class = "form-control" })
+            </div>
+            <div class="form-group @Html.ValidationErrorClassFor(model => model.Hours, "form-group-error") ">
+                <label class="form-label" for="select-box">Hours</label>
+                <span class="error-message">@Html.ValidationMessageFor(model => model.Hours)</span>
+                @Html.EditorFor(model => model.Hours, new { @class = "form-control" })
+            </div>
+
+            <div class="form-group">
+                <input class="button" type="submit" value="Continue">
+            </div>
+        }
+    </div>
+</div>

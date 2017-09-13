@@ -50,6 +50,17 @@ namespace Triad.CabinetOffice.Slipping.Web.Controllers
             };
             return View(model);
         }
+        public ActionResult Location(int id)
+        {
+            SlippingRequest slippingRequest = Get(id);
+            var model = new LocationAndHours
+            {
+                ID = slippingRequest.ID,
+                Location = slippingRequest.Location!= null ? slippingRequest.Location : "",
+                Hours = slippingRequest.TravelTimeInHours.HasValue ? slippingRequest.TravelTimeInHours.Value : 0
+            };
+            return View(model);
+        }
         // POST: Slipping/Create
         // To protect from overposting attacks, please enable the specific properties you want to bind to, for 
         // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
@@ -88,7 +99,7 @@ namespace Triad.CabinetOffice.Slipping.Web.Controllers
 
                 CreateOrUpdate(slippingRequest);
 
-                return RedirectToAction("Index");
+                return RedirectToAction("Location", new { id = id });
             }
             else
             {

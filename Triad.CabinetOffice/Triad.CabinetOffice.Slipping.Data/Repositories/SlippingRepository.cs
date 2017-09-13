@@ -84,6 +84,8 @@ namespace Triad.CabinetOffice.Slipping.Data.Repositories
             absenceRequest.FromDate = slippingRequest.FromDate;
             absenceRequest.ToDate = slippingRequest.ToDate;
             absenceRequest.DecisionNotes = slippingRequest.DecisionNotes;
+            absenceRequest.Location = slippingRequest.Location;
+            absenceRequest.TravelTimeInHours = slippingRequest.TravelTimeInHours;
 
              return absenceRequest;
         }
@@ -113,7 +115,9 @@ namespace Triad.CabinetOffice.Slipping.Data.Repositories
                 ToDate=absenceRequest.ToDate,
                 DecisionNotes=absenceRequest.DecisionNotes,
                 CreatedBy=absenceRequest.CreatedBy,
-                LastChangedBy=absenceRequest.LastChangedBy
+                LastChangedBy=absenceRequest.LastChangedBy,
+                Location=absenceRequest.Location,
+                TravelTimeInHours=absenceRequest.TravelTimeInHours
             };
 
             return slippingRequest;

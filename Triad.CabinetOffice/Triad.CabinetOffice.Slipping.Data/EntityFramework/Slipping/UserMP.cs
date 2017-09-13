@@ -18,7 +18,9 @@ namespace Triad.CabinetOffice.Slipping.Data.EntityFramework.Slipping
         public int MPID { get; set; }
         public int CreatedBy { get; set; }
         public System.DateTime CreatedDate { get; set; }
+        public int UserID { get; set; }
     
         public virtual User User { get; set; }
+        public virtual User User1 { get; set; }
     }
 }

@@ -19,5 +19,7 @@ namespace Triad.CabinetOffice.Slipping.Data.Models
         public string DecisionNotes { get; set; }
         public int CreatedBy { get; set; }
         public int LastChangedBy { get; set; }
+        public string Location { get; set; }
+        public Nullable<int> TravelTimeInHours { get; set; }
     }
 }

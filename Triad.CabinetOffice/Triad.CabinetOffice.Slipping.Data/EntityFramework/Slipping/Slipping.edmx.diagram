@@ -12,6 +12,7 @@
         <AssociationConnector Association="Model.FK_AbsenceRequest_User_LastChangedBy" />
         <AssociationConnector Association="Model.FK_User_User" />
         <AssociationConnector Association="Model.FK_UserMP_User" />
+        <AssociationConnector Association="Model.FK_UserMP_UserID" />
       </Diagram>
     </edmx:Diagrams>
   </edmx:Designer>
