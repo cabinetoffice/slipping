@@ -24,7 +24,8 @@ namespace Triad.CabinetOffice.Slipping.Data.Repositories
             if (Exists(requestId, userId))
             {
                 AbsenceRequest absenceRequest = db.AbsenceRequests.Find(requestId);
-                SlippingRequest slippingRequest = GetSlippingRequest(absenceRequest);
+                var absenceRequestOppositionMPs = absenceRequest.AbsenceRequestOppositionMPs;
+                SlippingRequest slippingRequest = GetSlippingRequest(absenceRequest, absenceRequestOppositionMPs);
                 return slippingRequest;
             }
             else
@@ -109,7 +110,7 @@ namespace Triad.CabinetOffice.Slipping.Data.Repositories
             }
         }
 
-        private SlippingRequest GetSlippingRequest(AbsenceRequest absenceRequest)
+        private SlippingRequest GetSlippingRequest(AbsenceRequest absenceRequest, ICollection<AbsenceRequestOppositionMP> absenceRequestOppositionMPs)
         {
             SlippingRequest slippingRequest = new SlippingRequest()
             {
@@ -122,7 +123,9 @@ namespace Triad.CabinetOffice.Slipping.Data.Repositories
                 ToDate = absenceRequest.ToDate,
                 DecisionNotes = absenceRequest.DecisionNotes,
                 CreatedBy = absenceRequest.CreatedBy,
-                LastChangedBy = absenceRequest.LastChangedBy
+                LastChangedBy = absenceRequest.LastChangedBy,
+                OppositionMPsAttending = absenceRequest.OppositionMPsAttending,
+                OppositionMPs = absenceRequestOppositionMPs.ToDictionary(a => a.ID, a => a.MPFullName)
             };
 
             return slippingRequest;

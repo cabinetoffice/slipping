@@ -145,6 +145,53 @@ namespace Triad.CabinetOffice.Slipping.Web.Controllers
                 {
                     slippingRequest.ToDate = model.GetDateTime();
                     CreateOrUpdate(slippingRequest);
+                    return RedirectToAction("Location");
+                }
+                else
+                {
+                    return View(model);
+                }
+            }
+            else
+            {
+                return RedirectToAction("NotFound");
+            }
+        }
+
+        // GET: Slipping/Edit/ID/OppositionMPs
+        [HttpGet]
+        public ActionResult OppositionMPs(int id)
+        {
+            SlippingRequest slippingRequest = Get(id);
+
+            if (slippingRequest != null)
+            {
+                var model = new OppositionMPs
+                {
+                    YesNo = slippingRequest.OppositionMPsAttending,
+                    MPs = slippingRequest.OppositionMPs
+                };
+                return View(model);
+            }
+            else
+            {
+                return RedirectToAction("NotFound", "Home");
+            }
+        }
+
+        // POST: Slipping/Edit/ID/OppositionMPs
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public ActionResult OppositionMPs(int id, OppositionMPs model)
+        {
+            SlippingRequest slippingRequest = Get(id);
+
+            if (slippingRequest != null)
+            {
+                if (ModelState.IsValid)
+                {
+                    //slippingRequest = model.GetDateTime();
+                    CreateOrUpdate(slippingRequest);
                     return RedirectToAction("Index");
                 }
                 else

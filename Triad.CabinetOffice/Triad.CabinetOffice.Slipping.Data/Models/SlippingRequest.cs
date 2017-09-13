@@ -3,12 +3,13 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using Triad.CabinetOffice.Slipping.Data.EntityFramework.Slipping;
 
 namespace Triad.CabinetOffice.Slipping.Data.Models
 {
     public class SlippingRequest
     {
-        //smiliar to AbsenceRequest
+        //similar to AbsenceRequest
         public int ID { get; set; }
         public Nullable<int> MPID { get; set; }
         public Nullable<int> ReasonID { get; set; }
@@ -19,5 +20,7 @@ namespace Triad.CabinetOffice.Slipping.Data.Models
         public string DecisionNotes { get; set; }
         public int CreatedBy { get; set; }
         public int LastChangedBy { get; set; }
+        public bool? OppositionMPsAttending { get; set; }
+        public Dictionary<int, string> OppositionMPs { get; set; }
     }
 }
