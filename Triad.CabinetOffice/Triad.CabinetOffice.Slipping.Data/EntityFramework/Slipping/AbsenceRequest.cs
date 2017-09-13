@@ -14,6 +14,12 @@ namespace Triad.CabinetOffice.Slipping.Data.EntityFramework.Slipping
     
     public partial class AbsenceRequest
     {
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
+        public AbsenceRequest()
+        {
+            this.AbsenceRequestOppositionMPs = new HashSet<AbsenceRequestOppositionMP>();
+        }
+    
         public int ID { get; set; }
         public int MPID { get; set; }
         public Nullable<int> ReasonID { get; set; }
@@ -28,8 +34,11 @@ namespace Triad.CabinetOffice.Slipping.Data.EntityFramework.Slipping
         public System.DateTime LastChangedDate { get; set; }
         public string Location { get; set; }
         public Nullable<int> TravelTimeInHours { get; set; }
+        public Nullable<bool> OppositionMPsAttending { get; set; }
     
         public virtual User User { get; set; }
         public virtual User User1 { get; set; }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<AbsenceRequestOppositionMP> AbsenceRequestOppositionMPs { get; set; }
     }
 }
