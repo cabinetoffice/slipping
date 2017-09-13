@@ -92,20 +92,7 @@ namespace Triad.CabinetOffice.Slipping.Web.Controllers
             }
             return View(model);
         }
-        // GET: Slipping/ToDate/ID
-        [HttpGet]
 
-        public ActionResult Location(int id)
-        {
-            SlippingRequest slippingRequest = Get(id);
-            var model = new LocationAndHours
-            {
-                ID = slippingRequest.ID,
-                Location = slippingRequest.Location!= null ? slippingRequest.Location : "",
-                Hours = slippingRequest.TravelTimeInHours.HasValue ? slippingRequest.TravelTimeInHours.ToString() : ""
-            };
-            return View(model);
-        }
         // POST: Slipping/Create
         // To protect from overposting attacks, please enable the specific properties you want to bind to, for 
         // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
@@ -192,6 +179,20 @@ namespace Triad.CabinetOffice.Slipping.Web.Controllers
             }
         }
 
+        // GET: Slipping/Edit/ID/Location
+        [HttpGet]
+        public ActionResult Location(int id)
+        {
+            SlippingRequest slippingRequest = Get(id);
+            var model = new LocationAndHours
+            {
+                ID = slippingRequest.ID,
+                Location = slippingRequest.Location != null ? slippingRequest.Location : string.Empty,
+                Hours = slippingRequest.TravelTimeInHours.HasValue ? slippingRequest.TravelTimeInHours.ToString() : string.Empty
+            };
+            return View(model);
+        }
+
         // POST: Slipping/Edit/ID/ToDate
         // To protect from overposting attacks, please enable the specific properties you want to bind to, for 
         // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
@@ -203,7 +204,6 @@ namespace Triad.CabinetOffice.Slipping.Web.Controllers
 
             if (slippingRequest != null)
             {
-
                 if (ModelState.IsValid)
                 {
                     slippingRequest.Location = model.Location;

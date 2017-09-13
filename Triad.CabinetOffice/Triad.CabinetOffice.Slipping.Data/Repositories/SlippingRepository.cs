@@ -70,6 +70,7 @@ namespace Triad.CabinetOffice.Slipping.Data.Repositories
             {
                 absenceRequest = db.AbsenceRequests.Find(slippingRequest.ID);
             }
+
             if (absenceRequest != null)
             {
                 absenceRequest.LastChangedBy = userId;
@@ -83,6 +84,7 @@ namespace Triad.CabinetOffice.Slipping.Data.Repositories
                 absenceRequest.Location = slippingRequest.Location;
                 absenceRequest.TravelTimeInHours = slippingRequest.TravelTimeInHours;
             }
+
             return absenceRequest;
         }
 
