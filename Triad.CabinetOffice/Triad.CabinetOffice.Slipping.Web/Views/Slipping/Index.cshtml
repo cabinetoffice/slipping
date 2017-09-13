@@ -1,4 +1,6 @@
-﻿
+﻿@model Triad.CabinetOffice.Slipping.Web.ViewModels.SlippingHistory
+@using Triad.CabinetOffice.Slipping.Data.Models
+
 @{
     ViewBag.Title = "History";
 }
@@ -10,36 +12,23 @@
         <div class="column-two-thirds">
 
             <h1 class="heading-large">
-                Damian Green MP slipping requests
+                @Model.MPName MP slipping requests
             </h1>
 
             <ol class="task-list">
                 <li>
                     <ul class="task-list-items">
-                        <li class="task-list-item">
-                            <a class="task-name" href="#" aria-describedby="eligibility-completed">
-                                Slipping request 15/08/2017
-                            </a>
-                            <strong class="task-completed" id="eligibility-completed">Deferred</strong>
-                        </li>
-                        <li class="task-list-item">
-                            <a class="task-name" href="#" aria-describedby="read-declaration-completed">
-                                Slipping request 10/10/2017
-                            </a>
-                            <strong class="task-completed" id="read-declaration-completed">Rejected</strong>
-                        </li>
-                        <li class="task-list-item">
-                            <a class="task-name" href="page-slipping-request-cancel" aria-describedby="eligibility-completed">
-                                Slipping request 10/08/2017
-                            </a>
-                            <strong class="task-completed" id="eligibility-completed">Approved</strong>
-                        </li>
-                        <li class="task-list-item">
-                            <a class="task-name" href="#" aria-describedby="read-declaration-completed">
-                                Slipping request 01/06/2017
-                            </a>
-                            <strong class="task-completed" id="read-declaration-completed">Approved</strong>
-                        </li>
+                        @foreach (SlipSummary slip in Model.Slips)
+                        {
+                            <li class="task-list-item">
+                                @Html.ActionLink(string.Format("Slipping request - {0} - {1}", @slip.FromDate.ToString("dd/MM/yyyy"), @slip.FromDate.ToString("HH:mm")), "Review", new { id = @slip.ID }, new { @aria_describedby = "eligibility-completed" })
+                                <strong class="task-completed" id="eligibility-completed">@slip.Status</strong>
+                            </li>
+                        }
+                        @if (ViewBag.ShowViewAll)
+                        {
+                            <p class="view-all-link">@Html.ActionLink("View All", "Index", new { viewAll = true })</p>
+                        }
                     </ul>
             </ol>
 

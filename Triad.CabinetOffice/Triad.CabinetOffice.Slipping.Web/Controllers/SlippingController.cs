@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Linq;
 using System.Web.Mvc;
 using Triad.CabinetOffice.Slipping.Data.Models;
 using Triad.CabinetOffice.Slipping.Data.Repositories;
@@ -48,9 +49,27 @@ namespace Triad.CabinetOffice.Slipping.Web.Controllers
         #region Action Methods
 
         // GET: Slipping
-        public ActionResult Index()
+        public ActionResult Index(bool viewAll = false)
         {
-            return View();
+            SlipSummary[] slips = new SlipSummary[]
+                {
+                    new SlipSummary(){ ID = 1, FromDate = new DateTime(2017,9,14,9,15,0), Status = "Approved" },
+                    new SlipSummary(){ ID = 2, FromDate = new DateTime(2017,9,18,14,45,0), Status = "Pending" },
+                    new SlipSummary(){ ID = 3, FromDate = new DateTime(2017,9,22,10,0,0), Status = "Pending" },
+                    new SlipSummary(){ ID = 4, FromDate = new DateTime(2017,9,25,17,0,0), Status = "Rejected" },
+                    new SlipSummary(){ ID = 5, FromDate = new DateTime(2017,10,5,17,0,0), Status = "Pending" },
+                    new SlipSummary(){ ID = 6, FromDate = new DateTime(2017,10,15,0,0,0), Status = "Unsubmitted" },
+                    new SlipSummary(){ ID = 7, FromDate = new DateTime(2017,10,20,10,0,0), Status = "Unsubmitted" },
+                };
+
+            ViewBag.ShowViewAll = slips.Count() > 5 && !viewAll;
+
+            SlippingHistory model = new SlippingHistory()
+            {
+                MPName = "David Preston",
+                Slips = viewAll ? slips : slips.Take(5)
+            };
+            return View(model);
         }
 
         // GET: Slipping/Create or Slipping/Edit/ID/FromDate
