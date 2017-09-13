@@ -14,7 +14,7 @@ namespace Triad.CabinetOffice.Slipping.Web.Attributes
             if (value is DateTime)
             {
                 DateTime dateValue = Convert.ToDateTime(value);
-                return dateValue > DateTime.Now.Date;
+                return dateValue.Date >= DateTime.Now.Date;
             }
             else
             {
