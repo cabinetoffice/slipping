@@ -7,6 +7,8 @@
       <Diagram DiagramId="f6128f6a138c4836a7ac9c0adc1f3973" Name="Diagram1">
         <EntityTypeShape EntityType="Model.Absence_Request" Width="1.5" PointX="0.75" PointY="0.75" IsExpanded="true" />
         <EntityTypeShape EntityType="Model.Members_of_Parliament" Width="1.5" PointX="3.375" PointY="0.75" />
+        <EntityTypeShape EntityType="Model.Absence_Request_Status" Width="1.5" PointX="0.75" PointY="5.75" />
+        <AssociationConnector Association="Model.FK_Absence_Request_D3626684_2ADD_4611_BA06_3DBB23C03243" />
       </Diagram>
     </edmx:Diagrams>
   </edmx:Designer>

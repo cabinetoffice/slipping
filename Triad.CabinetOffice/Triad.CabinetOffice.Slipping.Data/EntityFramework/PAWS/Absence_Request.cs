@@ -27,5 +27,7 @@ namespace Triad.CabinetOffice.Slipping.Data.EntityFramework.PAWS
         public Nullable<System.DateTime> From_Date_Time { get; set; }
         public Nullable<System.DateTime> To_Date_Time { get; set; }
         public string Decision_Notes { get; set; }
+    
+        public virtual Absence_Request_Status Absence_Request_Status { get; set; }
     }
 }

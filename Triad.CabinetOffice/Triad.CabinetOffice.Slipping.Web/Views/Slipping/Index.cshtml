@@ -5,59 +5,56 @@
     ViewBag.Title = "History";
 }
 
-<main id="content" role="main">
+<div class="grid-row">
 
-    <div class="grid-row">
+    <div class="column-two-thirds">
 
-        <div class="column-two-thirds">
+        <h1 class="heading-large">
+            @Model.MPName MP slipping requests
+        </h1>
 
-            <h1 class="heading-large">
-                @Model.MPName MP slipping requests
-            </h1>
+        <ol class="task-list">
+            <li>
+                <ul class="task-list-items">
+                    @foreach (SlipSummary slip in Model.Slips)
+                    {
+                        <li class="task-list-item">
+                            @Html.ActionLink(string.Format("Slipping request - {0} - {1}", @slip.FromDate.ToString("dd/MM/yyyy"), @slip.FromDate.ToString("HH:mm")), "Review", new { id = @slip.ID }, new { @aria_describedby = string.Format("task-status-{0}", @slip.ID) })
+                            <strong class="task-completed" id="@string.Format("task-status-{0}", @slip.ID)">@slip.Status</strong>
+                        </li>
+                    }
+                    @if (ViewBag.ShowViewAll)
+                    {
+                        <p class="view-all-link">@Html.ActionLink("View All", "Index", new { viewAll = true })</p>
+                    }
+                </ul>
+        </ol>
 
-            <ol class="task-list">
-                <li>
-                    <ul class="task-list-items">
-                        @foreach (SlipSummary slip in Model.Slips)
-                        {
-                            <li class="task-list-item">
-                                @Html.ActionLink(string.Format("Slipping request - {0} - {1}", @slip.FromDate.ToString("dd/MM/yyyy"), @slip.FromDate.ToString("HH:mm")), "Review", new { id = @slip.ID }, new { @aria_describedby = "eligibility-completed" })
-                                <strong class="task-completed" id="eligibility-completed">@slip.Status</strong>
-                            </li>
-                        }
-                        @if (ViewBag.ShowViewAll)
-                        {
-                            <p class="view-all-link">@Html.ActionLink("View All", "Index", new { viewAll = true })</p>
-                        }
-                    </ul>
-            </ol>
+        <p>
+            @Html.ActionLink("New slipping request", "FromDate", null, new { @class = "button", @role = "button" })
+        </p>
 
-            <p>
-                @Html.ActionLink("New slipping request", "FromDate", null, new { @class = "button", @role = "button" })
-            </p>
+        <h2 class="heading-medium">
+            Want to nominate a user to fill-in your slipping requests?
+        </h2>
 
-            <h2 class="heading-medium">
-                Want to nominate a user to fill-in your slipping requests?
-            </h2>
+        <p>
+            We need their name and email address.  You can send us these details by email or by telephone.
+        </p>
 
-            <p>
-                We need their name and email address.  You can send us these details by email or by telephone.
-            </p>
+        <p>
+            <span class="bold">Email:</span> pairsandwhipping@parliament.gov.uk
+        </p>
 
-            <p>
-                <span class="bold">Email:</span> pairsandwhipping@parliament.gov.uk
-            </p>
+        <p>
+            <span class="bold">Telephone:</span> 0208 123 4567
+        </p>
+    </div>
 
-            <p>
-                <span class="bold">Telephone:</span> 0208 123 4567
-            </p>
-        </div>
-
-        <div class="column-third">
-
-        </div>
+    <div class="column-third">
 
     </div>
 
-</main>
+</div>
+
 

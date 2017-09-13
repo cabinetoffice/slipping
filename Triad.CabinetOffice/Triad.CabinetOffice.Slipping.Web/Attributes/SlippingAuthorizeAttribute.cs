@@ -19,6 +19,7 @@ namespace Triad.CabinetOffice.Slipping.Web.Attributes
                 string username = httpContext.User.Identity.Name;
                 UserRepository repository = new UserRepository();
                 User user = repository.GetByUsername(username);
+                httpContext.Session["MPID"] = user.UserMPs1.First().MPID;
 
                 if (user != null)
                 {

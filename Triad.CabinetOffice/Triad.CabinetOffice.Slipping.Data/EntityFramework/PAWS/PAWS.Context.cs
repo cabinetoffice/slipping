@@ -27,5 +27,6 @@ namespace Triad.CabinetOffice.Slipping.Data.EntityFramework.PAWS
     
         public virtual DbSet<Absence_Request> Absence_Requests { get; set; }
         public virtual DbSet<Members_of_Parliament> Members_of_Parliaments { get; set; }
+        public virtual DbSet<Absence_Request_Status> Absence_Request_Status { get; set; }
     }
 }

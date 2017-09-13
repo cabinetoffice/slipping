@@ -10,6 +10,7 @@ namespace Triad.CabinetOffice.Slipping.Data.Models
     {
         public int ID { get; set; }
         public DateTime FromDate { get; set; }
+        public DateTime ToDate { get; set; }
         public string Status { get; set; }
     }
 }

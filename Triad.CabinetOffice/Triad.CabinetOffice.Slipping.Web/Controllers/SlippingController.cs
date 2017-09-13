@@ -1,5 +1,7 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.Linq;
+using System.Web.Configuration;
 using System.Web.Mvc;
 using Triad.CabinetOffice.Slipping.Data.Models;
 using Triad.CabinetOffice.Slipping.Data.Repositories;
@@ -13,7 +15,9 @@ namespace Triad.CabinetOffice.Slipping.Web.Controllers
     {
         #region Properties
 
-        private SlippingRepository Repository { get { return new SlippingRepository(); } }
+        private SlippingRepository SlippingRepository { get { return new SlippingRepository(); } }
+
+        private MPRepository MPRepository { get { return new MPRepository(); } }
 
         private int UserID
         {
@@ -30,18 +34,20 @@ namespace Triad.CabinetOffice.Slipping.Web.Controllers
             }
         }
 
+        private int MPID { get { return Convert.ToInt32(Session["MPID"]); } }
+
         #endregion Properties
 
         #region Methods
 
         private SlippingRequest Get(int requestId)
         {
-            return Repository.Get(requestId, this.UserID);
+            return SlippingRepository.Get(requestId, this.UserID);
         }
 
         private int CreateOrUpdate(SlippingRequest slippingRequest)
         {
-            return Repository.CreateOrUpdate(slippingRequest, this.UserID);
+            return SlippingRepository.CreateOrUpdate(slippingRequest, this.MPID, this.UserID);
         }
 
         #endregion Methods
@@ -51,23 +57,19 @@ namespace Triad.CabinetOffice.Slipping.Web.Controllers
         // GET: Slipping
         public ActionResult Index(bool viewAll = false)
         {
-            SlipSummary[] slips = new SlipSummary[]
-                {
-                    new SlipSummary(){ ID = 1, FromDate = new DateTime(2017,9,14,9,15,0), Status = "Approved" },
-                    new SlipSummary(){ ID = 2, FromDate = new DateTime(2017,9,18,14,45,0), Status = "Pending" },
-                    new SlipSummary(){ ID = 3, FromDate = new DateTime(2017,9,22,10,0,0), Status = "Pending" },
-                    new SlipSummary(){ ID = 4, FromDate = new DateTime(2017,9,25,17,0,0), Status = "Rejected" },
-                    new SlipSummary(){ ID = 5, FromDate = new DateTime(2017,10,5,17,0,0), Status = "Pending" },
-                    new SlipSummary(){ ID = 6, FromDate = new DateTime(2017,10,15,0,0,0), Status = "Unsubmitted" },
-                    new SlipSummary(){ ID = 7, FromDate = new DateTime(2017,10,20,10,0,0), Status = "Unsubmitted" },
-                };
+            MP mp = MPRepository.Get(this.MPID, this.UserID);
+            int initialSlippingRequestListLength = Convert.ToInt32(WebConfigurationManager.AppSettings["InitialSlippingRequestListLength"]);
+            IEnumerable<SlipSummary> slips = this.SlippingRepository.GetSummaries(this.MPID, this.UserID);
 
-            ViewBag.ShowViewAll = slips.Count() > 5 && !viewAll;
+            IEnumerable<SlipSummary> visibleSlips = slips
+                .Where(s => s.ToDate.Date >= DateTime.Now.Date)
+                .OrderBy(s => s.ToDate);
+            ViewBag.ShowViewAll = visibleSlips.Count() > initialSlippingRequestListLength && !viewAll;
 
             SlippingHistory model = new SlippingHistory()
             {
-                MPName = "David Preston",
-                Slips = viewAll ? slips : slips.Take(5)
+                MPName = mp != null ? mp.Name : "Unknown",
+                Slips = viewAll ? visibleSlips : visibleSlips.Take(initialSlippingRequestListLength)
             };
             return View(model);
         }
