@@ -10,7 +10,7 @@ Scenario: Page Title
 Scenario: Listing slips when zero 
           Given I have successfully logged into the SRS
           And I have submitted no slips
-          Then I should not see a an empty list of slips
+          Then I should not see an empty list of slips
           And I should not see a link to ‘View All’         
           
 Scenario: Listing slips when between one and five
