@@ -30,7 +30,7 @@ Scenario: Authorised User Selects Reason Radio Button in Slipping Form- 'Constit
           When I select the radio button that states: “Constituency Engagement' 
           Then I should see a text field appear below this with a word limit of 200 words
           And I should see a label that states “What type of constituency engagement is it?”
-          And I should see a hint appear below this that states “for example: fundraising, charity event or surgery appointments with constituents.”
+          And I should see a hint appear below this that states “for example: fundraising, charity event or surgery appointments with constituents”
           And I should see an instruction below this that states “Please also provide the estimated size of the event"
 	  
 Scenario: Authorised User Selects Reason Radio Button in Slipping Form- 'Parliamentary Campaigning Activity'
