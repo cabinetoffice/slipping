@@ -19,6 +19,8 @@ namespace Triad.CabinetOffice.Slipping.Web.Controllers
 
         private MPRepository MPRepository { get { return new MPRepository(); } }
 
+        private ReasonRepository ReasonRepository { get { return new ReasonRepository(); } }
+
         private int UserID
         {
             get
@@ -227,7 +229,15 @@ namespace Triad.CabinetOffice.Slipping.Web.Controllers
         public ActionResult Reason(int id)
         {
             SlippingRequest slippingRequest = Get(id);
-            return View();
+            var model = new ReasonAndDetails
+            {
+                Reasons = ReasonRepository.Get().Select(r => new SelectListItem { Text = r.Reason.ToString(), Value = r.ID.ToString() }),
+                ID = slippingRequest.ID,
+                Details = slippingRequest.Details ?? string.Empty,
+                Reason = slippingRequest.ReasonID.HasValue ? slippingRequest.ReasonID.ToString() : "-1"
+            };
+
+            return View(model);
         }
 
         // POST: Slipping/Edit/ID/Reason
@@ -235,7 +245,7 @@ namespace Triad.CabinetOffice.Slipping.Web.Controllers
         // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Reason(int id, object form)
+        public ActionResult Reason(int id, ReasonAndDetails model)
         {
             SlippingRequest slippingRequest = Get(id);
 
@@ -243,12 +253,14 @@ namespace Triad.CabinetOffice.Slipping.Web.Controllers
             {
                 if (ModelState.IsValid)
                 {
+                    slippingRequest.ReasonID = Convert.ToInt32(model.Reason);
                     CreateOrUpdate(slippingRequest);
                     return RedirectToAction("OppositionMPs");
                 }
                 else
                 {
-                    return View();
+                    model.Reasons = ReasonRepository.Get().Select(r => new SelectListItem { Text = r.Reason.ToString(), Value = r.ID.ToString() });
+                    return View(model);
                 }
             }
             else

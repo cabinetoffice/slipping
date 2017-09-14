@@ -52,6 +52,9 @@
     <Compile Include="EntityFramework\PAWS\Absence_Request.cs">
       <DependentUpon>PAWS.tt</DependentUpon>
     </Compile>
+    <Compile Include="EntityFramework\PAWS\Absence_Request_Reason.cs">
+      <DependentUpon>PAWS.tt</DependentUpon>
+    </Compile>
     <Compile Include="EntityFramework\PAWS\Absence_Request_Status.cs">
       <DependentUpon>PAWS.tt</DependentUpon>
     </Compile>
@@ -102,9 +105,11 @@
     </Compile>
     <Compile Include="Models\MP.cs" />
     <Compile Include="Models\SlippingRequest.cs" />
+    <Compile Include="Models\RequestReason.cs" />
     <Compile Include="Models\SlipSummary.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Repositories\MPRepository.cs" />
+    <Compile Include="Repositories\ReasonRepository.cs" />
     <Compile Include="Repositories\SlippingRepository.cs" />
     <Compile Include="Repositories\RepositoryBase.cs" />
     <Compile Include="Repositories\UserRepository.cs" />

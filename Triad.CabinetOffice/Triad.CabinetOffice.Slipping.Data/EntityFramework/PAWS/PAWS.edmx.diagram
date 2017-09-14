@@ -9,6 +9,8 @@
         <EntityTypeShape EntityType="Model.Members_of_Parliament" Width="1.5" PointX="3.375" PointY="0.75" />
         <EntityTypeShape EntityType="Model.Absence_Request_Status" Width="1.5" PointX="0.75" PointY="5.75" />
         <AssociationConnector Association="Model.FK_Absence_Request_D3626684_2ADD_4611_BA06_3DBB23C03243" />
+        <EntityTypeShape EntityType="Model.Absence_Request_Reason" Width="1.5" PointX="5.375" PointY="0.875" />
+        <AssociationConnector Association="Model.FK_Absence_Request_4D7AF5E8_BB24_42F4_B3E7_1B551FCABB1E" />
       </Diagram>
     </edmx:Diagrams>
   </edmx:Designer>
