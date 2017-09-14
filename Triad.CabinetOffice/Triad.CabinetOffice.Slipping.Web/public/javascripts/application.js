@@ -58,10 +58,10 @@ $(document).ready(function () {
 
     function sortFields() {
       var listCounter = 1;
-      var inputCounter = 1;
+      var inputCounter = 0;
 
       $(document).find('.list-item-wrapper').each(function () {
-        $(this).find('h2').text('MP' + listCounter);
+        $(this).find('h2').text('MP ' + listCounter);
 
         if ($(this).find('.remove-list-item').length === 0) {
           $(this).find('.list-item:last').append('<a id="remove-item-' + listCounter + '" class="remove-list-item" href="#">Remove this</a>');
@@ -70,13 +70,14 @@ $(document).ready(function () {
         }
 
         $(this).find('.list-item').children('label').each(function () {
-          $(this).attr('for', 'field-' + inputCounter);
-          inputCounter++;
+            $(this).attr('for', $(this).attr('for').replace(/MPs\_[0-9]*\_/, 'MPs_' + inputCounter + '_'));
+            inputCounter++;
         });
 
         $(this).find('.list-item').children('input').each(function () {
-          var labelNo = $(this).parent().find('label').attr('for').split('-').pop();
-          $(this).attr('id', 'field-' + labelNo);
+          var labelNo = $(this).parent().find('label').attr('for').split('_')[1];
+          $(this).attr('id', $(this).attr('id').replace(/MPs\_[0-9]*\_/, 'MPs_' + labelNo + '_'));
+          $(this).attr('name', $(this).attr('name').replace(/MPs\[[0-9]*\]/, 'MPs[' + labelNo + ']'));
           
         });
 

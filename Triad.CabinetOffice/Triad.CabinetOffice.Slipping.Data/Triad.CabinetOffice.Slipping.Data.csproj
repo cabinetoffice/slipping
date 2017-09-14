@@ -101,6 +101,7 @@
       <DependentUpon>Slipping.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\MP.cs" />
+    <Compile Include="Models\OppositionMP.cs" />
     <Compile Include="Models\SlippingRequest.cs" />
     <Compile Include="Models\SlipSummary.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />

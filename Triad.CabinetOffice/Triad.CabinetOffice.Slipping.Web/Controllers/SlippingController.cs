@@ -266,6 +266,9 @@ namespace Triad.CabinetOffice.Slipping.Web.Controllers
 
             if (slippingRequest != null)
             {
+                if (slippingRequest.OppositionMPs.Count == 0)
+                    slippingRequest.OppositionMPs.Add(new OppositionMP() { ID = 0, MPID = 0, FullName = null });
+
                 var model = new OppositionMPs
                 {
                     YesNo = slippingRequest.OppositionMPsAttending,
@@ -282,26 +285,35 @@ namespace Triad.CabinetOffice.Slipping.Web.Controllers
         // POST: Slipping/Edit/ID/OppositionMPs
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult OppositionMPs(int id, OppositionMPs model)
+        public ActionResult OppositionMPs(int id, OppositionMPs model, FormCollection formCollection)
         {
-            SlippingRequest slippingRequest = Get(id);
-
-            if (slippingRequest != null)
+            if (formCollection.AllKeys.Contains("add-mp"))
             {
-                if (ModelState.IsValid)
-                {
-                    //slippingRequest = model.GetDateTime();
-                    CreateOrUpdate(slippingRequest);
-                    return RedirectToAction("CheckYourAnswers");
-                }
-                else
-                {
-                    return View(model);
-                }
+                model.MPs.Add(new OppositionMP() { ID = 0, MPID = 0 });
+                return View(model);
             }
             else
             {
-                return RedirectToAction("NotFound");
+                SlippingRequest slippingRequest = Get(id);
+
+                if (slippingRequest != null)
+                {
+                    if (ModelState.IsValid)
+                    {
+                        slippingRequest.OppositionMPsAttending = model.YesNo;
+                        slippingRequest.OppositionMPs = model.MPs;
+                        CreateOrUpdate(slippingRequest);
+                        return RedirectToAction("CheckYourAnswers");
+                    }
+                    else
+                    {
+                        return View(model);
+                    }
+                }
+                else
+                {
+                    return RedirectToAction("NotFound");
+                }
             }
         }
 
