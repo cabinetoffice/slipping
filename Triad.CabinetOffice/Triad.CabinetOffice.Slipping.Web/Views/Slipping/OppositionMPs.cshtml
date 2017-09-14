@@ -11,7 +11,7 @@
         <h1 class="heading-large">
             Are there any opposition MPs in attendance?
         </h1>
-        @using (Html.BeginForm())
+        @using (Html.BeginForm(null, null, FormMethod.Post, new { id = "form-opposition-mps" }))
         {
             @Html.AntiForgeryToken()
             
@@ -19,36 +19,49 @@
                 <fieldset>
                     <div class="multiple-choice" data-target="yes-add-mps">
                         @Html.RadioButtonFor(model => model.YesNo, true, new { @id = "yes", @name = "radio-group-add-mps" })
-                        <!--<input id="yes" type="radio" name="radio-group-add-mps" value="Yes">-->
                         <label for="yes">Yes</label>
                     </div>
+                    
                     <div class="panel panel-border-narrow js-hidden" id="yes-add-mps">
-                        @for (var i = 1; i <= Model.MPs.Count; i++)
+                        <div id="opposition-mp-list">
+                        @for (var i = 0; i < Model.MPs.Count; i++)
                         {
-                            var mp = Model.MPs.ElementAt(i-1);
-                            <div class="grid-row">
+                            <div class="grid-row opposition-mp-item">
                                 <div class="form-group-compound list-item-wrapper">
-                                    <h2 class="heading-medium">MP @i</h2>
+                                    <h2 class="heading-medium">MP @(i + 1)</h2>
                                     <fieldset>
                                         <div class="column-one-third no-padding">
                                             <div class="form-group list-item">
-                                                <label class="form-label" for="@string.Format("mp{0}-full-name", i)">Full name</label>
-                                                <input class="form-control" name="mp1-full-name" type="text" id="@string.Format("mp{0}-full-name",mp.Key)" value="@mp.Value">
+                                                @Html.LabelFor(model => model.MPs[i].FullName, new { @class = "form-label" })
+                                                @Html.TextBoxFor(model => model.MPs[i].FullName, new { @class = "form-control" })
+                                                @Html.HiddenFor(model => model.MPs[i].ID)
+                                                @Html.HiddenFor(model => model.MPs[i].MPID)
                                             </div>
                                         </div>
                                         <div class="column-one-third no-padding">
                                             <div class="list-item">
-                                                <a class="remove-list-item" id="remove-item-1" href="#">Remove this</a>
+                                                @if (Model.MPs.Count != 1)
+                                                {
+                                                    <a class="remove-list-item" id="remove-item-1" href="#">Remove this</a>
+                                                }
                                             </div>
                                         </div>
                                     </fieldset>
+                                    <hr />
                                 </div>
                             </div>
                         }
+                        </div>
+                        <div class="grid-row">
+                            <div class="column-two-thirds">
+                                <div class="form-group">
+                                    <button class="button button-add-another" id="add-button">Add another MP</button>
+                                </div>
+                            </div>
+                        </div>
                     </div>
                     <div class="multiple-choice">
                         @Html.RadioButtonFor(model => model.YesNo, false, new { @id = "no", @name = "radio.group-add-mps" })
-                        <!--<input id="no" type="radio" name="radio-group-add-mps" value="No">-->
                         <label for="no">No</label>
                     </div>
                 </fieldset>

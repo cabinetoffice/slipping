@@ -41,18 +41,13 @@
             <a href="#content" class="skiplink">Skip to main content</a>
         </div>
     </div>
-    <div id="global-cookie-message">
-
-
-
-    </div>
 
     <header role="banner" id="global-header" class="with-proposition">
         <div class="header-wrapper">
             <div class="header-global">
                 <div class="header-logo" >
                     <a href="https://www.gov.uk" title="Go to the GOV.UK homepage" id="logo" class="content">
-                        <img src="{{ asset_path }}images/gov.uk_logotype_crown_invert_trans.png?0.22.1" width="36" height="32" alt="Crown logo" style="display: inline-block;"> GOV.UK
+                        <img src="/public/images/gov.uk_logotype_crown_invert_trans.png?0.22.1" width="36" height="32" alt="Crown logo" style="display: inline-block;"> GOV.UK
                     </a>
                 </div>
             </div>
@@ -101,17 +96,27 @@
         </div>
     </footer>
     <div id="global-app-error" class="app-error hidden"></div>
-    <script src="{{ asset_path }}javascripts/govuk-template.js?0.22.1"></script>
 
 
-    <script>if (typeof window.GOVUK === 'undefined') document.body.className = document.body.className.replace('js-enabled', '');</script>
-
-
+    
 
 
 
     @Scripts.Render("~/bundles/jquery")
     @Scripts.Render("~/bundles/bootstrap")
     @RenderSection("scripts", required: false)
+
+
+    <script src="/public/javascripts/govuk-template.js?0.22.1"></script>
+    <!-- Javascript -->
+    <!--[if lte IE 8]><script src="/public/javascripts/bind.js"></script><![endif]-->
+    <script src="/public/javascripts/details.polyfill.js"></script>
+    <script src="/public/javascripts/jquery-1.11.3.js"></script>
+    <script src="/public/javascripts/govuk/shim-links-with-button-role.js"></script>
+    <script src="/public/javascripts/govuk/show-hide-content.js"></script>
+    <script src="/public/javascripts/application.js"></script>
+    <script src="/public/javascripts/auto-store-data.js"></script>
+    <script src="/public/javascripts/validation.js"></script>
+    <script>if (typeof window.GOVUK === 'undefined') document.body.className = document.body.className.replace('js-enabled', '');</script>
 </body>
 </html>

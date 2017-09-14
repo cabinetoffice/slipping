@@ -29,5 +29,6 @@ namespace Triad.CabinetOffice.Slipping.Data.EntityFramework.PAWS
         public string Decision_Notes { get; set; }
     
         public virtual Absence_Request_Status Absence_Request_Status { get; set; }
+        public virtual Absence_Request_Reason Absence_Request_Reason { get; set; }
     }
 }
