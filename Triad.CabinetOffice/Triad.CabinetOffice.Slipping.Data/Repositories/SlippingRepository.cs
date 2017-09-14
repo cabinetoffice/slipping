@@ -49,6 +49,36 @@ namespace Triad.CabinetOffice.Slipping.Data.Repositories
                 db.Entry(absenceRequest).State = EntityState.Modified;
             }
 
+            if (absenceRequest.OppositionMPsAttending == true)
+            {
+                var removedMPs = new List<AbsenceRequestOppositionMP>();
+                foreach(var mp in absenceRequest.AbsenceRequestOppositionMPs)
+                {
+                    if (!slippingRequest.OppositionMPs.Select(m => m.ID).Contains(mp.ID)) {
+                        removedMPs.Add(mp);
+                    }
+                }
+                db.AbsenceRequestOppositionMPs.RemoveRange(removedMPs);
+
+                foreach(var mp in slippingRequest.OppositionMPs)
+                {
+                    var absenceRequestOppositionMP = GetAbsenceRequestOppositionMP(mp, absenceRequest.ID, userId);
+                    if (absenceRequestOppositionMP.ID == 0)
+                    {
+                        db.AbsenceRequestOppositionMPs.Add(absenceRequestOppositionMP);
+                    }
+                    else
+                    {
+                        db.Entry(absenceRequestOppositionMP).State = EntityState.Modified;
+                    }
+                }
+            }
+            else
+            {
+                foreach (var mp in db.AbsenceRequestOppositionMPs.Where(m => m.AbsenceRequestID == absenceRequest.ID))
+                    db.AbsenceRequestOppositionMPs.Remove(mp);
+            }
+
             db.SaveChanges();
 
             return absenceRequest.ID;
@@ -84,9 +114,38 @@ namespace Triad.CabinetOffice.Slipping.Data.Repositories
                 absenceRequest.DecisionNotes = slippingRequest.DecisionNotes;
                 absenceRequest.Location = slippingRequest.Location;
                 absenceRequest.TravelTimeInHours = slippingRequest.TravelTimeInHours;
+                absenceRequest.OppositionMPsAttending = slippingRequest.OppositionMPsAttending;
             }
 
             return absenceRequest;
+        }
+
+        private AbsenceRequestOppositionMP GetAbsenceRequestOppositionMP(OppositionMP oppositionMP, int absenceRequestId, int userId) {
+            AbsenceRequestOppositionMP absenceRequestOppositionMP;
+            if (oppositionMP.ID == 0)
+            {
+                absenceRequestOppositionMP = new AbsenceRequestOppositionMP()
+                {
+                    CreatedBy = userId,
+                    CreatedDate = DateTime.Now,
+                    MPFullName = oppositionMP.FullName,
+                    MPID = oppositionMP.MPID
+                };
+            }
+            else
+            {
+                absenceRequestOppositionMP = db.AbsenceRequestOppositionMPs.Find(oppositionMP.ID);
+            }
+
+            if (absenceRequestOppositionMP != null)
+            {
+                absenceRequestOppositionMP.AbsenceRequestID = absenceRequestId;
+                absenceRequestOppositionMP.LastChangedBy = userId;
+                absenceRequestOppositionMP.LastChangedDate = DateTime.Now;
+                absenceRequestOppositionMP.MPFullName = oppositionMP.FullName;
+                absenceRequestOppositionMP.MPID = oppositionMP.MPID;
+            }
+            return absenceRequestOppositionMP;
         }
 
         internal bool Exists(int requestId, int userId)
@@ -107,20 +166,20 @@ namespace Triad.CabinetOffice.Slipping.Data.Repositories
         {
             SlippingRequest slippingRequest = new SlippingRequest()
             {
-                ID= absenceRequest.ID,
-                MPID=absenceRequest.MPID,
-                ReasonID=absenceRequest.ReasonID,
-                Details=absenceRequest.Details,
-                StatusID=absenceRequest.StatusID,
-                FromDate=absenceRequest.FromDate,
-                ToDate=absenceRequest.ToDate,
-                DecisionNotes=absenceRequest.DecisionNotes,
-                CreatedBy=absenceRequest.CreatedBy,
-                LastChangedBy=absenceRequest.LastChangedBy,
-                Location=absenceRequest.Location,
-                TravelTimeInHours=absenceRequest.TravelTimeInHours,
+                ID = absenceRequest.ID,
+                MPID = absenceRequest.MPID,
+                ReasonID = absenceRequest.ReasonID,
+                Details = absenceRequest.Details,
+                StatusID = absenceRequest.StatusID,
+                FromDate = absenceRequest.FromDate,
+                ToDate = absenceRequest.ToDate,
+                DecisionNotes = absenceRequest.DecisionNotes,
+                CreatedBy = absenceRequest.CreatedBy,
+                LastChangedBy = absenceRequest.LastChangedBy,
+                Location = absenceRequest.Location,
+                TravelTimeInHours = absenceRequest.TravelTimeInHours,
                 OppositionMPsAttending = absenceRequest.OppositionMPsAttending,
-                OppositionMPs = absenceRequestOppositionMPs.ToDictionary(a => a.ID, a => a.MPFullName)
+                OppositionMPs = absenceRequestOppositionMPs.Select(a => new OppositionMP { ID = a.ID, MPID = a.MPID, FullName = a.MPFullName }).ToList()
             };
 
             return slippingRequest;

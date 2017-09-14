@@ -19,10 +19,15 @@ $(document).ready(function () {
 })
 
     $(document).on('click', '.button-add-another', function (e) {
-      var beforeThis = $(this).closest('.grid-row');
-      e.preventDefault();
-      insertFields(beforeThis);
-      sortFields();
+        var beforeThis = $(this).closest('.grid-row');
+        e.preventDefault();
+        var clone = $('.opposition-mp-item').first().clone();
+        var index = $('.opposition-mp-item').length;
+        $('h2', clone).text('MP ' + (index + 1));
+        $('input.form-control', clone).val('');
+        $('input[type="hidden"]', clone).val(0);
+        $("#opposition-mp-list").append(clone);
+        sortFields();
     });
 
     $(document).on('click', '.remove-list-item', function (e) {
@@ -31,37 +36,12 @@ $(document).ready(function () {
       sortFields();
     });
 
-    function insertFields(element) {
-      element.before(
-        '<div class="grid-row">' +
-          '<div class="form-group-compound list-item-wrapper">' +
-            '<h2 class="heading-medium">MP 1</h2>' +
-            '<fieldset>' +
-              '<div class="column-one-third no-padding">' +
-                '<div class="form-group list-item">' +
-                  '<label class="form-label" for="field-x">' +
-                    'Full name' +
-                  '</label>' +
-                  '<input type="text" class="form-control" id="field-x" name="field"> ' +
-                '</div>' +
-              '</div>' +
-              '<div class="column-one-third no-padding">' +
-                '<div class="list-item">' +
-                '</div>' +
-              '</div>' +
-            '</fieldset>' +
-            '<hr />' +
-          '</div>' +
-        '</div>'
-      );
-    }
-
     function sortFields() {
       var listCounter = 1;
-      var inputCounter = 1;
+      var inputCounter = 0;
 
       $(document).find('.list-item-wrapper').each(function () {
-        $(this).find('h2').text('MP' + listCounter);
+        $(this).find('h2').text('MP ' + listCounter);
 
         if ($(this).find('.remove-list-item').length === 0) {
           $(this).find('.list-item:last').append('<a id="remove-item-' + listCounter + '" class="remove-list-item" href="#">Remove this</a>');
@@ -70,13 +50,14 @@ $(document).ready(function () {
         }
 
         $(this).find('.list-item').children('label').each(function () {
-          $(this).attr('for', 'field-' + inputCounter);
-          inputCounter++;
+            $(this).attr('for', $(this).attr('for').replace(/MPs\_[0-9]*\_/, 'MPs_' + inputCounter + '_'));
+            inputCounter++;
         });
 
         $(this).find('.list-item').children('input').each(function () {
-          var labelNo = $(this).parent().find('label').attr('for').split('-').pop();
-          $(this).attr('id', 'field-' + labelNo);
+          var labelNo = $(this).parent().find('label').attr('for').split('_')[1];
+          $(this).attr('id', $(this).attr('id').replace(/MPs\_[0-9]*\_/, 'MPs_' + labelNo + '_'));
+          $(this).attr('name', $(this).attr('name').replace(/MPs\[[0-9]*\]/, 'MPs[' + labelNo + ']'));
           
         });
 

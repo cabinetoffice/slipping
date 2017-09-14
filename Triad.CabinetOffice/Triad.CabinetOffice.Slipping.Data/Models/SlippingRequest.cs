@@ -23,6 +23,6 @@ namespace Triad.CabinetOffice.Slipping.Data.Models
         public string Location { get; set; }
         public Nullable<int> TravelTimeInHours { get; set; }
         public bool? OppositionMPsAttending { get; set; }
-        public Dictionary<int, string> OppositionMPs { get; set; }
-     }
+        public List<OppositionMP> OppositionMPs { get; set; }
+    }
 }
