@@ -287,33 +287,25 @@ namespace Triad.CabinetOffice.Slipping.Web.Controllers
         [ValidateAntiForgeryToken]
         public ActionResult OppositionMPs(int id, OppositionMPs model, FormCollection formCollection)
         {
-            if (formCollection.AllKeys.Contains("add-mp"))
-            {
-                model.MPs.Add(new OppositionMP() { ID = 0, MPID = 0 });
-                return View(model);
-            }
-            else
-            {
-                SlippingRequest slippingRequest = Get(id);
+            SlippingRequest slippingRequest = Get(id);
 
-                if (slippingRequest != null)
+            if (slippingRequest != null)
+            {
+                if (ModelState.IsValid)
                 {
-                    if (ModelState.IsValid)
-                    {
-                        slippingRequest.OppositionMPsAttending = model.YesNo;
-                        slippingRequest.OppositionMPs = model.MPs;
-                        CreateOrUpdate(slippingRequest);
-                        return RedirectToAction("CheckYourAnswers");
-                    }
-                    else
-                    {
-                        return View(model);
-                    }
+                    slippingRequest.OppositionMPsAttending = model.YesNo;
+                    slippingRequest.OppositionMPs = model.MPs;
+                    CreateOrUpdate(slippingRequest);
+                    return RedirectToAction("CheckYourAnswers");
                 }
                 else
                 {
-                    return RedirectToAction("NotFound");
+                    return View(model);
                 }
+            }
+            else
+            {
+                return RedirectToAction("NotFound");
             }
         }
 

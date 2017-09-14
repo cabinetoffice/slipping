@@ -19,10 +19,15 @@ $(document).ready(function () {
 })
 
     $(document).on('click', '.button-add-another', function (e) {
-      var beforeThis = $(this).closest('.grid-row');
-      e.preventDefault();
-      insertFields(beforeThis);
-      sortFields();
+        var beforeThis = $(this).closest('.grid-row');
+        e.preventDefault();
+        var clone = $('.opposition-mp-item').first().clone();
+        var index = $('.opposition-mp-item').length;
+        $('h2', clone).text('MP ' + (index + 1));
+        $('input.form-control', clone).val('');
+        $('input[type="hidden"]', clone).val(0);
+        $("#opposition-mp-list").append(clone);
+        sortFields();
     });
 
     $(document).on('click', '.remove-list-item', function (e) {
@@ -30,31 +35,6 @@ $(document).ready(function () {
       $(this).closest('.list-item-wrapper').remove();
       sortFields();
     });
-
-    function insertFields(element) {
-      element.before(
-        '<div class="grid-row">' +
-          '<div class="form-group-compound list-item-wrapper">' +
-            '<h2 class="heading-medium">MP 1</h2>' +
-            '<fieldset>' +
-              '<div class="column-one-third no-padding">' +
-                '<div class="form-group list-item">' +
-                  '<label class="form-label" for="field-x">' +
-                    'Full name' +
-                  '</label>' +
-                  '<input type="text" class="form-control" id="field-x" name="field"> ' +
-                '</div>' +
-              '</div>' +
-              '<div class="column-one-third no-padding">' +
-                '<div class="list-item">' +
-                '</div>' +
-              '</div>' +
-            '</fieldset>' +
-            '<hr />' +
-          '</div>' +
-        '</div>'
-      );
-    }
 
     function sortFields() {
       var listCounter = 1;

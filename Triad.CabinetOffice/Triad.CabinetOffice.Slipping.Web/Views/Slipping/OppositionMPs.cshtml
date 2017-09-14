@@ -23,11 +23,39 @@
                     </div>
                     
                     <div class="panel panel-border-narrow js-hidden" id="yes-add-mps">
-                        @Html.EditorFor(model => model.MPs)
+                        <div id="opposition-mp-list">
+                        @for (var i = 0; i < Model.MPs.Count; i++)
+                        {
+                            <div class="grid-row opposition-mp-item">
+                                <div class="form-group-compound list-item-wrapper">
+                                    <h2 class="heading-medium">MP @(i + 1)</h2>
+                                    <fieldset>
+                                        <div class="column-one-third no-padding">
+                                            <div class="form-group list-item">
+                                                @Html.LabelFor(model => model.MPs[i].FullName, "Full name", new { @class = "form-label" })
+                                                @Html.TextBoxFor(model => model.MPs[i].FullName, new { @class = "form-control" })
+                                                @Html.HiddenFor(model => model.MPs[i].ID)
+                                                @Html.HiddenFor(model => model.MPs[i].MPID)
+                                            </div>
+                                        </div>
+                                        <div class="column-one-third no-padding">
+                                            <div class="list-item">
+                                                @if (Model.MPs.Count != 1)
+                                                {
+                                                    <a class="remove-list-item" id="remove-item-1" href="#">Remove this</a>
+                                                }
+                                            </div>
+                                        </div>
+                                    </fieldset>
+                                    <hr />
+                                </div>
+                            </div>
+                        }
+                        </div>
                         <div class="grid-row">
                             <div class="column-two-thirds">
                                 <div class="form-group">
-                                    <input type="submit" value="Add another MP" class="button" id="add-mp-button" name="add-mp" />
+                                    <button class="button button-add-another" id="add-button">Add another MP</button>
                                 </div>
                             </div>
                         </div>
