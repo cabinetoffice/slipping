@@ -199,6 +199,7 @@
     <Compile Include="ViewModels\DateAndTime.cs" />
     <Compile Include="ViewModels\OppositionMPs.cs" />
     <Compile Include="ViewModels\LocationAndHours.cs" />
+    <Compile Include="ViewModels\ReasonAndDetails.cs" />
     <Compile Include="ViewModels\SlippingHistory.cs" />
     <Compile Include="ViewModels\SlippingUser.cs" />
   </ItemGroup>

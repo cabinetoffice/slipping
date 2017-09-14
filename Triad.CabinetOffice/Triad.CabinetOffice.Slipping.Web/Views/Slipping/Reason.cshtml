@@ -1,4 +1,6 @@
-﻿
+﻿@model Triad.CabinetOffice.Slipping.Web.ViewModels.ReasonAndDetails
+@using Triad.CabinetOffice.Slipping.Web.Extensions
+
 @{
     ViewBag.Title = "What is the reason for your request?";
 }
@@ -12,9 +14,18 @@
         @using (Html.BeginForm())
         {
             @Html.AntiForgeryToken()
-
-            
-
+            <div class="form-group @Html.ValidationErrorClassFor(model => model.Reason, "form-group-error")">
+               <fieldset>
+                   <span class="error-message">@Html.ValidationMessageFor(model => model.Reason)</span>
+                    @foreach (var reason in Model.Reasons)
+                    {                
+                        <div class="multiple-choice">
+                            @Html.RadioButtonFor(model => model.Reason, reason.Value)
+                            @Html.LabelFor(model => model.Reason,reason.Text)
+                        </div>
+                    }
+                </fieldset>
+            </div>
             <div class="form-group">
                 <input class="button" type="submit" value="Continue">
             </div>
