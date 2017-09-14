@@ -32,3 +32,14 @@ Scenario: Authorised User Selects Reason Radio Button in Slipping Form- 'Constit
           And I should see a label that states “What type of constituency engagement is it?”
           And I should see a hint appear below this that states “for example: fundraising, charity event or surgery appointments with constituents.”
           And I should see an instruction below this that states “Please also provide the estimated size of the event"
+	  
+Scenario: Authorised User Selects Reason Radio Button in Slipping Form- 'Parliamentary Campaigning Activity'
+          Given I have successfully logged into the SRS
+          And I see a list of 4 radio buttons on the page entitled: ‘What is the reason for your slip’ 
+          When I select the radio button that states: “Parliamentary Campaigning Activity" 
+          Then I should see a text field appear below this with a word limit of 200 words
+          And I should see a label that states “Please provide a description for your reason”
+          And I should see a hint appear below this that states “for example: Select Committee Trip, Delegation on behalf of a group, an All Party Parliamentary related trip"
+          And I should see a questio below this that states “What will be the repercussions of the slip being revoked at last minute?"
+	  And I should see a final question below this that states "Can the event be held on the Parliamentary Estate if necessary?"
+
