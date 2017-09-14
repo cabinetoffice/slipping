@@ -85,7 +85,7 @@ Scenario: Authorised User Attempts to Enter Reason Above Word Limit
 	  And I should not be able to progress with completing the rest of the SRS form	  
 
 Scenario: User Attempts to Populate Text Field With Just Symbols/Numbers
- Given I have successfully logged in to the SRS
+ Given 	  I have successfully logged in to the SRS
 	  And I see a list of 4 radio buttons on the page entitled: ‘What is the reason for your slip’
 	  And I select any of the 4 radio buttons 
 	  And I see a correspoding text field with its corresponding word limit
