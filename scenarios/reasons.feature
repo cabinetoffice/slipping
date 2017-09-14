@@ -64,7 +64,7 @@ Scenario: Authorised User Enters Reason Correctly in Text Field
 	  
 Sad Path
 
-Scenario: Authorised User Attempts to Enter Reason Above Word Limi
+Scenario: Authorised User Attempts to Enter Reason Above Word Limit
 	  Given I have successfully logged in to the SRS
 	  And I see a list of 4 radio buttons on the page entitled: ‘What is the reason for your slip’
 	  And I select any of the 4 radio buttons 
@@ -73,3 +73,25 @@ Scenario: Authorised User Attempts to Enter Reason Above Word Limi
 	  And this is above the given word limit of 200 words or 100 words
 	  Then I should not be able to click the 'Continue' button
 	  And I should not be able to progress with completing the rest of the SRS form
+	  
+Scenario: Authorised User Attempts to Enter Reason Above Word Limit
+	  Given I have successfully logged in to the SRS
+	  And I see a list of 4 radio buttons on the page entitled: ‘What is the reason for your slip’
+	  And I select any of the 4 radio buttons 
+	  And I see a correspoding text field with its corresponding word limit
+	  When I attempt to enter a reason in text format inside the given text field
+	  And this is above the given word limit of 200 words or 100 words
+	  Then I should not be able to click the 'Continue' button
+	  And I should not be able to progress with completing the rest of the SRS form	  
+
+Scenario: User Attempts to Populate Text Field With Just Symbols/Numbers
+ Given I have successfully logged in to the SRS
+	  And I see a list of 4 radio buttons on the page entitled: ‘What is the reason for your slip’
+	  And I select any of the 4 radio buttons 
+	  And I see a correspoding text field with its corresponding word limit
+	  When I attempt to enter a reason in purely numeric format inside the text field
+	  And I attempt to enter a reason in purely symbolic format inside the text field
+	  And this is either above or within the character limit of the corresponding text field
+ 	  Then I should not be able to click the 'Continue' button
+	  And I should not be able to progress with completing the rest of the SRS form	  
+
