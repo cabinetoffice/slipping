@@ -1,4 +1,5 @@
-﻿
+﻿@model Triad.CabinetOffice.Slipping.Data.Models.SlippingRequest
+
 @{
     ViewBag.Title = "Check your answers";
 }
@@ -13,11 +14,117 @@
         {
             @Html.AntiForgeryToken()
 
+            <br>
+            <br>
+        <!-- use additional modifier class to change column widths for multiple groups of questions and answers: -->
+        <!--   * `cya-questions-short` for short questions -->
+        <!--   * `cya-questions-long` for long questions -->
+        <!--   * none for single group of q&a -->
+            <dl class="govuk-check-your-answers cya-questions-short">
+                <div>
+                    <dt class="cya-question">
+                        From
+                    </dt>
+                    <dd class="cya-answer">
+                        @Model.FromDate.ToString("dd/MM/yyyy HH:mm")
+                    </dd>
+                    <dd class="cya-change">
+                        @Html.ActionLink("Change", "FromDate", new { id = Model.ID })
+                    </dd>
+                </div>
+                <div>
+                    <dt class="cya-question">
+                        To
+                    </dt>
+                    <dd class="cya-answer">
+                        @if (Model.ToDate.HasValue)
+                        {
+                            @Model.ToDate.Value.ToString("dd/MM/yyyy HH:mm")
+                        }
+                    </dd>
+                    <dd class="cya-change">
+                        @Html.ActionLink("Change", "ToDate", new { id = Model.ID })
+                    </dd>
+                </div>
+                <div>
+                    <dt class="cya-question">
+                        Location
+                    </dt>
+                    <dd class="cya-answer">
+                        @Model.Location
+                    </dd>
+                    <dd class="cya-change">
+                        @Html.ActionLink("Change", "Location", new { id = Model.ID })
+                    </dd>
+                </div>
+                <div>
+                    <dt class="cya-question">
+                        Travel time to Westminster
+                    </dt>
+                    <dd class="cya-answer">
+                        @if (Model.TravelTimeInHours.HasValue)
+                        {
+                            @Html.Encode(string.Format("{0} hours", Model.TravelTimeInHours.Value))
+                        }
+                    </dd>
+                    <dd class="cya-change">
+                        @Html.ActionLink("Change", "Location", new { id = Model.ID })
+                    </dd>
+                </div>
+                <div>
+                    <dt class="cya-question">
+                        Reason
+                    </dt>
+                    <dd class="cya-answer">
+                        @Model.ReasonID
+                    </dd>
+                    <dd class="cya-change">
+                        @Html.ActionLink("Change", "Reason", new { id = Model.ID })
+                    </dd>
+                </div>
+                <div>
+                    <dt class="cya-question">
+                        Details
+                    </dt>
+                    <dd class="cya-answer">
+                        @Model.Details
+                    </dd>
+                    <dd class="cya-change">
+                        @Html.ActionLink("Change", "Reason", new { id = Model.ID })
+                    </dd>
+                </div>
+                <div>
+                    <dt class="cya-question">
+                        Any opposition MPs in attendance?
+                    </dt>
+                    <dd class="cya-answer">
+                        @if (Model.OppositionMPsAttending.HasValue)
+                        {
+                            @Html.Encode(Model.OppositionMPsAttending.Value ? "Yes" : "No")
+                            <br />
+                            if (Model.OppositionMPsAttending.Value)
+                            {
+                                foreach (string mp in Model.OppositionMPs.Values)
+                                {
+                                    @Html.Encode(mp);
+                                    <br />
+                                }
+                            }
+                        }
+                    </dd>
+                    <dd class="cya-change">
+                        @Html.ActionLink("Change", "OppositionMPs", new { id = Model.ID })
+                    </dd>
+                </div>
+            </dl>
 
+            <br>
+            <br>
 
             <div class="form-group">
                 <input class="button" type="submit" value="Submit slipping request">
             </div>
         }
     </div>
+
 </div>

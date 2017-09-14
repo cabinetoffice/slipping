@@ -7,7 +7,7 @@
 
 <div class="grid-row">
     <div class="column-two-thirds column-minimum">
-        <a class="link-back" href="/">Back</a>
+        @Html.ActionLink("Back", "Reason", new { id = Model.ID }, new { @class = "link-back" })
         <h1 class="heading-large">
             Are there any opposition MPs in attendance?
         </h1>

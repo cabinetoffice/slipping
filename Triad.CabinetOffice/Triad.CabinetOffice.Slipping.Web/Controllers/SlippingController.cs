@@ -98,14 +98,34 @@ namespace Triad.CabinetOffice.Slipping.Web.Controllers
         // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult FromDate(DateAndTime model)
+        public ActionResult FromDate(int? id, DateAndTime model)
         {
             if (ModelState.IsValid)
             {
-                SlippingRequest slippingRequest = new SlippingRequest();
-                slippingRequest.FromDate = model.GetDateTime();
-                int id = CreateOrUpdate(slippingRequest);
-                return RedirectToAction("ToDate", new { id = id });
+                if (id.HasValue)
+                {
+                    // Update an existing record
+                    SlippingRequest slippingRequest = Get(id.Value);
+
+                    if (slippingRequest != null)
+                    {
+                        slippingRequest.FromDate = model.GetDateTime();
+                        CreateOrUpdate(slippingRequest);
+                        return RedirectToAction("ToDate", new { id = id });
+                    }
+                    else
+                    {
+                        return RedirectToAction("NotFound", "Home");
+                    }
+                }
+                else
+                {
+                    // Create a new record
+                    SlippingRequest slippingRequest = new SlippingRequest();
+                    slippingRequest.FromDate = model.GetDateTime();
+                    int requestId = CreateOrUpdate(slippingRequest);
+                    return RedirectToAction("ToDate", new { id = requestId });
+                }
             }
             else
             {
@@ -166,7 +186,7 @@ namespace Triad.CabinetOffice.Slipping.Web.Controllers
                 {
                     slippingRequest.ToDate = model.GetDateTime();
                     CreateOrUpdate(slippingRequest);
-                    return RedirectToAction("Location", new { id=id});
+                    return RedirectToAction("Location", new { id = id });
                 }
                 else
                 {
@@ -310,7 +330,15 @@ namespace Triad.CabinetOffice.Slipping.Web.Controllers
         public ActionResult CheckYourAnswers(int id)
         {
             SlippingRequest slippingRequest = Get(id);
-            return View();
+
+            if (slippingRequest != null)
+            {
+                return View(slippingRequest);
+            }
+            else
+            {
+                return RedirectToAction("NotFound", "Home");
+            }
         }
 
         // POST: Slipping/Edit/ID/CheckYourAnswers
