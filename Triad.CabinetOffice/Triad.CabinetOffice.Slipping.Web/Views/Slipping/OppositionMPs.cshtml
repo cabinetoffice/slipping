@@ -11,7 +11,7 @@
         <h1 class="heading-large">
             Are there any opposition MPs in attendance?
         </h1>
-        @using (Html.BeginForm())
+        @using (Html.BeginForm(null, null, FormMethod.Post, new { id = "form-opposition-mps" }))
         {
             @Html.AntiForgeryToken()
             
@@ -32,7 +32,7 @@
                                     <fieldset>
                                         <div class="column-one-third no-padding">
                                             <div class="form-group list-item">
-                                                @Html.LabelFor(model => model.MPs[i].FullName, "Full name", new { @class = "form-label" })
+                                                @Html.LabelFor(model => model.MPs[i].FullName, new { @class = "form-label" })
                                                 @Html.TextBoxFor(model => model.MPs[i].FullName, new { @class = "form-control" })
                                                 @Html.HiddenFor(model => model.MPs[i].ID)
                                                 @Html.HiddenFor(model => model.MPs[i].MPID)

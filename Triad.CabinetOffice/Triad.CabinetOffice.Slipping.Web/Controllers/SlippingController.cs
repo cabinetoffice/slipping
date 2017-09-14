@@ -285,7 +285,7 @@ namespace Triad.CabinetOffice.Slipping.Web.Controllers
         // POST: Slipping/Edit/ID/OppositionMPs
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult OppositionMPs(int id, OppositionMPs model, FormCollection formCollection)
+        public ActionResult OppositionMPs(int id, OppositionMPs model)
         {
             SlippingRequest slippingRequest = Get(id);
 
