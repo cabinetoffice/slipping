@@ -42,4 +42,43 @@ Scenario: Authorised User Selects Reason Radio Button in Slipping Form- 'Parliam
           And I should see a hint appear below this that states “for example: Select Committee Trip, Delegation on behalf of a group, an All Party Parliamentary related trip"
           And I should see a questio below this that states “What will be the repercussions of the slip being revoked at last minute?"
 	  And I should see a final question below this that states "Can the event be held on the Parliamentary Estate if necessary?"
+	  
+Scenario: Authorised User Selects Reason Radio Button in Slipping Form- 'Personal/Other'
+          Given I have successfully logged into the SRS
+          And I see a list of 4 radio buttons on the page entitled: ‘What is the reason for your slip’ 
+          When I select the radio button that states: “Personal/Other" 
+          Then I should see a text field appear below this with a word limit of 100 words
+          And I should see a label that states “What is the personal/other reason?”
+          And I should see a hint appear below this that states “For example dentist, funeral or wedding. If you do not wish to mention the reason to us, please just write ‘Personal’ and let your Whip know"
 
+Scenario: Authorised User Enters Reason Correctly in Text Field- 200 Word Limit
+	  Given I have successfully logged in to the SRS
+	  And I see a list of 4 radio buttons on the page entitled: ‘What is the reason for your slip’
+	  And I select any of the 3 first radio buttons 
+	  And I see a correspoding text field with a word limit of 200 words
+	  When I enter a reason in text format inside the given text field
+	  And this is within the word limit of 200 words
+	  Then I should be able to click the 'Continue' button
+	  And I should be able to progress with completing the rest of the SRS form
+	  
+Scenario: Authorised User Enters Reason Correctly in Text Field- 100 Word Limit
+	  Given I have successfully logged in to the SRS
+	  And I see a list of 4 radio buttons on the page entitled: ‘What is the reason for your slip’
+	  And I select the the radio button that states: “Personal/Other" 
+	  And I see a correspoding text field with a word limit of 100 words
+	  When I enter a reason in text format inside the given text field
+	  And this is within the word limit of 100 words
+	  Then I should be able to click the 'Continue' button
+	  And I should be able to progress with completing the rest of the SRS form
+	  
+Sad Path
+
+Scenario: Authorised User Attemptes to Enter Reason Above Charachter Limit- 200 Word Limit
+	  Given I have successfully logged in to the SRS
+	  And I see a list of 4 radio buttons on the page entitled: ‘What is the reason for your slip’
+	  And I select any of the 3 first radio buttons
+	  And I see a correspoding text field with a word limit of 200 words
+	  When I attempt to enter a reason in text format inside the given text field
+	  And this is above the word limit of 200 words
+	  Then I should not be able to click the 'Continue' button
+	  And I should be able to progress with completing the rest of the SRS form
