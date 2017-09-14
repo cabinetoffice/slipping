@@ -24,7 +24,7 @@ Scenario: Authorised User Selects Reason Radio Button in Slipping Form- 'Governm
           And I should see an instruction below this that states “What will be the repercussions of the slip being revoked at last minute? 
           And I should see an instruction below this stating "Please state if the trip has been approved by Number 10”
           
-Scenario: Authorised User Enters Reason in Text Field- 'Government Work'
+Scenario: Authorised User Enters Reason Correctly in Text Field- 'Government Work'
 	  Given I have successfully logged in to the SRS
 	  And I see a list of 4 radio buttons on the page entitled: ‘What is the reason for your slip’
 	  And I select the radio button that states: “Government Work (Secretaries of State / Ministers of State only)”
@@ -34,14 +34,27 @@ Scenario: Authorised User Enters Reason in Text Field- 'Government Work'
 	  Then I should be able to click the 'Continue' button
 	  And I should be able to progress with completing the rest of the SRS form
 	  
-Scenario: Authorised User Selects Reason Radio Button in Slipping Form- 'Government Work'
-          Given have successfully logged into the SRS
-          And I see a list of 4 radio buttons on the page entitled: ‘What is the reason for your slip’ 
-          When I select the radio button that states: “Government Work (Secretaries of State / Ministers of State only)” 
-          Then I should see a text field appear below this with a word limit of 200 words
-          And I should see a label that states “Please provide a description for your reason”
-          And I should see a hint appear below this that states “for example: Select Committee Trip, Delegation on behalf of a group, an All Party Parliamentary related trip”
-          And I should see an instruction below this that states “What will be the repercussions of the slip being revoked at last minute? 
-          And I should see an instruction below this stating "Please state if the trip has been approved by Number 10”
+	  Sad Path
+Scenario: Authorised User Attemptes to Enter Reason Above Charachter Limit- 'Government Work'
+	  Given I have successfully logged in to the SRS
+	  And I see a list of 4 radio buttons on the page entitled: ‘What is the reason for your slip’
+	  And I select the radio button that states: “Government Work (Secretaries of State / Ministers of State only)”
+	  And I see a text field with a word limit of 200 words
+	  When I attempt to enter a reason in text format inside the given text field
+	  And this is above the word limit of 200 words
+	  Then I should not be able to enter more text
+	  And I should not be able to click the 'Continue' button
+	  And I should be able to progress with completing the rest of the SRS form
+	  
+Scenario: Authorised User Attemptes to Enter Reason in purely Numberic/Symbolc Format- 'Government Work'
+	  Given I have successfully logged in to the SRS
+	  And I see a list of 4 radio buttons on the page entitled: ‘What is the reason for your slip’
+	  And I select any of the radio button that states
+	  And I see a text field with any word limit
+	  When I attempt to enter a reason in purely numberic format inside the given text field
+	  And I attempt to enter a reason in purely symbolic format inside the given text field
+	  And this is either above or within the word limit of 200 words
+	  Then I should not be able to click the 'Continue' button
+	  And I should be able to progress with completing the rest of the SRS form
 	  
 	  
