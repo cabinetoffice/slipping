@@ -1,0 +1,23 @@
+﻿
+@{
+    ViewBag.Title = "Check your answers";
+}
+
+<div class="grid-row">
+    <div class="column-two-thirds column-minimum">
+        @Html.ActionLink("Back", "Index", null, new { @class = "link-back" })
+        <h1 class="heading-large">
+            Check your answers before submitting your slipping request
+        </h1>
+        @using (Html.BeginForm())
+        {
+            @Html.AntiForgeryToken()
+
+
+
+            <div class="form-group">
+                <input class="button" type="submit" value="Submit slipping request">
+            </div>
+        }
+    </div>
+</div>

@@ -197,6 +197,7 @@
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Startup.cs" />
     <Compile Include="ViewModels\DateAndTime.cs" />
+    <Compile Include="ViewModels\OppositionMPs.cs" />
     <Compile Include="ViewModels\LocationAndHours.cs" />
     <Compile Include="ViewModels\SlippingHistory.cs" />
     <Compile Include="ViewModels\SlippingUser.cs" />
@@ -880,6 +881,10 @@
     <Content Include="Views\Slipping\Index.cshtml" />
     <Content Include="Views\Shared\NotFound.cshtml" />
     <Content Include="Views\Slipping\Location.cshtml" />
+    <Content Include="Views\Slipping\OppositionMPs.cshtml" />
+    <Content Include="Views\Slipping\Reason.cshtml" />
+    <Content Include="Views\Slipping\CheckYourAnswers.cshtml" />
+    <Content Include="Views\Slipping\Confirmation.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

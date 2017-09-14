@@ -193,7 +193,7 @@ namespace Triad.CabinetOffice.Slipping.Web.Controllers
             return View(model);
         }
 
-        // POST: Slipping/Edit/ID/ToDate
+        // POST: Slipping/Edit/ID/Location
         // To protect from overposting attacks, please enable the specific properties you want to bind to, for 
         // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
@@ -209,7 +209,7 @@ namespace Triad.CabinetOffice.Slipping.Web.Controllers
                     slippingRequest.Location = model.Location;
                     slippingRequest.TravelTimeInHours = Convert.ToInt32(model.Hours);
                     CreateOrUpdate(slippingRequest);
-                    return RedirectToAction("Index");
+                    return RedirectToAction("Reason");
                 }
                 else
                 {
@@ -220,6 +220,132 @@ namespace Triad.CabinetOffice.Slipping.Web.Controllers
             {
                 return RedirectToAction("NotFound");
             }
+        }
+
+        // GET: Slipping/Edit/ID/Reason
+        [HttpGet]
+        public ActionResult Reason(int id)
+        {
+            SlippingRequest slippingRequest = Get(id);
+            return View();
+        }
+
+        // POST: Slipping/Edit/ID/Reason
+        // To protect from overposting attacks, please enable the specific properties you want to bind to, for 
+        // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public ActionResult Reason(int id, object form)
+        {
+            SlippingRequest slippingRequest = Get(id);
+
+            if (slippingRequest != null)
+            {
+                if (ModelState.IsValid)
+                {
+                    CreateOrUpdate(slippingRequest);
+                    return RedirectToAction("OppositionMPs");
+                }
+                else
+                {
+                    return View();
+                }
+            }
+            else
+            {
+                return RedirectToAction("NotFound");
+            }
+        }
+
+
+        // GET: Slipping/Edit/ID/OppositionMPs
+        [HttpGet]
+        public ActionResult OppositionMPs(int id)
+        {
+            SlippingRequest slippingRequest = Get(id);
+
+            if (slippingRequest != null)
+            {
+                var model = new OppositionMPs
+                {
+                    YesNo = slippingRequest.OppositionMPsAttending,
+                    MPs = slippingRequest.OppositionMPs
+                };
+                return View(model);
+            }
+            else
+            {
+                return RedirectToAction("NotFound", "Home");
+            }
+        }
+
+        // POST: Slipping/Edit/ID/OppositionMPs
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public ActionResult OppositionMPs(int id, OppositionMPs model)
+        {
+            SlippingRequest slippingRequest = Get(id);
+
+            if (slippingRequest != null)
+            {
+                if (ModelState.IsValid)
+                {
+                    //slippingRequest = model.GetDateTime();
+                    CreateOrUpdate(slippingRequest);
+                    return RedirectToAction("CheckYourAnswers");
+                }
+                else
+                {
+                    return View(model);
+                }
+            }
+            else
+            {
+                return RedirectToAction("NotFound");
+            }
+        }
+
+        // GET: Slipping/Edit/ID/CheckYourAnswers
+        [HttpGet]
+        public ActionResult CheckYourAnswers(int id)
+        {
+            SlippingRequest slippingRequest = Get(id);
+            return View();
+        }
+
+        // POST: Slipping/Edit/ID/CheckYourAnswers
+        // To protect from overposting attacks, please enable the specific properties you want to bind to, for 
+        // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public ActionResult CheckYourAnswers(int id, object form)
+        {
+            SlippingRequest slippingRequest = Get(id);
+
+            if (slippingRequest != null)
+            {
+                if (ModelState.IsValid)
+                {
+                    CreateOrUpdate(slippingRequest);
+                    return RedirectToAction("Confirmation");
+                }
+                else
+                {
+                    return View();
+                }
+            }
+            else
+            {
+                return RedirectToAction("NotFound");
+            }
+        }
+
+        // GET: Slipping/Edit/ID/Confirmation
+        [HttpGet]
+        public ActionResult Confirmation(int id)
+        {
+            SlippingRequest slippingRequest = Get(id);
+            return View();
         }
 
         #endregion Action Methods
