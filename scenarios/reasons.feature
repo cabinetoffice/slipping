@@ -31,5 +31,5 @@ Scenario: Authorised User Enters Reason in Text Field- 'Government Work'
 	  And I see a text field with a word limit of 200 words
 	  When I enter a reason in text format inside the given text field
 	  And this is within the word limit of 200 words
-	  Then I will be able to click the 'Continue' button
-	  And I will be able to progress with completing the rest of the SRS for
+	  Then I should be able to click the 'Continue' button
+	  And I should be able to progress with completing the rest of the SRS form
