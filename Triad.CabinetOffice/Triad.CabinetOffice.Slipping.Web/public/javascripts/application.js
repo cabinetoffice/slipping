@@ -73,4 +73,4 @@ $('#form-opposition-mps').submit(function () {
     if ($('#no').is(':checked'))
         $('#opposition-mp-list').empty();
     return true;
-})
+});
