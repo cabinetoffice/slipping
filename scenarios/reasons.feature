@@ -33,5 +33,3 @@ Scenario: Authorised User Enters Reason in Text Field- 'Government Work'
 	And this is within the word limit of 200 words 
 	Then I will be able to click the 'Continue' button
        	And I will be able to progress with completing the rest of the SRS form
-          
-
