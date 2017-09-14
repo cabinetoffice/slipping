@@ -13,6 +13,7 @@ namespace Triad.CabinetOffice.Slipping.Data.Models
         public int ID { get; set; }
         public int MPID { get; set; }
         public Nullable<int> ReasonID { get; set; }
+        public string Reason { get; set; }
         public string Details { get; set; }
         public int StatusID { get; set; }
         public System.DateTime FromDate { get; set; }

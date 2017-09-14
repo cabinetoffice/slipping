@@ -325,6 +325,7 @@ namespace Triad.CabinetOffice.Slipping.Web.Controllers
 
                 var model = new OppositionMPs
                 {
+                    ID = slippingRequest.ID,
                     YesNo = slippingRequest.OppositionMPsAttending,
                     MPs = slippingRequest.OppositionMPs
                 };
@@ -390,9 +391,10 @@ namespace Triad.CabinetOffice.Slipping.Web.Controllers
 
             if (slippingRequest != null)
             {
+                // TODO: Check mandatory fields have been supplied
+                // TODO: Check From and To Dates are within valid ranges
                 if (ModelState.IsValid)
                 {
-                    CreateOrUpdate(slippingRequest);
                     return RedirectToAction("Confirmation");
                 }
                 else

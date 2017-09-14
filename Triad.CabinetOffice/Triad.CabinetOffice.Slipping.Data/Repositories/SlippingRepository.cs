@@ -169,6 +169,7 @@ namespace Triad.CabinetOffice.Slipping.Data.Repositories
                 ID = absenceRequest.ID,
                 MPID = absenceRequest.MPID,
                 ReasonID = absenceRequest.ReasonID,
+                Reason = absenceRequest.ReasonID.HasValue ? new ReasonRepository().Get(absenceRequest.ReasonID.Value).Reason : string.Empty,
                 Details = absenceRequest.Details,
                 StatusID = absenceRequest.StatusID,
                 FromDate = absenceRequest.FromDate,
@@ -198,7 +199,8 @@ namespace Triad.CabinetOffice.Slipping.Data.Repositories
                         FromDate = ar.FromDate,
                         ToDate = ar.ToDate.HasValue ? ar.ToDate.Value : new DateTime(9999, 1, 1),
                         ID = ar.ID,
-                        Status = "Unsubmitted"
+                        Status = "Unsubmitted",
+                        IsUnsubmitted = true
                     })
                 );
 
@@ -210,7 +212,8 @@ namespace Triad.CabinetOffice.Slipping.Data.Repositories
                         FromDate = ar.From_Date_Time.HasValue ? ar.From_Date_Time.Value : DateTime.Now.Date,
                         ToDate = ar.To_Date_Time.HasValue ? ar.To_Date_Time.Value : new DateTime(9999, 1, 1),
                         ID = ar.ID,
-                        Status = ar.Absence_Request_Status.Status
+                        Status = ar.Absence_Request_Status.Status,
+                        IsUnsubmitted = false
                     })
                 );
             }
