@@ -21,7 +21,7 @@ Scenario: Authorised User Selects Reason Radio Button in Slipping Form- 'Governm
           Then I should see a text field appear below this with a word limit of 200 words
           And I should see a label that states “Please provide a description for your reason”
           And I should see a hint appear below this that states “for example: Select Committee Trip, Delegation on behalf of a group, an All Party Parliamentary related trip”
-          And I should see an instruction below this that states “What will be the repercussions of the slip being revoked at last minute?@
+          And I should see an instruction below this that states “What will be the repercussions of the slip being revoked at last minute?"
           And I should see an instruction below this stating "Please state if the trip has been approved by Number 10”
 	  
 Scenario: Authorised User Selects Reason Radio Button in Slipping Form- 'Constituency Engagement'
