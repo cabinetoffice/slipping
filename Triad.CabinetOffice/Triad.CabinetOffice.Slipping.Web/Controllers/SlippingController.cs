@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Web.Configuration;
 using System.Web.Mvc;
+using Triad.CabinetOffice.Slipping.Data.EntityFramework.Slipping;
 using Triad.CabinetOffice.Slipping.Data.Models;
 using Triad.CabinetOffice.Slipping.Data.Repositories;
 using Triad.CabinetOffice.Slipping.Web.Attributes;
@@ -10,7 +11,7 @@ using Triad.CabinetOffice.Slipping.Web.ViewModels;
 
 namespace Triad.CabinetOffice.Slipping.Web.Controllers
 {
-    [SlippingAuthorize]
+    [Authorize]
     public class SlippingController : Controller
     {
         #region Properties
@@ -25,18 +26,39 @@ namespace Triad.CabinetOffice.Slipping.Web.Controllers
         {
             get
             {
-                if (this.User.Identity is SlippingUserIdentity)
+                string username = this.User.Identity.Name;
+                UserRepository repository = new UserRepository();
+                User user = repository.GetByUsername(username);
+
+                if (user != null)
                 {
-                    return ((SlippingUserIdentity)this.User.Identity).ID;
+                    return user.ID;
                 }
                 else
                 {
-                    throw new Exception(string.Format("User.Identity is not expected type (expected SlippingUserIdentity but was {0})", this.User.Identity.GetType().Name));
+                    throw new Exception(string.Format("User '{0}' not recognised.", this.User.Identity.Name));
                 }
             }
         }
 
-        private int MPID { get { return Convert.ToInt32(Session["MPID"]); } }
+        private int MPID
+        {
+            get
+            {
+                string username = this.User.Identity.Name;
+                UserRepository repository = new UserRepository();
+                User user = repository.GetByUsername(username);
+
+                if (user != null)
+                {
+                    return user.UserMPs1.First().MPID;
+                }
+                else
+                {
+                    throw new Exception(string.Format("User '{0}' not recognised.", this.User.Identity.Name));
+                }
+            }
+        }
 
         #endregion Properties
 
@@ -100,14 +122,34 @@ namespace Triad.CabinetOffice.Slipping.Web.Controllers
         // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult FromDate(DateAndTime model)
+        public ActionResult FromDate(int? id, DateAndTime model)
         {
             if (ModelState.IsValid)
             {
-                SlippingRequest slippingRequest = new SlippingRequest();
-                slippingRequest.FromDate = model.GetDateTime();
-                int id = CreateOrUpdate(slippingRequest);
-                return RedirectToAction("ToDate", new { id = id });
+                if (id.HasValue)
+                {
+                    // Update an existing record
+                    SlippingRequest slippingRequest = Get(id.Value);
+
+                    if (slippingRequest != null)
+                    {
+                        slippingRequest.FromDate = model.GetDateTime();
+                        CreateOrUpdate(slippingRequest);
+                        return RedirectToAction("ToDate", new { id = id });
+                    }
+                    else
+                    {
+                        return RedirectToAction("NotFound", "Home");
+                    }
+                }
+                else
+                {
+                    // Create a new record
+                    SlippingRequest slippingRequest = new SlippingRequest();
+                    slippingRequest.FromDate = model.GetDateTime();
+                    int requestId = CreateOrUpdate(slippingRequest);
+                    return RedirectToAction("ToDate", new { id = requestId });
+                }
             }
             else
             {
@@ -168,7 +210,7 @@ namespace Triad.CabinetOffice.Slipping.Web.Controllers
                 {
                     slippingRequest.ToDate = model.GetDateTime();
                     CreateOrUpdate(slippingRequest);
-                    return RedirectToAction("Location", new { id=id});
+                    return RedirectToAction("Location", new { id = id });
                 }
                 else
                 {
@@ -283,6 +325,7 @@ namespace Triad.CabinetOffice.Slipping.Web.Controllers
 
                 var model = new OppositionMPs
                 {
+                    ID = slippingRequest.ID,
                     YesNo = slippingRequest.OppositionMPsAttending,
                     MPs = slippingRequest.OppositionMPs
                 };
@@ -326,7 +369,15 @@ namespace Triad.CabinetOffice.Slipping.Web.Controllers
         public ActionResult CheckYourAnswers(int id)
         {
             SlippingRequest slippingRequest = Get(id);
-            return View();
+
+            if (slippingRequest != null)
+            {
+                return View(slippingRequest);
+            }
+            else
+            {
+                return RedirectToAction("NotFound", "Home");
+            }
         }
 
         // POST: Slipping/Edit/ID/CheckYourAnswers
@@ -340,9 +391,10 @@ namespace Triad.CabinetOffice.Slipping.Web.Controllers
 
             if (slippingRequest != null)
             {
+                // TODO: Check mandatory fields have been supplied
+                // TODO: Check From and To Dates are within valid ranges
                 if (ModelState.IsValid)
                 {
-                    CreateOrUpdate(slippingRequest);
                     return RedirectToAction("Confirmation");
                 }
                 else

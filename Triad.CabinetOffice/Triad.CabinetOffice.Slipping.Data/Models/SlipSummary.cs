@@ -12,5 +12,6 @@ namespace Triad.CabinetOffice.Slipping.Data.Models
         public DateTime FromDate { get; set; }
         public DateTime ToDate { get; set; }
         public string Status { get; set; }
+        public bool IsUnsubmitted { get; set; }
     }
 }

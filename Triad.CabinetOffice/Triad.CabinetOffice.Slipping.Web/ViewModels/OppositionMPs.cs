@@ -9,6 +9,7 @@ namespace Triad.CabinetOffice.Slipping.Web.ViewModels
 {
     public class OppositionMPs
     {
+        public int ID { get; set; }
         [Required]
         public bool? YesNo { get; set; }
         public List<OppositionMP> MPs { get; set; }

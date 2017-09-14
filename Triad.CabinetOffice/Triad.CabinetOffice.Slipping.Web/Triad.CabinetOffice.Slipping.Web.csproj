@@ -185,7 +185,6 @@
     <Compile Include="App_Start\Startup.Auth.cs" />
     <Compile Include="Attributes\FutureDateValidationAttribute.cs" />
     <Compile Include="Attributes\PastDateValidationAttribute.cs" />
-    <Compile Include="Attributes\SlippingAuthorizeAttribute.cs" />
     <Compile Include="Controllers\AccountController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\NotifyController.cs" />
@@ -260,6 +259,7 @@
     </Content>
     <Content Include="Web.Release.config">
       <DependentUpon>Web.config</DependentUpon>
+      <SubType>Designer</SubType>
     </Content>
     <Content Include="Views\Web.config" />
     <Content Include="Views\_ViewStart.cshtml" />
