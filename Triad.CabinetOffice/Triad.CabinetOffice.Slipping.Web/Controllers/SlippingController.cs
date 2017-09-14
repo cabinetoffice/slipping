@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Web.Configuration;
 using System.Web.Mvc;
+using Triad.CabinetOffice.Slipping.Data.EntityFramework.Slipping;
 using Triad.CabinetOffice.Slipping.Data.Models;
 using Triad.CabinetOffice.Slipping.Data.Repositories;
 using Triad.CabinetOffice.Slipping.Web.Attributes;
@@ -10,7 +11,7 @@ using Triad.CabinetOffice.Slipping.Web.ViewModels;
 
 namespace Triad.CabinetOffice.Slipping.Web.Controllers
 {
-    [SlippingAuthorize]
+    [Authorize]
     public class SlippingController : Controller
     {
         #region Properties
@@ -23,18 +24,39 @@ namespace Triad.CabinetOffice.Slipping.Web.Controllers
         {
             get
             {
-                if (this.User.Identity is SlippingUserIdentity)
+                string username = this.User.Identity.Name;
+                UserRepository repository = new UserRepository();
+                User user = repository.GetByUsername(username);
+
+                if (user != null)
                 {
-                    return ((SlippingUserIdentity)this.User.Identity).ID;
+                    return user.ID;
                 }
                 else
                 {
-                    throw new Exception(string.Format("User.Identity is not expected type (expected SlippingUserIdentity but was {0})", this.User.Identity.GetType().Name));
+                    throw new Exception(string.Format("User '{0}' not recognised.", this.User.Identity.Name));
                 }
             }
         }
 
-        private int MPID { get { return Convert.ToInt32(Session["MPID"]); } }
+        private int MPID
+        {
+            get
+            {
+                string username = this.User.Identity.Name;
+                UserRepository repository = new UserRepository();
+                User user = repository.GetByUsername(username);
+
+                if (user != null)
+                {
+                    return user.UserMPs1.First().MPID;
+                }
+                else
+                {
+                    throw new Exception(string.Format("User '{0}' not recognised.", this.User.Identity.Name));
+                }
+            }
+        }
 
         #endregion Properties
 
