@@ -452,6 +452,11 @@ namespace Triad.CabinetOffice.Slipping.Web.Controllers
                     ModelState.AddModelError("Location", "Location must be supplied");
                 }
 
+                if (slippingRequest.TravelTimeInHours == null)
+                {
+                    ModelState.AddModelError("TravelTimeInHours", "Travel time to Westminster must be supplied");
+                }
+
                 if (slippingRequest.ReasonID == null)
                 {
                     ModelState.AddModelError("Reason", "Reason must be supplied");
@@ -460,6 +465,11 @@ namespace Triad.CabinetOffice.Slipping.Web.Controllers
                 if (string.IsNullOrEmpty(slippingRequest.Details))
                 {
                     ModelState.AddModelError("Details", "Details must be supplied");
+                }
+
+                if (slippingRequest.OppositionMPsAttending == null)
+                {
+                    ModelState.AddModelError("OppositionMPsAttending", "Any opposition MPs in attendance? must be supplied");
                 }
 
                 if (ModelState.IsValid)

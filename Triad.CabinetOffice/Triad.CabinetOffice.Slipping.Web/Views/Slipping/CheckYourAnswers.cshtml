@@ -69,6 +69,7 @@
                         {
                             @Html.Encode(string.Format("{0} hours", Model.TravelTimeInHours.Value))
                         }
+                        <span class="error-message">@Html.ValidationMessageFor(model => model.TravelTimeInHours)</span>
                     </dd>
                     <dd class="cya-change">
                         @Html.ActionLink("Change", "Location", new { id = Model.ID })
@@ -116,6 +117,7 @@
                                 }
                             }
                         }
+                        <span class="error-message">@Html.ValidationMessageFor(model => model.OppositionMPsAttending)</span>
                     </dd>
                     <dd class="cya-change">
                         @Html.ActionLink("Change", "OppositionMPs", new { id = Model.ID })
