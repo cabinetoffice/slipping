@@ -33,6 +33,7 @@
                                         <div class="column-one-third no-padding">
                                             <div class="form-group list-item">
                                                 @Html.LabelFor(model => model.MPs[i].FullName, new { @class = "form-label" })
+                                                <span class="error-message">@Html.ValidationMessageFor(model => model.MPs[i].FullName)</span>
                                                 @Html.TextBoxFor(model => model.MPs[i].FullName, new { @class = "form-control" })
                                                 @Html.HiddenFor(model => model.MPs[i].ID)
                                                 @Html.HiddenFor(model => model.MPs[i].MPID)
