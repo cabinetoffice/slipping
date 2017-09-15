@@ -35,6 +35,7 @@ namespace Triad.CabinetOffice.Slipping.Data.EntityFramework.Slipping
         public string Location { get; set; }
         public Nullable<int> TravelTimeInHours { get; set; }
         public Nullable<bool> OppositionMPsAttending { get; set; }
+        public Nullable<int> PawsAbsenceRequestID { get; set; }
     
         public virtual User User { get; set; }
         public virtual User User1 { get; set; }

@@ -73,6 +73,10 @@ namespace Triad.CabinetOffice.Slipping.Web.Controllers
         {
             return SlippingRepository.CreateOrUpdate(slippingRequest, this.MPID, this.UserID);
         }
+        private int SubmitSlippingRequest(SlippingRequest slippingRequest)
+        {
+            return SlippingRepository.SubmitSlippingRequest(slippingRequest, this.UserID);
+        }
 
         #endregion Methods
 
@@ -385,7 +389,7 @@ namespace Triad.CabinetOffice.Slipping.Web.Controllers
         // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult CheckYourAnswers(int id, object form)
+        public ActionResult CheckYourAnswers(int id, SlippingRequest model)
         {
             SlippingRequest slippingRequest = Get(id);
 
@@ -393,13 +397,51 @@ namespace Triad.CabinetOffice.Slipping.Web.Controllers
             {
                 // TODO: Check mandatory fields have been supplied
                 // TODO: Check From and To Dates are within valid ranges
+
+                if (slippingRequest.ToDate == null)
+                {
+                    ModelState.AddModelError("ToDate", "To Date and Time must be supplied");
+                }
+                else
+                {
+                    if (((DateTime)slippingRequest.ToDate).Date < slippingRequest.FromDate.Date)
+                    {
+                        ModelState.AddModelError("ToDate", "To Date cannot fall before From Date");
+                    }
+
+                    if (((DateTime)slippingRequest.ToDate).Date == slippingRequest.FromDate.Date)
+                    {
+                        if (((DateTime)slippingRequest.ToDate).TimeOfDay <= slippingRequest.FromDate.TimeOfDay)
+                        {
+                            ModelState.AddModelError("ToDate", "To Hour must be at least 15 minutes after From Hour");
+                        }
+                    }
+                }
+
+                if (string.IsNullOrEmpty(slippingRequest.Location))
+                {
+                    ModelState.AddModelError("Location", "Location must be supplied");
+                }
+
+                if (slippingRequest.ReasonID == null)
+                {
+                    ModelState.AddModelError("Reason", "Reason must be supplied");
+                }
+
+                if (string.IsNullOrEmpty(slippingRequest.Details))
+                {
+                    ModelState.AddModelError("Details", "Details must be supplied");
+                }
+
                 if (ModelState.IsValid)
                 {
+
+                    SubmitSlippingRequest(slippingRequest);
                     return RedirectToAction("Confirmation");
                 }
                 else
                 {
-                    return View();
+                    return View(slippingRequest);
                 }
             }
             else

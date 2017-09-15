@@ -103,6 +103,7 @@
     <Compile Include="EntityFramework\Slipping\UserMP.cs">
       <DependentUpon>Slipping.tt</DependentUpon>
     </Compile>
+    <Compile Include="Extensions\HelperExtensions.cs" />
     <Compile Include="Models\MP.cs" />
     <Compile Include="Models\OppositionMP.cs" />
     <Compile Include="Models\SlippingRequest.cs" />
