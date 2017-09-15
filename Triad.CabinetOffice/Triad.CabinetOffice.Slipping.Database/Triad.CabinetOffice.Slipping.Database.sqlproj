@@ -64,5 +64,6 @@
     <Build Include="dbo\Tables\User.sql" />
     <Build Include="dbo\Tables\UserMP.sql" />
     <Build Include="dbo\Tables\AbsenceRequest.sql" />
+    <Build Include="dbo\Tables\AbsenceRequestOppositionMPs.sql" />
   </ItemGroup>
 </Project>
