@@ -273,7 +273,7 @@ namespace Triad.CabinetOffice.Slipping.Web.Controllers
             SlippingRequest slippingRequest = Get(id);
             var model = new ReasonAndDetails
             {
-                Reasons = ReasonRepository.Get().Select(r => new SelectListItem { Text = r.Reason.ToString(), Value = r.ID.ToString() }),
+                Reasons = ReasonRepository.Get(),
                 ID = slippingRequest.ID,
                 Details = slippingRequest.Details ?? string.Empty,
                 Reason = slippingRequest.ReasonID.HasValue ? slippingRequest.ReasonID.ToString() : "-1"
@@ -296,12 +296,13 @@ namespace Triad.CabinetOffice.Slipping.Web.Controllers
                 if (ModelState.IsValid)
                 {
                     slippingRequest.ReasonID = Convert.ToInt32(model.Reason);
+                    slippingRequest.Details = model.Details;
                     CreateOrUpdate(slippingRequest);
                     return RedirectToAction("OppositionMPs");
                 }
                 else
                 {
-                    model.Reasons = ReasonRepository.Get().Select(r => new SelectListItem { Text = r.Reason.ToString(), Value = r.ID.ToString() });
+                    model.Reasons = ReasonRepository.Get();
                     return View(model);
                 }
             }

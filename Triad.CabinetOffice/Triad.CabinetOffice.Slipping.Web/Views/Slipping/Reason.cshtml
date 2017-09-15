@@ -19,9 +19,15 @@
                    <span class="error-message">@Html.ValidationMessageFor(model => model.Reason)</span>
                     @foreach (var reason in Model.Reasons)
                     {                
-                        <div class="multiple-choice">
-                            @Html.RadioButtonFor(model => model.Reason, reason.Value)
-                            @Html.LabelFor(model => model.Reason,reason.Text)
+                        <div class="multiple-choice" data-target="Reason-@reason.ID">
+                            @Html.RadioButtonFor(model => model.Reason, reason.ID, new {@name="radio-group",@id="radio-" + @reason.ID, aria_controls= "Reason-"+ @reason.ID })
+                            @Html.LabelFor(model => model.Reason,reason.Reason)
+                        </div>
+                        <div class="panel panel-border-narrow  js-hidden" id="Reason-@reason.ID" aria-hidden="true">
+                            <label class="form-label" for="Reason-@reason.ID">@Model.Labels[@reason.ID]</label>
+                            <span class="form-hint">@Model.Hints[@reason.ID]</span>
+                            <span class="form-label">@Model.Instructions[@reason.ID]</span>
+                            @Html.TextAreaFor(model => model.Details, new { @id = "Reason-"+ @reason.ID, @Name = "reason-details",@rows=5,@class= "form-control form-control-3-4"})
                         </div>
                     }
                 </fieldset>
