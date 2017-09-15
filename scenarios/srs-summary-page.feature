@@ -1,3 +1,5 @@
+Feature: Summary Page
+
 Scenario: Authorised User Views Summary Page Before Submission
           Given that I have successfully logged into the SRS
           And I have completed all sections of the form correctly
