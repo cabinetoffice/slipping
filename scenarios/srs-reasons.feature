@@ -89,10 +89,19 @@ Scenario: User Attempts to Populate Text Field With Just Symbols/Numbers
 Scenario: Authorised User Attempts to Select More Than One Reason
 	  Given I have successfully logged in to the SRS
 	  And I see a list of 4 radio buttons on the page entitled: ‘What is the reason for your slip’
-	  And I have select one of the radio buttons
+	  And I have selected one of the radio buttons
 	  When I try to click another radio button
 	  Then the previously selected option will be unselected 
 	  And I should see the newly clicked radio button alone selected
 	  And I should see a correspoding text field with its corresponding word limit
 	  And I should be able to progress with completing the rest of the SRS form	 
+	  
+Scenario: Authorised User Does Not Populate Text Field
+	  Given I have successfully logged in to the SRS
+	  And I see a list of 4 radio buttons on the page entitled: ‘What is the reason for your slip’
+	  And I have selected one of the radio buttons
+	  And I see a correspoding text field with its corresponding word limit
+	  When I attempt to leave the text field blank/empty
+	  Then I should be prompted with an error message that states "???"
+	  And I should not be able to proceed with completing the rest of the SRS form
 
