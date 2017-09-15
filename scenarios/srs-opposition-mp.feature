@@ -19,7 +19,7 @@ Scenario: Select Yes to Add Opposition MP - Textbox Appears
           And I should see a clickable button that states ‘Add Another MP’ below this
 
 
-Scenario: Select Yes to Add Opposition MP- Textbox Populated
+Scenario: Select Yes to Add Opposition MP- Textbox Correctly Populated 
           Given that I have successfully logged into the SRS
           And I am on the page entitled ‘Are there any opposition MPs in attendance?’
           And I click the radio dial that states ‘Yes’
@@ -39,22 +39,9 @@ Scenario: Add Opposition MP- Textbox Populated- ‘Remove This’ Option
           And I should be able to click the ‘Continue’ button
           And I should be able to proceed with the rest of the form
           And I should see a clickable button that states ‘Remove This’ next to this
-
-
-Sad Path: 
-          Scenario: Select Yes to Add Opposition MP- Textbox Empty
-          Given that I have successfully logged into the SRS
-          And I am on the page entitled ‘Are there any opposition MPs in attendance?’
-          And I click the radio dial that states ‘Yes’
-          And I see a text box appear under this 
-          When I do not enter any text into this textbox
-          Then I should not see a clickable button that states ‘Add Another MP’ 
-          And I should not see a clickable button that states ‘Remove This’
-          And I should not be able to click the ‘Continue’ button
-          And I should not be able to proceed with the rest of the form
-
-
-Scenario: Select Opposition MP - ‘Add Another MP’ 
+          
+          
+Scenario: Select Opposition MP - ‘Add Another MP’ Option
           Given that I have successfully logged into the SRS
           And I am on the page entitled ‘Are there any opposition MPs in attendance?’
           And I click the radio dial that states ‘Yes’
@@ -65,30 +52,32 @@ Scenario: Select Opposition MP - ‘Add Another MP’
           And The ‘MP’ number should correspond with the number of boxes produced e.g “MP3, MP4, MP5 etc”
 
 
-Scenario:  Add Another MP- Textbox Populated
-          Given that I have successfully logged into the SRS
-          And I am on the page entitled ‘Are there any opposition MPs in attendance?’
-          And I click the radio dial that states ‘Yes’
-          And I select ‘Add Another MP’
-          When I enter a full name in text format into this textbox
-          Then I should be able to click the ‘Continue’ button
-          And I should be able to proceed with the rest of the form
-          
-
-Sad Path
-Scenario: Add Another Opposition MP - Textbox Empty
+Sad Path: 
+Scenario: Select Yes to Add Opposition MP- Textbox Empty
           Given that I have successfully logged into the SRS
           And I am on the page entitled ‘Are there any opposition MPs in attendance?’
           And I click the radio dial that states ‘Yes’
           And I see a text box appear under this 
           When I do not enter any text into this textbox
-          Then i will not be able to proceed with the rest of the form
+          Then I should not see a clickable button that states ‘Add Another MP’ 
+          And I should not see a clickable button that states ‘Remove This’
+          And I should not be able to click the ‘Continue’ button
+          And I should not be able to proceed with the rest of the form
           
 
-Scenario: Select no to adding Opposition MP 
+Scenario: Select 'No' to adding Opposition MP 
           Given that I have successfully logged into the SRS
           And I am on the page entitled ‘Are there any opposition MPs in attendance?’
           When i click the radio dial that states ‘No’
           Then I should see no changes to the page
           And I should be able to click the ‘Continue’ button
           And I should be able to proceed with the rest of the form
+          
+          
+Scenario: Add Opposition MP- Textbox Incorrectly Populated- ‘Numbers Only and Symbols Only'
+          Given that I have successfully logged into the SRS
+          And I am on the page entitled ‘Are there any opposition MPs in attendance?’
+          When I attempt to enter a name in purely numeric format inside the text field
+	And I attempt to enter a name in purely symbolic format inside the text field
+ 	Then I should not be able to click the 'Continue' button
+	And I should not be able to progress with completing the rest of the SRS form	
