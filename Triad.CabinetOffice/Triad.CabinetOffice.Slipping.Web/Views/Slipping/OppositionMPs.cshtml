@@ -15,7 +15,7 @@
         {
             @Html.AntiForgeryToken()
 
-            <div class="form-group">
+            <div class="form-group @Html.ValidationErrorClassFor(model => model.YesNo, "form-group-error")">
                 <fieldset>
                     <span class="error-message">@Html.ValidationMessageFor(model => model.YesNo)</span>
                     <div class="multiple-choice" data-target="yes-add-mps">
