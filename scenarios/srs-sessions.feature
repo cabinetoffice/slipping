@@ -1,4 +1,4 @@
-Feature: Sessions
+Feature: Session Timeout
 
 Scenario: Active session
 	Given I visit the SRS
