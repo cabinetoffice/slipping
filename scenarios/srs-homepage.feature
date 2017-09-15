@@ -41,6 +41,16 @@ Scenario: Viewing All Slips
           And I should only see slip requests which have not already expired i.e where the to date (end date) is in the future
           And I should see their decision status next to each request
           
+Scenario: Minimize View All Slips
+          Given I have successfully logged into the SRS
+          And I have submitted more than five slip requests
+          And I have clicked the ‘View All’ button
+          And I see a longer list with 6 or more submitted slip requests
+          When I Click ??? 
+          Then I should be able to revert back to my previous view of 5 slip requests for this user
+          And I should only see slip requests which have not already expired i.e where the to date (end date) is in the future
+          And I should see their decision status next to each request
+          
 Scenario: Instructions for nominating a user
           Given I have successfully logged into the SRS
           Then I should see a label with instructions for nominating a user e.g. ‘Want to nominate a user to fill in your slipping requests?’
