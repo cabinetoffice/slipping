@@ -14,10 +14,10 @@ Scenario: Authorised User Submits Form- Confirmation Page
           And I should see a clickable 'log out' button at the top of the page
           And below the page I should see a clickable button that states: 'New Slipping Request'
           And below this I should see a clickable button that states: 'Take me back to my slipping requests'
-          And at the end of the page I should see instructions on how to Nominate a User that states: Want to nominate a user to fill in your slipping requests?
+          And at the end of the page I should see instructions on how to Nominate a User that states: 'Want to nominate a user to fill in your slipping requests?
           We need their name and email address. You can send us these details by email or by telephone. 
           Email: pairsandwhipping@parliament.gov.uk
-          Telephone: 0208 123 4567
+          Telephone: 0208 123 4567'
           
     
 Scenario: Authorised User Submits Form- Clcks New Slipping request
