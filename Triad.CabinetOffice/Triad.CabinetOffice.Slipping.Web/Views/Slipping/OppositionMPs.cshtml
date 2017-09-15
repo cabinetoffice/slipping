@@ -14,9 +14,10 @@
         @using (Html.BeginForm(null, null, FormMethod.Post, new { id = "form-opposition-mps" }))
         {
             @Html.AntiForgeryToken()
-            
+
             <div class="form-group">
                 <fieldset>
+                    <span class="error-message">@Html.ValidationMessageFor(model => model.YesNo)</span>
                     <div class="multiple-choice" data-target="yes-add-mps">
                         @Html.RadioButtonFor(model => model.YesNo, true, new { @id = "yes", @name = "radio-group-add-mps" })
                         <label for="yes">Yes</label>
