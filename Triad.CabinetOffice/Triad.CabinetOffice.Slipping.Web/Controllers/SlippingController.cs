@@ -78,6 +78,11 @@ namespace Triad.CabinetOffice.Slipping.Web.Controllers
             return SlippingRepository.SubmitSlippingRequest(slippingRequest, this.UserID);
         }
 
+        private bool IsSubmitted(SlippingRequest slippingRequest)
+        {
+            return slippingRequest.PawsAbsenceRequestID != null;
+        }
+
         #endregion Methods
 
         #region Action Methods
@@ -111,7 +116,7 @@ namespace Triad.CabinetOffice.Slipping.Web.Controllers
             {
                 SlippingRequest slippingRequest = Get(id.Value);
 
-                if (slippingRequest != null)
+                if (slippingRequest != null && !IsSubmitted(slippingRequest))
                 {
                     model = new DateAndTime
                     {
@@ -143,7 +148,7 @@ namespace Triad.CabinetOffice.Slipping.Web.Controllers
                     // Update an existing record
                     SlippingRequest slippingRequest = Get(id.Value);
 
-                    if (slippingRequest != null)
+                    if (slippingRequest != null && !IsSubmitted(slippingRequest))
                     {
                         slippingRequest.FromDate = model.GetDateTime();
                         CreateOrUpdate(slippingRequest);
@@ -175,7 +180,7 @@ namespace Triad.CabinetOffice.Slipping.Web.Controllers
         {
             SlippingRequest slippingRequest = Get(id);
 
-            if (slippingRequest != null)
+            if (slippingRequest != null && !IsSubmitted(slippingRequest))
             {
                 var model = new DateAndTime
                 {
@@ -201,7 +206,7 @@ namespace Triad.CabinetOffice.Slipping.Web.Controllers
         {
             SlippingRequest slippingRequest = Get(id);
 
-            if (slippingRequest != null)
+            if (slippingRequest != null && !IsSubmitted(slippingRequest))
             {
                 DateTime toDate = model.GetDateTime();
 
@@ -240,7 +245,7 @@ namespace Triad.CabinetOffice.Slipping.Web.Controllers
         public ActionResult Location(int id)
         {
             SlippingRequest slippingRequest = Get(id);
-            if (slippingRequest != null)
+            if (slippingRequest != null && !IsSubmitted(slippingRequest))
             {
                 var model = new LocationAndHours
                 {
@@ -265,7 +270,7 @@ namespace Triad.CabinetOffice.Slipping.Web.Controllers
         {
             SlippingRequest slippingRequest = Get(id);
 
-            if (slippingRequest != null)
+            if (slippingRequest != null && !IsSubmitted(slippingRequest))
             {
                 if (ModelState.IsValid)
                 {
@@ -290,7 +295,7 @@ namespace Triad.CabinetOffice.Slipping.Web.Controllers
         public ActionResult Reason(int id)
         {
             SlippingRequest slippingRequest = Get(id);
-            if (slippingRequest != null)
+            if (slippingRequest != null && !IsSubmitted(slippingRequest))
             {
                 var model = new ReasonAndDetails
                 {
@@ -317,7 +322,7 @@ namespace Triad.CabinetOffice.Slipping.Web.Controllers
         {
             SlippingRequest slippingRequest = Get(id);
 
-            if (slippingRequest != null)
+            if (slippingRequest != null && !IsSubmitted(slippingRequest))
             {
                 if (ModelState.IsValid)
                 {
@@ -344,7 +349,7 @@ namespace Triad.CabinetOffice.Slipping.Web.Controllers
         {
             SlippingRequest slippingRequest = Get(id);
 
-            if (slippingRequest != null)
+            if (slippingRequest != null && !IsSubmitted(slippingRequest))
             {
                 if (slippingRequest.OppositionMPs.Count == 0)
                     slippingRequest.OppositionMPs.Add(new OppositionMP() { ID = 0, MPID = 0, FullName = null });
@@ -370,7 +375,7 @@ namespace Triad.CabinetOffice.Slipping.Web.Controllers
         {
             SlippingRequest slippingRequest = Get(id);
 
-            if (slippingRequest != null)
+            if (slippingRequest != null && !IsSubmitted(slippingRequest))
             {
                 if (ModelState.IsValid)
                 {
@@ -396,7 +401,7 @@ namespace Triad.CabinetOffice.Slipping.Web.Controllers
         {
             SlippingRequest slippingRequest = Get(id);
 
-            if (slippingRequest != null)
+            if (slippingRequest != null && !IsSubmitted(slippingRequest))
             {
                 return View(slippingRequest);
             }
@@ -415,7 +420,7 @@ namespace Triad.CabinetOffice.Slipping.Web.Controllers
         {
             SlippingRequest slippingRequest = Get(id);
 
-            if (slippingRequest != null)
+            if (slippingRequest != null && !IsSubmitted(slippingRequest))
             {
                 // TODO: Check mandatory fields have been supplied
                 // TODO: Check From and To Dates are within valid ranges

@@ -31,11 +31,6 @@ namespace Triad.CabinetOffice.Slipping.Data.Repositories
             if (Exists(requestId, userId))
             {
                 AbsenceRequest absenceRequest = db.AbsenceRequests.Find(requestId);
-                if (absenceRequest.PawsAbsenceRequestID != null)
-                {
-                    // Absence Request is submitted so cannot be edited.
-                    return null;
-                }
                 var absenceRequestOppositionMPs = absenceRequest.AbsenceRequestOppositionMPs;
                 SlippingRequest slippingRequest = GetSlippingRequest(absenceRequest, absenceRequestOppositionMPs);
                 return slippingRequest;
@@ -190,7 +185,8 @@ namespace Triad.CabinetOffice.Slipping.Data.Repositories
                 Location = absenceRequest.Location,
                 TravelTimeInHours = absenceRequest.TravelTimeInHours,
                 OppositionMPsAttending = absenceRequest.OppositionMPsAttending,
-                OppositionMPs = absenceRequestOppositionMPs.Select(a => new OppositionMP { ID = a.ID, MPID = a.MPID, FullName = a.MPFullName }).ToList()
+                OppositionMPs = absenceRequestOppositionMPs.Select(a => new OppositionMP { ID = a.ID, MPID = a.MPID, FullName = a.MPFullName }).ToList(),
+                PawsAbsenceRequestID = absenceRequest.PawsAbsenceRequestID
             };
 
             return slippingRequest;
