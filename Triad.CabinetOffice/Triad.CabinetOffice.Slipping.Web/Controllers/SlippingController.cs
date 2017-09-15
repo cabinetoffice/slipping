@@ -110,13 +110,21 @@ namespace Triad.CabinetOffice.Slipping.Web.Controllers
             if (id.HasValue)
             {
                 SlippingRequest slippingRequest = Get(id.Value);
-                model = new DateAndTime
+
+                if (slippingRequest != null)
                 {
-                    ID = slippingRequest.ID,
-                    Date = slippingRequest.FromDate,
-                    Hour = slippingRequest.FromDate.ToString("hh"),
-                    Minute = slippingRequest.FromDate.ToString("mm")
-                };
+                    model = new DateAndTime
+                    {
+                        ID = slippingRequest.ID,
+                        Date = slippingRequest.FromDate,
+                        Hour = slippingRequest.FromDate.ToString("hh"),
+                        Minute = slippingRequest.FromDate.ToString("mm")
+                    };
+                }
+                else
+                {
+                    return RedirectToAction("NotFound");
+                }
             }
             return View(model);
         }
@@ -232,13 +240,20 @@ namespace Triad.CabinetOffice.Slipping.Web.Controllers
         public ActionResult Location(int id)
         {
             SlippingRequest slippingRequest = Get(id);
-            var model = new LocationAndHours
+            if (slippingRequest != null)
             {
-                ID = slippingRequest.ID,
-                Location = slippingRequest.Location != null ? slippingRequest.Location : string.Empty,
-                Hours = slippingRequest.TravelTimeInHours.HasValue ? slippingRequest.TravelTimeInHours.ToString() : string.Empty
-            };
-            return View(model);
+                var model = new LocationAndHours
+                {
+                    ID = slippingRequest.ID,
+                    Location = slippingRequest.Location != null ? slippingRequest.Location : string.Empty,
+                    Hours = slippingRequest.TravelTimeInHours.HasValue ? slippingRequest.TravelTimeInHours.ToString() : string.Empty
+                };
+                return View(model);
+            }
+            else
+            {
+                return RedirectToAction("NotFound");
+            }
         }
 
         // POST: Slipping/Edit/ID/Location
@@ -275,15 +290,22 @@ namespace Triad.CabinetOffice.Slipping.Web.Controllers
         public ActionResult Reason(int id)
         {
             SlippingRequest slippingRequest = Get(id);
-            var model = new ReasonAndDetails
+            if (slippingRequest != null)
             {
-                Reasons = ReasonRepository.Get().Select(r => new SelectListItem { Text = r.Reason.ToString(), Value = r.ID.ToString() }),
-                ID = slippingRequest.ID,
-                Details = slippingRequest.Details ?? string.Empty,
-                Reason = slippingRequest.ReasonID.HasValue ? slippingRequest.ReasonID.ToString() : "-1"
-            };
+                var model = new ReasonAndDetails
+                {
+                    Reasons = ReasonRepository.Get().Select(r => new SelectListItem { Text = r.Reason.ToString(), Value = r.ID.ToString() }),
+                    ID = slippingRequest.ID,
+                    Details = slippingRequest.Details ?? string.Empty,
+                    Reason = slippingRequest.ReasonID.HasValue ? slippingRequest.ReasonID.ToString() : "-1"
+                };
 
-            return View(model);
+                return View(model);
+            }
+            else
+            {
+                return RedirectToAction("NotFound");
+            }
         }
 
         // POST: Slipping/Edit/ID/Reason
@@ -455,7 +477,15 @@ namespace Triad.CabinetOffice.Slipping.Web.Controllers
         public ActionResult Confirmation(int id)
         {
             SlippingRequest slippingRequest = Get(id);
-            return View();
+
+            if (slippingRequest != null)
+            {
+                return View(slippingRequest);
+            }
+            else
+            {
+                return RedirectToAction("NotFound", "Home");
+            }
         }
 
         #endregion Action Methods

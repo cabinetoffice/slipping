@@ -4,6 +4,7 @@ using System.Data.Entity;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Web.Configuration;
 using Triad.CabinetOffice.Slipping.Data.EntityFramework.PAWS;
 using Triad.CabinetOffice.Slipping.Data.EntityFramework.Slipping;
 using Triad.CabinetOffice.Slipping.Data.Models;
@@ -14,7 +15,7 @@ namespace Triad.CabinetOffice.Slipping.Data.Repositories
     public class SlippingRepository : RepositoryBase
     {
         private const string SlipDetailsFormat = "Location: {0} \nTravel Time to Westminster (hours): {1} \nReason: {2} \nDetails: {3}";
-        private const int DefaultSlipStatusId = 1; // 1 == Pending. Get from config?
+        private int DefaultSlipStatusId = Convert.ToInt32(WebConfigurationManager.AppSettings["DefaultAbsenceRequestStatusID"]);
         public SlippingRepository() : base()
         {
             this.PAWSDB = new PAWSEntities();
@@ -30,6 +31,11 @@ namespace Triad.CabinetOffice.Slipping.Data.Repositories
             if (Exists(requestId, userId))
             {
                 AbsenceRequest absenceRequest = db.AbsenceRequests.Find(requestId);
+                if (absenceRequest.PawsAbsenceRequestID != null)
+                {
+                    // Absence Request is submitted so cannot be edited.
+                    return null;
+                }
                 var absenceRequestOppositionMPs = absenceRequest.AbsenceRequestOppositionMPs;
                 SlippingRequest slippingRequest = GetSlippingRequest(absenceRequest, absenceRequestOppositionMPs);
                 return slippingRequest;
@@ -197,7 +203,7 @@ namespace Triad.CabinetOffice.Slipping.Data.Repositories
             if (UserCanActForMP(userId, MPID))
             {
                 result.AddRange(this.db.AbsenceRequests
-                    .Where(ar => ar.MPID == MPID)
+                    .Where(ar => ar.MPID == MPID && ar.PawsAbsenceRequestID == null)
                     .Select(ar => new SlipSummary()
                     {
                         FromDate = ar.FromDate,
