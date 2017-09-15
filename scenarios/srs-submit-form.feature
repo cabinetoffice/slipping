@@ -1,3 +1,5 @@
+Feature: Form Submission
+
 Scenario: Authorised User Submits Form- Notify Email 
           Given that I have successfully logged into the SRS
           And I am on the final page entitled ‘Check your answers before submitting your slipping request’
