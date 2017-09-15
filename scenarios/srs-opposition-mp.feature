@@ -78,6 +78,6 @@ Scenario: Add Opposition MP- Textbox Incorrectly Populated- ‘Numbers Only and 
           Given that I have successfully logged into the SRS
           And I am on the page entitled ‘Are there any opposition MPs in attendance?’
           When I attempt to enter a name in purely numeric format inside the text field
-	And I attempt to enter a name in purely symbolic format inside the text field
- 	Then I should not be able to click the 'Continue' button
-	And I should not be able to progress with completing the rest of the SRS form	
+	  And I attempt to enter a name in purely symbolic format inside the text field
+ 	  Then I should not be able to click the 'Continue' button
+	  And I should not be able to progress with completing the rest of the SRS form	
