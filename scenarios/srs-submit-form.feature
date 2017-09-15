@@ -10,8 +10,8 @@ Scenario: Authorised User Submits Form- Confirmation Page
           And I am on the final page entitled ‘Check your answers before submitting your slipping request’
           When I click the button that states: 'Submit Slipping Request'
           Then I should be taken to a page with a bold heading that states: 'Slipping request submitted'
-          And below this I should see the 'From' date and time of the request which I have just submitted
-          And below this I should see the 'To'/end of absence date and and time of the request
+          And below this I should see the 'From' date and time of the request which I have just submitted in DD/MM/YYYY and 24hr format
+          And below this I should see the 'To'/end of absence date and and time of the request in DD/MM/YYYY and 24hr format
           And I should see a clickable 'log out' button at the top of the page
           And below the page I should see a clickable button that states: 'New Slipping Request'
           And below this I should see a clickable button that states: 'Take me back to my slipping requests'
