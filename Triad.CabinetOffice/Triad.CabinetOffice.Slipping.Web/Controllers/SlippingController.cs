@@ -321,7 +321,9 @@ namespace Triad.CabinetOffice.Slipping.Web.Controllers
             if (slippingRequest != null)
             {
                 if (slippingRequest.OppositionMPs.Count == 0)
+                {
                     slippingRequest.OppositionMPs.Add(new OppositionMP() { ID = 0, MPID = 0, FullName = null });
+                }
 
                 var model = new OppositionMPs
                 {
