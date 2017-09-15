@@ -10,7 +10,8 @@ Scenario: Authorised User Views Summary Page Before Submission
           And I should see the entered reason and details of my absence request  with a clickable 'Change' button next to it
           And I should see the entered response from the Opposition MP page  with a clickable 'Change' button next to it
           And at the end of the page I should see a clickable button that states: 'Submit Slipping Request'
-          
+      
+      
 Scenario: Authorised User Wants to Edit Information Before Submission 
           Given that I have successfully logged into the SRS
           And I have completed all sections of the form correctly
@@ -22,17 +23,6 @@ Scenario: Authorised User Wants to Edit Information Before Submission
           And I should be able to complete the form with the given parameters in each section
           And I should be able to return to this Summary Page before submission
           
-Scenario: Authorised User Wants to Edit Information Before Submission 
-          Given that I have successfully logged into the SRS
-          And I have completed all sections of the form correctly
-          And I am on the final page entitled ‘Check your answers before submitting your slipping request’
-          And I see a summary of my completed slip in a table format with a clickable 'Change' button next to each section
-          When I click the 'Change' button
-          Then I should be taken to the corresponding page of the form
-          And I should be taken to the corresponding field of the form
-          And I should be able to edit/change and update the corresponding/relevant field in that page
-          And I should be able to complete the form with the given parameters in each section
-          And I should be able to return to this Summary Page before submission       
            
 Scenario: Authorised User Wants Submit Form Without Editing 
           Given that I have successfully logged into the SRS
