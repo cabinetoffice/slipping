@@ -1,3 +1,5 @@
+Feature: Slip Details
+
 Scenario: Authorised User Opens Sent Slip to View Details - Slips with Approved & Refused Status
           Given I have successfully logged into the SRS
           And I see a list of up to 5 slip requests for this user
