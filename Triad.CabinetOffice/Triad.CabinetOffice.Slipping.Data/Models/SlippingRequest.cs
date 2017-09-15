@@ -25,5 +25,6 @@ namespace Triad.CabinetOffice.Slipping.Data.Models
         public Nullable<int> TravelTimeInHours { get; set; }
         public bool? OppositionMPsAttending { get; set; }
         public List<OppositionMP> OppositionMPs { get; set; }
+        public int? PawsAbsenceRequestID { get; set; }
     }
 }

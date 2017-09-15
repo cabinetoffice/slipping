@@ -73,6 +73,15 @@ namespace Triad.CabinetOffice.Slipping.Web.Controllers
         {
             return SlippingRepository.CreateOrUpdate(slippingRequest, this.MPID, this.UserID);
         }
+        private int SubmitSlippingRequest(SlippingRequest slippingRequest)
+        {
+            return SlippingRepository.SubmitSlippingRequest(slippingRequest, this.UserID);
+        }
+
+        private bool IsSubmitted(SlippingRequest slippingRequest)
+        {
+            return slippingRequest.PawsAbsenceRequestID != null;
+        }
 
         #endregion Methods
 
@@ -106,13 +115,21 @@ namespace Triad.CabinetOffice.Slipping.Web.Controllers
             if (id.HasValue)
             {
                 SlippingRequest slippingRequest = Get(id.Value);
-                model = new DateAndTime
+
+                if (slippingRequest != null && !IsSubmitted(slippingRequest))
                 {
-                    ID = slippingRequest.ID,
-                    Date = slippingRequest.FromDate,
-                    Hour = slippingRequest.FromDate.ToString("hh"),
-                    Minute = slippingRequest.FromDate.ToString("mm")
-                };
+                    model = new DateAndTime
+                    {
+                        ID = slippingRequest.ID,
+                        Date = slippingRequest.FromDate,
+                        Hour = slippingRequest.FromDate.ToString("hh"),
+                        Minute = slippingRequest.FromDate.ToString("mm")
+                    };
+                }
+                else
+                {
+                    return RedirectToAction("NotFound");
+                }
             }
             return View(model);
         }
@@ -131,7 +148,7 @@ namespace Triad.CabinetOffice.Slipping.Web.Controllers
                     // Update an existing record
                     SlippingRequest slippingRequest = Get(id.Value);
 
-                    if (slippingRequest != null)
+                    if (slippingRequest != null && !IsSubmitted(slippingRequest))
                     {
                         slippingRequest.FromDate = model.GetDateTime();
                         CreateOrUpdate(slippingRequest);
@@ -163,7 +180,7 @@ namespace Triad.CabinetOffice.Slipping.Web.Controllers
         {
             SlippingRequest slippingRequest = Get(id);
 
-            if (slippingRequest != null)
+            if (slippingRequest != null && !IsSubmitted(slippingRequest))
             {
                 var model = new DateAndTime
                 {
@@ -189,7 +206,7 @@ namespace Triad.CabinetOffice.Slipping.Web.Controllers
         {
             SlippingRequest slippingRequest = Get(id);
 
-            if (slippingRequest != null)
+            if (slippingRequest != null && !IsSubmitted(slippingRequest))
             {
                 DateTime toDate = model.GetDateTime();
 
@@ -228,13 +245,20 @@ namespace Triad.CabinetOffice.Slipping.Web.Controllers
         public ActionResult Location(int id)
         {
             SlippingRequest slippingRequest = Get(id);
-            var model = new LocationAndHours
+            if (slippingRequest != null && !IsSubmitted(slippingRequest))
             {
-                ID = slippingRequest.ID,
-                Location = slippingRequest.Location != null ? slippingRequest.Location : string.Empty,
-                Hours = slippingRequest.TravelTimeInHours.HasValue ? slippingRequest.TravelTimeInHours.ToString() : string.Empty
-            };
-            return View(model);
+                var model = new LocationAndHours
+                {
+                    ID = slippingRequest.ID,
+                    Location = slippingRequest.Location != null ? slippingRequest.Location : string.Empty,
+                    Hours = slippingRequest.TravelTimeInHours.HasValue ? slippingRequest.TravelTimeInHours.ToString() : string.Empty
+                };
+                return View(model);
+            }
+            else
+            {
+                return RedirectToAction("NotFound");
+            }
         }
 
         // POST: Slipping/Edit/ID/Location
@@ -246,7 +270,7 @@ namespace Triad.CabinetOffice.Slipping.Web.Controllers
         {
             SlippingRequest slippingRequest = Get(id);
 
-            if (slippingRequest != null)
+            if (slippingRequest != null && !IsSubmitted(slippingRequest))
             {
                 if (ModelState.IsValid)
                 {
@@ -271,15 +295,22 @@ namespace Triad.CabinetOffice.Slipping.Web.Controllers
         public ActionResult Reason(int id)
         {
             SlippingRequest slippingRequest = Get(id);
-            var model = new ReasonAndDetails
+            if (slippingRequest != null && !IsSubmitted(slippingRequest))
             {
-                Reasons = ReasonRepository.Get().Select(r => new SelectListItem { Text = r.Reason.ToString(), Value = r.ID.ToString() }),
-                ID = slippingRequest.ID,
-                Details = slippingRequest.Details ?? string.Empty,
-                Reason = slippingRequest.ReasonID.HasValue ? slippingRequest.ReasonID.ToString() : "-1"
-            };
+                var model = new ReasonAndDetails
+                {
+                    Reasons = ReasonRepository.Get().Select(r => new SelectListItem { Text = r.Reason.ToString(), Value = r.ID.ToString() }),
+                    ID = slippingRequest.ID,
+                    Details = slippingRequest.Details ?? string.Empty,
+                    Reason = slippingRequest.ReasonID.HasValue ? slippingRequest.ReasonID.ToString() : "-1"
+                };
 
-            return View(model);
+                return View(model);
+            }
+            else
+            {
+                return RedirectToAction("NotFound");
+            }
         }
 
         // POST: Slipping/Edit/ID/Reason
@@ -291,7 +322,7 @@ namespace Triad.CabinetOffice.Slipping.Web.Controllers
         {
             SlippingRequest slippingRequest = Get(id);
 
-            if (slippingRequest != null)
+            if (slippingRequest != null && !IsSubmitted(slippingRequest))
             {
                 if (ModelState.IsValid)
                 {
@@ -318,7 +349,7 @@ namespace Triad.CabinetOffice.Slipping.Web.Controllers
         {
             SlippingRequest slippingRequest = Get(id);
 
-            if (slippingRequest != null)
+            if (slippingRequest != null && !IsSubmitted(slippingRequest))
             {
                 if (slippingRequest.OppositionMPs.Count == 0)
                 {
@@ -346,7 +377,7 @@ namespace Triad.CabinetOffice.Slipping.Web.Controllers
         {
             SlippingRequest slippingRequest = Get(id);
 
-            if (slippingRequest != null)
+            if (slippingRequest != null && !IsSubmitted(slippingRequest))
             {
                 if (ModelState.IsValid)
                 {
@@ -372,7 +403,7 @@ namespace Triad.CabinetOffice.Slipping.Web.Controllers
         {
             SlippingRequest slippingRequest = Get(id);
 
-            if (slippingRequest != null)
+            if (slippingRequest != null && !IsSubmitted(slippingRequest))
             {
                 return View(slippingRequest);
             }
@@ -387,21 +418,59 @@ namespace Triad.CabinetOffice.Slipping.Web.Controllers
         // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult CheckYourAnswers(int id, object form)
+        public ActionResult CheckYourAnswers(int id, SlippingRequest model)
         {
             SlippingRequest slippingRequest = Get(id);
 
-            if (slippingRequest != null)
+            if (slippingRequest != null && !IsSubmitted(slippingRequest))
             {
                 // TODO: Check mandatory fields have been supplied
                 // TODO: Check From and To Dates are within valid ranges
+
+                if (slippingRequest.ToDate == null)
+                {
+                    ModelState.AddModelError("ToDate", "To Date and Time must be supplied");
+                }
+                else
+                {
+                    if (((DateTime)slippingRequest.ToDate).Date < slippingRequest.FromDate.Date)
+                    {
+                        ModelState.AddModelError("ToDate", "To Date cannot fall before From Date");
+                    }
+
+                    if (((DateTime)slippingRequest.ToDate).Date == slippingRequest.FromDate.Date)
+                    {
+                        if (((DateTime)slippingRequest.ToDate).TimeOfDay <= slippingRequest.FromDate.TimeOfDay)
+                        {
+                            ModelState.AddModelError("ToDate", "To Hour must be at least 15 minutes after From Hour");
+                        }
+                    }
+                }
+
+                if (string.IsNullOrEmpty(slippingRequest.Location))
+                {
+                    ModelState.AddModelError("Location", "Location must be supplied");
+                }
+
+                if (slippingRequest.ReasonID == null)
+                {
+                    ModelState.AddModelError("Reason", "Reason must be supplied");
+                }
+
+                if (string.IsNullOrEmpty(slippingRequest.Details))
+                {
+                    ModelState.AddModelError("Details", "Details must be supplied");
+                }
+
                 if (ModelState.IsValid)
                 {
+
+                    SubmitSlippingRequest(slippingRequest);
                     return RedirectToAction("Confirmation");
                 }
                 else
                 {
-                    return View();
+                    return View(slippingRequest);
                 }
             }
             else
@@ -415,7 +484,15 @@ namespace Triad.CabinetOffice.Slipping.Web.Controllers
         public ActionResult Confirmation(int id)
         {
             SlippingRequest slippingRequest = Get(id);
-            return View();
+
+            if (slippingRequest != null)
+            {
+                return View(slippingRequest);
+            }
+            else
+            {
+                return RedirectToAction("NotFound", "Home");
+            }
         }
 
         #endregion Action Methods

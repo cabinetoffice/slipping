@@ -24,6 +24,7 @@
           <Property Name="Location" Type="nvarchar" MaxLength="100" />
           <Property Name="TravelTimeInHours" Type="int" />
           <Property Name="OppositionMPsAttending" Type="bit" />
+          <Property Name="PawsAbsenceRequestID" Type="int" />
         </EntityType>
         <EntityType Name="AbsenceRequestOppositionMP">
           <Key>
@@ -255,6 +256,7 @@
           <Property Name="TravelTimeInHours" Type="Int32" />
           <Property Name="OppositionMPsAttending" Type="Boolean" />
           <NavigationProperty Name="AbsenceRequestOppositionMPs" Relationship="Model.FK_AbsenceRequestOppositionMP_AbsenceRequestID" FromRole="AbsenceRequest" ToRole="AbsenceRequestOppositionMP" />
+          <Property Name="PawsAbsenceRequestID" Type="Int32" />
         </EntityType>
         <EntityType Name="User">
           <Key>
@@ -406,6 +408,7 @@
           <EntitySetMapping Name="AbsenceRequests">
             <EntityTypeMapping TypeName="Model.AbsenceRequest">
               <MappingFragment StoreEntitySet="AbsenceRequest">
+                <ScalarProperty Name="PawsAbsenceRequestID" ColumnName="PawsAbsenceRequestID" />
                 <ScalarProperty Name="OppositionMPsAttending" ColumnName="OppositionMPsAttending" />
                 <ScalarProperty Name="TravelTimeInHours" ColumnName="TravelTimeInHours" />
                 <ScalarProperty Name="Location" ColumnName="Location" />

@@ -4,14 +4,18 @@ using System.Data.Entity;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Web.Configuration;
 using Triad.CabinetOffice.Slipping.Data.EntityFramework.PAWS;
 using Triad.CabinetOffice.Slipping.Data.EntityFramework.Slipping;
 using Triad.CabinetOffice.Slipping.Data.Models;
+using Triad.CabinetOffice.Slipping.Data.Extensions;
 
 namespace Triad.CabinetOffice.Slipping.Data.Repositories
 {
     public class SlippingRepository : RepositoryBase
     {
+        private const string SlipDetailsFormat = "Location: {0} \nTravel Time to Westminster (hours): {1} \nReason: {2} \nDetails: {3}";
+        private int DefaultSlipStatusId = Convert.ToInt32(WebConfigurationManager.AppSettings["DefaultAbsenceRequestStatusID"]);
         public SlippingRepository() : base()
         {
             this.PAWSDB = new PAWSEntities();
@@ -115,6 +119,7 @@ namespace Triad.CabinetOffice.Slipping.Data.Repositories
                 absenceRequest.Location = slippingRequest.Location;
                 absenceRequest.TravelTimeInHours = slippingRequest.TravelTimeInHours;
                 absenceRequest.OppositionMPsAttending = slippingRequest.OppositionMPsAttending;
+                absenceRequest.PawsAbsenceRequestID = slippingRequest.PawsAbsenceRequestID;
             }
 
             return absenceRequest;
@@ -180,7 +185,8 @@ namespace Triad.CabinetOffice.Slipping.Data.Repositories
                 Location = absenceRequest.Location,
                 TravelTimeInHours = absenceRequest.TravelTimeInHours,
                 OppositionMPsAttending = absenceRequest.OppositionMPsAttending,
-                OppositionMPs = absenceRequestOppositionMPs.Select(a => new OppositionMP { ID = a.ID, MPID = a.MPID, FullName = a.MPFullName }).ToList()
+                OppositionMPs = absenceRequestOppositionMPs.Select(a => new OppositionMP { ID = a.ID, MPID = a.MPID, FullName = a.MPFullName }).ToList(),
+                PawsAbsenceRequestID = absenceRequest.PawsAbsenceRequestID
             };
 
             return slippingRequest;
@@ -193,7 +199,7 @@ namespace Triad.CabinetOffice.Slipping.Data.Repositories
             if (UserCanActForMP(userId, MPID))
             {
                 result.AddRange(this.db.AbsenceRequests
-                    .Where(ar => ar.MPID == MPID)
+                    .Where(ar => ar.MPID == MPID && ar.PawsAbsenceRequestID == null)
                     .Select(ar => new SlipSummary()
                     {
                         FromDate = ar.FromDate,
@@ -219,6 +225,31 @@ namespace Triad.CabinetOffice.Slipping.Data.Repositories
             }
 
             return result;
+        }
+
+        public int SubmitSlippingRequest(SlippingRequest slippingRequest, int userId)
+        {
+            if (UserCanActForMP(userId, slippingRequest.MPID))
+            {
+                var absenceRequest = PAWSDB.Absence_Requests.Add(
+                    new Absence_Request()
+                    {
+                        Govt_MP = slippingRequest.MPID,
+                        Reason = (int)slippingRequest.ReasonID,
+                        Details = string.Format(SlipDetailsFormat, slippingRequest.Location, slippingRequest.TravelTimeInHours, slippingRequest.Reason, slippingRequest.Details).Left(220),
+                        Date_Created = DateTime.Now,
+                        Status = DefaultSlipStatusId,
+                        From_Time = slippingRequest.FromDate.TimeOfDay,
+                        From_Date = slippingRequest.FromDate.Date,
+                        To_Time = ((DateTime)slippingRequest.ToDate).TimeOfDay,
+                        To_Date = ((DateTime)slippingRequest.ToDate).Date
+                    });
+                PAWSDB.SaveChanges();
+                slippingRequest.PawsAbsenceRequestID = absenceRequest.ID;
+                CreateOrUpdate(slippingRequest, slippingRequest.MPID, userId);
+                return slippingRequest.ID;
+            }
+            throw new Exception("Unauthorized");
         }
     }
 }

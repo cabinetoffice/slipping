@@ -42,6 +42,7 @@
                         {
                             @Model.ToDate.Value.ToString("dd/MM/yyyy HH:mm")
                         }
+                        <span class="error-message">@Html.ValidationMessageFor(model => model.ToDate)</span>
                     </dd>
                     <dd class="cya-change">
                         @Html.ActionLink("Change", "ToDate", new { id = Model.ID })
@@ -53,6 +54,7 @@
                     </dt>
                     <dd class="cya-answer">
                         @Model.Location
+                        <span class="error-message">@Html.ValidationMessageFor(model => model.Location)</span>
                     </dd>
                     <dd class="cya-change">
                         @Html.ActionLink("Change", "Location", new { id = Model.ID })
@@ -78,6 +80,7 @@
                     </dt>
                     <dd class="cya-answer">
                         @Model.Reason
+                        <span class="error-message">@Html.ValidationMessageFor(model => model.Reason)</span>
                     </dd>
                     <dd class="cya-change">
                         @Html.ActionLink("Change", "Reason", new { id = Model.ID })
@@ -89,6 +92,7 @@
                     </dt>
                     <dd class="cya-answer">
                         @Model.Details
+                        <span class="error-message">@Html.ValidationMessageFor(model => model.Details)</span>
                     </dd>
                     <dd class="cya-change">
                         @Html.ActionLink("Change", "Reason", new { id = Model.ID })
