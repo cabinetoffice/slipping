@@ -10,7 +10,7 @@ namespace Triad.CabinetOffice.Slipping.Web.ViewModels
     public class OppositionMPs
     {
         public int ID { get; set; }
-        [Required]
+        [Required(ErrorMessage = "Please select Yes or No")]
         public bool? YesNo { get; set; }
         public List<OppositionMP> MPs { get; set; }
         public OppositionMPs()

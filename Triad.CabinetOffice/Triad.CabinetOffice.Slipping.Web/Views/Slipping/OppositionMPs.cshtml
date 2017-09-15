@@ -14,9 +14,10 @@
         @using (Html.BeginForm(null, null, FormMethod.Post, new { id = "form-opposition-mps" }))
         {
             @Html.AntiForgeryToken()
-            
-            <div class="form-group">
+
+            <div class="form-group @Html.ValidationErrorClassFor(model => model.YesNo, "form-group-error")">
                 <fieldset>
+                    <span class="error-message">@Html.ValidationMessageFor(model => model.YesNo)</span>
                     <div class="multiple-choice" data-target="yes-add-mps">
                         @Html.RadioButtonFor(model => model.YesNo, true, new { @id = "yes", @name = "radio-group-add-mps" })
                         <label for="yes">Yes</label>
@@ -33,6 +34,7 @@
                                         <div class="column-one-third no-padding">
                                             <div class="form-group list-item">
                                                 @Html.LabelFor(model => model.MPs[i].FullName, new { @class = "form-label" })
+                                                <span class="error-message">@Html.ValidationMessageFor(model => model.MPs[i].FullName)</span>
                                                 @Html.TextBoxFor(model => model.MPs[i].FullName, new { @class = "form-control" })
                                                 @Html.HiddenFor(model => model.MPs[i].ID)
                                                 @Html.HiddenFor(model => model.MPs[i].MPID)
@@ -42,7 +44,7 @@
                                             <div class="list-item">
                                                 @if (Model.MPs.Count != 1)
                                                 {
-                                                    <a class="remove-list-item" id="remove-item-1" href="#">Remove this</a>
+                                                    <a class="remove-list-item" id="remove-item-@(i + 1)" href="#">Remove this</a>
                                                 }
                                             </div>
                                         </div>
