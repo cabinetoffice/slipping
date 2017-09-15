@@ -1,3 +1,5 @@
+Feature: Select Opposition MP
+
 Scenario: Authorised User Sees Opposition MP Selection Page
           Given that I have successfully logged into the SRS
           And I have selected and completed the reason for the slip request
