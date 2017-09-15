@@ -32,7 +32,7 @@ $(document).on('click', '.button-add-another', function (e) {
 
 $(document).on('click', '.remove-list-item', function (e) {
     e.preventDefault();
-    $(this).closest('.list-item-wrapper').remove();
+    $(this).closest('.opposition-mp-item').remove();
     sortFields();
 });
 
