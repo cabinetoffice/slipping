@@ -242,7 +242,7 @@ namespace Triad.CabinetOffice.Slipping.Data.Repositories
                                         slippingRequest.Reason,
                                         slippingRequest.Details,
                                         ((bool)slippingRequest.OppositionMPsAttending) ?
-                                            string.Format("\nOpposition MPs attending: {0}", string.Join(", ", slippingRequest.OppositionMPs)) :
+                                            string.Format("\nOpposition MPs attending: {0}", string.Join(", ", slippingRequest.OppositionMPs.Select(mp => mp.FullName))) :
                                             string.Empty
                                         ).Left(220),
                         Date_Created = DateTime.Now,
