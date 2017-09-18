@@ -57,7 +57,9 @@
                     <nav id="proposition-menu">
                         <a id="proposition-name" href="/">Slipping</a>
                         <ul id="proposition-links">
-                            <li><a href="/Account/SignOut">Log out</a></li>
+                            @if (Request.IsAuthenticated) {
+                                <li><a href="/Account/SignOut">Log out</a></li>
+                            }
                         </ul>
                     </nav>
                 </div>
