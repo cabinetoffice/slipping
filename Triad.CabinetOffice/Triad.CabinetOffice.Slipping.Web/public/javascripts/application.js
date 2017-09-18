@@ -1,11 +1,6 @@
 /* global $ */
 /* global GOVUK */
 
-// Warn about using the kit in production
-if (window.console && window.console.info) {
-  window.console.info('GOV.UK Prototype Kit - do not use for production')
-}
-
 $(document).ready(function () {
     // Use GOV.UK shim-links-with-button-role.js to trigger a link styled to look like a button,
     // with role="button" when the space key is pressed.
@@ -32,7 +27,7 @@ $(document).on('click', '.button-add-another', function (e) {
 
 $(document).on('click', '.remove-list-item', function (e) {
     e.preventDefault();
-    $(this).closest('.list-item-wrapper').remove();
+    $(this).closest('.opposition-mp-item').remove();
     sortFields();
 });
 

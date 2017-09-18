@@ -122,7 +122,7 @@ namespace Triad.CabinetOffice.Slipping.Web.Controllers
                     {
                         ID = slippingRequest.ID,
                         Date = slippingRequest.FromDate,
-                        Hour = slippingRequest.FromDate.ToString("hh"),
+                        Hour = slippingRequest.FromDate.ToString("HH"),
                         Minute = slippingRequest.FromDate.ToString("mm")
                     };
                 }
@@ -141,6 +141,12 @@ namespace Triad.CabinetOffice.Slipping.Web.Controllers
         [ValidateAntiForgeryToken]
         public ActionResult FromDate(int? id, DateAndTime model)
         {
+            var fromDate = model.GetDateTime();
+            if (fromDate < DateTime.Now.AddMinutes(15))
+            {
+                ModelState.AddModelError("Hour", "From Time must be at least 15 minutes from now");
+            }
+
             if (ModelState.IsValid)
             {
                 if (id.HasValue)
@@ -186,7 +192,7 @@ namespace Triad.CabinetOffice.Slipping.Web.Controllers
                 {
                     ID = slippingRequest.ID,
                     Date = slippingRequest.ToDate.HasValue ? slippingRequest.ToDate.Value : slippingRequest.FromDate,
-                    Hour = slippingRequest.ToDate.HasValue ? slippingRequest.ToDate.Value.ToString("hh") : slippingRequest.FromDate.ToString("hh"),
+                    Hour = slippingRequest.ToDate.HasValue ? slippingRequest.ToDate.Value.ToString("HH") : slippingRequest.FromDate.ToString("HH"),
                     Minute = slippingRequest.ToDate.HasValue ? slippingRequest.ToDate.Value.ToString("mm") : slippingRequest.FromDate.ToString("mm")
                 };
                 return View(model);
@@ -212,14 +218,14 @@ namespace Triad.CabinetOffice.Slipping.Web.Controllers
 
                 if (toDate.Date < slippingRequest.FromDate.Date)
                 {
-                    ModelState.AddModelError("Date", "To Date cannot fall before From Date");
+                    ModelState.AddModelError("Date", "To Date cannot be before From Date");
                 }
 
                 if (toDate.Date == slippingRequest.FromDate.Date)
                 {
                     if (toDate.TimeOfDay <= slippingRequest.FromDate.TimeOfDay)
                     {
-                        ModelState.AddModelError("Hour", "To Hour must be at least 15 minutes after From Hour");
+                        ModelState.AddModelError("Hour", "To Time must be at least 15 minutes after From Time");
                     }
                 }
 
@@ -484,8 +490,10 @@ namespace Triad.CabinetOffice.Slipping.Web.Controllers
 
             if (slippingRequest != null && !IsSubmitted(slippingRequest))
             {
-                // TODO: Check mandatory fields have been supplied
-                // TODO: Check From and To Dates are within valid ranges
+                if (slippingRequest.FromDate < DateTime.Now.AddMinutes(15))
+                {
+                    ModelState.AddModelError("FromDate", "From Time must be at least 15 minutes from now");
+                }
 
                 if (slippingRequest.ToDate == null)
                 {
@@ -495,14 +503,14 @@ namespace Triad.CabinetOffice.Slipping.Web.Controllers
                 {
                     if (((DateTime)slippingRequest.ToDate).Date < slippingRequest.FromDate.Date)
                     {
-                        ModelState.AddModelError("ToDate", "To Date cannot fall before From Date");
+                        ModelState.AddModelError("ToDate", "To Date cannot be before From Date");
                     }
 
                     if (((DateTime)slippingRequest.ToDate).Date == slippingRequest.FromDate.Date)
                     {
                         if (((DateTime)slippingRequest.ToDate).TimeOfDay <= slippingRequest.FromDate.TimeOfDay)
                         {
-                            ModelState.AddModelError("ToDate", "To Hour must be at least 15 minutes after From Hour");
+                            ModelState.AddModelError("ToDate", "To Time must be at least 15 minutes after From Time");
                         }
                     }
                 }
@@ -552,6 +560,22 @@ namespace Triad.CabinetOffice.Slipping.Web.Controllers
         // GET: Slipping/Edit/ID/Confirmation
         [HttpGet]
         public ActionResult Confirmation(int id)
+        {
+            SlippingRequest slippingRequest = Get(id);
+
+            if (slippingRequest != null)
+            {
+                return View(slippingRequest);
+            }
+            else
+            {
+                return RedirectToAction("NotFound", "Home");
+            }
+        }
+
+        // GET: Slipping/Review/ID
+        [HttpGet]
+        public ActionResult Review(int id)
         {
             SlippingRequest slippingRequest = Get(id);
 

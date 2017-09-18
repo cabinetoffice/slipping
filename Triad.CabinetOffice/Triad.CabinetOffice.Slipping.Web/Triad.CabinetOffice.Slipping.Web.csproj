@@ -208,6 +208,7 @@
     <Content Include="Content\bootstrap.min.css" />
     <Content Include="Content\govuk-elements-styles.css" />
     <Content Include="Content\govuk-template.css" />
+    <Content Include="Content\images\favicon.ico" />
     <Content Include="Content\images\gov.uk_logotype_crown.png" />
     <Content Include="Content\images\govuk-crest.png" />
     <Content Include="Content\images\open-government-licence.png" />
@@ -280,6 +281,7 @@
     <Content Include="Views\Slipping\Reason.cshtml" />
     <Content Include="Views\Slipping\CheckYourAnswers.cshtml" />
     <Content Include="Views\Slipping\Confirmation.cshtml" />
+    <Content Include="Views\Slipping\Review.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
