@@ -502,6 +502,22 @@ namespace Triad.CabinetOffice.Slipping.Web.Controllers
             }
         }
 
+        // GET: Slipping/Review/ID
+        [HttpGet]
+        public ActionResult Review(int id)
+        {
+            SlippingRequest slippingRequest = Get(id);
+
+            if (slippingRequest != null)
+            {
+                return View(slippingRequest);
+            }
+            else
+            {
+                return RedirectToAction("NotFound", "Home");
+            }
+        }
+
         #endregion Action Methods
     }
 }
