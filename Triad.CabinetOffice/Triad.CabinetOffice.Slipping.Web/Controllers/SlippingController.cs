@@ -122,7 +122,7 @@ namespace Triad.CabinetOffice.Slipping.Web.Controllers
                     {
                         ID = slippingRequest.ID,
                         Date = slippingRequest.FromDate,
-                        Hour = slippingRequest.FromDate.ToString("hh"),
+                        Hour = slippingRequest.FromDate.ToString("HH"),
                         Minute = slippingRequest.FromDate.ToString("mm")
                     };
                 }
@@ -186,7 +186,7 @@ namespace Triad.CabinetOffice.Slipping.Web.Controllers
                 {
                     ID = slippingRequest.ID,
                     Date = slippingRequest.ToDate.HasValue ? slippingRequest.ToDate.Value : slippingRequest.FromDate,
-                    Hour = slippingRequest.ToDate.HasValue ? slippingRequest.ToDate.Value.ToString("hh") : slippingRequest.FromDate.ToString("hh"),
+                    Hour = slippingRequest.ToDate.HasValue ? slippingRequest.ToDate.Value.ToString("HH") : slippingRequest.FromDate.ToString("HH"),
                     Minute = slippingRequest.ToDate.HasValue ? slippingRequest.ToDate.Value.ToString("mm") : slippingRequest.FromDate.ToString("mm")
                 };
                 return View(model);
@@ -424,9 +424,6 @@ namespace Triad.CabinetOffice.Slipping.Web.Controllers
 
             if (slippingRequest != null && !IsSubmitted(slippingRequest))
             {
-                // TODO: Check mandatory fields have been supplied
-                // TODO: Check From and To Dates are within valid ranges
-
                 if (slippingRequest.ToDate == null)
                 {
                     ModelState.AddModelError("ToDate", "To Date and Time must be supplied");

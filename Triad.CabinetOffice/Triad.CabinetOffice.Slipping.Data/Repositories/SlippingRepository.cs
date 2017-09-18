@@ -14,7 +14,7 @@ namespace Triad.CabinetOffice.Slipping.Data.Repositories
 {
     public class SlippingRepository : RepositoryBase
     {
-        private const string SlipDetailsFormat = "Location: {0} \nTravel Time to Westminster (hours): {1} \nReason: {2} \nDetails: {3}";
+        private const string SlipDetailsFormat = "Location: {0} \nTravel Time to Westminster (hours): {1} \nReason: {2} \nDetails: {3} {4}";
         private int DefaultSlipStatusId = Convert.ToInt32(WebConfigurationManager.AppSettings["DefaultAbsenceRequestStatusID"]);
         public SlippingRepository() : base()
         {
@@ -236,7 +236,15 @@ namespace Triad.CabinetOffice.Slipping.Data.Repositories
                     {
                         Govt_MP = slippingRequest.MPID,
                         Reason = (int)slippingRequest.ReasonID,
-                        Details = string.Format(SlipDetailsFormat, slippingRequest.Location, slippingRequest.TravelTimeInHours, slippingRequest.Reason, slippingRequest.Details).Left(220),
+                        Details = string.Format(SlipDetailsFormat,
+                                        slippingRequest.Location,
+                                        slippingRequest.TravelTimeInHours,
+                                        slippingRequest.Reason,
+                                        slippingRequest.Details,
+                                        ((bool)slippingRequest.OppositionMPsAttending) ?
+                                            string.Format("\nOpposition MPs attending: {0}", string.Join(", ", slippingRequest.OppositionMPs)) :
+                                            string.Empty
+                                        ).Left(220),
                         Date_Created = DateTime.Now,
                         Status = DefaultSlipStatusId,
                         From_Time = slippingRequest.FromDate.TimeOfDay,
