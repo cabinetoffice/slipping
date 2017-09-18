@@ -301,9 +301,24 @@ namespace Triad.CabinetOffice.Slipping.Web.Controllers
                 {
                     Reasons = ReasonRepository.Get(),
                     ID = slippingRequest.ID,
-                    Details = slippingRequest.Details ?? string.Empty,
                     Reason = slippingRequest.ReasonID.HasValue ? slippingRequest.ReasonID.ToString() : "-1"
                 };
+
+                switch (model.Reason)
+                {
+                    case "1":
+                        model.Details1 = slippingRequest.Details ?? string.Empty;
+                        break;
+                    case "2":
+                        model.Details2 = slippingRequest.Details ?? string.Empty;
+                        break;
+                    case "3":
+                        model.Details3 = slippingRequest.Details ?? string.Empty;
+                        break;
+                    case "5":
+                        model.Details5 = slippingRequest.Details ?? string.Empty;
+                        break;
+                }
 
                 return View(model);
             }
@@ -322,12 +337,56 @@ namespace Triad.CabinetOffice.Slipping.Web.Controllers
         {
             SlippingRequest slippingRequest = Get(id);
 
+            //mapping correct reason details
+            switch (model.Reason)
+            {
+                case "1":
+                    if (string.IsNullOrWhiteSpace(model.Details1))
+                    {
+                        ModelState.AddModelError("Details1", "Detail must be supplied");
+                    }
+                    break;
+                case "2":
+                    if (string.IsNullOrWhiteSpace(model.Details2))
+                    {
+                        ModelState.AddModelError("Details2", "Detail must be supplied");
+                    }
+                    break;
+                case "3":
+                    if (string.IsNullOrWhiteSpace(model.Details3))
+                    {
+                        ModelState.AddModelError("Details3", "Detail must be supplied");
+                    }
+                    break;
+                case "5":
+                    if (string.IsNullOrWhiteSpace(model.Details5))
+                    {
+                        ModelState.AddModelError("Details4", "Detail must be supplied");
+                    }
+                    break;
+            }   
+
             if (slippingRequest != null && !IsSubmitted(slippingRequest))
             {
                 if (ModelState.IsValid)
                 {
                     slippingRequest.ReasonID = Convert.ToInt32(model.Reason);
-                    slippingRequest.Details = model.Details;
+                    switch (model.Reason)
+                    {
+                        case "1":
+                            slippingRequest.Details = model.Details1;
+                            break;
+                        case "2":
+                            slippingRequest.Details = model.Details2;
+                            break;
+                        case "3":
+                            slippingRequest.Details = model.Details3;
+                            break;
+                        case "5":
+                            slippingRequest.Details = model.Details5;
+                            break;
+                    }
+
                     CreateOrUpdate(slippingRequest);
                     return RedirectToAction("OppositionMPs");
                 }
