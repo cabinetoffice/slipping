@@ -443,14 +443,14 @@ namespace Triad.CabinetOffice.Slipping.Web.Controllers
                 {
                     if (((DateTime)slippingRequest.ToDate).Date < slippingRequest.FromDate.Date)
                     {
-                        ModelState.AddModelError("ToDate", "To Date cannot fall before From Date");
+                        ModelState.AddModelError("ToDate", "To Date cannot be before From Date");
                     }
 
                     if (((DateTime)slippingRequest.ToDate).Date == slippingRequest.FromDate.Date)
                     {
                         if (((DateTime)slippingRequest.ToDate).TimeOfDay <= slippingRequest.FromDate.TimeOfDay)
                         {
-                            ModelState.AddModelError("ToDate", "To Hour must be at least 15 minutes after From Hour");
+                            ModelState.AddModelError("ToDate", "To Time must be at least 15 minutes after From Time");
                         }
                     }
                 }
