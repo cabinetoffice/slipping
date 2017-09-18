@@ -31,6 +31,7 @@
                     </dd>
                     <dd class="cya-change">
                         @Html.ActionLink("Change", "FromDate", new { id = Model.ID })
+                        <span class="error-message">@Html.ValidationMessageFor(model => model.FromDate)</span>
                     </dd>
                 </div>
                 <div>

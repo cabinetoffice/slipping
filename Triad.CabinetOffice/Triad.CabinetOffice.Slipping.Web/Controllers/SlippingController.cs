@@ -141,6 +141,12 @@ namespace Triad.CabinetOffice.Slipping.Web.Controllers
         [ValidateAntiForgeryToken]
         public ActionResult FromDate(int? id, DateAndTime model)
         {
+            var fromDate = model.GetDateTime();
+            if (fromDate < DateTime.Now.AddMinutes(15))
+            {
+                ModelState.AddModelError("Hour", "From Time must be at least 15 minutes from now");
+            }
+
             if (ModelState.IsValid)
             {
                 if (id.HasValue)
@@ -212,14 +218,14 @@ namespace Triad.CabinetOffice.Slipping.Web.Controllers
 
                 if (toDate.Date < slippingRequest.FromDate.Date)
                 {
-                    ModelState.AddModelError("Date", "To Date cannot fall before From Date");
+                    ModelState.AddModelError("Date", "To Date cannot be before From Date");
                 }
 
                 if (toDate.Date == slippingRequest.FromDate.Date)
                 {
                     if (toDate.TimeOfDay <= slippingRequest.FromDate.TimeOfDay)
                     {
-                        ModelState.AddModelError("Hour", "To Hour must be at least 15 minutes after From Hour");
+                        ModelState.AddModelError("Hour", "To Time must be at least 15 minutes after From Time");
                     }
                 }
 
@@ -424,6 +430,11 @@ namespace Triad.CabinetOffice.Slipping.Web.Controllers
 
             if (slippingRequest != null && !IsSubmitted(slippingRequest))
             {
+                if (slippingRequest.FromDate < DateTime.Now.AddMinutes(15))
+                {
+                    ModelState.AddModelError("FromDate", "From Time must be at least 15 minutes from now");
+                }
+
                 if (slippingRequest.ToDate == null)
                 {
                     ModelState.AddModelError("ToDate", "To Date and Time must be supplied");
