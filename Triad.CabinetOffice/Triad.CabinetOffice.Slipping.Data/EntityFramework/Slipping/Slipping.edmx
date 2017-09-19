@@ -12,7 +12,7 @@
           <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
           <Property Name="MPID" Type="int" Nullable="false" />
           <Property Name="ReasonID" Type="int" />
-          <Property Name="Details" Type="nvarchar" MaxLength="220" />
+          <Property Name="Details" Type="nvarchar" MaxLength="800" />
           <Property Name="StatusID" Type="int" Nullable="false" />
           <Property Name="FromDate" Type="datetime" Nullable="false" />
           <Property Name="ToDate" Type="datetime" />
@@ -241,7 +241,7 @@
           <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
           <Property Name="MPID" Type="Int32" Nullable="false" />
           <Property Name="ReasonID" Type="Int32" />
-          <Property Name="Details" Type="String" MaxLength="220" FixedLength="false" Unicode="true" />
+          <Property Name="Details" Type="String" MaxLength="800" FixedLength="false" Unicode="true" />
           <Property Name="StatusID" Type="Int32" Nullable="false" />
           <Property Name="FromDate" Type="DateTime" Nullable="false" Precision="3" />
           <Property Name="ToDate" Type="DateTime" Precision="3" Nullable="true" />

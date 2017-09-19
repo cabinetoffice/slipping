@@ -21,7 +21,7 @@
                     {                
                         <div class="multiple-choice" data-target="Reason-@reason.ID">
                             @Html.RadioButtonFor(model => model.Reason, reason.ID, new {@name="radio-group",@id="radio-" + @reason.ID, aria_controls= "Reason-"+ @reason.ID })
-                            @Html.LabelFor(model => model.Reason,reason.Reason)
+                            <label for="radio-@reason.ID">@reason.Reason</label>
                         </div>
                         <div class="panel panel-border-narrow  js-hidden" id="Reason-@reason.ID" aria-hidden="true">
                             @switch (reason.ID)
