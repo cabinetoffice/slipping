@@ -38,6 +38,12 @@ namespace Triad.CabinetOffice.Slipping.Web
             );
 
             routes.MapRoute(
+                name: "Delete Slipping Request",
+                url: "Slipping/Deleted/{date}",
+                defaults: new { controller = "Slipping", action = "Deleted" }
+            );
+
+            routes.MapRoute(
                 name: "Default",
                 url: "{controller}/{action}/{id}",
                 defaults: new { controller = "Home", action = "Index", id = UrlParameter.Optional }

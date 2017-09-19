@@ -2,6 +2,7 @@
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Web;
 using System.Web.Configuration;
 using System.Web.Mvc;
 using Triad.CabinetOffice.Slipping.Data.EntityFramework.Slipping;
@@ -201,8 +202,10 @@ namespace Triad.CabinetOffice.Slipping.Web.Controllers
                 else
                 {
                     // Create a new record
-                    SlippingRequest slippingRequest = new SlippingRequest();
-                    slippingRequest.FromDate = model.GetDateTime();
+                    SlippingRequest slippingRequest = new SlippingRequest()
+                    {
+                        FromDate = model.GetDateTime()
+                    };
                     int requestId = CreateOrUpdate(slippingRequest);
                     return RedirectToAction("ToDate", new { id = requestId });
                 }
@@ -224,7 +227,7 @@ namespace Triad.CabinetOffice.Slipping.Web.Controllers
                 var model = new DateAndTime
                 {
                     ID = slippingRequest.ID,
-                    Date = slippingRequest.ToDate.HasValue ? slippingRequest.ToDate.Value : slippingRequest.FromDate,
+                    Date = slippingRequest.ToDate ?? slippingRequest.FromDate,
                     Hour = slippingRequest.ToDate.HasValue ? slippingRequest.ToDate.Value.ToString("HH") : slippingRequest.FromDate.ToString("HH"),
                     Minute = slippingRequest.ToDate.HasValue ? slippingRequest.ToDate.Value.ToString("mm") : slippingRequest.FromDate.ToString("mm")
                 };
@@ -289,7 +292,7 @@ namespace Triad.CabinetOffice.Slipping.Web.Controllers
                 var model = new LocationAndHours
                 {
                     ID = slippingRequest.ID,
-                    Location = slippingRequest.Location != null ? slippingRequest.Location : string.Empty,
+                    Location = slippingRequest.Location ?? string.Empty,
                     Hours = slippingRequest.TravelTimeInHours.HasValue ? slippingRequest.TravelTimeInHours.ToString() : string.Empty
                 };
                 return View(model);
@@ -650,6 +653,21 @@ namespace Triad.CabinetOffice.Slipping.Web.Controllers
             if (slippingRequest != null)
             {
                 return View(slippingRequest);
+            }
+            else
+            {
+                return RedirectToAction("NotFound", "Home");
+            }
+        }
+
+        // GET: Slipping/Deleted/Date
+        [HttpGet]
+        public ActionResult Deleted(string date)
+        {
+            DateTime validatedDate;
+            if (DateTime.TryParse(date.Replace("!", ":"), out validatedDate))
+            {
+                return View(new DeletedSlippingRequest(validatedDate));
             }
             else
             {
