@@ -30,6 +30,9 @@ namespace Triad.CabinetOffice.Slipping.Data.EntityFramework.Slipping
         public string Username { get; set; }
         public int CreatedBy { get; set; }
         public System.DateTime CreatedDate { get; set; }
+        public string Forenames { get; set; }
+        public string Surname { get; set; }
+        public bool IsMP { get; set; }
     
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<AbsenceRequest> AbsenceRequests { get; set; }

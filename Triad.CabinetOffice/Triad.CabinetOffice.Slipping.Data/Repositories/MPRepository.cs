@@ -29,7 +29,8 @@ namespace Triad.CabinetOffice.Slipping.Data.Repositories
                 {
                     return new MP()
                     {
-                        Name = mp.Full_Name
+                        Name = mp.Full_Name,
+                        EmailAddress = mp.Email_Address
                     };
                 }
                 else

@@ -187,7 +187,6 @@
     <Compile Include="Attributes\PastDateValidationAttribute.cs" />
     <Compile Include="Controllers\AccountController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
-    <Compile Include="Controllers\NotifyController.cs" />
     <Compile Include="Controllers\SlippingController.cs" />
     <Compile Include="Extensions\HtmlHelperExtensions.cs" />
     <Compile Include="Global.asax.cs">
@@ -269,7 +268,6 @@
     <Content Include="Views\Home\Index.cshtml" />
     <Content Include="Views\Shared\_LoginPartial.cshtml" />
     <Content Include="Views\Account\SignOutCallback.cshtml" />
-    <Content Include="Views\Notify\Index.cshtml" />
     <Content Include="Scripts\version.json" />
     <Content Include="Views\Slipping\FromDate.cshtml" />
     <Content Include="Views\View.cshtml" />

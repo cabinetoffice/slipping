@@ -12,7 +12,7 @@
           <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
           <Property Name="MPID" Type="int" Nullable="false" />
           <Property Name="ReasonID" Type="int" />
-          <Property Name="Details" Type="nvarchar" MaxLength="220" />
+          <Property Name="Details" Type="nvarchar" MaxLength="800" />
           <Property Name="StatusID" Type="int" Nullable="false" />
           <Property Name="FromDate" Type="datetime" Nullable="false" />
           <Property Name="ToDate" Type="datetime" />
@@ -47,6 +47,9 @@
           <Property Name="Username" Type="varchar" MaxLength="255" Nullable="false" />
           <Property Name="CreatedBy" Type="int" Nullable="false" />
           <Property Name="CreatedDate" Type="datetime" Nullable="false" />
+          <Property Name="Forenames" Type="nvarchar" MaxLength="255" Nullable="false" />
+          <Property Name="Surname" Type="nvarchar" MaxLength="255" Nullable="false" />
+          <Property Name="IsMP" Type="bit" Nullable="false" />
         </EntityType>
         <EntityType Name="UserMP">
           <Key>
@@ -241,7 +244,7 @@
           <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
           <Property Name="MPID" Type="Int32" Nullable="false" />
           <Property Name="ReasonID" Type="Int32" />
-          <Property Name="Details" Type="String" MaxLength="220" FixedLength="false" Unicode="true" />
+          <Property Name="Details" Type="String" MaxLength="800" FixedLength="false" Unicode="true" />
           <Property Name="StatusID" Type="Int32" Nullable="false" />
           <Property Name="FromDate" Type="DateTime" Nullable="false" Precision="3" />
           <Property Name="ToDate" Type="DateTime" Precision="3" Nullable="true" />
@@ -274,6 +277,9 @@
           <NavigationProperty Name="UserMPs1" Relationship="Model.FK_UserMP_UserID" FromRole="User" ToRole="UserMP" />
           <NavigationProperty Name="AbsenceRequestOppositionMPs" Relationship="Model.FK_AbsenceRequestOppositionMP_CreatedBy" FromRole="User" ToRole="AbsenceRequestOppositionMP" />
           <NavigationProperty Name="AbsenceRequestOppositionMPs1" Relationship="Model.FK_AbsenceRequestOppositionMP_LastChangedBy" FromRole="User" ToRole="AbsenceRequestOppositionMP" />
+          <Property Name="Forenames" Type="String" MaxLength="255" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="Surname" Type="String" MaxLength="255" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="IsMP" Type="Boolean" Nullable="false" />
         </EntityType>
         <EntityType Name="UserMP">
           <Key>
@@ -430,6 +436,9 @@
           <EntitySetMapping Name="Users">
             <EntityTypeMapping TypeName="Model.User">
               <MappingFragment StoreEntitySet="User">
+                <ScalarProperty Name="IsMP" ColumnName="IsMP" />
+                <ScalarProperty Name="Surname" ColumnName="Surname" />
+                <ScalarProperty Name="Forenames" ColumnName="Forenames" />
                 <ScalarProperty Name="CreatedDate" ColumnName="CreatedDate" />
                 <ScalarProperty Name="CreatedBy" ColumnName="CreatedBy" />
                 <ScalarProperty Name="Username" ColumnName="Username" />

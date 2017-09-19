@@ -7,7 +7,7 @@
       <Diagram DiagramId="a739a7f6c5484f14874b98568e3fa6ec" Name="Diagram1" >
         <EntityTypeShape EntityType="Model.AbsenceRequest" Width="2.5" PointX="3" PointY="3.875" />
         <EntityTypeShape EntityType="Model.User" Width="1.5" PointX="0.75" PointY="3" />
-        <EntityTypeShape EntityType="Model.UserMP" Width="1.5" PointX="3" PointY="1.125" />
+        <EntityTypeShape EntityType="Model.UserMP" Width="1.5" PointX="4.125" PointY="0.625" />
         <AssociationConnector Association="Model.FK_AbsenceRequest_User_CreatedBy" />
         <AssociationConnector Association="Model.FK_AbsenceRequest_User_LastChangedBy" />
         <AssociationConnector Association="Model.FK_User_User" />
