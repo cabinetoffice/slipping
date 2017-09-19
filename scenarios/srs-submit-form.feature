@@ -1,6 +1,6 @@
 Feature: Form Submission
 
-Scenario: Nominated User Submits Form- Notify Email Sent To Applicant 
+Scenario: Nominated User Submits Form- Notify Email Sent To Applicant and MP
           Given that I have successfully logged into the SRS
           And I am a nominated user
           And I am on the final page entitled ‘Check your answers before submitting your slipping request’
