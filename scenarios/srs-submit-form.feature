@@ -1,10 +1,26 @@
 Feature: Form Submission
 
-Scenario: Authorised User Submits Form- Notify Email 
+Scenario: Nominated User Submits Form- Notify Email Sent To Applicant 
           Given that I have successfully logged into the SRS
+          And I am a nominated user
           And I am on the final page entitled ‘Check your answers before submitting your slipping request’
           When click the button that states: 'Submit Slipping Request'
           Then I should receive an email notification stating that my request has been sent and is awaiting review
+          And my MP should also receive this email notification stating that the slip request has been sent an is awaiting review
+          
+Scenario: MP Submits Form- Notify Email Sent To MP  
+          Given that I have successfully logged into the SRS
+          And I am an MP
+          And I am on the final page entitled ‘Check your answers before submitting your slipping request’
+          When click the button that states: 'Submit Slipping Request'
+          Then I should receive an email notification stating that my request has been sent and is awaiting review
+          
+Scenario: Authorised User Submits Form- Notify Email Sent To Whips Team 
+          Given that I have successfully logged into the SRS
+          And I am either a nominated user or an MP
+          And I am on the final page entitled ‘Check your answers before submitting your slipping request’
+          When click the button that states: 'Submit Slipping Request'
+          Then the Whips Offce receive an email notification stating that a new request has been sent and is awaiting review
        
        
 Scenario: Authorised User Submits Form- Confirmation Page
