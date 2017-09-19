@@ -4,6 +4,7 @@ using System.Linq;
 using System.Linq.Expressions;
 using System.Web;
 using System.Web.Mvc;
+using System.Web.Mvc.Html;
 
 namespace Triad.CabinetOffice.Slipping.Web.Extensions
 {
@@ -22,6 +23,26 @@ namespace Triad.CabinetOffice.Slipping.Web.Extensions
             {
                 return new MvcHtmlString(errorClass);
             }
+        }
+
+        public static MvcHtmlString BackLink(this HtmlHelper helper, string defaultAction, object routeValues, string cssClass)
+        {
+            var returnUrl = HttpContext.Current.Request["returnUrl"];
+            var backLink = "<a href=\"{0}\" class=\"{1}\">Back</a>";
+
+            if (!String.IsNullOrEmpty(returnUrl))
+            {
+                return new MvcHtmlString(string.Format(backLink, returnUrl, cssClass));
+            }
+            else if (HttpContext.Current.Request.HttpMethod == "POST")
+            {
+                return helper.ActionLink("Back", defaultAction, routeValues, new { @class = cssClass });
+            }
+            else if (HttpContext.Current.Request.UrlReferrer != null)
+            {
+                return new MvcHtmlString(string.Format(backLink, HttpContext.Current.Request.UrlReferrer.ToString(), cssClass));
+            }
+            return null;
         }
     }
 }

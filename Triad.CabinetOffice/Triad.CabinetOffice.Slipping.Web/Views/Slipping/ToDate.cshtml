@@ -7,9 +7,9 @@
 
 <div class="grid-row">
     <div class="column-two-thirds column-minimum">
-        @Html.ActionLink("Back", "FromDate", new { id = Model.ID }, new { @class = "link-back" })
+        @Html.BackLink("FromDate", new { id = Model.ID }, "link-back")
         <h1 class="heading-large">
-            When are you coming back? 
+            When are you coming back?
         </h1>
         @using (Html.BeginForm())
         {
