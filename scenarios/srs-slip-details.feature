@@ -38,9 +38,20 @@ Scenario: View Sent Slip Details Page- Opposition MP & Status
           And below this, the current ‘Status’ of the Slip request e.g: ‘Status: Approved or ‘Status: Refused’ or ‘Status: Pending’
 
 
-Scenario: View Pending Slip to View Details- Cancel Option
+Scenario: View Pending Slip Details- Cancel Option
           Given that I have successfully logged into the SRS
           When I click on the title of a Slip with Pending status e.g. ‘Slipping request 26/09/2017 - 10:00’ ‘Status: Pending’
           Then I should see a question in bold asking: ‘Want to cancel your slipping request?’
           And below this I should see a clickable button with the words ‘Cancel my slipping request’
           And below this i should see a clickable link to return to the summary page with the words ‘Take me back to my slipping requests’
+          
+Scenario: View Unsubmitted Slip Details- Cancel Option
+          Given that I have successfully logged into the SRS
+          When I click on the title of a Slip with Unsubmitted status e.g. ‘Slipping request 26/09/2017 - 10:00’ ‘Status: Unsubmitted’
+          Then I should see a heading in bold stating: ‘Check your answers before submitting your slipping request’
+          And below this I should see a summary of my Slip with a row of fields which I have completed and those yet to be populated
+          And beside each field I should see a clickable button next to it stating: 'Change' 
+          And at the end of the page I should see a clickable button that states: 'Submit Slipping Request' 
+          And beside this I should see a clickable button that states: 'Cancel my Slipping Request'
+          And below this i should see a clickable link to return to the summary page with the words ‘Take me back to my slipping requests’
+
