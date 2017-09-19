@@ -14,11 +14,11 @@ namespace Triad.CabinetOffice.Slipping.Web.ViewModels
 
         [RegularExpression("^\\W*(?:\\w+\\b\\W*){1,200}$", ErrorMessage = "Detail must be valid and must not exceed 200 words")]
         public string Details1 { get; set; }
-        [RegularExpression("^\\W*(?:\\w+\\b\\W*){1,200}$", ErrorMessage = "Detail must be valid and must not exceed 200 characters")]
+        [RegularExpression("^\\W*(?:\\w+\\b\\W*){1,200}$", ErrorMessage = "Detail must be valid and must not exceed 200 words")]
         public string Details2 { get; set; }
-        [RegularExpression("^\\W*(?:\\w+\\b\\W*){1,200}$", ErrorMessage = "Detail must be valid and must not exceed 200 characters")]
+        [RegularExpression("^\\W*(?:\\w+\\b\\W*){1,200}$", ErrorMessage = "Detail must be valid and must not exceed 200 words")]
         public string Details3 { get; set; }
-        [RegularExpression("^\\W*(?:\\w+\\b\\W*){1,200}$", ErrorMessage = "Detail must be valid and must not exceed 100 characters")]
+        [RegularExpression("^\\W*(?:\\w+\\b\\W*){1,100}$", ErrorMessage = "Detail must be valid and must not exceed 100 words")]
         public string Details5 { get; set; }
         
         [Required]

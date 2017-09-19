@@ -400,7 +400,7 @@ namespace Triad.CabinetOffice.Slipping.Web.Controllers
                 case "5":
                     if (string.IsNullOrWhiteSpace(model.Details5))
                     {
-                        ModelState.AddModelError("Details4", "Detail must be supplied");
+                        ModelState.AddModelError("Details5", "Detail must be supplied");
                     }
                     break;
             }   
