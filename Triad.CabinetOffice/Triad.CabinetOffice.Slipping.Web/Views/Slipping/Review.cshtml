@@ -1,17 +1,23 @@
-﻿
+﻿@model Triad.CabinetOffice.Slipping.Data.Models.SlipSummary
 @{
     ViewBag.Title = "Review slipping request";
 }
 
 <div class="grid-row">
     <div class="column-two-thirds column-minimum">
-                    
+    @using (Html.BeginForm())
+    {
+        @Html.AntiForgeryToken()
+
         <!--TODO: Review content-->
 
         <h2 class="heading-medium">Want to cancel your slipping request?</h2>
+
         <div class="form-group">
+            <span class="error-message">@Html.ValidationMessageFor(model => model.ID)</span>
             <button class="button" type="submit">Cancel my slipping request</button>
         </div>
-        <a href="Index">Take me back to my slipping requests</a>
+    }
+        <a href="/Slipping">Take me back to my slipping requests</a>
     </div>
 </div>

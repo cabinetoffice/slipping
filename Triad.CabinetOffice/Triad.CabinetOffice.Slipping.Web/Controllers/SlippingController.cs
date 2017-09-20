@@ -117,6 +117,11 @@ namespace Triad.CabinetOffice.Slipping.Web.Controllers
             return MPRepository.Get(MPID, userId).EmailAddress;
         }
 
+        private bool CancelSlip(SlipSummary slip, int userId)
+        {
+            return SlippingRepository.CancelSlip(userId, slip);
+        }
+
         #endregion Methods
 
         #region Action Methods
@@ -648,17 +653,42 @@ namespace Triad.CabinetOffice.Slipping.Web.Controllers
         [HttpGet]
         public ActionResult Review(int id)
         {
-            SlippingRequest slippingRequest = Get(id);
+            var slip = SlippingRepository.GetSummaries(MPID, SlippingUser.ID).FirstOrDefault(s => s.ID == id);
 
-            if (slippingRequest != null)
+            if (slip != null)
             {
-                return View(slippingRequest);
+                return View(slip);
             }
             else
             {
                 return RedirectToAction("NotFound", "Home");
             }
         }
+
+        // POST: Slipping/Review/ID
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public ActionResult Review(int id, SlipSummary model)
+        {
+            var slip = SlippingRepository.GetSummaries(MPID, SlippingUser.ID).FirstOrDefault(s => s.ID == id);
+            if (slip != null)
+            {
+                if (CancelSlip(slip, SlippingUser.ID))
+                {
+                    return RedirectToAction("Cancelled");
+                }
+                else
+                {
+                    ModelState.AddModelError("ID", "Error cancelling slip. Please try again later or contact the Whips Office.");
+                    return View(slip);
+                }
+            }
+            else
+            {
+                return RedirectToAction("NotFound", "Home");
+            }
+        }
+
         // GET: Slipping/Edit/ID/ViewRequest
         [HttpGet]
         public ActionResult ViewRequest(int id)
@@ -673,6 +703,7 @@ namespace Triad.CabinetOffice.Slipping.Web.Controllers
                 return RedirectToAction("NotFound", "Home");
             }
         }
+
         // GET: Slipping/Deleted/Date
         [HttpGet]
         public ActionResult Deleted(string date)
@@ -681,6 +712,22 @@ namespace Triad.CabinetOffice.Slipping.Web.Controllers
             if (DateTime.TryParse(date.Replace("!", ":"), out validatedDate))
             {
                 return View(new DeletedSlippingRequest(validatedDate));
+            }
+            else
+            {
+                return RedirectToAction("NotFound", "Home");
+            }
+        }
+
+        // GET: Slipping/Review/ID/Cancelled
+        [HttpGet]
+        public ActionResult Cancelled(int id)
+        {
+            var slip = SlippingRepository.GetSummaries(MPID, SlippingUser.ID).FirstOrDefault(s => s.ID == id);
+
+            if (slip != null)
+            {
+                return View(slip);
             }
             else
             {

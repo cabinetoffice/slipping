@@ -207,7 +207,8 @@ namespace Triad.CabinetOffice.Slipping.Data.Repositories
                         ToDate = ar.ToDate.HasValue ? ar.ToDate.Value : new DateTime(9999, 1, 1),
                         ID = ar.ID,
                         Status = "Unsubmitted",
-                        IsUnsubmitted = true
+                        IsUnsubmitted = true,
+                        MPID = ar.MPID
                     })
                 );
 
@@ -220,7 +221,8 @@ namespace Triad.CabinetOffice.Slipping.Data.Repositories
                         ToDate = ar.To_Date_Time.HasValue ? ar.To_Date_Time.Value : new DateTime(9999, 1, 1),
                         ID = ar.ID,
                         Status = ar.Absence_Request_Status.Status,
-                        IsUnsubmitted = false
+                        IsUnsubmitted = false,
+                        MPID = ar.Govt_MP
                     })
                 );
             }
@@ -258,7 +260,30 @@ namespace Triad.CabinetOffice.Slipping.Data.Repositories
                 CreateOrUpdate(slippingRequest, slippingRequest.MPID, userId);
                 return slippingRequest.ID;
             }
-            throw new Exception("Unauthorized");
+            throw new Exception("Unauthorised");
+        }
+
+        public bool CancelSlip(int userId, SlipSummary slip)
+        {
+            if (UserCanActForMP(userId, slip.MPID))
+            {
+                var ar = PAWSDB.Absence_Requests.Find(slip.ID);
+                ar.Status = 7; // Cancelled
+                try
+                {
+                    PAWSDB.SaveChanges();
+                    return true;
+                }
+                catch (Exception ex)
+                {
+                    return false;
+                }
+            }
+            else
+            {
+                throw new Exception("Unauthorised");
+            }
+            
         }
     }
 }
