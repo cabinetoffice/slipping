@@ -659,20 +659,6 @@ namespace Triad.CabinetOffice.Slipping.Web.Controllers
                 return RedirectToAction("NotFound", "Home");
             }
         }
-        // GET: Slipping/Edit/ID/ViewRequest
-        [HttpGet]
-        public ActionResult ViewRequest(int id)
-        {
-            SlippingRequest slippingRequest = Get(id);
-            if (slippingRequest != null && !IsSubmitted(slippingRequest))
-            {
-                return View(slippingRequest);
-            }
-            else
-            {
-                return RedirectToAction("NotFound", "Home");
-            }
-        }
         // GET: Slipping/Deleted/Date
         [HttpGet]
         public ActionResult Deleted(string date)

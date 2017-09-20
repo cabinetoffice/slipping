@@ -195,35 +195,31 @@ namespace Triad.CabinetOffice.Slipping.Data.Repositories
 
         public IEnumerable<SlipSummary> GetSummaries(int MPID, int userId)
         {
-            List<SlipSummary> result = new List<SlipSummary>();
+            IEnumerable<SlipSummary> result = new List<SlipSummary>();
+
+
 
             if (UserCanActForMP(userId, MPID))
             {
-                result.AddRange(this.db.AbsenceRequests
-                    .Where(ar => ar.MPID == MPID && ar.PawsAbsenceRequestID == null)
-                    .Select(ar => new SlipSummary()
-                    {
-                        FromDate = ar.FromDate,
-                        ToDate = ar.ToDate.HasValue ? ar.ToDate.Value : new DateTime(9999, 1, 1),
-                        ID = ar.ID,
-                        Status = "Unsubmitted",
-                        IsUnsubmitted = true
-                    })
-                );
 
-                result.AddRange(this.PAWSDB.Absence_Requests
-                    .Where(ar => ar.Govt_MP == MPID)
-                    .ToList()
-                    .Select(ar => new SlipSummary()
-                    {
-                        FromDate = ar.From_Date_Time.HasValue ? ar.From_Date_Time.Value : DateTime.Now.Date,
-                        ToDate = ar.To_Date_Time.HasValue ? ar.To_Date_Time.Value : new DateTime(9999, 1, 1),
-                        ID = ar.ID,
-                        Status = ar.Absence_Request_Status.Status,
-                        IsUnsubmitted = false
-                    })
-                );
-            }
+                IList<Absence_Request> absence_Request = this.PAWSDB.Absence_Requests.ToList();
+                IList<AbsenceRequest> absenceRequest = db.AbsenceRequests.Where(a => a.MPID == MPID).ToList();
+
+
+                result = absenceRequest.GroupJoin(
+                         absence_Request,
+                         foo => foo.PawsAbsenceRequestID,
+                         bar => bar.ID,
+                         (f, bs) => new { Foo = f, Bar = bs.FirstOrDefault() })
+                         .Select(r => new SlipSummary {
+                             FromDate = r.Foo.FromDate,
+                             ToDate = r.Foo.ToDate ?? new DateTime(9999, 1, 1),
+                             ID = r.Foo.ID,
+                             Status = r.Foo.PawsAbsenceRequestID.HasValue ? r.Bar.Absence_Request_Status.Status : "Unsubmitted",
+                             IsUnsubmitted = r.Foo.PawsAbsenceRequestID.HasValue ? false : true
+                        });
+
+             }
 
             return result;
         }

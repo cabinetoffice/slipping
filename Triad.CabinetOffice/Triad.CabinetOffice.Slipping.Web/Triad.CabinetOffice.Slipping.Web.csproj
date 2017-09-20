@@ -280,7 +280,6 @@
     <Content Include="Views\Slipping\CheckYourAnswers.cshtml" />
     <Content Include="Views\Slipping\Confirmation.cshtml" />
     <Content Include="Views\Slipping\Review.cshtml" />
-    <Content Include="Views\Slipping\ViewRequest.cshtml" />
     <Content Include="Views\Slipping\Deleted.cshtml" />
   </ItemGroup>
   <ItemGroup>

@@ -1,6 +1,127 @@
-﻿
+﻿@model Triad.CabinetOffice.Slipping.Data.Models.SlippingRequest
+@using Triad.CabinetOffice.Slipping.Data.Models
+@using Triad.CabinetOffice.Slipping.Web.Extensions
+
 @{
     ViewBag.Title = "Review slipping request";
 }
 
-@Model.ID
+<div class="grid-row">
+    <div class="column-two-thirds column-minimum">
+        @Html.BackLink("Index", new { id = Model.ID }, "link-back")
+        <h1 class="heading-large">
+            Slipping request @Model.FromDate.ToString("dd/MM/yyyy HH:mm")
+        </h1>
+        @using (Html.BeginForm())
+        {
+            @Html.AntiForgeryToken()
+
+            <br>
+            <br>
+            <!-- use additional modifier class to change column widths for multiple groups of questions and answers: -->
+            <!--   * `cya-questions-short` for short questions -->
+            <!--   * `cya-questions-long` for long questions -->
+            <!--   * none for single group of q&a -->
+            <dl class="govuk-check-your-answers cya-questions-short">
+                <div>
+                    <dt class="cya-question">
+                        From
+                    </dt>
+                    <dd class="cya-answer">
+                        @Model.FromDate.ToString("dd/MM/yyyy HH:mm")
+                        <span class="error-message">@Html.ValidationMessageFor(model => model.FromDate)</span>
+                    </dd>
+                </div>
+                <div>
+                    <dt class="cya-question">
+                        To
+                    </dt>
+                    <dd class="cya-answer">
+                        @if (Model.ToDate.HasValue)
+                        {
+                            @Model.ToDate.Value.ToString("dd/MM/yyyy HH:mm")
+                        }
+                        <span class="error-message">@Html.ValidationMessageFor(model => model.ToDate)</span>
+                    </dd>
+                </div>
+                <div>
+                    <dt class="cya-question">
+                        Location
+                    </dt>
+                    <dd class="cya-answer">
+                        @Model.Location
+                        <span class="error-message">@Html.ValidationMessageFor(model => model.Location)</span>
+                    </dd>
+                </div>
+                <div>
+                    <dt class="cya-question">
+                        Travel time to Westminster
+                    </dt>
+                    <dd class="cya-answer">
+                        @if (Model.TravelTimeInHours.HasValue)
+                        {
+                            @Html.Encode(string.Format("{0} hours", Model.TravelTimeInHours.Value))
+                        }
+                        <span class="error-message">@Html.ValidationMessageFor(model => model.TravelTimeInHours)</span>
+                    </dd>
+                </div>
+                <div>
+                    <dt class="cya-question">
+                        Reason
+                    </dt>
+                    <dd class="cya-answer">
+                        @Model.Reason
+                        <span class="error-message">@Html.ValidationMessageFor(model => model.Reason)</span>
+                    </dd>
+                </div>
+                <div>
+                    <dt class="cya-question">
+                        Details
+                    </dt>
+                    <dd class="cya-answer">
+                        @Model.Details
+                        <span class="error-message">@Html.ValidationMessageFor(model => model.Details)</span>
+                    </dd>
+                </div>
+                <div>
+                    <dt class="cya-question">
+                        Any opposition MPs in attendance?
+                    </dt>
+                    <dd class="cya-answer">
+                        @if (Model.OppositionMPsAttending.HasValue)
+                        {
+                            @Html.Encode(Model.OppositionMPsAttending.Value ? "Yes" : "No")
+                            <br />
+                            if (Model.OppositionMPsAttending.Value)
+                            {
+                                foreach (OppositionMP mp in Model.OppositionMPs)
+                                {
+                                    @Html.Encode(mp.FullName);
+                                    <br />
+                                }
+                            }
+                        }
+                        <span class="error-message">@Html.ValidationMessageFor(model => model.OppositionMPsAttending)</span>
+                    </dd>
+                </div>
+                <div>
+                    <dt class="cya-question">
+                        Status
+                    </dt>
+                    <dd class="cya-answer">
+                        @Model.Status
+                        <span class="error-message">@Html.ValidationMessageFor(model => model.Status)</span>
+                    </dd>
+                </div>
+            </dl>
+            <h2 class="heading-medium">Want to cancel your slipping request?</h2>
+            <div class="form-group">
+                <a href="page-cancel-confirmation" class="button">Cancel my slipping request</a>
+            </div>
+            <a href="/Slipping">Take me back to my slipping requests</a>
+            <br>
+            <br>
+        }
+
+    </div>
+</div>
