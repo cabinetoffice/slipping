@@ -70,6 +70,10 @@ namespace Triad.CabinetOffice.Slipping.Web.Controllers
 
         private string SlippingRequestReviewersEmailAddress = WebConfigurationManager.AppSettings["SlippingRequestReviewersEmailAddress"];
 
+        private string NotifyTemplateId_SlippingRequestCancelledUser = WebConfigurationManager.AppSettings["NotifyTemplateId_SlippingRequestCancelledUser"];
+
+        private string NotifyTemplateId_SlippingRequestCancelledAdmin = WebConfigurationManager.AppSettings["NotifyTemplateId_SlippingRequestCancelledAdmin"];
+
         #endregion Properties
 
         #region Methods
@@ -114,7 +118,15 @@ namespace Triad.CabinetOffice.Slipping.Web.Controllers
 
         private string GetMPEmailAddress(int MPID, int userId)
         {
-            return MPRepository.Get(MPID, userId).EmailAddress;
+            var mp = MPRepository.Get(MPID, userId);
+            if (mp.EmailAddress != null)
+            {
+                return mp.EmailAddress;
+            }
+            else
+            {
+                throw new Exception(string.Format("Email address for {0} MP missing in PAWS", mp.Name));
+            }
         }
 
         private bool CancelSlip(SlipSummary slip, int userId)
@@ -671,10 +683,33 @@ namespace Triad.CabinetOffice.Slipping.Web.Controllers
         public ActionResult Review(int id, SlipSummary model)
         {
             var slip = SlippingRepository.GetSummaries(MPID, SlippingUser.ID).FirstOrDefault(s => s.ID == id);
-            if (slip != null)
+            if (slip != null && slip.Status != "Cancelled")
             {
                 if (CancelSlip(slip, SlippingUser.ID))
                 {
+                    if (!string.IsNullOrEmpty(NotifyTemplateId_SlippingRequestCancelledUser))
+                    {
+                        if (!SlippingUser.IsMP)
+                        {
+                            SendNotification(NotifyTemplateId_SlippingRequestCancelledUser, GetUserEmailAddress(SlippingUser), new Dictionary<string, dynamic>()
+                            {  });
+                        }
+                        SendNotification(NotifyTemplateId_SlippingRequestCancelledUser, GetMPEmailAddress(slip.MPID, SlippingUser.ID), new Dictionary<string, dynamic>()
+                        {  });
+                    }
+                    else
+                    {
+                        throw new Exception("NotifyTemplateId_SlippingRequestCancelledUser in web.config missing or invalid");
+                    }
+                    if (!string.IsNullOrEmpty(NotifyTemplateId_SlippingRequestCancelledAdmin) && !string.IsNullOrEmpty(SlippingRequestReviewersEmailAddress))
+                    {
+                        SendNotification(NotifyTemplateId_SlippingRequestCancelledAdmin, SlippingRequestReviewersEmailAddress, new Dictionary<string, dynamic>()
+                        {  });
+                    }
+                    else
+                    {
+                        throw new Exception("NotifyTemplateId_SlippingRequestCancelledAdmin and/or SlippingRequestReviewersEmailAddress in web.config missing or invalid");
+                    }
                     return RedirectToAction("Cancelled");
                 }
                 else
