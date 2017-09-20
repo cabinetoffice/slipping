@@ -31,9 +31,9 @@ Scenario: Nominated User Cancels 'Pending' Slip- Notify Email Sent To Applicant 
           And my MP should also receive this email notification stating that the slip request has been cancelled
           
 
-Scenario: Authorised User Cancels 'Submitted' Slip
+Scenario: Authorised User Cancels 'Approved' Slip
           Given that I have successfully logged into the SRS
-          And I click on the title of a Slip with Pending status e.g. ‘Slipping request 26/09/2017 - 10:00’ ‘Status: Pending’
+          And I click on the title of a Slip with Approved status e.g. ‘Slipping request 26/09/2017 - 10:00’ ‘Status: Approved’
           When I click on the button with the words ‘Cancel my slipping request’
           Then I should be taken to a page with a bold heading that states: 'Slipping request cancelled'
           And below this I should see the given date and time of the request which I have just cancelled
@@ -46,9 +46,9 @@ Scenario: Authorised User Cancels 'Submitted' Slip
           Telephone: 0208 123 4567'
           
           
-Scenario: MP Cancels 'Submitted' Slips- Notify Email Sent To MP  
+Scenario: MP Cancels 'Approved' Slips- Notify Email Sent To MP  
           Given that I have successfully logged into the SRS
-          And I click on the title of a Slip with Submitted status e.g. ‘Slipping request 26/09/2017 - 10:00’ ‘Status: Submitted’
+          And I click on the title of a Slip with Approved status e.g. ‘Slipping request 26/09/2017 - 10:00’ ‘Status: Approved’
           When I click on the button with the words ‘Cancel my slipping request’
           Then I should receive an email notification stating that my request has been cancelled
           
@@ -56,7 +56,7 @@ Scenario: MP Cancels 'Submitted' Slips- Notify Email Sent To MP
 Scenario: Nominated User Cancels 'Submitted' Slip- Notify Email Sent To Applicant and MP
           Given that I have successfully logged into the SRS
           And I am a nominated user
-          And I click on the title of a Slip with Submitted status e.g. ‘Slipping request 26/09/2017 - 10:00’ ‘Status: Submitted’
+          And I click on the title of a Slip with Approved status e.g. ‘Slipping request 26/09/2017 - 10:00’ ‘Status: Approved’
           When I click on the button with the words ‘Cancel my slipping request’
           Then I should receive an email notification stating that my request has been cancelled
           And my MP should also receive this email notification stating that the slip request has been cancelled
