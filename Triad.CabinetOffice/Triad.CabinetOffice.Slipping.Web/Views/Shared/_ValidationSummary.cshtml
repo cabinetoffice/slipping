@@ -1,0 +1,20 @@
+﻿@if (!ViewData.ModelState.IsValid)
+{
+    <div class="error-summary" role="alert" aria-labelledby="error-summary-heading" tabindex="-1">
+        <h2 class="heading-medium error-summary-heading" id="error-summary-heading">
+            There is a problem on the page
+        </h2>
+        <p>
+            Please correct the following errors on the page to continue
+        </p>
+        <ul class="error-summary-list">
+            @foreach (var err in ViewData.ModelState)
+                {
+                    if (err.Value.Errors.Count > 0)
+                    {
+                    <li><a href="#@err.Key">@err.Value.Errors[0].ErrorMessage</a></li>
+                }
+            }
+        </ul>
+    </div>
+}

@@ -24,6 +24,18 @@ namespace Triad.CabinetOffice.Slipping.Web.Extensions
                 return new MvcHtmlString(errorClass);
             }
         }
+        public static MvcHtmlString ValidationErrorClassFor<TModel>(this HtmlHelper<TModel> htmlHelper, string propertyName, string errorClass)
+        {
+            if (htmlHelper.ViewData.ModelState.IsValidField(propertyName))
+            {
+                // No validation errors so don't show error class
+                return new MvcHtmlString(string.Empty);
+            }
+            else
+            {
+                return new MvcHtmlString(errorClass);
+            }
+        }
 
         public static MvcHtmlString BackLink(this HtmlHelper helper, string defaultAction, object routeValues, string cssClass)
         {

@@ -65,7 +65,7 @@ function sortFields() {
 }
 
 $('#form-opposition-mps').submit(function () {
-    if ($('#no').is(':checked'))
+    if (!$('#yes').is(':checked'))
         $('#opposition-mp-list').empty();
     return true;
 });

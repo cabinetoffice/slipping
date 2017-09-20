@@ -13,7 +13,7 @@ namespace Triad.CabinetOffice.Slipping.Web.ViewModels
         public int ID { get; set; }
 
         [Display(Name = "Date")]
-        [Required]
+        [Required(ErrorMessage = "Date is required")]
         [DataType(DataType.Date, ErrorMessage = "Date must be in format dd/mm/yyyy")]
         [DisplayFormat(DataFormatString = "{0:dd/MM/yyyy}", ApplyFormatInEditMode = true)]
         [PastDateValidation(ErrorMessage = "Date cannot be in the past")]

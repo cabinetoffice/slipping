@@ -283,6 +283,7 @@
     <Content Include="Views\Slipping\ViewRequest.cshtml" />
     <Content Include="Views\Slipping\Deleted.cshtml" />
     <Content Include="Views\Slipping\Cancelled.cshtml" />
+    <Content Include="Views\Shared\_ValidationSummary.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

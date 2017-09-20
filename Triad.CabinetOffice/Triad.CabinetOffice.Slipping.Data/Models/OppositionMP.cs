@@ -11,7 +11,7 @@ namespace Triad.CabinetOffice.Slipping.Data.Models
     {
         public int ID { get; set; }
         public int? MPID { get; set; }
-        [Required]
+        [Required(ErrorMessage = "Opposition MP full name is required")]
         [Display(Name = "Full name")]
         public string FullName { get; set; }
     }

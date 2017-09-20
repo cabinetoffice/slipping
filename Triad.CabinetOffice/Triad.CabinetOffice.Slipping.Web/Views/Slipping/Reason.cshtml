@@ -2,12 +2,15 @@
 @using Triad.CabinetOffice.Slipping.Web.Extensions
 
 @{
-    ViewBag.Title = "What is the reason for your request?";
+    ViewBag.Title = (ViewData.ModelState.IsValid ? "" : "Error: ") + "What is the reason for your request?";
 }
 
 <div class="grid-row">
     <div class="column-two-thirds column-minimum">
         @Html.BackLink("Location", new { id = Model.ID }, "link-back")
+
+        @Html.Partial("_ValidationSummary")
+
         <h1 class="heading-large">
             What is the reason for your request?
         </h1>
@@ -29,7 +32,7 @@
                                 case 1:
                                     <label class="form-label" for="Reason-@reason.ID">Please provide a description for your reason</label>
                                     <span class="form-hint">for example: Select Committee Trip, Delegation on behalf of a group, an All Party Parliamentary related trip</span>
-                                    <span class="form-label">What will be the repercussions of the slip being revoked at last minute? <br/>Please state if the trip has been approved by Number 10</span>
+                                    <span class="form-label">What will be the repercussions of the slip being revoked at the last minute? <br/>Please state if the trip has been approved by Number 10</span>
                                     @Html.TextAreaFor(model => model.Details1, new { @rows = 5, @class = "form-control form-control-3-4", @style = "width: 100%;" })
                                     <span class="error-message">@Html.ValidationMessageFor(model => model.Details1)</span>
                                     break;
@@ -43,15 +46,15 @@
                                 case 3:
                                     <label class="form-label" for="Reason-@reason.ID">Please provide a description for your reason</label>
                                     <span class="form-hint">for example: Select Committee Trip, Delegation on behalf of a group, an All Party Parliamentary related trip</span>
-                                    <span class="form-label">What will be the repercussions of the slip being revoked at last minute? <br/>Can the event be held on the Parliamentary Estate if necessary</span>
+                                    <span class="form-label">What will be the repercussions of the slip being revoked at the last minute? <br/>Can the event be held on the Parliamentary Estate if necessary</span>
                                     @Html.TextAreaFor(model => model.Details3, new { @rows = 5, @class = "form-control form-control-3-4", @style = "width: 100%;" })
                                     <span class="error-message">@Html.ValidationMessageFor(model => model.Details3)</span>
                                     break;
-                                case 5:
+                                case 4:
                                     <label class="form-label" for="Reason-@reason.ID">What is the personal/other reason?</label>
-                                    <span class="form-hint">For example dentist, funeral or wedding. If you do not wish to mention the reason to us, please just write ‘Personal’ and let your Whip know</span>
-                                    @Html.TextAreaFor(model => model.Details5, new { @rows = 5, @class = "form-control form-control-3-4", @style = "width: 100%;" })
-                                    <span class="error-message">@Html.ValidationMessageFor(model => model.Details5)</span>
+                                    <span class="form-hint">For example dentist, funeral or wedding. If you do not wish to mention the reason to us, please just write 'Personal' and let your Whip know</span>
+                                    @Html.TextAreaFor(model => model.Details4, new { @rows = 5, @class = "form-control form-control-3-4", @style = "width: 100%;" })
+                                    <span class="error-message">@Html.ValidationMessageFor(model => model.Details4)</span>
                                     break;
                             }
                         </div>
