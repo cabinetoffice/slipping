@@ -21,7 +21,7 @@ namespace Triad.CabinetOffice.Slipping.Web.ViewModels
         [RegularExpression("^\\W*(?:\\w+\\b\\W*){1,100}$", ErrorMessage = "Detail must be valid and must not exceed 100 words")]
         public string Details4 { get; set; }
         
-        [Required]
+        [Required(ErrorMessage = "Reason is required")]
         public string Reason { get; set; }
 
         public ICollection<RequestReason> Reasons { get; set; }
