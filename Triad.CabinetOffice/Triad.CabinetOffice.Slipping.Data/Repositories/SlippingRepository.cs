@@ -199,18 +199,18 @@ namespace Triad.CabinetOffice.Slipping.Data.Repositories
 
             if (UserCanActForMP(userId, MPID))
             {
-                result.AddRange(this.db.AbsenceRequests
-                    .Where(ar => ar.MPID == MPID && ar.PawsAbsenceRequestID == null)
-                    .Select(ar => new SlipSummary()
-                    {
-                        FromDate = ar.FromDate,
-                        ToDate = ar.ToDate.HasValue ? ar.ToDate.Value : new DateTime(9999, 1, 1),
-                        ID = ar.ID,
-                        Status = "Unsubmitted",
-                        IsUnsubmitted = true,
-                        MPID = ar.MPID
-                    })
-                );
+                //result.AddRange(this.db.AbsenceRequests
+                //    .Where(ar => ar.MPID == MPID && ar.PawsAbsenceRequestID == null)
+                //    .Select(ar => new SlipSummary()
+                //    {
+                //        FromDate = ar.FromDate,
+                //        ToDate = ar.ToDate.HasValue ? ar.ToDate.Value : new DateTime(9999, 1, 1),
+                //        ID = ar.ID,
+                //        Status = "Unsubmitted",
+                //        IsUnsubmitted = true,
+                //        MPID = ar.MPID
+                //    })
+                //);
 
                 result.AddRange(this.PAWSDB.Absence_Requests
                     .Where(ar => ar.Govt_MP == MPID)
