@@ -1,6 +1,8 @@
-﻿using System;
+﻿using Notify.Client;
+using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Web;
 using System.Web.Configuration;
 using System.Web.Mvc;
 using Triad.CabinetOffice.Slipping.Data.EntityFramework.Slipping;
@@ -22,17 +24,17 @@ namespace Triad.CabinetOffice.Slipping.Web.Controllers
 
         private ReasonRepository ReasonRepository { get { return new ReasonRepository(); } }
 
-        private int UserID
+        private User SlippingUser
         {
             get
             {
-                string username = this.User.Identity.Name;
-                UserRepository repository = new UserRepository();
-                User user = repository.GetByUsername(username);
+                var username = User.Identity.Name;
+                var repository = new UserRepository();
+                var user = repository.GetByUsername(username);
 
                 if (user != null)
                 {
-                    return user.ID;
+                    return user;
                 }
                 else
                 {
@@ -60,27 +62,59 @@ namespace Triad.CabinetOffice.Slipping.Web.Controllers
             }
         }
 
+        private string GovUkNotifyApiKey = WebConfigurationManager.AppSettings["GovUkNotifyApiKey"];
+
+        private string NotifyTemplateId_SlippingRequestReceivedUser = WebConfigurationManager.AppSettings["NotifyTemplateId_SlippingRequestReceivedUser"];
+
+        private string NotifyTemplateId_SlippingRequestReceivedAdmin = WebConfigurationManager.AppSettings["NotifyTemplateId_SlippingRequestReceivedAdmin"];
+
+        private string SlippingRequestReviewersEmailAddress = WebConfigurationManager.AppSettings["SlippingRequestReviewersEmailAddress"];
+
         #endregion Properties
 
         #region Methods
 
         private SlippingRequest Get(int requestId)
         {
-            return SlippingRepository.Get(requestId, this.UserID);
+            return SlippingRepository.Get(requestId, SlippingUser.ID);
         }
 
         private int CreateOrUpdate(SlippingRequest slippingRequest)
         {
-            return SlippingRepository.CreateOrUpdate(slippingRequest, this.MPID, this.UserID);
+            return SlippingRepository.CreateOrUpdate(slippingRequest, this.MPID, SlippingUser.ID);
         }
         private int SubmitSlippingRequest(SlippingRequest slippingRequest)
         {
-            return SlippingRepository.SubmitSlippingRequest(slippingRequest, this.UserID);
+            return SlippingRepository.SubmitSlippingRequest(slippingRequest, SlippingUser.ID);
         }
 
         private bool IsSubmitted(SlippingRequest slippingRequest)
         {
             return slippingRequest.PawsAbsenceRequestID != null;
+        }
+
+        private void SendNotification(string templateId, string emailAddress, Dictionary<string,dynamic> personalisations)
+        {
+            if (!string.IsNullOrEmpty(GovUkNotifyApiKey))
+            {
+                var client = new NotificationClient(GovUkNotifyApiKey);
+                var response = client.SendEmail(emailAddress, templateId, personalisations);
+            }
+            else
+            {
+                throw new Exception("GOV.UK Notify API Key in web.config missing or invalid.");
+            }
+
+        }
+        
+        private string GetUserEmailAddress(User user)
+        {
+            return user.Username.Replace("live.com#", string.Empty);
+        }
+
+        private string GetMPEmailAddress(int MPID, int userId)
+        {
+            return MPRepository.Get(MPID, userId).EmailAddress;
         }
 
         #endregion Methods
@@ -90,9 +124,9 @@ namespace Triad.CabinetOffice.Slipping.Web.Controllers
         // GET: Slipping
         public ActionResult Index(bool viewAll = false)
         {
-            MP mp = MPRepository.Get(this.MPID, this.UserID);
+            MP mp = MPRepository.Get(this.MPID, SlippingUser.ID);
             int initialSlippingRequestListLength = Convert.ToInt32(WebConfigurationManager.AppSettings["InitialSlippingRequestListLength"]);
-            IEnumerable<SlipSummary> slips = this.SlippingRepository.GetSummaries(this.MPID, this.UserID);
+            IEnumerable<SlipSummary> slips = this.SlippingRepository.GetSummaries(this.MPID, SlippingUser.ID);
 
             IEnumerable<SlipSummary> visibleSlips = slips
                 .Where(s => s.ToDate.Date >= DateTime.Now.Date)
@@ -168,8 +202,10 @@ namespace Triad.CabinetOffice.Slipping.Web.Controllers
                 else
                 {
                     // Create a new record
-                    SlippingRequest slippingRequest = new SlippingRequest();
-                    slippingRequest.FromDate = model.GetDateTime();
+                    SlippingRequest slippingRequest = new SlippingRequest()
+                    {
+                        FromDate = model.GetDateTime()
+                    };
                     int requestId = CreateOrUpdate(slippingRequest);
                     return RedirectToAction("ToDate", new { id = requestId });
                 }
@@ -191,7 +227,7 @@ namespace Triad.CabinetOffice.Slipping.Web.Controllers
                 var model = new DateAndTime
                 {
                     ID = slippingRequest.ID,
-                    Date = slippingRequest.ToDate.HasValue ? slippingRequest.ToDate.Value : slippingRequest.FromDate,
+                    Date = slippingRequest.ToDate ?? slippingRequest.FromDate,
                     Hour = slippingRequest.ToDate.HasValue ? slippingRequest.ToDate.Value.ToString("HH") : slippingRequest.FromDate.ToString("HH"),
                     Minute = slippingRequest.ToDate.HasValue ? slippingRequest.ToDate.Value.ToString("mm") : slippingRequest.FromDate.ToString("mm")
                 };
@@ -256,7 +292,7 @@ namespace Triad.CabinetOffice.Slipping.Web.Controllers
                 var model = new LocationAndHours
                 {
                     ID = slippingRequest.ID,
-                    Location = slippingRequest.Location != null ? slippingRequest.Location : string.Empty,
+                    Location = slippingRequest.Location ?? string.Empty,
                     Hours = slippingRequest.TravelTimeInHours.HasValue ? slippingRequest.TravelTimeInHours.ToString() : string.Empty
                 };
                 return View(model);
@@ -542,8 +578,43 @@ namespace Triad.CabinetOffice.Slipping.Web.Controllers
 
                 if (ModelState.IsValid)
                 {
-
                     SubmitSlippingRequest(slippingRequest);
+
+                    if (!string.IsNullOrEmpty(NotifyTemplateId_SlippingRequestReceivedUser))
+                    {
+                        if (!SlippingUser.IsMP)
+                        {
+                            SendNotification(NotifyTemplateId_SlippingRequestReceivedUser, GetUserEmailAddress(SlippingUser), new Dictionary<string, dynamic>()
+                            {
+                                { "name", SlippingUser.Forenames },
+                                { "absence_date", slippingRequest.FromDate.ToString("dd/MM/yyyy") },
+                                { "reference", slippingRequest.PawsAbsenceRequestID }
+                            });
+                        }
+                        SendNotification(NotifyTemplateId_SlippingRequestReceivedUser, GetMPEmailAddress(slippingRequest.MPID, SlippingUser.ID), new Dictionary<string, dynamic>()
+                        {
+                            { "name", SlippingUser.Forenames },
+                            { "absence_date", slippingRequest.FromDate.ToString("dd/MM/yyyy") },
+                            { "reference", slippingRequest.PawsAbsenceRequestID }
+                        });
+                    }
+                    else
+                    {
+                        throw new Exception("NotifyTemplateId_SlippingRequestReceivedUser in web.config missing or invalid");
+                    }
+                    if (!string.IsNullOrEmpty(NotifyTemplateId_SlippingRequestReceivedAdmin) && !string.IsNullOrEmpty(SlippingRequestReviewersEmailAddress))
+                    {
+                        SendNotification(NotifyTemplateId_SlippingRequestReceivedAdmin, SlippingRequestReviewersEmailAddress, new Dictionary<string, dynamic>()
+                        {
+                            { "name", string.Format("{0} {1}", SlippingUser.Forenames, SlippingUser.Surname) },
+                            { "absence_date", slippingRequest.FromDate.ToString("dd/MM/yyyy") },
+                            { "reference", slippingRequest.PawsAbsenceRequestID }
+                        });
+                    }
+                    else
+                    {
+                        throw new Exception("NotifyTemplateId_SlippingRequestReceivedAdmin and/or SlippingRequestReviewersEmailAddress in web.config missing or invalid");
+                    }
                     return RedirectToAction("Confirmation");
                 }
                 else
@@ -593,7 +664,6 @@ namespace Triad.CabinetOffice.Slipping.Web.Controllers
         public ActionResult ViewRequest(int id)
         {
             SlippingRequest slippingRequest = Get(id);
-
             if (slippingRequest != null && !IsSubmitted(slippingRequest))
             {
                 return View(slippingRequest);
@@ -603,6 +673,21 @@ namespace Triad.CabinetOffice.Slipping.Web.Controllers
                 return RedirectToAction("NotFound", "Home");
             }
         }
+        // GET: Slipping/Deleted/Date
+        [HttpGet]
+        public ActionResult Deleted(string date)
+        {
+            DateTime validatedDate;
+            if (DateTime.TryParse(date.Replace("!", ":"), out validatedDate))
+            {
+                return View(new DeletedSlippingRequest(validatedDate));
+            }
+            else
+            {
+                return RedirectToAction("NotFound", "Home");
+            }
+        }
+
         #endregion Action Methods
     }
 }

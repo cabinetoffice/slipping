@@ -9,5 +9,6 @@ namespace Triad.CabinetOffice.Slipping.Data.Models
     public class MP
     {
         public string Name { get; set; }
+        public string EmailAddress { get; set; }
     }
 }
