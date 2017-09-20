@@ -16,6 +16,7 @@ namespace Triad.CabinetOffice.Slipping.Data.Models
         public string Reason { get; set; }
         public string Details { get; set; }
         public int StatusID { get; set; }
+        public string Status { get; set; }
         public System.DateTime FromDate { get; set; }
         public System.DateTime? ToDate { get; set; }
         public string DecisionNotes { get; set; }

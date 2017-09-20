@@ -177,6 +177,7 @@ namespace Triad.CabinetOffice.Slipping.Data.Repositories
                 Reason = absenceRequest.ReasonID.HasValue ? new ReasonRepository().Get(absenceRequest.ReasonID.Value).Reason : string.Empty,
                 Details = absenceRequest.Details,
                 StatusID = absenceRequest.StatusID,
+                Status= absenceRequest.PawsAbsenceRequestID.HasValue ?  this.PAWSDB.Absence_Requests.Where(ar=>ar.ID== absenceRequest.PawsAbsenceRequestID).FirstOrDefault().Absence_Request_Status.Status : "Unsubmitted",
                 FromDate = absenceRequest.FromDate,
                 ToDate = absenceRequest.ToDate,
                 DecisionNotes = absenceRequest.DecisionNotes,
