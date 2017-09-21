@@ -129,7 +129,7 @@ namespace Triad.CabinetOffice.Slipping.Web.Controllers
             }
         }
 
-        private bool CancelSlip(SlipSummary slip, int userId)
+        private bool CancelSlip(SlippingRequest slip, int userId)
         {
             return SlippingRepository.CancelSlip(userId, slip);
         }
@@ -680,9 +680,9 @@ namespace Triad.CabinetOffice.Slipping.Web.Controllers
         // POST: Slipping/Review/ID
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Review(int id, SlipSummary model)
+        public ActionResult Review(int id, SlippingRequest model)
         {
-            var slip = SlippingRepository.GetSummaries(MPID, SlippingUser.ID).FirstOrDefault(s => s.ID == id);
+            var slip = Get(id);
             if (slip != null && slip.Status != "Cancelled")
             {
                 if (CancelSlip(slip, SlippingUser.ID))

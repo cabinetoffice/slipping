@@ -257,11 +257,11 @@ namespace Triad.CabinetOffice.Slipping.Data.Repositories
             throw new Exception("Unauthorised");
         }
 
-        public bool CancelSlip(int userId, SlipSummary slip)
+        public bool CancelSlip(int userId, SlippingRequest slip)
         {
             if (UserCanActForMP(userId, slip.MPID))
             {
-                var ar = PAWSDB.Absence_Requests.Find(slip.ID);
+                var ar = PAWSDB.Absence_Requests.Find(slip.PawsAbsenceRequestID);
                 ar.Status = 7; // Cancelled
                 try
                 {

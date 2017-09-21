@@ -114,18 +114,17 @@
                     </dd>
                 </div>
             </dl>
-        if (Model.Status != "Cancelled")
-        {
-            <h2 class="heading-medium">Want to cancel your slipping request?</h2>
-            <div class="form-group">
-                <a href="page-cancel-confirmation" class="button">Cancel my slipping request</a>
-            </div>
-            <a href="/Slipping">Take me back to my slipping requests</a>
-            <br>
-            <br>
+            if (Model.Status != "Cancelled")
+            {
+                <h2 class="heading-medium">Want to cancel your slipping request?</h2>
+
+                <div class="form-group">
+                    <span class="error-message">@Html.ValidationMessageFor(model => model.ID)</span>
+                    <button class="button" type="submit">Cancel my slipping request</button>
+                </div>
+            }
+
         }
-        
-     }
 
     </div>
 </div>
