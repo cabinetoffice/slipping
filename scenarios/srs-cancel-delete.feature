@@ -79,14 +79,14 @@ Scenario: Authorised User Deletes Unsubmitted Slip
           
 
           
-Scenario: MP Deletes Form- Notify Email Sent To MP  
+Scenario: MP Deletes Unsubmitted Slip- Notify Email Sent To MP  
           Given that I have successfully logged into the SRS
           And I click on the title of a Slip with Pending status e.g. ‘Slipping request 26/09/2017 - 10:00’ ‘Status: Unsubmitted’
           When I click on the button with the words ‘Delete my slipping request’
           Then I should receive an email notification stating that my request has been Deleted
           
 
-Scenario: Nominated User Deletes Form- Notify Email Sent To Applicant and MP
+Scenario: Nominated User Deletes Unsubmitted Slip- Notify Email Sent To Applicant and MP
           Given that I have successfully logged into the SRS
           And I am a nominated user
           And I click on the title of a Slip with Unsubmitted status e.g. ‘Slipping request 26/09/2017 - 10:00’ ‘Status: Unsubmitted’
