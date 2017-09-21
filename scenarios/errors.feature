@@ -12,6 +12,20 @@ Scenario: Authorised user enters data in wrong format
           And I should be able to update this field with the correct information 
           And I should be able to progress with completing the form
           
+Scenario: Authorised User Leaves Field Blank
+          Given that C have successfully logged into the SRS
+          And I have begun completing the form
+          When I leave any fields unpopulated
+          And I attempt to click 'Continue' without populating this field
+          Then I will see an error message above this blank field in bold red that states e.g: 'Please enter a location' 
+          And I should automatically be taken to the top of the page
+          And I should see a text box that states in black bold text: 'There was a problem'
+          And below this I should see text in non-bold black that states: 'Please ammend the following details:'
+          And below this I should see the instruction to complete the missing section as a clickable link in red bold text e.g: 'Please Enter a Location'
+          And clicking this link should direct me back to the incomplete field on the page
+          And I should be able to update this field with the correct information 
+          And I should be able to progress with completing the form
+          
                     
 Scenario: Authorised User Does Not Select An Option On The Page 
           Given that i have successfully logged into the SRS
@@ -24,5 +38,5 @@ Scenario: Authorised User Does Not Select An Option On The Page
           And below this I should see text in non-bold black that states: 'Please ammend the following details:'
           And below this I should see the instruction to complete the missing section as a clickable link in red bold text e.g: 'Please Select an Answer'
           And this link should direct me back to the incomplete field on the page
-          And i should be able to update this field with the correct information 
-          And i should be able to progress with completing the form
+          And I should be able to update this field with the correct information 
+          And I should be able to progress with completing the form
