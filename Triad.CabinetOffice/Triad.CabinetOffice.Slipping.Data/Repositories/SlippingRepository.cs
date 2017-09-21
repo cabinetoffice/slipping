@@ -186,7 +186,7 @@ namespace Triad.CabinetOffice.Slipping.Data.Repositories
                 Location = absenceRequest.Location,
                 TravelTimeInHours = absenceRequest.TravelTimeInHours,
                 OppositionMPsAttending = absenceRequest.OppositionMPsAttending,
-                OppositionMPs = absenceRequestOppositionMPs.Select(a => new OppositionMP { ID = a.ID, MPID = a.MPID, FullName = a.MPFullName }).ToList(),
+                OppositionMPs = absenceRequestOppositionMPs.Count > 0 ? absenceRequestOppositionMPs.Select(a => new OppositionMP { ID = a.ID, MPID = a.MPID, FullName = a.MPFullName }).ToList():null,
                 PawsAbsenceRequestID = absenceRequest.PawsAbsenceRequestID
             };
 

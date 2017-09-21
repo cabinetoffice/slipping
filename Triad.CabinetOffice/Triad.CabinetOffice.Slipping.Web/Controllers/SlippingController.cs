@@ -441,7 +441,7 @@ namespace Triad.CabinetOffice.Slipping.Web.Controllers
                         case "3":
                             slippingRequest.Details = model.Details3;
                             break;
-                        case "4":
+                        case "5":
                             slippingRequest.Details = model.Details4;
                             break;
                     }
@@ -470,7 +470,12 @@ namespace Triad.CabinetOffice.Slipping.Web.Controllers
 
             if (slippingRequest != null && !IsSubmitted(slippingRequest))
             {
-                if (slippingRequest.OppositionMPs.Count == 0)
+                if(slippingRequest.OppositionMPs ==null)
+                {
+                    slippingRequest.OppositionMPs = new List<OppositionMP>();
+                }
+
+               if (slippingRequest.OppositionMPs.Count == 0)
                 {
                     slippingRequest.OppositionMPs.Add(new OppositionMP() { ID = 0, MPID = 0, FullName = null });
                 }
