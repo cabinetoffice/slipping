@@ -2,12 +2,15 @@
 @using Triad.CabinetOffice.Slipping.Web.Extensions
 
 @{
-    ViewBag.Title = "When will you be going?";
+    ViewBag.Title = (ViewData.ModelState.IsValid ? "" : "Error: ") + "When will you be going?";
 }
 
 <div class="grid-row">
     <div class="column-two-thirds column-minimum">
         @Html.BackLink("Index", null, "link-back")
+
+        @Html.Partial("_ValidationSummary")
+
         <h1 class="heading-large">
             When will you be going?
         </h1>

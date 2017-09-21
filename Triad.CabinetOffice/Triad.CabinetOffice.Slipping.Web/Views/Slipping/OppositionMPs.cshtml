@@ -2,12 +2,15 @@
 @using Triad.CabinetOffice.Slipping.Web.Extensions
 
 @{
-    ViewBag.Title = "Are there any opposition MPs in attendance?";
+    ViewBag.Title = (ViewData.ModelState.IsValid ? "" : "Error: ") + "Are there any opposition MPs in attendance?";
 }
 
 <div class="grid-row">
     <div class="column-two-thirds column-minimum">
         @Html.BackLink("Reason", new { id = Model.ID }, "link-back")
+
+        @Html.Partial("_ValidationSummary")
+
         <h1 class="heading-large">
             Are there any opposition MPs in attendance?
         </h1>
@@ -29,10 +32,12 @@
                         {
                             <div class="grid-row opposition-mp-item">
                                 <div class="form-group-compound list-item-wrapper">
-                                    <h2 class="heading-medium">MP @(i + 1)</h2>
                                     <fieldset>
+                                        <legend>
+                                            <h2 class="heading-medium">MP @(i + 1)</h2>
+                                        </legend>
                                         <div class="column-one-third no-padding">
-                                            <div class="form-group list-item">
+                                            <div class="form-group list-item @Html.ValidationErrorClassFor(string.Format("MPs[{0}].FullName", i), "form-group-error")">
                                                 @Html.LabelFor(model => model.MPs[i].FullName, new { @class = "form-label" })
                                                 <span class="error-message">@Html.ValidationMessageFor(model => model.MPs[i].FullName)</span>
                                                 @Html.TextBoxFor(model => model.MPs[i].FullName, new { @class = "form-control" })

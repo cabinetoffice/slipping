@@ -17,7 +17,7 @@ namespace Triad.CabinetOffice.Slipping.Data.Repositories
             requestReason.Add(new RequestReason { ID = 1, Reason = "Government Work (Secretaries of State / Ministers of State only)" });
             requestReason.Add(new RequestReason { ID = 2, Reason = "Constituency Engagement" });
             requestReason.Add(new RequestReason { ID = 3, Reason = "Parliamentary Campaigning Activity" });
-            requestReason.Add(new RequestReason { ID = 5, Reason = "Personal/Other" });
+            requestReason.Add(new RequestReason { ID = 4, Reason = "Personal/Other" });
         }
 
         public ICollection<RequestReason> Get()

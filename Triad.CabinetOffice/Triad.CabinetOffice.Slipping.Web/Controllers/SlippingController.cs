@@ -375,7 +375,7 @@ namespace Triad.CabinetOffice.Slipping.Web.Controllers
                         model.Details3 = slippingRequest.Details ?? string.Empty;
                         break;
                     case "5":
-                        model.Details5 = slippingRequest.Details ?? string.Empty;
+                        model.Details4 = slippingRequest.Details ?? string.Empty;
                         break;
                 }
 
@@ -402,25 +402,25 @@ namespace Triad.CabinetOffice.Slipping.Web.Controllers
                 case "1":
                     if (string.IsNullOrWhiteSpace(model.Details1))
                     {
-                        ModelState.AddModelError("Details1", "Detail must be supplied");
+                        ModelState.AddModelError("Details1", "A description of the reason is required");
                     }
                     break;
                 case "2":
                     if (string.IsNullOrWhiteSpace(model.Details2))
                     {
-                        ModelState.AddModelError("Details2", "Detail must be supplied");
+                        ModelState.AddModelError("Details2", "A description of the reason is required");
                     }
                     break;
                 case "3":
                     if (string.IsNullOrWhiteSpace(model.Details3))
                     {
-                        ModelState.AddModelError("Details3", "Detail must be supplied");
+                        ModelState.AddModelError("Details3", "A description of the reason is required");
                     }
                     break;
                 case "5":
-                    if (string.IsNullOrWhiteSpace(model.Details5))
+                    if (string.IsNullOrWhiteSpace(model.Details4))
                     {
-                        ModelState.AddModelError("Details5", "Detail must be supplied");
+                        ModelState.AddModelError("Details4", "A description of the reason is required");
                     }
                     break;
             }   
@@ -441,8 +441,8 @@ namespace Triad.CabinetOffice.Slipping.Web.Controllers
                         case "3":
                             slippingRequest.Details = model.Details3;
                             break;
-                        case "5":
-                            slippingRequest.Details = model.Details5;
+                        case "4":
+                            slippingRequest.Details = model.Details4;
                             break;
                     }
 
@@ -507,6 +507,10 @@ namespace Triad.CabinetOffice.Slipping.Web.Controllers
                 }
                 else
                 {
+                    if (model.YesNo == null && model.MPs == null)
+                    {
+                        model.MPs = new List<OppositionMP>() { new OppositionMP() };
+                    }
                     return View(model);
                 }
             }
