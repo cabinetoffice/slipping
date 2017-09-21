@@ -23,20 +23,19 @@
 
       <form class="form" action="page-date-time-2">
 
-<fieldset data-required data-error="Cannot be blank">
+
 <div class="form-group">
   <label class="form-label" for="date-from">Date</label>
   <span class="form-hint">
     for example: 12/04/2017
   </span>
-  <input class="form-control" id="date-from" name="date-from" type="date" value="{{ data['date-from'] }}" style= "width:202px;">
+  <input class="form-control" id="date-from" name="date-from" type="date" value="{{ data['date-from'] }}">
 </div>
-</fieldset>
 
-<fieldset data-required data-error="Cannot be blank">
+
 <div class="form-group">
-  <label class="form-label" for="select-box">Time</label>
-  <select class="form-control" id="time-from" name="time-from" value="{{ data['time-from'] }}" style= "width:100px;">
+  <label class="form-label" for="select-box">Time Hour</label>
+  <select class="form-control" id="time-from" name="time-from" value="{{ data['time-from'] }}">
      <option>Hour</option>
     <option>00</option>
     <option>01</option>
@@ -64,8 +63,12 @@
     <option>23</option>
   </select>
 
-  <select class="form-control" id="time-from" name="time-from" value="{{ data['time-from'] }}" style= "width:100px;">
-     <option>Minute</option>
+  <br>
+  </br>
+
+<label class="form-label" for="select-box">Time Minutes</label>
+  <select class="form-control" id="time-from" name="time-from" value="{{ data['time-from'] }}">
+     <option>Minutes</option>
     <option>00</option>
     <option>15</option>
     <option>30</option>

@@ -27,12 +27,12 @@
   <span class="form-hint">
     for example: 12/04/2017
   </span>
-  <input class="form-control" id="date-to" name="date-to" type="date" value="{{ data['date-to'] }}" style= "width:202px;">
+  <input class="form-control" id="date-to" name="date-to" type="date" value="{{ data['date-to'] }}">
 </div>
 
 <div class="form-group">
-  <label class="form-label" for="select-box">Time</label>
-  <select class="form-control" id="time-from" name="time-to" value="{{ data['time-from'] }}" style= "width:100px;">
+  <label class="form-label" for="select-box">Time Hour</label>
+  <select class="form-control" id="time-from" name="time-from" value="{{ data['time-from'] }}">
      <option>Hour</option>
     <option>00</option>
     <option>01</option>
@@ -60,13 +60,18 @@
     <option>23</option>
   </select>
 
-  <select class="form-control" id="time-from" name="time-to" value="{{ data['time-from'] }}" style= "width:100px;">
-     <option>Minute</option>
+  <br>
+  </br>
+
+<label class="form-label" for="select-box">Time Minutes</label>
+  <select class="form-control" id="time-from" name="time-from" value="{{ data['time-from'] }}">
+     <option>Minutes</option>
     <option>00</option>
     <option>15</option>
     <option>30</option>
     <option>45</option>
 </select>
+
 </div>
 
         <div class="form-group">
