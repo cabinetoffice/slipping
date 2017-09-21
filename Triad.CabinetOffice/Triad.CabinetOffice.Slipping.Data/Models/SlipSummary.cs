@@ -13,5 +13,6 @@ namespace Triad.CabinetOffice.Slipping.Data.Models
         public DateTime ToDate { get; set; }
         public string Status { get; set; }
         public bool IsUnsubmitted { get; set; }
+        public int MPID { get; internal set; }
     }
 }

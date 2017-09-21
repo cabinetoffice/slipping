@@ -254,7 +254,30 @@ namespace Triad.CabinetOffice.Slipping.Data.Repositories
                 CreateOrUpdate(slippingRequest, slippingRequest.MPID, userId);
                 return slippingRequest.ID;
             }
-            throw new Exception("Unauthorized");
+            throw new Exception("Unauthorised");
+        }
+
+        public bool CancelSlip(int userId, SlipSummary slip)
+        {
+            if (UserCanActForMP(userId, slip.MPID))
+            {
+                var ar = PAWSDB.Absence_Requests.Find(slip.ID);
+                ar.Status = 7; // Cancelled
+                try
+                {
+                    PAWSDB.SaveChanges();
+                    return true;
+                }
+                catch (Exception ex)
+                {
+                    return false;
+                }
+            }
+            else
+            {
+                throw new Exception("Unauthorised");
+            }
+            
         }
     }
 }

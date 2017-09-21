@@ -70,6 +70,10 @@ namespace Triad.CabinetOffice.Slipping.Web.Controllers
 
         private string SlippingRequestReviewersEmailAddress = WebConfigurationManager.AppSettings["SlippingRequestReviewersEmailAddress"];
 
+        private string NotifyTemplateId_SlippingRequestCancelledUser = WebConfigurationManager.AppSettings["NotifyTemplateId_SlippingRequestCancelledUser"];
+
+        private string NotifyTemplateId_SlippingRequestCancelledAdmin = WebConfigurationManager.AppSettings["NotifyTemplateId_SlippingRequestCancelledAdmin"];
+
         #endregion Properties
 
         #region Methods
@@ -114,7 +118,20 @@ namespace Triad.CabinetOffice.Slipping.Web.Controllers
 
         private string GetMPEmailAddress(int MPID, int userId)
         {
-            return MPRepository.Get(MPID, userId).EmailAddress;
+            var mp = MPRepository.Get(MPID, userId);
+            if (mp.EmailAddress != null)
+            {
+                return mp.EmailAddress;
+            }
+            else
+            {
+                throw new Exception(string.Format("Email address for {0} MP missing in PAWS", mp.Name));
+            }
+        }
+
+        private bool CancelSlip(SlipSummary slip, int userId)
+        {
+            return SlippingRepository.CancelSlip(userId, slip);
         }
 
         #endregion Methods
@@ -648,11 +665,58 @@ namespace Triad.CabinetOffice.Slipping.Web.Controllers
         [HttpGet]
         public ActionResult Review(int id)
         {
-            SlippingRequest slippingRequest = Get(id);
+            SlippingRequest slip = Get(id); 
 
-            if (slippingRequest != null)
+            if (slip != null)
             {
-                return View(slippingRequest);
+                return View(slip);
+            }
+            else
+            {
+                return RedirectToAction("NotFound", "Home");
+            }
+        }
+
+        // POST: Slipping/Review/ID
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public ActionResult Review(int id, SlipSummary model)
+        {
+            var slip = SlippingRepository.GetSummaries(MPID, SlippingUser.ID).FirstOrDefault(s => s.ID == id);
+            if (slip != null && slip.Status != "Cancelled")
+            {
+                if (CancelSlip(slip, SlippingUser.ID))
+                {
+                    if (!string.IsNullOrEmpty(NotifyTemplateId_SlippingRequestCancelledUser))
+                    {
+                        if (!SlippingUser.IsMP)
+                        {
+                            SendNotification(NotifyTemplateId_SlippingRequestCancelledUser, GetUserEmailAddress(SlippingUser), new Dictionary<string, dynamic>()
+                            {  });
+                        }
+                        SendNotification(NotifyTemplateId_SlippingRequestCancelledUser, GetMPEmailAddress(slip.MPID, SlippingUser.ID), new Dictionary<string, dynamic>()
+                        {  });
+                    }
+                    else
+                    {
+                        throw new Exception("NotifyTemplateId_SlippingRequestCancelledUser in web.config missing or invalid");
+                    }
+                    if (!string.IsNullOrEmpty(NotifyTemplateId_SlippingRequestCancelledAdmin) && !string.IsNullOrEmpty(SlippingRequestReviewersEmailAddress))
+                    {
+                        SendNotification(NotifyTemplateId_SlippingRequestCancelledAdmin, SlippingRequestReviewersEmailAddress, new Dictionary<string, dynamic>()
+                        {  });
+                    }
+                    else
+                    {
+                        throw new Exception("NotifyTemplateId_SlippingRequestCancelledAdmin and/or SlippingRequestReviewersEmailAddress in web.config missing or invalid");
+                    }
+                    return RedirectToAction("Cancelled");
+                }
+                else
+                {
+                    ModelState.AddModelError("ID", "Error cancelling slip. Please try again later or contact the Whips Office.");
+                    return View(slip);
+                }
             }
             else
             {
@@ -667,6 +731,22 @@ namespace Triad.CabinetOffice.Slipping.Web.Controllers
             if (DateTime.TryParse(date.Replace("!", ":"), out validatedDate))
             {
                 return View(new DeletedSlippingRequest(validatedDate));
+            }
+            else
+            {
+                return RedirectToAction("NotFound", "Home");
+            }
+        }
+
+        // GET: Slipping/Review/ID/Cancelled
+        [HttpGet]
+        public ActionResult Cancelled(int id)
+        {
+            var slip = SlippingRepository.GetSummaries(MPID, SlippingUser.ID).FirstOrDefault(s => s.ID == id);
+
+            if (slip != null)
+            {
+                return View(slip);
             }
             else
             {

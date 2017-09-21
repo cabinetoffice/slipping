@@ -26,6 +26,12 @@ namespace Triad.CabinetOffice.Slipping.Web
             );
 
             routes.MapRoute(
+                name: "Slip Cancelled",
+                url: "Slipping/Review/{id}/Cancelled",
+                defaults: new { controller = "Slipping", action = "Cancelled" }
+            );
+
+            routes.MapRoute(
                 name: "Create Slipping Request",
                 url: "Slipping/Create",
                 defaults: new { controller = "Slipping", action = "FromDate", id = UrlParameter.Optional }
