@@ -50,7 +50,7 @@
                                     @Html.TextAreaFor(model => model.Details3, new { @rows = 5, @class = "form-control form-control-3-4", @style = "width: 100%;" })
                                     <span class="error-message">@Html.ValidationMessageFor(model => model.Details3)</span>
                                     break;
-                                case 4:
+                                case 5:
                                     <label class="form-label" for="Reason-@reason.ID">What is the personal/other reason?</label>
                                     <span class="form-hint">For example dentist, funeral or wedding. If you do not wish to mention the reason to us, please just write 'Personal' and let your Whip know</span>
                                     @Html.TextAreaFor(model => model.Details4, new { @rows = 5, @class = "form-control form-control-3-4", @style = "width: 100%;" })
