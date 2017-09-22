@@ -57,7 +57,14 @@
                 <div class="content">
                     <a class="js-header-toggle menu" href="#proposition-links">Menu</a>
                     <nav id="proposition-menu">
-                        <a id="proposition-name" href="/">Slipping</a>
+                        @if (Request.IsAuthenticated)
+                        {
+                            <a id="proposition-name" href="/Slipping">Slipping</a>
+                        }
+                        else
+                        {
+                           <a id="proposition-name" href="/">Slipping</a>    
+                        }
                         <ul id="proposition-links">
                             @if (Request.IsAuthenticated) {
                                 <li><a href="/Account/SignOut">Log out</a></li>
