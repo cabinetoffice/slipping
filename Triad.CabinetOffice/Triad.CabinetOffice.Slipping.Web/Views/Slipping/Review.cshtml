@@ -28,7 +28,8 @@
                         From
                     </dt>
                     <dd class="cya-answer">
-                        @Model.FromDate.ToString("dd/MM/yyyy HH:mm")
+                        @Model.FromDate.ToString("dd/MM/yyyy")<br />
+                        @Model.FromDate.ToString("HH:mm")
                     </dd>
                 </div>
                 <div>
@@ -36,7 +37,8 @@
                         To
                     </dt>
                     <dd class="cya-answer">
-                        @Model.ToDate.ToString("dd/MM/yyyy HH:mm")
+                        @Model.ToDate.ToString("dd/MM/yyyy")<br />
+                        @Model.ToDate.ToString("HH:mm")
                     </dd>
                 </div>
                 <div>
