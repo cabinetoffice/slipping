@@ -12,37 +12,37 @@
         @Html.Partial("_ValidationSummary")
 
         <h1 class="heading-large">
-            When are you coming back?
+            When do you want your slip to finish?
         </h1>
         @using (Html.BeginForm())
         {
             @Html.AntiForgeryToken()
 
-            <fieldset>
-                <div class="form-group @Html.ValidationErrorClassFor(model => model.Date, "form-group-error") ">
-                    <label class="form-label" for="Date">Date</label>
-                    <span class="form-hint">for example: 12/04/2017</span>
-                    <span class="error-message">@Html.ValidationMessageFor(model => model.Date)</span>
-                    @if (Request.Browser.Browser == "IE")
-                    {
-                        @Html.EditorFor(model => model.Date, new { htmlAttributes = new { @class = "form-control", @type = "date" } })
-                    }
-                    else
-                    {
-                        @Html.EditorFor(model => model.Date, new { htmlAttributes = new { @class = "form-control", @type = "date", @Value = Model.Date.ToString("yyyy-MM-dd") } })
-                    }
-                </div>
-            </fieldset>
+            <div class="form-group @Html.ValidationErrorClassFor(model => model.Date, "form-group-error") ">
+                @Html.LabelFor(model => model.Date, new { @class = "form-label" })
+                <span class="form-hint">for example: 12/04/2017</span>
+                <span class="error-message">@Html.ValidationMessageFor(model => model.Date)</span>
+                @if (Request.Browser.Browser == "IE")
+                {
+                    @Html.EditorFor(model => model.Date, new { htmlAttributes = new { @class = "form-control", @type = "date" } })
+                }
+                else
+                {
+                    @Html.EditorFor(model => model.Date, new { htmlAttributes = new { @class = "form-control", @type = "date", @Value = Model.Date.ToString("yyyy-MM-dd") } })
+                }
+            </div>
 
-            <fieldset>
-                <div class="form-group @Html.ValidationErrorClassFor(model => model.Hour, "form-group-error") @Html.ValidationErrorClassFor(model => model.Minute, "form-group-error") ">
-                    <label class="form-label" for="Hour">Time</label>
-                    <span class="error-message">@Html.ValidationMessageFor(model => model.Hour)</span>
-                    <span class="error-message">@Html.ValidationMessageFor(model => model.Minute)</span>
-                    @Html.DropDownListFor(model => model.Hour, Model.Hours, new { @class = "form-control", @style = "width: 100px;" })
-                    @Html.DropDownListFor(model => model.Minute, Model.Minutes, new { @class = "form-control", @style = "width: 100px;" })
+            <label class="form-label">What time will you be going?</label>
+            <div class="form-group @Html.ValidationErrorClassFor(model => model.Hour, "form-group-error") ">
+                @Html.LabelFor(model=>model.Hour, new { @class = "form-label" })
+                <span class="error-message">@Html.ValidationMessageFor(model => model.Hour)</span>
+                @Html.DropDownListFor(model => model.Hour, Model.Hours, new { @class = "form-control" })
                 </div>
-            </fieldset>
+            <div class="form-group @Html.ValidationErrorClassFor(model => model.Minute, "form-group-error")">
+                @Html.LabelFor(model=>model.Minute, "Minutes", new { @class = "form-label" })
+                <span class="error-message">@Html.ValidationMessageFor(model => model.Minute)</span>
+                @Html.DropDownListFor(model => model.Minute, Model.Minutes, new { @class = "form-control" })
+            </div>
 
             <div class="form-group">
                 <button class="button" type="submit">Continue</button>
