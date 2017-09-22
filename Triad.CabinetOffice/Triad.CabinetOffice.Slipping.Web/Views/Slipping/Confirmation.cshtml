@@ -1,14 +1,14 @@
 ﻿@model Triad.CabinetOffice.Slipping.Data.Models.SlippingRequest
 
 @{
-    ViewBag.Title = "Slipping request submitted";
+    ViewBag.Title = "Slip submitted";
 }
 
 <div class="grid-row">
     <div class="column-two-thirds column-minimum">
 
         <div class="govuk-box-highlight">
-            <h1 class="bold-large">Slipping request submitted</h1>
+            <h1 class="bold-large">Slip submitted</h1>
             <p>
                 Date and time<br>
                 <strong class="heading-medium">@Model.FromDate.ToString("d") at @Model.FromDate.ToShortTimeString()</strong>
@@ -17,13 +17,13 @@
         <p>We have sent you a confirmation email.</p>
         <h2 class="heading-medium">What do you want to do next?</h2>
         <p>
-            <a class="button" role="button" href="/Slipping/Create">New slipping request</a>
+            <a class="button" role="button" href="/Slipping/Create">Create a new slip</a>
         </p>
-        <p><a href="/Slipping">Take me back to my slipping requests</a></p>
-        <h2 class="heading-medium">Want to nominate a user to fill in your slipping requests?</h2>
+        <p><a href="/Slipping">Take me back to my slip requests</a></p>
+        <h2 class="heading-medium">Want to nominate a user to fill in your slips?</h2>
         <p>We need their name and email address. You can send us these details by email or by telephone.</p>
-        <p><strong class="bold-small">Email: </strong>pairsandwhipping@parliament.gov.uk</p>
-        <p><strong class="bold-small">Telephone: </strong>0208 123 4567</p>
+        <p><strong class="bold-small">Email:</strong> GWAU@parliament.uk</p>
+        <p><strong class="bold-small">Telephone:</strong> 0208 123 4567</p>
     </div>
 </div>
 
