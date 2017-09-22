@@ -674,7 +674,7 @@ namespace Triad.CabinetOffice.Slipping.Web.Controllers
         [HttpGet]
         public ActionResult Review(int id)
         {
-            SlippingRequest slip = Get(id); 
+            var slip = SlippingRepository.GetSummaries(MPID, SlippingUser.ID).FirstOrDefault(s => s.ID == id);
 
             if (slip != null)
             {
@@ -732,6 +732,7 @@ namespace Triad.CabinetOffice.Slipping.Web.Controllers
                 return RedirectToAction("NotFound", "Home");
             }
         }
+
         // GET: Slipping/Deleted/Date
         [HttpGet]
         public ActionResult Deleted(string date)

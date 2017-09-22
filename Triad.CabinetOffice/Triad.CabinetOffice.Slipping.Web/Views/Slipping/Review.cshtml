@@ -1,4 +1,4 @@
-﻿@model Triad.CabinetOffice.Slipping.Data.Models.SlippingRequest
+﻿@model Triad.CabinetOffice.Slipping.Data.Models.SlipSummary
 @using Triad.CabinetOffice.Slipping.Data.Models
 @using Triad.CabinetOffice.Slipping.Web.Extensions
 
@@ -29,7 +29,6 @@
                     </dt>
                     <dd class="cya-answer">
                         @Model.FromDate.ToString("dd/MM/yyyy HH:mm")
-                        <span class="error-message">@Html.ValidationMessageFor(model => model.FromDate)</span>
                     </dd>
                 </div>
                 <div>
@@ -37,11 +36,7 @@
                         To
                     </dt>
                     <dd class="cya-answer">
-                        @if (Model.ToDate.HasValue)
-                        {
-                            @Model.ToDate.Value.ToString("dd/MM/yyyy HH:mm")
-                        }
-                        <span class="error-message">@Html.ValidationMessageFor(model => model.ToDate)</span>
+                        @Model.ToDate.ToString("dd/MM/yyyy HH:mm")
                     </dd>
                 </div>
                 <div>
@@ -50,7 +45,6 @@
                     </dt>
                     <dd class="cya-answer">
                         @Model.Location
-                        <span class="error-message">@Html.ValidationMessageFor(model => model.Location)</span>
                     </dd>
                 </div>
                 <div>
@@ -58,11 +52,7 @@
                         Travel time to Westminster
                     </dt>
                     <dd class="cya-answer">
-                        @if (Model.TravelTimeInHours.HasValue)
-                        {
-                            @Html.Encode(string.Format("{0} hours", Model.TravelTimeInHours.Value))
-                        }
-                        <span class="error-message">@Html.ValidationMessageFor(model => model.TravelTimeInHours)</span>
+                        @Html.Encode(string.Format("{0} hours", Model.TravelTimeInHours))
                     </dd>
                 </div>
                 <div>
@@ -71,7 +61,6 @@
                     </dt>
                     <dd class="cya-answer">
                         @Model.Reason
-                        <span class="error-message">@Html.ValidationMessageFor(model => model.Reason)</span>
                     </dd>
                 </div>
                 <div>
@@ -80,7 +69,6 @@
                     </dt>
                     <dd class="cya-answer">
                         @Model.Details
-                        <span class="error-message">@Html.ValidationMessageFor(model => model.Details)</span>
                     </dd>
                 </div>
                 <div>
@@ -88,20 +76,16 @@
                         Any opposition MPs in attendance?
                     </dt>
                     <dd class="cya-answer">
-                        @if (Model.OppositionMPsAttending.HasValue)
+                        @Html.Encode(Model.OppositionMPsAttending ? "Yes" : "No")
+                        <br />
+                        @if (Model.OppositionMPsAttending)
                         {
-                            @Html.Encode(Model.OppositionMPsAttending.Value ? "Yes" : "No")
-                            <br />
-                            if (Model.OppositionMPsAttending.Value)
+                            foreach (OppositionMP mp in Model.OppositionMPs)
                             {
-                                foreach (OppositionMP mp in Model.OppositionMPs)
-                                {
-                                    @Html.Encode(mp.FullName);
-                                    <br />
-                                }
+                                @Html.Encode(mp.FullName);
+                                <br />
                             }
                         }
-                        <span class="error-message">@Html.ValidationMessageFor(model => model.OppositionMPsAttending)</span>
                     </dd>
                 </div>
                 <div>
@@ -110,7 +94,6 @@
                     </dt>
                     <dd class="cya-answer">
                         @Model.Status
-                        <span class="error-message">@Html.ValidationMessageFor(model => model.Status)</span>
                     </dd>
                 </div>
             </dl>
@@ -129,6 +112,6 @@
             }
 
         }
-        <a href="\Slipping">Take me back to my slipping requests</a>
+        <a href="/Slipping">Take me back to my slipping requests</a>
      </div>
 </div>

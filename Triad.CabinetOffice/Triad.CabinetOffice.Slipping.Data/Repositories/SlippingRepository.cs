@@ -186,7 +186,7 @@ namespace Triad.CabinetOffice.Slipping.Data.Repositories
                 Location = absenceRequest.Location,
                 TravelTimeInHours = absenceRequest.TravelTimeInHours,
                 OppositionMPsAttending = absenceRequest.OppositionMPsAttending,
-                OppositionMPs = absenceRequestOppositionMPs.Count > 0 ? absenceRequestOppositionMPs.Select(a => new OppositionMP { ID = a.ID, MPID = a.MPID, FullName = a.MPFullName }).ToList():null,
+                OppositionMPs = absenceRequestOppositionMPs.Count > 0 ? absenceRequestOppositionMPs.Select(a => new OppositionMP { ID = a.ID, MPID = a.MPID, FullName = a.MPFullName }).ToList():new List<OppositionMP>(),
                 PawsAbsenceRequestID = absenceRequest.PawsAbsenceRequestID
             };
 
@@ -197,29 +197,32 @@ namespace Triad.CabinetOffice.Slipping.Data.Repositories
         {
             IEnumerable<SlipSummary> result = new List<SlipSummary>();
 
-
-
             if (UserCanActForMP(userId, MPID))
             {
+                IList<Absence_Request> absence_Request = PAWSDB.Absence_Requests.Where(a => a.Govt_MP == MPID).ToList();
+                IList<AbsenceRequest> absenceRequest = db.AbsenceRequests.Where(a => a.MPID == MPID && a.PawsAbsenceRequestID != null).ToList();
 
-                IList<Absence_Request> absence_Request = this.PAWSDB.Absence_Requests.ToList();
-                IList<AbsenceRequest> absenceRequest = db.AbsenceRequests.Where(a => a.MPID == MPID).ToList();
-
-
-                result = absenceRequest.GroupJoin(
+                result = absenceRequest.Join(
                          absence_Request,
-                         foo => foo.PawsAbsenceRequestID,
-                         bar => bar.ID,
-                         (f, bs) => new { Foo = f, Bar = bs.FirstOrDefault() })
-                         .Select(r => new SlipSummary {
-                             FromDate = r.Foo.FromDate,
-                             ToDate = r.Foo.ToDate ?? new DateTime(9999, 1, 1),
-                             ID = r.Foo.ID,
-                             Status = r.Foo.PawsAbsenceRequestID.HasValue ? r.Bar.Absence_Request_Status.Status : "Unsubmitted",
-                             IsUnsubmitted = r.Foo.PawsAbsenceRequestID.HasValue ? false : true
-                        });
-
-             }
+                         srs => srs.PawsAbsenceRequestID,
+                         paws => paws.ID,
+                         (s, p) => new { srs = s, paws = p })
+                         .Select(ar => new SlipSummary
+                         {
+                             FromDate = (DateTime)ar.paws.From_Date_Time,
+                             ToDate = (DateTime)ar.paws.To_Date_Time,
+                             ID = ar.paws.ID,
+                             Status = ar.paws.Absence_Request_Status.Status,
+                             IsUnsubmitted = false,
+                             MPID = ar.paws.Govt_MP,
+                             Details = ar.srs.Details,
+                             Location = ar.srs.Location,
+                             TravelTimeInHours = (int)ar.srs.TravelTimeInHours,
+                             Reason = ar.paws.Absence_Request_Reason.Reason,
+                             OppositionMPsAttending = (bool)ar.srs.OppositionMPsAttending,
+                             OppositionMPs = ar.srs.AbsenceRequestOppositionMPs.Count > 0 ? ar.srs.AbsenceRequestOppositionMPs.Select(a => new OppositionMP { ID = a.ID, MPID = a.MPID, FullName = a.MPFullName }).ToList() : new List<OppositionMP>(),
+                         });
+            }
 
             return result;
         }
