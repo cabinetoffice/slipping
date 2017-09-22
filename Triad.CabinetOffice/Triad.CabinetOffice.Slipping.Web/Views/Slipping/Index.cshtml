@@ -6,20 +6,17 @@
 }
 
 <div class="grid-row">
-
     <div class="column-two-thirds">
-
         <h1 class="heading-large">
-            @Model.MPName MP slipping requests
+            @Model.MPName MP slips
         </h1>
-
         <ol class="task-list">
             <li>
                 <ul class="task-list-items">
                     @foreach (SlipSummary slip in Model.Slips)
                     {
                         <li class="task-list-item">
-                            @Html.ActionLink(string.Format("Slipping request - {0} - {1}", @slip.FromDate.ToString("dd/MM/yyyy"), @slip.FromDate.ToString("HH:mm")), @slip.IsUnsubmitted ? "CheckYourAnswers" : "Review", new { id = @slip.ID }, new { @class="task-name", @aria_describedby = string.Format("task-status-{0}", @slip.ID) })
+                            @Html.ActionLink(string.Format("Slip - {0} - {1}", @slip.FromDate.ToString("dd/MM/yyyy"), @slip.FromDate.ToString("HH:mm")), @slip.IsUnsubmitted ? "CheckYourAnswers" : "Review", new { id = @slip.ID }, new { @class="task-name", @aria_describedby = string.Format("task-status-{0}", @slip.ID) })
                             <strong class="task-completed" id="@string.Format("task-status-{0}", @slip.ID)">@slip.Status</strong>
                         </li>
                     }
@@ -29,32 +26,15 @@
                     }
                 </ul>
         </ol>
-
         <p>
-            @Html.ActionLink("New slipping request", "FromDate", null, new { @class = "button", @role = "button" })
+            @Html.ActionLink("Create a new slip", "FromDate", null, new { @class = "button", @role = "button" })
         </p>
-
-        <h2 class="heading-medium">
-            Want to nominate a user to fill in your slipping requests?
-        </h2>
-
-        <p>
-            We need their name and email address.  You can send us these details by email or by telephone.
-        </p>
-
-        <p>
-            <span class="bold">Email:</span> pairsandwhipping@parliament.gov.uk
-        </p>
-
-        <p>
-            <span class="bold">Telephone:</span> 0208 123 4567
-        </p>
+        <h2 class="heading-medium">Want to nominate a user to fill in your slips?</h2>
+        <p>We need their name and email address. You can send us these details by email or by telephone.</p>
+        <p><strong class="bold-small">Email:</strong> GWAU@parliament.uk</p>
+        <p><strong class="bold-small">Telephone:</strong> 0208 123 4567</p>
     </div>
-
-    <div class="column-third">
-
-    </div>
-
+    <div class="column-third"></div>
 </div>
 
 
