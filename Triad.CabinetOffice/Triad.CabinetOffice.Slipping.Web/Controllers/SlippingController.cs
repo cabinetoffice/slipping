@@ -417,7 +417,7 @@ namespace Triad.CabinetOffice.Slipping.Web.Controllers
                         ModelState.AddModelError("Details3", "A description of the reason is required");
                     }
                     break;
-                case "4":
+                case "5":
                     if (string.IsNullOrWhiteSpace(model.Details4))
                     {
                         ModelState.AddModelError("Details4", "A description of the reason is required");
