@@ -10,7 +10,7 @@
     <div class="column-two-thirds column-minimum">
         @Html.BackLink("Index", new { id = Model.ID }, "link-back")
         <h1 class="heading-large">
-            Slipping request @Model.FromDate.ToString("dd/MM/yyyy HH:mm")
+            Slip @Model.FromDate.ToString("dd/MM/yyyy HH:mm")
         </h1>
         @using (Html.BeginForm())
         {
@@ -101,11 +101,11 @@
             </dl>
             if (Model.Status != "Cancelled")
             {
-                <h2 class="heading-medium">Want to cancel your slipping request?</h2>
+                <h2 class="heading-medium">Want to cancel your slip?</h2>
 
                 <div class="form-group">
                     <span class="error-message">@Html.ValidationMessageFor(model => model.ID)</span>
-                    <button class="button" type="submit">Cancel my slipping request</button>
+                    <button class="button" type="submit">Cancel my slip</button>
                 </div>
             }
             else
@@ -114,6 +114,6 @@
             }
 
         }
-        <a href="/Slipping">Take me back to my slipping requests</a>
+        <a href="/Slipping">Take me back to my slips</a>
      </div>
 </div>
