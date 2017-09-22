@@ -203,6 +203,7 @@
     <Compile Include="ViewModels\SlippingUser.cs" />
   </ItemGroup>
   <ItemGroup>
+    <Content Include="public\stylesheets\application-ie8.css" />
     <Content Include="public\stylesheets\application.css" />
     <Content Include="public\stylesheets\check-your-answers.css" />
     <Content Include="public\stylesheets\govuk-elements-styles.css" />

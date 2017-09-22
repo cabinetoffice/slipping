@@ -28,9 +28,10 @@
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <meta property="og:image" content="/public/images/opengraph-image.png?0.22.1">
     
+    <!--[if lte IE 8]><link href="/public/stylesheets/application-ie8.css" rel="stylesheet" type="text/css" /><![endif]-->
+    <!--[if gt IE 8]><!-->
+    <link href="/public/stylesheets/application.css" media="screen" rel="stylesheet" type="text/css" /><!--<![endif]-->
 
-    @Styles.Render("~/bundles/stylesheets")
-    @Scripts.Render("~/bundles/modernizr")
 </head>
 <body>
     <script>document.body.className = ((document.body.className) ? document.body.className + ' js-enabled' : 'js-enabled');</script>
@@ -110,14 +111,7 @@
     </footer>
     <div id="global-app-error" class="app-error hidden"></div>
 
-
-    
-
-
-
-    @Scripts.Render("~/bundles/jquery")
     @RenderSection("scripts", required: false)
-
 
     <script src="/public/javascripts/govuk-template.js?0.22.1"></script>
     <!-- Javascript -->
