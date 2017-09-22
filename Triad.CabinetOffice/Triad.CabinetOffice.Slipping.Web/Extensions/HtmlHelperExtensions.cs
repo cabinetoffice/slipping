@@ -46,7 +46,7 @@ namespace Triad.CabinetOffice.Slipping.Web.Extensions
             {
                 return new MvcHtmlString(string.Format(backLink, returnUrl, cssClass));
             }
-            else if (HttpContext.Current.Request.HttpMethod == "POST")
+            else if (HttpContext.Current.Request.HttpMethod == "POST" || (HttpContext.Current.Request.UrlReferrer != null && HttpContext.Current.Request.UrlReferrer.ToString().EndsWith("Create")))
             {
                 return helper.ActionLink("Back", defaultAction, routeValues, new { @class = cssClass });
             }
