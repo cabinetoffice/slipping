@@ -374,7 +374,7 @@ namespace Triad.CabinetOffice.Slipping.Web.Controllers
                     case "3":
                         model.Details3 = slippingRequest.Details ?? string.Empty;
                         break;
-                    case "5":
+                    case "4":
                         model.Details4 = slippingRequest.Details ?? string.Empty;
                         break;
                 }
@@ -417,7 +417,7 @@ namespace Triad.CabinetOffice.Slipping.Web.Controllers
                         ModelState.AddModelError("Details3", "A description of the reason is required");
                     }
                     break;
-                case "5":
+                case "4":
                     if (string.IsNullOrWhiteSpace(model.Details4))
                     {
                         ModelState.AddModelError("Details4", "A description of the reason is required");
@@ -441,7 +441,7 @@ namespace Triad.CabinetOffice.Slipping.Web.Controllers
                         case "3":
                             slippingRequest.Details = model.Details3;
                             break;
-                        case "5":
+                        case "4":
                             slippingRequest.Details = model.Details4;
                             break;
                     }
@@ -701,10 +701,10 @@ namespace Triad.CabinetOffice.Slipping.Web.Controllers
                         if (!SlippingUser.IsMP)
                         {
                             SendNotification(NotifyTemplateId_SlippingRequestCancelledUser, GetUserEmailAddress(SlippingUser), new Dictionary<string, dynamic>()
-                            {  });
+                            { });
                         }
                         SendNotification(NotifyTemplateId_SlippingRequestCancelledUser, GetMPEmailAddress(slip.MPID, SlippingUser.ID), new Dictionary<string, dynamic>()
-                        {  });
+                        { });
                     }
                     else
                     {
@@ -713,7 +713,7 @@ namespace Triad.CabinetOffice.Slipping.Web.Controllers
                     if (!string.IsNullOrEmpty(NotifyTemplateId_SlippingRequestCancelledAdmin) && !string.IsNullOrEmpty(SlippingRequestReviewersEmailAddress))
                     {
                         SendNotification(NotifyTemplateId_SlippingRequestCancelledAdmin, SlippingRequestReviewersEmailAddress, new Dictionary<string, dynamic>()
-                        {  });
+                        { });
                     }
                     else
                     {
