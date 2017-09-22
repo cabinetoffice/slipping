@@ -23,7 +23,7 @@ namespace Triad.CabinetOffice.Slipping.Web.Controllers
 
         public void SignOut()
         {
-            string callbackUrl = Url.Action("Index", "Slipping", routeValues: null, protocol: Request.Url.Scheme);
+            string callbackUrl = Url.Action("Index", "Home", routeValues: null, protocol: Request.Url.Scheme);
 
             HttpContext.GetOwinContext().Authentication.SignOut(
                 new AuthenticationProperties { RedirectUri = callbackUrl },
