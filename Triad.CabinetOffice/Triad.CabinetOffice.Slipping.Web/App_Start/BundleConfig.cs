@@ -21,7 +21,6 @@ namespace Triad.CabinetOffice.Slipping.Web
 
             bundles.Add(new StyleBundle("~/bundles/stylesheets").Include(
                       "~/public/stylesheets/govuk-template.css",
-                      "~/public/stylesheets/govuk-elements-styles.css",
                       "~/public/stylesheets/check-your-answers.css",
                       "~/public/stylesheets/application.css"));
         }

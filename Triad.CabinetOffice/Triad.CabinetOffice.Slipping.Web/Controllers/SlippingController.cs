@@ -692,7 +692,7 @@ namespace Triad.CabinetOffice.Slipping.Web.Controllers
         public ActionResult Review(int id, SlipSummary model)
         {
             var slip = SlippingRepository.GetSummaries(MPID, SlippingUser.ID).FirstOrDefault(s => s.ID == id);
-            if (slip != null && slip.Status != "Cancelled")
+            if (slip != null && slip.Status != "Refused" && slip.Status != "Revoked" && slip.Status != "Cancelled")
             {
                 if (CancelSlip(slip, SlippingUser.ID))
                 {
