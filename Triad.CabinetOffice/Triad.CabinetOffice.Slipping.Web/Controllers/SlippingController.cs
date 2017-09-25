@@ -38,7 +38,7 @@ namespace Triad.CabinetOffice.Slipping.Web.Controllers
                 }
                 else
                 {
-                    throw new Exception(string.Format("User '{0}' not recognised.", this.User.Identity.Name));
+                    throw new Exception(string.Format("User '{0}' not recognised. Please contact the Whips Admin Unit.", User.Identity.Name));
                 }
             }
         }
@@ -57,7 +57,7 @@ namespace Triad.CabinetOffice.Slipping.Web.Controllers
                 }
                 else
                 {
-                    throw new Exception(string.Format("User '{0}' not recognised.", this.User.Identity.Name));
+                    throw new Exception(string.Format("User '{0}' not recognised. Please contact the Whips Admin Unit.", User.Identity.Name));
                 }
             }
         }
