@@ -374,7 +374,7 @@ namespace Triad.CabinetOffice.Slipping.Web.Controllers
                     case "3":
                         model.Details3 = slippingRequest.Details ?? string.Empty;
                         break;
-                    case "4":
+                    case "5":
                         model.Details4 = slippingRequest.Details ?? string.Empty;
                         break;
                 }
