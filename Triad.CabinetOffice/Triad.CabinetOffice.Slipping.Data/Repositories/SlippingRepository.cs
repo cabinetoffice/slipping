@@ -281,5 +281,15 @@ namespace Triad.CabinetOffice.Slipping.Data.Repositories
             }
             
         }
+
+        public bool DatesOverlapExistingSlip(int MPID, DateTime fromDate)
+        {
+            return PAWSDB.Absence_Requests.Where(ar => ar.Govt_MP == MPID && ar.Status != 7 && fromDate > ar.From_Date_Time && fromDate < ar.To_Date_Time).Count() > 0;
+        }
+
+        public bool DatesOverlapExistingSlip(int MPID, DateTime fromDate, DateTime toDate)
+        {
+            return PAWSDB.Absence_Requests.Where(ar => ar.Govt_MP == MPID && ar.Status != 7 && fromDate < ar.To_Date_Time && ar.From_Date_Time < toDate).Count() > 0;
+        }
     }
 }

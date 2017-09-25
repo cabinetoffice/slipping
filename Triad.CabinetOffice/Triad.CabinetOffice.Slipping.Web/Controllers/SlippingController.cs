@@ -134,6 +134,16 @@ namespace Triad.CabinetOffice.Slipping.Web.Controllers
             return SlippingRepository.CancelSlip(userId, slip);
         }
 
+        private bool DatesOverlapExistingSlip(int MPID, DateTime fromDate)
+        {
+            return SlippingRepository.DatesOverlapExistingSlip(MPID, fromDate);
+        }
+
+        private bool DatesOverlapExistingSlip(int MPID, DateTime fromDate, DateTime toDate)
+        {
+            return SlippingRepository.DatesOverlapExistingSlip(MPID, fromDate, toDate);
+        }
+
         #endregion Methods
 
         #region Action Methods
@@ -199,6 +209,11 @@ namespace Triad.CabinetOffice.Slipping.Web.Controllers
             {
                 ModelState.AddModelError("Hour", "From Time must be at least 15 minutes from now");
                 ModelState.AddModelError("Minute", "From Time must be at least 15 minutes from now");
+            }
+
+            if(DatesOverlapExistingSlip(MPID, fromDate))
+            {
+                ModelState.AddModelError("Date", "You have already submitted a slip for this date.");
             }
 
             if (ModelState.IsValid)
@@ -283,6 +298,11 @@ namespace Triad.CabinetOffice.Slipping.Web.Controllers
                     {
                         ModelState.AddModelError("Hour", "To Time must be at least 15 minutes after From Time");
                     }
+                }
+
+                if(DatesOverlapExistingSlip(MPID, slippingRequest.FromDate, toDate))
+                {
+                    ModelState.AddModelError("Date", "The period you have selected overlaps with an existing slip you have submitted.");
                 }
 
                 if (ModelState.IsValid)
