@@ -69,7 +69,7 @@ namespace Triad.CabinetOffice.Slipping.Web.ViewModels
         public DateAndTime()
         {
             this.Date = DateTime.Now;
-            this.Hour = "00";
+            this.Hour = DateTime.Now.AddHours(1).ToString("HH");
             this.Minute = "00";
         }
 
