@@ -16,7 +16,7 @@
                     @foreach (SlipSummary slip in Model.Slips)
                     {
                         <li class="task-list-item">
-                            @Html.ActionLink(@slip.FromDate.ToString("dd/MM/yyyy hh:mm tt"), @slip.IsUnsubmitted ? "CheckYourAnswers" : "Review", new { id = @slip.ID }, new { @class="task-name", @aria_describedby = string.Format("task-status-{0}", @slip.ID) })
+                            @Html.ActionLink(string.Format("Slip - {0}", @slip.FromDate.ToString("dd/MM/yyyy - HH:mm")), @slip.IsUnsubmitted ? "CheckYourAnswers" : "Review", new { id = @slip.ID }, new { @class="task-name", @aria_describedby = string.Format("task-status-{0}", @slip.ID) })
                             <strong class="task-completed" id="@string.Format("task-status-{0}", @slip.ID)">@slip.Status</strong>
                         </li>
                     }
