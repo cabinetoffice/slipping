@@ -58,21 +58,7 @@ namespace Triad.CabinetOffice.Slipping.Web.Extensions
             return null;
         }
 
-        public static MvcHtmlString EditorWithValidationFor<TModel, TValue>(this HtmlHelper<TModel> html, Expression<Func<TModel, TValue>> expression, object additionalViewData, object additionalViewDataInvalid)
-        {
-            MemberExpression body = expression.Body as MemberExpression;
-            string propertyName = body.Member.Name;
-            if (html.ViewData.ModelState.IsValidField(propertyName))
-            {
-                return EditorExtensions.EditorFor(html, expression, additionalViewData);
-            }
-            else
-            {
-                return EditorExtensions.EditorFor(html, expression, additionalViewDataInvalid);
-            }
-        }
-
-        public static MvcHtmlString DropDownListWithValidationFor<TModel, TProperty>(this HtmlHelper<TModel> htmlHelper, Expression<Func<TModel, TProperty>> expression, IEnumerable<SelectListItem> selectList, object htmlAttributes, object htmlAttributesInvalid)
+        public static MvcHtmlString DropDownListWithErrorClassFor<TModel, TProperty>(this HtmlHelper<TModel> htmlHelper, Expression<Func<TModel, TProperty>> expression, IEnumerable<SelectListItem> selectList, object htmlAttributes, string errorClass)
         {
             MemberExpression body = expression.Body as MemberExpression;
             string propertyName = body.Member.Name;
@@ -82,11 +68,16 @@ namespace Triad.CabinetOffice.Slipping.Web.Extensions
             }
             else
             {
-                return SelectExtensions.DropDownListFor(htmlHelper, expression, selectList, htmlAttributesInvalid);
+                var attributes = HtmlHelper.AnonymousObjectToHtmlAttributes(htmlAttributes);
+                if (attributes.ContainsKey("class"))
+                    attributes["class"] += " " + errorClass;
+                else
+                    attributes.Add("class", errorClass);
+                return SelectExtensions.DropDownListFor(htmlHelper, expression, selectList, attributes);
             }
         }
 
-        public static MvcHtmlString TextAreaWithValidationFor<TModel, TProperty>(this HtmlHelper<TModel> htmlHelper, Expression<Func<TModel, TProperty>> expression, object htmlAttributes, object htmlAttributesInvalid)
+        public static MvcHtmlString TextAreaWithErrorClassFor<TModel, TProperty>(this HtmlHelper<TModel> htmlHelper, Expression<Func<TModel, TProperty>> expression, object htmlAttributes, string errorClass)
         {
             MemberExpression body = expression.Body as MemberExpression;
             string propertyName = body.Member.Name;
@@ -96,11 +87,35 @@ namespace Triad.CabinetOffice.Slipping.Web.Extensions
             }
             else
             {
-                return TextAreaExtensions.TextAreaFor(htmlHelper, expression, htmlAttributesInvalid);
+                var attributes = HtmlHelper.AnonymousObjectToHtmlAttributes(htmlAttributes);
+                if (attributes.ContainsKey("class"))
+                    attributes["class"] += " " + errorClass;
+                else
+                    attributes.Add("class", errorClass);
+                return TextAreaExtensions.TextAreaFor(htmlHelper, expression, attributes);
             }
         }
 
-        public static MvcHtmlString TextBoxWithValidationFor<TModel, TProperty>(this HtmlHelper<TModel> htmlHelper, Expression<Func<TModel, TProperty>> expression, object htmlAttributes, string validationProperty, object htmlAttributesInvalid)
+        public static MvcHtmlString TextBoxWithErrorClassFor<TModel, TProperty>(this HtmlHelper<TModel> htmlHelper, Expression<Func<TModel, TProperty>> expression, object htmlAttributes, string errorClass)
+        {
+            MemberExpression body = expression.Body as MemberExpression;
+            string propertyName = body.Member.Name;
+            if (htmlHelper.ViewData.ModelState.IsValidField(propertyName))
+            {
+                return InputExtensions.TextBoxFor(htmlHelper, expression, htmlAttributes);
+            }
+            else
+            {
+                var attributes = HtmlHelper.AnonymousObjectToHtmlAttributes(htmlAttributes);
+                if (attributes.ContainsKey("class"))
+                    attributes["class"] += " " + errorClass;
+                else
+                    attributes.Add("class", errorClass);
+                return InputExtensions.TextBoxFor(htmlHelper, expression, attributes);
+            }
+        }
+
+        public static MvcHtmlString TextBoxWithErrorClassFor<TModel, TProperty>(this HtmlHelper<TModel> htmlHelper, Expression<Func<TModel, TProperty>> expression, object htmlAttributes, string validationProperty, string errorClass)
         {
             if (htmlHelper.ViewData.ModelState.IsValidField(validationProperty))
             {
@@ -108,7 +123,12 @@ namespace Triad.CabinetOffice.Slipping.Web.Extensions
             }
             else
             {
-                return InputExtensions.TextBoxFor(htmlHelper, expression, htmlAttributesInvalid);
+                var attributes = HtmlHelper.AnonymousObjectToHtmlAttributes(htmlAttributes);
+                if (attributes.ContainsKey("class"))
+                    attributes["class"] += " " + errorClass;
+                else
+                    attributes.Add("class", errorClass);
+                return InputExtensions.TextBoxFor(htmlHelper, expression, attributes);
             }
         }
     }

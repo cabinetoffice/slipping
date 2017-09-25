@@ -21,7 +21,7 @@
                <fieldset>
                    <span class="error-message">@Html.ValidationMessageFor(model => model.Reason)</span>
                     @foreach (var reason in Model.Reasons)
-                    {                
+                    {
                         <div class="multiple-choice" data-target="Reason-@reason.ID">
                             @Html.RadioButtonFor(model => model.Reason, reason.ID, new { @name = "radio-group", @id = "radio-" + @reason.ID, aria_controls = "Reason-" + @reason.ID })
                             <label for="radio-@reason.ID">@reason.Reason</label>
@@ -30,31 +30,39 @@
                             @switch (reason.ID)
                             {
                                 case 1:
-                                    <label class="form-label" for="Details1">Please provide a description for your reason</label>
-                                    <span class="form-hint">for example: Select Committee Trip, Delegation on behalf of a group, an All Party Parliamentary related trip</span>
-                                    <span class="form-label">What will be the repercussions of the slip being revoked at the last minute? <br/>Please state if the trip has been approved by Number 10</span>
-                                    <span class="error-message">@Html.ValidationMessageFor(model => model.Details1)</span>
-                                    @Html.TextAreaWithValidationFor(model => model.Details1, new { @rows = 5, @class = "form-control form-control-3-4", @style = "width: 100%;" }, new { @rows = 5, @class = "form-control form-control-3-4 form-control-error", @style = "width: 100%;" })
+                                    <div class="form-group @Html.ValidationErrorClassFor(model => model.Details1, "form-group-error")">
+                                        <label class="form-label" for="Details1">Please provide a description for your reason</label>
+                                        <span class="form-hint">for example: Select Committee Trip, Delegation on behalf of a group, an All Party Parliamentary related trip</span>
+                                        <span class="form-label">What will be the repercussions of the slip being revoked at the last minute? <br/>Please state if the trip has been approved by Number 10</span>
+                                        <span class="error-message">@Html.ValidationMessageFor(model => model.Details1)</span>
+                                        @Html.TextAreaWithErrorClassFor(model => model.Details1, new { @rows = 5, @class = "form-control form-control-3-4", @style = "width: 100%;" }, "form-control-error")
+                                    </div>
                                     break;
                                 case 2:
-                                    <label class="form-label" for="Details2">What type of constituency engagement is it?</label>
-                                    <span class="form-hint">for example: fundraising, charity event or surgery appointments with constituents</span>
-                                    <span class="form-label">Please also provide the estimated size of the event</span>
-                                    <span class="error-message">@Html.ValidationMessageFor(model => model.Details2)</span>
-                                    @Html.TextAreaWithValidationFor(model => model.Details2, new { @rows = 5, @class = "form-control form-control-3-4", @style = "width: 100%;" }, new { @rows = 5, @class = "form-control form-control-3-4 form-control-error", @style = "width: 100%;" })
+                                    <div class="form-group @Html.ValidationErrorClassFor(model => model.Details2, "form-group-error")">
+                                        <label class="form-label" for="Details2">What type of constituency engagement is it?</label>
+                                        <span class="form-hint">for example: fundraising, charity event or surgery appointments with constituents</span>
+                                        <span class="form-label">Please also provide the estimated size of the event</span>
+                                        <span class="error-message">@Html.ValidationMessageFor(model => model.Details2)</span>
+                                        @Html.TextAreaWithErrorClassFor(model => model.Details2, new { @rows = 5, @class = "form-control form-control-3-4", @style = "width: 100%;" }, "form-control-error")
+                                    </div>
                                     break;
                                 case 3:
-                                    <label class="form-label" for="Details3">Please provide a description for your reason</label>
-                                    <span class="form-hint">for example: Select Committee Trip, Delegation on behalf of a group, an All Party Parliamentary related trip</span>
-                                    <span class="form-label">What will be the repercussions of the slip being revoked at the last minute? <br/>Can the event be held on the Parliamentary Estate if necessary?</span>
-                                    <span class="error-message">@Html.ValidationMessageFor(model => model.Details3)</span>
-                                    @Html.TextAreaWithValidationFor(model => model.Details3, new { @rows = 5, @class = "form-control form-control-3-4", @style = "width: 100%;" }, new { @rows = 5, @class = "form-control form-control-3-4 form-control-error", @style = "width: 100%;" })
+                                    <div class="form-group @Html.ValidationErrorClassFor(model => model.Details3, "form-group-error")">
+                                        <label class="form-label" for="Details3">Please provide a description for your reason</label>
+                                        <span class="form-hint">for example: Select Committee Trip, Delegation on behalf of a group, an All Party Parliamentary related trip</span>
+                                        <span class="form-label">What will be the repercussions of the slip being revoked at the last minute? <br />Can the event be held on the Parliamentary Estate if necessary?</span>
+                                        <span class="error-message">@Html.ValidationMessageFor(model => model.Details3)</span>
+                                        @Html.TextAreaWithErrorClassFor(model => model.Details3, new { @rows = 5, @class = "form-control form-control-3-4", @style = "width: 100%;" }, "form-control-error")
+                                    </div>
                                     break;
                                 case 5:
-                                    <label class="form-label" for="Details4">What is the personal/other reason?</label>
-                                    <span class="form-hint">For example dentist, funeral or wedding. If you do not wish to mention the reason to us, please just write 'Personal' and let your Whip know</span>
-                                    <span class="error-message">@Html.ValidationMessageFor(model => model.Details4)</span>
-                                    @Html.TextAreaWithValidationFor(model => model.Details4, new { @rows = 5, @class = "form-control form-control-3-4", @style = "width: 100%;" }, new { @rows = 5, @class = "form-control form-control-3-4 form-control-error", @style = "width: 100%;" })
+                                    <div class="form-group @Html.ValidationErrorClassFor(model => model.Details4, "form-group-error")">
+                                        <label class="form-label" for="Details4">What is the personal/other reason?</label>
+                                        <span class="form-hint">For example dentist, funeral or wedding. If you do not wish to mention the reason to us, please just write 'Personal' and let your Whip know</span>
+                                        <span class="error-message">@Html.ValidationMessageFor(model => model.Details4)</span>
+                                        @Html.TextAreaWithErrorClassFor(model => model.Details4, new { @rows = 5, @class = "form-control form-control-3-4", @style = "width: 100%;" }, "form-control-error")
+                                    </div>
                                     break;
                             }
                         </div>

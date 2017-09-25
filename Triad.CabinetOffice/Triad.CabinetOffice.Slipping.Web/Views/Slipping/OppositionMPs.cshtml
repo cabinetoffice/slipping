@@ -40,7 +40,7 @@
                                             <div class="form-group list-item @Html.ValidationErrorClassFor(string.Format("MPs[{0}].FullName", i), "form-group-error")">
                                                 @Html.LabelFor(model => model.MPs[i].FullName, new { @class = "form-label" })
                                                 <span class="error-message">@Html.ValidationMessageFor(model => model.MPs[i].FullName)</span>
-                                                @Html.TextBoxWithValidationFor(model => model.MPs[i].FullName, new { @class = "form-control" }, string.Format("MPs[{0}].FullName", i), new { @class = "form-control form-control-error" })
+                                                @Html.TextBoxWithErrorClassFor(model => model.MPs[i].FullName, new { @class = "form-control" }, string.Format("MPs[{0}].FullName", i), "form-control-error")
                                                 @Html.HiddenFor(model => model.MPs[i].ID)
                                                 @Html.HiddenFor(model => model.MPs[i].MPID)
                                             </div>
