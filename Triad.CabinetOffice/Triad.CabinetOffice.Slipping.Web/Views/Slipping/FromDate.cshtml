@@ -22,9 +22,9 @@
                 @Html.LabelFor(model=>model.Date, new { @class = "form-label" })
                 <span class="form-hint">for example: 12/04/2017</span>
                 <span class="error-message">@Html.ValidationMessageFor(model => model.Date)</span>
-                @if (Request.Browser.Browser == "IE")
+                @if (Request.Browser.Browser == "IE" || Request.Browser.Browser == "InternetExplorer" || Request.Browser.Browser == "Firefox")
                 {
-                    @Html.EditorFor(model => model.Date, new { htmlAttributes = new { @class = "form-control", @type = "date" } })
+                    @Html.EditorFor(model => model.Date, new { htmlAttributes = new { @class = "form-control", @type = "text" } })
                 }
                 else
                 {
