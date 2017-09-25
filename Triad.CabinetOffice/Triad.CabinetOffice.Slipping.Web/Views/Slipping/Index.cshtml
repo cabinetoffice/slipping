@@ -2,13 +2,13 @@
 @using Triad.CabinetOffice.Slipping.Data.Models
 
 @{
-    ViewBag.Title = "Slipping Requests";
+    ViewBag.Title = string.Format("{0} MP slips", Model.MPName);
 }
 
 <div class="grid-row">
     <div class="column-two-thirds">
         <h1 class="heading-large">
-            @Model.MPName MP slipping requests
+            @Model.MPName MP slips
         </h1>
         <ol class="task-list">
             <li>
