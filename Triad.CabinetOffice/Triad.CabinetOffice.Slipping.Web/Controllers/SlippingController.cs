@@ -148,7 +148,9 @@ namespace Triad.CabinetOffice.Slipping.Web.Controllers
             IEnumerable<SlipSummary> visibleSlips = slips
                 .Where(s => s.ToDate.Date >= DateTime.Now.Date)
                 .OrderBy(s => s.ToDate);
-            ViewBag.ShowViewAll = visibleSlips.Count() > initialSlippingRequestListLength && !viewAll;
+
+            ViewBag.ShowViewAll = visibleSlips.Count() > initialSlippingRequestListLength;
+            ViewBag.ViewAllStatus = !viewAll;
 
             SlippingHistory model = new SlippingHistory()
             {
