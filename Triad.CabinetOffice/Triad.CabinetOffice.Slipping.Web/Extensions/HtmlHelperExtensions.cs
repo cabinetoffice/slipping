@@ -24,6 +24,7 @@ namespace Triad.CabinetOffice.Slipping.Web.Extensions
                 return new MvcHtmlString(errorClass);
             }
         }
+
         public static MvcHtmlString ValidationErrorClassFor<TModel>(this HtmlHelper<TModel> htmlHelper, string propertyName, string errorClass)
         {
             if (htmlHelper.ViewData.ModelState.IsValidField(propertyName))
@@ -56,6 +57,7 @@ namespace Triad.CabinetOffice.Slipping.Web.Extensions
             }
             return null;
         }
+
         public static MvcHtmlString EditorWithValidationFor<TModel, TValue>(this HtmlHelper<TModel> html, Expression<Func<TModel, TValue>> expression, object additionalViewData, object additionalViewDataInvalid)
         {
             MemberExpression body = expression.Body as MemberExpression;
@@ -69,6 +71,7 @@ namespace Triad.CabinetOffice.Slipping.Web.Extensions
                 return EditorExtensions.EditorFor(html, expression, additionalViewDataInvalid);
             }
         }
+
         public static MvcHtmlString DropDownListWithValidationFor<TModel, TProperty>(this HtmlHelper<TModel> htmlHelper, Expression<Func<TModel, TProperty>> expression, IEnumerable<SelectListItem> selectList, object htmlAttributes, object htmlAttributesInvalid)
         {
             MemberExpression body = expression.Body as MemberExpression;
@@ -80,6 +83,32 @@ namespace Triad.CabinetOffice.Slipping.Web.Extensions
             else
             {
                 return SelectExtensions.DropDownListFor(htmlHelper, expression, selectList, htmlAttributesInvalid);
+            }
+        }
+
+        public static MvcHtmlString TextAreaWithValidationFor<TModel, TProperty>(this HtmlHelper<TModel> htmlHelper, Expression<Func<TModel, TProperty>> expression, object htmlAttributes, object htmlAttributesInvalid)
+        {
+            MemberExpression body = expression.Body as MemberExpression;
+            string propertyName = body.Member.Name;
+            if (htmlHelper.ViewData.ModelState.IsValidField(propertyName))
+            {
+                return TextAreaExtensions.TextAreaFor(htmlHelper, expression, htmlAttributes);
+            }
+            else
+            {
+                return TextAreaExtensions.TextAreaFor(htmlHelper, expression, htmlAttributesInvalid);
+            }
+        }
+
+        public static MvcHtmlString TextBoxWithValidationFor<TModel, TProperty>(this HtmlHelper<TModel> htmlHelper, Expression<Func<TModel, TProperty>> expression, object htmlAttributes, string validationProperty, object htmlAttributesInvalid)
+        {
+            if (htmlHelper.ViewData.ModelState.IsValidField(validationProperty))
+            {
+                return InputExtensions.TextBoxFor(htmlHelper, expression, htmlAttributes);
+            }
+            else
+            {
+                return InputExtensions.TextBoxFor(htmlHelper, expression, htmlAttributesInvalid);
             }
         }
     }
