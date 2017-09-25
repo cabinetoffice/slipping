@@ -358,7 +358,7 @@ namespace Triad.CabinetOffice.Slipping.Web.Controllers
             {
                 var model = new ReasonAndDetails
                 {
-                    Reasons = ReasonRepository.Get(),
+                    Reasons = ReasonRepository.Get().Where(r => r.ID != 4).ToList(),
                     ID = slippingRequest.ID,
                     Reason = slippingRequest.ReasonID.HasValue ? slippingRequest.ReasonID.ToString() : "-1"
                 };
@@ -374,7 +374,7 @@ namespace Triad.CabinetOffice.Slipping.Web.Controllers
                     case "3":
                         model.Details3 = slippingRequest.Details ?? string.Empty;
                         break;
-                    case "4":
+                    case "5":
                         model.Details4 = slippingRequest.Details ?? string.Empty;
                         break;
                 }
@@ -417,7 +417,7 @@ namespace Triad.CabinetOffice.Slipping.Web.Controllers
                         ModelState.AddModelError("Details3", "A description of the reason is required");
                     }
                     break;
-                case "4":
+                case "5":
                     if (string.IsNullOrWhiteSpace(model.Details4))
                     {
                         ModelState.AddModelError("Details4", "A description of the reason is required");
@@ -441,7 +441,7 @@ namespace Triad.CabinetOffice.Slipping.Web.Controllers
                         case "3":
                             slippingRequest.Details = model.Details3;
                             break;
-                        case "4":
+                        case "5":
                             slippingRequest.Details = model.Details4;
                             break;
                     }
@@ -451,7 +451,7 @@ namespace Triad.CabinetOffice.Slipping.Web.Controllers
                 }
                 else
                 {
-                    model.Reasons = ReasonRepository.Get();
+                    model.Reasons = ReasonRepository.Get().Where(r => r.ID != 4).ToList();
                     return View(model);
                 }
             }
@@ -692,7 +692,7 @@ namespace Triad.CabinetOffice.Slipping.Web.Controllers
         public ActionResult Review(int id, SlipSummary model)
         {
             var slip = SlippingRepository.GetSummaries(MPID, SlippingUser.ID).FirstOrDefault(s => s.ID == id);
-            if (slip != null && slip.Status != "Cancelled")
+            if (slip != null && slip.Status != "Refused" && slip.Status != "Revoked" && slip.Status != "Cancelled")
             {
                 if (CancelSlip(slip, SlippingUser.ID))
                 {

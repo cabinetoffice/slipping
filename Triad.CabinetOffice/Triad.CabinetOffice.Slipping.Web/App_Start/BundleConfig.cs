@@ -19,15 +19,10 @@ namespace Triad.CabinetOffice.Slipping.Web
             bundles.Add(new ScriptBundle("~/bundles/modernizr").Include(
                         "~/Scripts/modernizr-*"));
 
-            bundles.Add(new ScriptBundle("~/bundles/bootstrap").Include(
-                      "~/Scripts/bootstrap.js",
-                      "~/Scripts/respond.js"));
-
-            bundles.Add(new StyleBundle("~/Content/css").Include(
-                      "~/Content/application.css",
-                      "~/Content/govuk-template.css",
-                      "~/Content/govuk-elements-styles.css",
-                      "~/Content/check-your-answers.css"));
+            bundles.Add(new StyleBundle("~/bundles/stylesheets").Include(
+                      "~/public/stylesheets/govuk-template.css",
+                      "~/public/stylesheets/check-your-answers.css",
+                      "~/public/stylesheets/application.css"));
         }
     }
 }

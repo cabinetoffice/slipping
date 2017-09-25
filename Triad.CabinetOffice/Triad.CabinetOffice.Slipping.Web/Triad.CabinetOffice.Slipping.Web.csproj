@@ -203,21 +203,25 @@
     <Compile Include="ViewModels\SlippingUser.cs" />
   </ItemGroup>
   <ItemGroup>
-    <Content Include="Content\application.css" />
-    <Content Include="Content\bootstrap.css" />
-    <Content Include="Content\bootstrap.min.css" />
-    <Content Include="Content\govuk-elements-styles.css" />
-    <Content Include="Content\govuk-template.css" />
-    <Content Include="Content\images\favicon.ico" />
-    <Content Include="Content\images\gov.uk_logotype_crown.png" />
-    <Content Include="Content\images\govuk-crest.png" />
-    <Content Include="Content\images\open-government-licence.png" />
+    <Content Include="public\stylesheets\application-ie8.css" />
+    <Content Include="public\stylesheets\application.css" />
+    <Content Include="public\stylesheets\check-your-answers.css" />
+    <Content Include="public\stylesheets\govuk-elements-styles.css" />
+    <Content Include="public\images\apple-touch-icon-152x152.png" />
+    <Content Include="public\images\apple-touch-icon-167x167.png" />
+    <Content Include="public\images\apple-touch-icon-180x180.png" />
+    <Content Include="public\images\apple-touch-icon.png" />
+    <Content Include="public\images\favicon.ico" />
+    <Content Include="public\stylesheets\images\gov.uk_logotype_crown.png" />
+    <Content Include="public\stylesheets\images\govuk-crest.png" />
+    <Content Include="public\images\gov_uk_logotype_crown_svg0_22.svg" />
+    <Content Include="public\stylesheets\images\open-government-licence.png" />
     <Content Include="favicon.ico" />
-    <Content Include="fonts\glyphicons-halflings-regular.svg" />
     <Content Include="Global.asax" />
     <Content Include="Content\Site.css" />
     <Content Include="public\images\gov.uk_logotype_crown_invert_trans.png" />
     <Content Include="public\images\icon-pointer.png" />
+    <Content Include="public\images\opengraph-image.png" />
     <Content Include="public\images\separator.png" />
     <Content Include="public\javascripts\application.js" />
     <Content Include="public\javascripts\auto-store-data.js" />
@@ -228,9 +232,13 @@
     <Content Include="public\javascripts\govuk\show-hide-content.js" />
     <Content Include="public\javascripts\jquery-1.11.3.js" />
     <Content Include="public\javascripts\validation.js" />
+    <Content Include="public\stylesheets\fonts-ie8.css" />
     <Content Include="public\stylesheets\fonts.css" />
-    <Content Include="Scripts\bootstrap.js" />
-    <Content Include="Scripts\bootstrap.min.js" />
+    <Content Include="public\stylesheets\govuk-template-ie6.css" />
+    <Content Include="public\stylesheets\govuk-template-ie7.css" />
+    <Content Include="public\stylesheets\govuk-template-ie8.css" />
+    <Content Include="public\stylesheets\govuk-template-print.css" />
+    <Content Include="public\stylesheets\govuk-template.css" />
     <Content Include="ApplicationInsights.config">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
@@ -251,8 +259,6 @@
     <Content Include="Scripts\jquery.validate.unobtrusive.js" />
     <Content Include="Scripts\jquery.validate.unobtrusive.min.js" />
     <Content Include="Scripts\modernizr-2.6.2.js" />
-    <Content Include="Scripts\respond.js" />
-    <Content Include="Scripts\respond.min.js" />
     <Content Include="Web.config">
       <SubType>Designer</SubType>
     </Content>
@@ -287,15 +293,6 @@
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
-  </ItemGroup>
-  <ItemGroup>
-    <Content Include="fonts\glyphicons-halflings-regular.woff" />
-  </ItemGroup>
-  <ItemGroup>
-    <Content Include="fonts\glyphicons-halflings-regular.ttf" />
-  </ItemGroup>
-  <ItemGroup>
-    <Content Include="fonts\glyphicons-halflings-regular.eot" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="packages.config" />

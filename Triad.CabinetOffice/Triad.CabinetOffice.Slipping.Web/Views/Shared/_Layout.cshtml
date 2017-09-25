@@ -7,31 +7,31 @@
     <meta charset="utf-8" />
     <title>@ViewBag.Title</title>
     <!--[if gt IE 8]><!-->
-    <link href="/Content/stylesheets/govuk-template.css?0.22.1" media="screen" rel="stylesheet" /><!--<![endif]-->
-    <!--[if IE 6]><link href="/Content/stylesheets/govuk-template-ie6.css?0.22.1" media="screen" rel="stylesheet" /><![endif]-->
-    <!--[if IE 7]><link href="/Content/stylesheets/govuk-template-ie7.css?0.22.1" media="screen" rel="stylesheet" /><![endif]-->
-    <!--[if IE 8]><link href="/Content/stylesheets/govuk-template-ie8.css?0.22.1" media="screen" rel="stylesheet" /><![endif]-->
-    <link href="/Content/stylesheets/govuk-template-print.css?0.22.1" media="print" rel="stylesheet" />
-    <!--[if IE 8]><link href="/Content/stylesheets/fonts-ie8.css?0.22.1" media="all" rel="stylesheet" /><![endif]-->
+    <link href="/public/stylesheets/govuk-template.css?0.22.1" media="screen" rel="stylesheet" /><!--<![endif]-->
+    <!--[if IE 6]><link href="/public/stylesheets/govuk-template-ie6.css?0.22.1" media="screen" rel="stylesheet" /><![endif]-->
+    <!--[if IE 7]><link href="/public/stylesheets/govuk-template-ie7.css?0.22.1" media="screen" rel="stylesheet" /><![endif]-->
+    <!--[if IE 8]><link href="/public/stylesheets/govuk-template-ie8.css?0.22.1" media="screen" rel="stylesheet" /><![endif]-->
+    <link href="/public/stylesheets/govuk-template-print.css?0.22.1" media="print" rel="stylesheet" />
+    <!--[if IE 8]><link href="/public/stylesheets/fonts-ie8.css?0.22.1" media="all" rel="stylesheet" /><![endif]-->
     <!--[if gte IE 9]><!-->
     <link href="/public/stylesheets/fonts.css?0.22.1" media="all" rel="stylesheet" /><!--<![endif]-->
-    <!--[if lt IE 9]><script src="/Content/javascripts/ie.js?0.22.1"></script><![endif]-->
-    <link rel="shortcut icon" href="/Content/images/favicon.ico?0.22.1" type="image/x-icon" />
+    <!--[if lt IE 9]><script src="/public/javascripts/ie.js?0.22.1"></script><![endif]-->
+    <link rel="shortcut icon" href="/public/images/favicon.ico?0.22.1" type="image/x-icon" />
 
-    <link rel="mask-icon" href="/Content/images/gov.uk_logotype_crown.svg?0.22.1" color="#0b0c0c">
-    <link rel="apple-touch-icon" sizes="180x180" href="/Content/images/apple-touch-icon-180x180.png?0.22.1">
-    <link rel="apple-touch-icon" sizes="167x167" href="/Content/images/apple-touch-icon-167x167.png?0.22.1">
-    <link rel="apple-touch-icon" sizes="152x152" href="/Content/images/apple-touch-icon-152x152.png?0.22.1">
-    <link rel="apple-touch-icon" href="/Content/images/apple-touch-icon.png?0.22.1">
+    <link rel="mask-icon" href="/public/images/gov.uk_logotype_crown.svg?0.22.1" color="#0b0c0c">
+    <link rel="apple-touch-icon" sizes="180x180" href="/public/images/apple-touch-icon-180x180.png?0.22.1">
+    <link rel="apple-touch-icon" sizes="167x167" href="/public/images/apple-touch-icon-167x167.png?0.22.1">
+    <link rel="apple-touch-icon" sizes="152x152" href="/public/images/apple-touch-icon-152x152.png?0.22.1">
+    <link rel="apple-touch-icon" href="/public/images/apple-touch-icon.png?0.22.1">
 
     <meta name="theme-color" content="#0b0c0c" />
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <meta property="og:image" content="/Content/images/opengraph-image.png?0.22.1">
+    <meta property="og:image" content="/public/images/opengraph-image.png?0.22.1">
     
+    <!--[if lte IE 8]><link href="/public/stylesheets/application-ie8.css" rel="stylesheet" type="text/css" /><![endif]-->
+    <!--[if gt IE 8]><!-->
+    <link href="/public/stylesheets/application.css" media="screen" rel="stylesheet" type="text/css" /><!--<![endif]-->
 
-    @Styles.Render("~/Content/css")
-    @Scripts.Render("~/bundles/modernizr")
-    <link href="/Content/application.css" rel="stylesheet" type="text/css" media="screen">
 </head>
 <body>
     <script>document.body.className = ((document.body.className) ? document.body.className + ' js-enabled' : 'js-enabled');</script>
@@ -111,15 +111,7 @@
     </footer>
     <div id="global-app-error" class="app-error hidden"></div>
 
-
-    
-
-
-
-    @Scripts.Render("~/bundles/jquery")
-    @Scripts.Render("~/bundles/bootstrap")
     @RenderSection("scripts", required: false)
-
 
     <script src="/public/javascripts/govuk-template.js?0.22.1"></script>
     <!-- Javascript -->

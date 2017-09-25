@@ -1,0 +1,99 @@
+@media (min-width: 769px) {
+    .govuk-check-your-answers {
+        display: table;
+    }
+}
+
+.govuk-check-your-answers > * {
+    position: relative;
+    border-bottom: 1px solid #bfc1c3;
+}
+
+@media (min-width: 769px) {
+    .govuk-check-your-answers > * {
+        display: table-row;
+        border-bottom-width: 0;
+    }
+}
+
+.govuk-check-your-answers > * > * {
+    display: block;
+}
+
+@media (min-width: 769px) {
+    .govuk-check-your-answers > * > * {
+        display: table-cell;
+        border-bottom: 1px solid #bfc1c3;
+        padding: 0.63158em 1.05263em 0.47368em 0;
+        margin: 0;
+    }
+}
+
+@media (min-width: 769px) {
+    .govuk-check-your-answers > *:first-child > * {
+        padding-top: 0;
+    }
+}
+
+.govuk-check-your-answers .cya-question {
+    font-weight: bold;
+    margin: 0.63158em 4em 0.21053em 0;
+}
+
+.govuk-check-your-answers > *:first-child .cya-question {
+    margin-top: 0;
+}
+
+@media (min-width: 769px) {
+    .govuk-check-your-answers.cya-questions-short, .govuk-check-your-answers.cya-questions-long {
+        width: 100%;
+    }
+
+    .govuk-check-your-answers.cya-questions-short .cya-question {
+        width: 30%;
+    }
+
+    .govuk-check-your-answers.cya-questions-long .cya-question {
+        width: 50%;
+    }
+}
+
+.govuk-check-your-answers .cya-answer {
+    padding-bottom: 0.47368em;
+}
+
+.govuk-check-your-answers .cya-change {
+    text-align: right;
+    position: absolute;
+    top: 0;
+    right: 0;
+}
+
+@media (min-width: 769px) {
+    .govuk-check-your-answers .cya-change {
+        position: static;
+        padding-right: 0;
+    }
+}
+
+.check-your-answers td {
+    font-family: "nta", Arial, sans-serif;
+    font-weight: 400;
+    text-transform: none;
+    font-size: 16px;
+    line-height: 1.25;
+    vertical-align: top;
+}
+
+@media (min-width: 641px) {
+    .check-your-answers td {
+        font-size: 19px;
+        line-height: 1.31579;
+    }
+}
+
+.check-your-answers .change-answer {
+    text-align: right;
+    font-weight: bold;
+    padding-right: 0;
+}

@@ -13,11 +13,7 @@ namespace Triad.CabinetOffice.Slipping.Data.Repositories
 
         public ReasonRepository() : base()
         {
-            requestReason = new List<RequestReason>();
-            requestReason.Add(new RequestReason { ID = 1, Reason = "Government Work (Secretaries of State / Ministers of State only)" });
-            requestReason.Add(new RequestReason { ID = 2, Reason = "Constituency Engagement" });
-            requestReason.Add(new RequestReason { ID = 3, Reason = "Parliamentary Campaigning Activity" });
-            requestReason.Add(new RequestReason { ID = 4, Reason = "Personal/Other" });
+            requestReason = PAWSDB.Absence_Request_Reasons.Select(arr => new RequestReason() { ID = arr.ID, Reason = arr.Reason }).ToList();
         }
 
         public ICollection<RequestReason> Get()
