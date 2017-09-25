@@ -196,6 +196,7 @@ namespace Triad.CabinetOffice.Slipping.Web.Controllers
             if (fromDate < DateTime.Now.AddMinutes(15))
             {
                 ModelState.AddModelError("Hour", "From Time must be at least 15 minutes from now");
+                ModelState.AddModelError("Minute", "From Time must be at least 15 minutes from now");
             }
 
             if (ModelState.IsValid)
@@ -245,7 +246,7 @@ namespace Triad.CabinetOffice.Slipping.Web.Controllers
                 {
                     ID = slippingRequest.ID,
                     Date = slippingRequest.ToDate ?? slippingRequest.FromDate,
-                    Hour = slippingRequest.ToDate.HasValue ? slippingRequest.ToDate.Value.ToString("HH") : slippingRequest.FromDate.ToString("HH"),
+                    Hour = slippingRequest.ToDate.HasValue ? slippingRequest.ToDate.Value.ToString("HH") : slippingRequest.FromDate.AddHours(1).ToString("HH"),
                     Minute = slippingRequest.ToDate.HasValue ? slippingRequest.ToDate.Value.ToString("mm") : slippingRequest.FromDate.ToString("mm")
                 };
                 return View(model);

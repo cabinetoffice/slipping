@@ -56,5 +56,31 @@ namespace Triad.CabinetOffice.Slipping.Web.Extensions
             }
             return null;
         }
+        public static MvcHtmlString EditorWithValidationFor<TModel, TValue>(this HtmlHelper<TModel> html, Expression<Func<TModel, TValue>> expression, object additionalViewData, object additionalViewDataInvalid)
+        {
+            MemberExpression body = expression.Body as MemberExpression;
+            string propertyName = body.Member.Name;
+            if (html.ViewData.ModelState.IsValidField(propertyName))
+            {
+                return EditorExtensions.EditorFor(html, expression, additionalViewData);
+            }
+            else
+            {
+                return EditorExtensions.EditorFor(html, expression, additionalViewDataInvalid);
+            }
+        }
+        public static MvcHtmlString DropDownListWithValidationFor<TModel, TProperty>(this HtmlHelper<TModel> htmlHelper, Expression<Func<TModel, TProperty>> expression, IEnumerable<SelectListItem> selectList, object htmlAttributes, object htmlAttributesInvalid)
+        {
+            MemberExpression body = expression.Body as MemberExpression;
+            string propertyName = body.Member.Name;
+            if (htmlHelper.ViewData.ModelState.IsValidField(propertyName))
+            {
+                return SelectExtensions.DropDownListFor(htmlHelper, expression, selectList, htmlAttributes);
+            }
+            else
+            {
+                return SelectExtensions.DropDownListFor(htmlHelper, expression, selectList, htmlAttributesInvalid);
+            }
+        }
     }
 }
