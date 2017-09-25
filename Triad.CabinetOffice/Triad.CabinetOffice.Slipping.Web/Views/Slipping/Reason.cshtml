@@ -33,28 +33,28 @@
                                     <label class="form-label" for="Reason-@reason.ID">Please provide a description for your reason</label>
                                     <span class="form-hint">for example: Select Committee Trip, Delegation on behalf of a group, an All Party Parliamentary related trip</span>
                                     <span class="form-label">What will be the repercussions of the slip being revoked at the last minute? <br/>Please state if the trip has been approved by Number 10</span>
-                                    @Html.TextAreaFor(model => model.Details1, new { @rows = 5, @class = "form-control form-control-3-4", @style = "width: 100%;" })
                                     <span class="error-message">@Html.ValidationMessageFor(model => model.Details1)</span>
+                                    @Html.TextAreaFor(model => model.Details1, new { @rows = 5, @class = "form-control form-control-3-4", @style = "width: 100%;" })
                                     break;
                                 case 2:
                                     <label class="form-label" for="Reason-@reason.ID">What type of constituency engagement is it?</label>
                                     <span class="form-hint">for example: fundraising, charity event or surgery appointments with constituents</span>
                                     <span class="form-label">Please also provide the estimated size of the event</span>
-                                    @Html.TextAreaFor(model => model.Details2, new { @rows = 5, @class = "form-control form-control-3-4", @style = "width: 100%;" })
                                     <span class="error-message">@Html.ValidationMessageFor(model => model.Details2)</span>
+                                    @Html.TextAreaFor(model => model.Details2, new { @rows = 5, @class = "form-control form-control-3-4", @style = "width: 100%;" })
                                     break;
                                 case 3:
                                     <label class="form-label" for="Reason-@reason.ID">Please provide a description for your reason</label>
                                     <span class="form-hint">for example: Select Committee Trip, Delegation on behalf of a group, an All Party Parliamentary related trip</span>
                                     <span class="form-label">What will be the repercussions of the slip being revoked at the last minute? <br/>Can the event be held on the Parliamentary Estate if necessary?</span>
-                                    @Html.TextAreaFor(model => model.Details3, new { @rows = 5, @class = "form-control form-control-3-4", @style = "width: 100%;" })
                                     <span class="error-message">@Html.ValidationMessageFor(model => model.Details3)</span>
+                                    @Html.TextAreaFor(model => model.Details3, new { @rows = 5, @class = "form-control form-control-3-4", @style = "width: 100%;" })
                                     break;
                                 case 5:
                                     <label class="form-label" for="Reason-@reason.ID">What is the personal/other reason?</label>
                                     <span class="form-hint">For example dentist, funeral or wedding. If you do not wish to mention the reason to us, please just write 'Personal' and let your Whip know</span>
-                                    @Html.TextAreaFor(model => model.Details4, new { @rows = 5, @class = "form-control form-control-3-4", @style = "width: 100%;" })
                                     <span class="error-message">@Html.ValidationMessageFor(model => model.Details4)</span>
+                                    @Html.TextAreaFor(model => model.Details4, new { @rows = 5, @class = "form-control form-control-3-4", @style = "width: 100%;" })
                                     break;
                             }
                         </div>
