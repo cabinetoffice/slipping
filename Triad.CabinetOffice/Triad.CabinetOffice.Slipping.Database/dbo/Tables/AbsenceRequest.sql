@@ -16,6 +16,7 @@
 	CONSTRAINT PK_AbsenceRequest PRIMARY KEY (ID),
 	[Location] NVARCHAR(100) NULL, 
     [TravelTimeInHours] INT NULL, 
+    [PAWSAbsenceRequestID] INT NULL, 
     CONSTRAINT FK_AbsenceRequest_User_CreatedBy FOREIGN KEY (CreatedBy) REFERENCES [dbo].[User](ID),
 	CONSTRAINT FK_AbsenceRequest_User_LastChangedBy FOREIGN KEY (LastChangedBy) REFERENCES [dbo].[User](ID)
 )

@@ -9,7 +9,7 @@
 	   AR.PAWSAbsenceRequestID,
 	   AR.CreatedDate,U1.ForeNames + ' '+ U1.Surname [CreatedBy],AR.LastChangedDate, U2.ForeNames + ' '+ U2.Surname [LastChangeBy],
 	   ARMP.MPFullName [OppositionMPAttending]
-FROM [dbo].[AbsenceRequest] AR
- LEFT JOIN [dbo].[AbsenceRequestOppositionMP] ARMP ON AR.ID=ARMP.AbsenceRequestID
- LEFT JOIN [dbo].[User] U1 on U1.ID=AR.CreatedBy
- LEFT JOIN [dbo].[User] U2 on U2.ID=AR.LastChangedBy
+FROM [dbo].[AbsenceRequest] AS AR
+ LEFT JOIN [dbo].[AbsenceRequestOppositionMP] AS ARMP ON AR.ID=ARMP.AbsenceRequestID
+ LEFT JOIN [dbo].[User] AS U1 on U1.ID=AR.CreatedBy
+ LEFT JOIN [dbo].[User] AS U2 on U2.ID=AR.LastChangedBy
