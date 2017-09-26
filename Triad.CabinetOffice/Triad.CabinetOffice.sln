@@ -1,13 +1,18 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio 15
-VisualStudioVersion = 15.0.26228.4
+VisualStudioVersion = 15.0.26730.12
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Triad.CabinetOffice.Slipping.Web", "Triad.CabinetOffice.Slipping.Web\Triad.CabinetOffice.Slipping.Web.csproj", "{728747C0-EEE2-43CF-8C39-D7DBE494B97D}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Triad.CabinetOffice.Slipping.Data", "Triad.CabinetOffice.Slipping.Data\Triad.CabinetOffice.Slipping.Data.csproj", "{75ED7B5B-513F-47AC-806F-B881E05200EE}"
 EndProject
 Project("{00D1A9C2-B5F0-4AF3-8072-F6C62B433612}") = "Triad.CabinetOffice.Slipping.Database", "Triad.CabinetOffice.Slipping.Database\Triad.CabinetOffice.Slipping.Database.sqlproj", "{A18BAB86-4533-4E38-BEAE-93579AC8D313}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Reports", "Reports", "{AFBA27C0-0623-439B-8CD6-12EBAE192CBC}"
+	ProjectSection(SolutionItems) = preProject
+		C:\Users\unaeem\Downloads\AbsenceRequest-AuditHistory.xlsx = C:\Users\unaeem\Downloads\AbsenceRequest-AuditHistory.xlsx
+	EndProjectSection
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -32,5 +37,8 @@ Global
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {1781F96D-F14D-4558-B5AB-30FDA643DD28}
 	EndGlobalSection
 EndGlobal
