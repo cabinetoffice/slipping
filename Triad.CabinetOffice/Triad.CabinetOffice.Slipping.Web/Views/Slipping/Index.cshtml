@@ -10,30 +10,27 @@
         <h1 class="heading-large">
             @Model.MPName MP slips
         </h1>
-        <ol class="task-list">
-            <li>
-                <ul class="task-list-items">
-                    @foreach (SlipSummary slip in Model.Slips)
-                    {
-                        <li class="task-list-item">
-                            @Html.ActionLink(string.Format("Slip - {0}", @slip.FromDate.ToString("dd/MM/yyyy - HH:mm")), @slip.IsUnsubmitted ? "CheckYourAnswers" : "Review", new { id = @slip.ID }, new { @class="task-name", @aria_describedby = string.Format("task-status-{0}", @slip.ID) })
-                            <strong class="task-completed" id="@string.Format("task-status-{0}", @slip.ID)">@slip.Status</strong>
-                        </li>
-                    }
-                    @if (ViewBag.ShowViewAll)
-                    {
+        <ul class="task-list-items">
+            @foreach (SlipSummary slip in Model.Slips)
+            {
+                <li class="task-list-item">
+                    @Html.ActionLink(string.Format("Slip - {0}", @slip.FromDate.ToString("dd/MM/yyyy - HH:mm")), @slip.IsUnsubmitted ? "CheckYourAnswers" : "Review", new { id = @slip.ID }, new { @class="task-name", @aria_describedby = string.Format("task-status-{0}", @slip.ID) })
+                    <strong class="task-completed" id="@string.Format("task-status-{0}", @slip.ID)">@slip.Status</strong>
+                </li>
+            }
+            @if (ViewBag.ShowViewAll)
+            {
 
-                        if (ViewBag.ViewAllStatus)
-                        {
-                            <p style="float:right;clear:both; margin-top:10px;">@Html.ActionLink("View All", "Index", new { viewAll = true })</p>
-                        }
-                        else
-                        {
-                            <p style="float:right;clear:both; margin-top:10px;">@Html.ActionLink("Close", "Index", new { viewAll = false })</p>
-                        }
-                    }
-                </ul>
-        </ol>
+                if (ViewBag.ViewAllStatus)
+                {
+                    <p style="float:right;clear:both; margin-top:10px;">@Html.ActionLink("View All", "Index", new { viewAll = true })</p>
+                }
+                else
+                {
+                    <p style="float:right;clear:both; margin-top:10px;">@Html.ActionLink("Close", "Index", new { viewAll = false })</p>
+                }
+            }
+        </ul>
         <p>
             @Html.ActionLink("Create a new slip", "FromDate", null, new { @class = "button", @role = "button" })
         </p>

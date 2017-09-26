@@ -24,27 +24,24 @@
                 <span class="error-message">@Html.ValidationMessageFor(model => model.Date)</span>
                 @if (Request.Browser.Browser == "IE" || Request.Browser.Browser == "InternetExplorer" || Request.Browser.Browser == "Firefox")
                 {
-                    @Html.EditorWithValidationFor(model => model.Date, new { htmlAttributes = new { @class = "form-control", @type = "text" } }, new { htmlAttributes = new { @class = "form-control form-control-error", @type = "text" } })
+                    @Html.TextBoxWithErrorClassFor(model => model.Date, new { @class = "form-control", @type = "text" }, "form-control-error")
                 }
                 else
                 {
-                    @Html.EditorWithValidationFor(model => model.Date, new { htmlAttributes = new { @class = "form-control", @type = "date", @Value = Model.Date.ToString("yyyy-MM-dd"), @min = DateTime.Now.ToString("yyyy-MM-dd") } }, new { htmlAttributes = new { @class = "form-control form-control-error", @type = "date", @Value = Model.Date.ToString("yyyy-MM-dd") } })
+                    @Html.TextBoxWithErrorClassFor(model => model.Date, new { @class = "form-control", @type = "date", @Value = Model.Date.ToString("yyyy-MM-dd"), @min = DateTime.Now.ToString("yyyy-MM-dd") }, "form-control-error")
                 }
             </div>
 
-            <fieldset>
+            <div class="form-group @Html.ValidationErrorClassFor(model => model.Hour, "form-group-error")">
                 <label class="form-label">What time will you be going?</label>
-                <div class="form-group @Html.ValidationErrorClassFor(model => model.Hour, "form-group-error")">
-                    @Html.LabelFor(model => model.Hour, new { @class = "form-label" })
-                    <span class="error-message">@Html.ValidationMessageFor(model => model.Hour)</span>
-                    @Html.DropDownListWithValidationFor(model => model.Hour, Model.Hours, new { @class = "form-control" }, new { @class = "form-control form-control-error" })
-                </div>
-                <div class="form-group @Html.ValidationErrorClassFor(model => model.Minute, "form-group-error")">
-                    @Html.LabelFor(model=>model.Minute, "Minutes", new { @class = "form-label" })
-                    <span class="error-message">@Html.ValidationMessageFor(model => model.Minute)</span>
-                    @Html.DropDownListWithValidationFor(model => model.Minute, Model.Minutes, new { @class = "form-control" }, new { @class = "form-control form-control-error" })
-                </div>
-            </fieldset>
+                @Html.LabelFor(model => model.Hour, new { @class = "form-label" })
+                <span class="error-message">@Html.ValidationMessageFor(model => model.Hour)</span>
+                @Html.DropDownListWithErrorClassFor(model => model.Hour, Model.Hours, new { @class = "form-control" }, "form-control-error")
+                <br />
+                <br />
+                @Html.LabelFor(model => model.Minute, "Minutes", new { @class = "form-label" })
+                @Html.DropDownListWithErrorClassFor(model => model.Minute, Model.Minutes, new { @class = "form-control" }, "form-control-error")
+            </div>
 
             <div class="form-group">
                 <button class="button" type="submit">Continue</button>

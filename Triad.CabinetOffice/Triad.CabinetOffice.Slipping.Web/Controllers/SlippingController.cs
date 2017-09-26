@@ -207,13 +207,13 @@ namespace Triad.CabinetOffice.Slipping.Web.Controllers
             var fromDate = model.GetDateTime();
             if (fromDate < DateTime.Now.AddMinutes(15))
             {
-                ModelState.AddModelError("Hour", "From Time must be at least 15 minutes from now");
-                ModelState.AddModelError("Minute", "From Time must be at least 15 minutes from now");
+                ModelState.AddModelError("Hour", "Start time must be at least 15 minutes from now");
+                ModelState.AddModelError("Minute", string.Empty);
             }
 
             if(DatesOverlapExistingSlip(MPID, fromDate))
             {
-                ModelState.AddModelError("Date", "You have already submitted a slip for this date.");
+                ModelState.AddModelError("Date", "You have already submitted a slip for this date");
             }
 
             if (ModelState.IsValid)
@@ -289,20 +289,21 @@ namespace Triad.CabinetOffice.Slipping.Web.Controllers
 
                 if (toDate.Date < slippingRequest.FromDate.Date)
                 {
-                    ModelState.AddModelError("Date", "To Date cannot be before From Date");
+                    ModelState.AddModelError("Date", "Finish date cannot be before start date");
                 }
 
                 if (toDate.Date == slippingRequest.FromDate.Date)
                 {
                     if (toDate.TimeOfDay <= slippingRequest.FromDate.TimeOfDay)
                     {
-                        ModelState.AddModelError("Hour", "To Time must be at least 15 minutes after From Time");
+                        ModelState.AddModelError("Hour", "Finish time must be at least 15 minutes after start time");
+                        ModelState.AddModelError("Minute", string.Empty);
                     }
                 }
 
                 if(DatesOverlapExistingSlip(MPID, slippingRequest.FromDate, toDate))
                 {
-                    ModelState.AddModelError("Date", "The period you have selected overlaps with an existing slip you have submitted.");
+                    ModelState.AddModelError("Date", "The period you have selected overlaps with an existing slip you have submitted");
                 }
 
                 if (ModelState.IsValid)
