@@ -188,6 +188,8 @@
     <Compile Include="Controllers\AccountController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\SlippingController.cs" />
+    <Compile Include="Exceptions\SlippingException.cs" />
+    <Compile Include="Exceptions\SlippingUserNotFoundException.cs" />
     <Compile Include="Extensions\HtmlHelperExtensions.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>

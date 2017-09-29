@@ -10,6 +10,7 @@ using Triad.CabinetOffice.Slipping.Data.Models;
 using Triad.CabinetOffice.Slipping.Data.Repositories;
 using Triad.CabinetOffice.Slipping.Web.Attributes;
 using Triad.CabinetOffice.Slipping.Web.ViewModels;
+using Triad.CabinetOffice.Slipping.Web.Exceptions;
 
 namespace Triad.CabinetOffice.Slipping.Web.Controllers
 {
@@ -18,7 +19,7 @@ namespace Triad.CabinetOffice.Slipping.Web.Controllers
     {
         #region Properties
 
-        private const string UserNotFoundError = "User '{0}' not recognised. Please contact the Government Whips Admin Unit.";
+        private const string UserNotFoundError = "User '{0}' not recognised.";
 
         private SlippingRepository SlippingRepository { get { return new SlippingRepository(); } }
 
@@ -40,7 +41,7 @@ namespace Triad.CabinetOffice.Slipping.Web.Controllers
                 }
                 else
                 {
-                    throw new Exception(string.Format(UserNotFoundError, User.Identity.Name));
+                    throw new SlippingUserNotFoundException(string.Format(UserNotFoundError, User.Identity.Name));
                 }
             }
         }
@@ -59,7 +60,7 @@ namespace Triad.CabinetOffice.Slipping.Web.Controllers
                 }
                 else
                 {
-                    throw new Exception(string.Format(UserNotFoundError, User.Identity.Name));
+                    throw new SlippingUserNotFoundException(string.Format(UserNotFoundError, User.Identity.Name));
                 }
             }
         }
