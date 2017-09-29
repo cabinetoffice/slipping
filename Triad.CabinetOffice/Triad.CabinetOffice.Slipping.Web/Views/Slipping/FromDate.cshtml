@@ -33,7 +33,7 @@
             </div>
 
             <div class="form-group @Html.ValidationErrorClassFor(model => model.Hour, "form-group-error")">
-                <label class="form-label">What time will you be going?</label>
+                <label class="form-label" style="margin-bottom:10px;">What time will you be going?</label>
                 @Html.LabelFor(model => model.Hour, new { @class = "form-label" })
                 <span class="error-message">@Html.ValidationMessageFor(model => model.Hour)</span>
                 @Html.DropDownListWithErrorClassFor(model => model.Hour, Model.Hours, new { @class = "form-control" }, "form-control-error")
@@ -44,7 +44,7 @@
             </div>
 
             <div class="form-group">
-                <button class="button" type="submit">Continue</button>
+                <input  class="button" type="submit" value="Continue" />
             </div>
         }
     </div>
