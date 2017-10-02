@@ -20,5 +20,11 @@ namespace Triad.CabinetOffice.Slipping.Web
             BundleConfig.RegisterBundles(BundleTable.Bundles);
             AntiForgeryConfig.UniqueClaimTypeIdentifier = ClaimTypes.NameIdentifier;
         }
+
+        protected void Application_Error(object sender, EventArgs e)
+        {
+            Exception ex = Server.GetLastError();
+            Logger.LogException(ex);
+        }
     }
 }

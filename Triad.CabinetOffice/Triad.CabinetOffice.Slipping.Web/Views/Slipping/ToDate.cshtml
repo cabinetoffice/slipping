@@ -24,7 +24,7 @@
                 <span class="error-message">@Html.ValidationMessageFor(model => model.Date)</span>
                 @if (Request.Browser.Browser == "IE" || Request.Browser.Browser == "InternetExplorer" || Request.Browser.Browser == "Firefox")
                 {
-                    @Html.TextBoxWithErrorClassFor(model => model.Date, new { @class = "form-control", @type = "text" }, "form-control-error")
+                    @Html.TextBoxWithErrorClassFor(model => model.Date, new { @class = "form-control", @type = "text", @Value = Model.Date.ToShortDateString() }, "form-control-error")
                 }
                 else
                 {
