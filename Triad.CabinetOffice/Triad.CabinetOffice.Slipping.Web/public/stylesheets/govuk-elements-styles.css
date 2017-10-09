@@ -257,7 +257,7 @@ legend {
       width: 100%; } }
 
 main {
-  font-family: "nta", Arial, sans-serif;
+  font-family:  Arial, sans-serif;
   font-weight: 400;
   text-transform: none;
   font-size: 16px;
@@ -269,7 +269,7 @@ main {
       line-height: 1.31579; } }
 
 .font-xxlarge {
-  font-family: "nta", Arial, sans-serif;
+  font-family:  Arial, sans-serif;
   font-weight: 400;
   text-transform: none;
   font-size: 53px;
@@ -280,7 +280,7 @@ main {
       line-height: 1; } }
 
 .font-xlarge {
-  font-family: "nta", Arial, sans-serif;
+  font-family:  Arial, sans-serif;
   font-weight: 400;
   text-transform: none;
   font-size: 32px;
@@ -291,7 +291,7 @@ main {
       line-height: 1.04167; } }
 
 .font-large {
-  font-family: "nta", Arial, sans-serif;
+  font-family:  Arial, sans-serif;
   font-weight: 400;
   text-transform: none;
   font-size: 24px;
@@ -302,7 +302,7 @@ main {
       line-height: 1.11111; } }
 
 .font-medium {
-  font-family: "nta", Arial, sans-serif;
+  font-family:  Arial, sans-serif;
   font-weight: 400;
   text-transform: none;
   font-size: 18px;
@@ -313,7 +313,7 @@ main {
       line-height: 1.25; } }
 
 .font-small {
-  font-family: "nta", Arial, sans-serif;
+  font-family:  Arial, sans-serif;
   font-weight: 400;
   text-transform: none;
   font-size: 16px;
@@ -324,7 +324,7 @@ main {
       line-height: 1.31579; } }
 
 .font-xsmall {
-  font-family: "nta", Arial, sans-serif;
+  font-family:  Arial, sans-serif;
   font-weight: 400;
   text-transform: none;
   font-size: 14px;
@@ -335,7 +335,7 @@ main {
       line-height: 1.25; } }
 
 .bold-xxlarge {
-  font-family: "nta", Arial, sans-serif;
+  font-family:  Arial, sans-serif;
   font-weight: 700;
   text-transform: none;
   font-size: 53px;
@@ -346,7 +346,7 @@ main {
       line-height: 1; } }
 
 .bold-xlarge {
-  font-family: "nta", Arial, sans-serif;
+  font-family:  Arial, sans-serif;
   font-weight: 700;
   text-transform: none;
   font-size: 32px;
@@ -357,7 +357,7 @@ main {
       line-height: 1.04167; } }
 
 .bold-large {
-  font-family: "nta", Arial, sans-serif;
+  font-family:  Arial, sans-serif;
   font-weight: 700;
   text-transform: none;
   font-size: 24px;
@@ -368,7 +368,7 @@ main {
       line-height: 1.11111; } }
 
 .bold-medium {
-  font-family: "nta", Arial, sans-serif;
+  font-family:  Arial, sans-serif;
   font-weight: 700;
   text-transform: none;
   font-size: 18px;
@@ -379,7 +379,7 @@ main {
       line-height: 1.25; } }
 
 .bold-small {
-  font-family: "nta", Arial, sans-serif;
+  font-family:  Arial, sans-serif;
   font-weight: 700;
   text-transform: none;
   font-size: 16px;
@@ -390,7 +390,7 @@ main {
       line-height: 1.31579; } }
 
 .bold-xsmall {
-  font-family: "nta", Arial, sans-serif;
+  font-family:  Arial, sans-serif;
   font-weight: 700;
   text-transform: none;
   font-size: 14px;
@@ -404,7 +404,7 @@ main {
   font-weight: 700; }
 
 .heading-xlarge {
-  font-family: "nta", Arial, sans-serif;
+  font-family:  Arial, sans-serif;
   font-weight: 700;
   text-transform: none;
   font-size: 32px;
@@ -420,7 +420,7 @@ main {
       margin-top: 0.625em;
       margin-bottom: 1.25em; } }
   .heading-xlarge .heading-secondary {
-    font-family: "nta", Arial, sans-serif;
+    font-family:  Arial, sans-serif;
     font-weight: 400;
     text-transform: none;
     font-size: 20px;
@@ -440,7 +440,7 @@ main {
         padding-bottom: 6px; } }
 
 .heading-large {
-  font-family: "nta", Arial, sans-serif;
+  font-family:  Arial, sans-serif;
   font-weight: 700;
   text-transform: none;
   font-size: 24px;
@@ -456,7 +456,7 @@ main {
       margin-top: 1.25em;
       margin-bottom: 0.55556em; } }
   .heading-large .heading-secondary {
-    font-family: "nta", Arial, sans-serif;
+    font-family:  Arial, sans-serif;
     font-weight: 400;
     text-transform: none;
     font-size: 18px;
@@ -476,7 +476,7 @@ main {
         padding-bottom: 4px; } }
 
 .heading-medium {
-  font-family: "nta", Arial, sans-serif;
+  font-family:  Arial, sans-serif;
   font-weight: 700;
   text-transform: none;
   font-size: 18px;
@@ -493,7 +493,7 @@ main {
       margin-bottom: 0.83333em; } }
 
 .heading-small {
-  font-family: "nta", Arial, sans-serif;
+  font-family:  Arial, sans-serif;
   font-weight: 700;
   text-transform: none;
   font-size: 16px;
@@ -522,7 +522,7 @@ p,
   display: block; }
 
 .lede {
-  font-family: "nta", Arial, sans-serif;
+  font-family:  Arial, sans-serif;
   font-weight: 400;
   text-transform: none;
   font-size: 18px;
@@ -555,7 +555,7 @@ p,
   display: -moz-inline-stack;
   display: inline-block;
   position: relative;
-  font-family: "nta", Arial, sans-serif;
+  font-family:  Arial, sans-serif;
   font-weight: 400;
   text-transform: none;
   font-size: 14px;
@@ -721,7 +721,7 @@ hr {
 
 .button-start,
 .button-get-started {
-  font-family: "nta", Arial, sans-serif;
+  font-family:  Arial, sans-serif;
   font-weight: 700;
   text-transform: none;
   font-size: 18px;
@@ -951,7 +951,7 @@ hr {
   border-radius: 50%;
   background: #0b0c0c;
   color: #fff;
-  font-family: "ntatabularnumbers", "nta", Arial, sans-serif;
+  font-family:  Arial, sans-serif;
   font-size: 12px;
   font-weight: bold;
   text-align: center; }
@@ -993,7 +993,7 @@ table {
   width: 100%; }
   table th,
   table td {
-    font-family: "nta", Arial, sans-serif;
+    font-family:  Arial, sans-serif;
     font-weight: 400;
     text-transform: none;
     font-size: 16px;
@@ -1014,12 +1014,12 @@ table {
   table .numeric {
     text-align: right; }
   table td.numeric {
-    font-family: "ntatabularnumbers", "nta", Arial, sans-serif; }
+    font-family: Arial, sans-serif; }
   table caption {
     text-align: left; }
 
 .table-font-xsmall th {
-  font-family: "nta", Arial, sans-serif;
+  font-family:  Arial, sans-serif;
   font-weight: 700;
   text-transform: none;
   font-size: 14px;
@@ -1030,7 +1030,7 @@ table {
       line-height: 1.25; } }
 
 .table-font-xsmall td {
-  font-family: "nta", Arial, sans-serif;
+  font-family:  Arial, sans-serif;
   font-weight: 400;
   text-transform: none;
   font-size: 14px;
@@ -1144,7 +1144,7 @@ textarea {
   padding-bottom: 2px; }
 
 .form-label {
-  font-family: "nta", Arial, sans-serif;
+  font-family:  Arial, sans-serif;
   font-weight: 400;
   text-transform: none;
   font-size: 16px;
@@ -1155,7 +1155,7 @@ textarea {
       line-height: 1.31579; } }
 
 .form-label-bold {
-  font-family: "nta", Arial, sans-serif;
+  font-family:  Arial, sans-serif;
   font-weight: 700;
   text-transform: none;
   font-size: 16px;
@@ -1176,7 +1176,7 @@ textarea {
       margin-bottom: 10px; } }
 
 .form-hint {
-  font-family: "nta", Arial, sans-serif;
+  font-family:  Arial, sans-serif;
   font-weight: 400;
   text-transform: none;
   font-size: 16px;
@@ -1200,7 +1200,7 @@ textarea {
   -webkit-box-sizing: border-box;
   -moz-box-sizing: border-box;
   box-sizing: border-box;
-  font-family: "nta", Arial, sans-serif;
+  font-family:  Arial, sans-serif;
   font-weight: 400;
   text-transform: none;
   font-size: 16px;
@@ -1419,7 +1419,7 @@ input[type=number] {
   border: 4px solid #b10e1e; }
 
 .error-message {
-  font-family: "nta", Arial, sans-serif;
+  font-family:  Arial, sans-serif;
   font-weight: 700;
   text-transform: none;
   font-size: 16px;
@@ -1470,7 +1470,7 @@ input[type=number] {
   padding-top: 0.75em;
   padding-bottom: 0.75em; }
   .breadcrumbs li {
-    font-family: "nta", Arial, sans-serif;
+    font-family:  Arial, sans-serif;
     font-weight: 400;
     text-transform: none;
     font-size: 14px;
@@ -1508,7 +1508,7 @@ input[type=number] {
     display: table;
     margin: 0;
     color: #000;
-    font-family: "nta", Arial, sans-serif;
+    font-family:  Arial, sans-serif;
     font-weight: 400;
     text-transform: none;
     font-size: 14px;
@@ -1522,7 +1522,7 @@ input[type=number] {
     display: inline-block;
     margin: 0 8px 0 0;
     padding: 2px 5px 0;
-    font-family: "nta", Arial, sans-serif;
+    font-family:  Arial, sans-serif;
     font-weight: 700;
     text-transform: none;
     font-size: 14px;
@@ -1553,7 +1553,7 @@ input[type=number] {
     display: table;
     margin: 0;
     color: #000;
-    font-family: "nta", Arial, sans-serif;
+    font-family:  Arial, sans-serif;
     font-weight: 400;
     text-transform: none;
     font-size: 14px;
@@ -1569,7 +1569,7 @@ input[type=number] {
     display: inline-block;
     margin: 0 8px 0 0;
     padding: 2px 5px 0;
-    font-family: "nta", Arial, sans-serif;
+    font-family:  Arial, sans-serif;
     font-weight: 700;
     text-transform: none;
     font-size: 14px;
@@ -1594,7 +1594,7 @@ input[type=number] {
   display: inline-block;
   margin: 0 8px 0 0;
   padding: 2px 5px 0;
-  font-family: "nta", Arial, sans-serif;
+  font-family:  Arial, sans-serif;
   font-weight: 700;
   text-transform: none;
   font-size: 14px;
