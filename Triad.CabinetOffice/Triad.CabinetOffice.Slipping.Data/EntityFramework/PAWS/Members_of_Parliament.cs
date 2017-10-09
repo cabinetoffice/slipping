@@ -14,6 +14,12 @@ namespace Triad.CabinetOffice.Slipping.Data.EntityFramework.PAWS
     
     public partial class Members_of_Parliament
     {
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
+        public Members_of_Parliament()
+        {
+            this.Absence_Requests = new HashSet<Absence_Request>();
+        }
+    
         public int ID { get; set; }
         public string Title { get; set; }
         public string Forenames { get; set; }
@@ -33,5 +39,8 @@ namespace Triad.CabinetOffice.Slipping.Data.EntityFramework.PAWS
         public string Dods_Id { get; set; }
         public string Pims_Id { get; set; }
         public string Full_Name { get; set; }
+    
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<Absence_Request> Absence_Requests { get; set; }
     }
 }
