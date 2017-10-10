@@ -206,6 +206,7 @@
     <Compile Include="ViewModels\SlippingUser.cs" />
   </ItemGroup>
   <ItemGroup>
+    <Content Include="public\images\cabinet_office_logo.png" />
     <Content Include="public\stylesheets\application-ie8.css" />
     <Content Include="public\stylesheets\application.css" />
     <Content Include="public\stylesheets\check-your-answers.css" />
