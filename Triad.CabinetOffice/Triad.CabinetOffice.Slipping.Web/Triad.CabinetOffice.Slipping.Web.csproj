@@ -206,6 +206,7 @@
     <Compile Include="ViewModels\SlippingUser.cs" />
   </ItemGroup>
   <ItemGroup>
+    <Content Include="public\images\cabinet_office_logo.png" />
     <Content Include="public\stylesheets\application-ie8.css" />
     <Content Include="public\stylesheets\application.css" />
     <Content Include="public\stylesheets\check-your-answers.css" />
@@ -235,8 +236,6 @@
     <Content Include="public\javascripts\govuk\show-hide-content.js" />
     <Content Include="public\javascripts\jquery-1.11.3.js" />
     <Content Include="public\javascripts\validation.js" />
-    <Content Include="public\stylesheets\fonts-ie8.css" />
-    <Content Include="public\stylesheets\fonts.css" />
     <Content Include="public\stylesheets\govuk-template-ie6.css" />
     <Content Include="public\stylesheets\govuk-template-ie7.css" />
     <Content Include="public\stylesheets\govuk-template-ie8.css" />
