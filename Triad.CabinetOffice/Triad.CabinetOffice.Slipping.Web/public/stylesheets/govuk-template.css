@@ -36,7 +36,7 @@
 }
 
 html, body, button, input, table, td, th {
-    font-family: "nta", Arial, sans-serif;
+    font-family:  Arial, sans-serif;
 }
 
 html, body, div, h1, h2, h3, h4, h5, h6, article, aside, footer, header, hgroup, nav, section {
@@ -430,7 +430,7 @@ button:focus {
 }
 
 #global-header .header-proposition #proposition-name {
-    font-family: "nta", Arial, sans-serif;
+    font-family:  Arial, sans-serif;
     font-weight: 400;
     text-transform: none;
     font-size: 18px;
@@ -456,7 +456,7 @@ button:focus {
 }
 
 #global-header .header-proposition a.menu {
-    font-family: "nta", Arial, sans-serif;
+    font-family:  Arial, sans-serif;
     font-weight: 400;
     text-transform: none;
     font-size: 14px;
@@ -556,7 +556,7 @@ button:focus {
 #global-header .header-proposition #proposition-links a {
     color: white;
     text-decoration: none;
-    font-family: "nta", Arial, sans-serif;
+    font-family:  Arial, sans-serif;
     font-weight: 700;
     text-transform: none;
     font-size: 12px;
@@ -574,7 +574,7 @@ button:focus {
 @media (min-width: 769px) {
     #global-header .header-proposition #proposition-link a,
     #global-header .header-proposition #proposition-links a {
-        font-family: "nta", Arial, sans-serif;
+        font-family:  Arial, sans-serif;
         font-weight: 700;
         text-transform: none;
         font-size: 14px;
@@ -641,7 +641,7 @@ button:focus {
 }
 
     #global-cookie-message p {
-        font-family: "nta", Arial, sans-serif;
+        font-family:  Arial, sans-serif;
         font-weight: 400;
         text-transform: none;
         font-size: 14px;
@@ -683,7 +683,7 @@ button:focus {
     }
 
 #footer h2 {
-    font-family: "nta", Arial, sans-serif;
+    font-family:  Arial, sans-serif;
     font-weight: 400;
     text-transform: none;
     font-size: 18px;
@@ -724,7 +724,7 @@ button:focus {
 }
 
 #footer .footer-meta .footer-meta-inner ul {
-    font-family: "nta", Arial, sans-serif;
+    font-family:  Arial, sans-serif;
     font-weight: 400;
     text-transform: none;
     font-size: 14px;
@@ -796,7 +796,7 @@ button:focus {
 }
 
 #footer .footer-meta .footer-meta-inner .open-government-licence p {
-    font-family: "nta", Arial, sans-serif;
+    font-family:  Arial, sans-serif;
     font-weight: 400;
     text-transform: none;
     font-size: 14px;
@@ -813,7 +813,7 @@ button:focus {
 }
 
 #footer .footer-meta .copyright {
-    font-family: "nta", Arial, sans-serif;
+    font-family:  Arial, sans-serif;
     font-weight: 400;
     text-transform: none;
     font-size: 14px;
