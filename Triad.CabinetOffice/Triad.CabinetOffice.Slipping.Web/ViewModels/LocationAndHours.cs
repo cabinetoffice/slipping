@@ -18,8 +18,8 @@ namespace Triad.CabinetOffice.Slipping.Web.ViewModels
         public string Location { get; set; }
 
         [Display(Name = "hours")]
-        [Required(ErrorMessage = "Travel time to Westminster is required")]
-        [RegularExpression("^[0-9]{1,3}$", ErrorMessage = "Hours must be a whole number")]
+        //[Required(ErrorMessage = "Travel time to Westminster is required")]
+        //[RegularExpression("^[0-9]{1,3}$", ErrorMessage = "Hours must be a whole number")]
         public string Hours { get; set; }
     }
 }

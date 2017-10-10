@@ -361,7 +361,7 @@ namespace Triad.CabinetOffice.Slipping.Web.Controllers
                 if (ModelState.IsValid)
                 {
                     slippingRequest.Location = model.Location;
-                    slippingRequest.TravelTimeInHours = Convert.ToInt32(model.Hours);
+                    slippingRequest.TravelTimeInHours = 0;//Convert.ToInt32(model.Hours);
                     CreateOrUpdate(slippingRequest);
                     return RedirectToAction("Reason");
                 }
@@ -609,10 +609,10 @@ namespace Triad.CabinetOffice.Slipping.Web.Controllers
                     ModelState.AddModelError("Location", "Location must be supplied");
                 }
 
-                if (slippingRequest.TravelTimeInHours == null)
-                {
-                    ModelState.AddModelError("TravelTimeInHours", "Travel time to Westminster must be supplied");
-                }
+                //if (slippingRequest.TravelTimeInHours == null)
+               // {
+               //     ModelState.AddModelError("TravelTimeInHours", "Travel time to Westminster must be supplied");
+               // }
 
                 if (slippingRequest.ReasonID == null)
                 {
