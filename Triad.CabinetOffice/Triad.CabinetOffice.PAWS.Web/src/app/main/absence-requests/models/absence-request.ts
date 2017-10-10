@@ -6,7 +6,7 @@ export interface IAbsenceRequest {
   Reason: string;
   Details: string;
   Date_Created: Date;
-  Status: string;
+  Status: number;
   From_Time: string;
   To_Time: string;
   From_Date: Date;
@@ -23,7 +23,7 @@ export class AbsenceRequest implements IAbsenceRequest {
   Reason: string;
   Details: string;
   Date_Created: Date;
-  Status: string;
+  Status: number;
   From_Time: string;
   To_Time: string;
   From_Date: Date;

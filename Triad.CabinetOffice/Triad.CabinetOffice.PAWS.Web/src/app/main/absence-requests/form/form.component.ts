@@ -13,7 +13,7 @@ import 'rxjs/add/operator/switchMap';
 })
 export class FormComponent implements OnInit {
 
-  reasons = ['Personal/Other', 'Government Work', 'Constituency Engagement'];
+  reasons = [{ID:5,Name:'Personal/Other'}, {ID:1,Name:'Government Work'}, {ID:2,Name:'Constituency Engagement'}];
 
   absenceRequest: AbsenceRequest;
 
@@ -32,12 +32,20 @@ export class FormComponent implements OnInit {
   }
 
   public newAbsenceRequest():void {
-
+    this.absenceRequest = new AbsenceRequest();
   };
   
-  submitted=false;
+  submitted = false;
+
   public onSubmit():void{
-    this.submitted=true;
+    this.submitted = true;
+    if(this.absenceRequest.ID){
+      this.absenceRequestService.updateAbsenceRequest(this.absenceRequest)
+      .subscribe(ar => this.absenceRequest = ar);
+    } else {
+      this.absenceRequestService.createAbsenceRequest(this.absenceRequest)
+      .subscribe(ar => this.absenceRequest = ar);
+    }
   };
 
   gotoAbsenceRequests(absenceRequest: AbsenceRequest){

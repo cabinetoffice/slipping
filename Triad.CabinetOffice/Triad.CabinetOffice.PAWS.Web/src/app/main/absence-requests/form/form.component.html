@@ -1,5 +1,5 @@
 <div class="card" *ngIf="absenceRequest">
-  <h3 class="card-header">Absence Request</h3>
+  <h3 class="card-header">Absence Request - {{(absenceRequest.ID) ? absenceRequest.ID : 'New'}}</h3>
   <div class="card-body">
     <form class="panel" (ngSubmit)="onSubmit()" #absenceRequestForm="ngForm">
       <div class="form-group">
@@ -10,12 +10,6 @@
         <button class="btn btn-primary" type="button" (click)="gotoAbsenceRequests(absenceRequest)"><span class="fa fa-times"></span></button>
       </div>
       <fieldset>
-          <div class="form-group row">
-              <label for="Status" class="col-3 col-form-label">Absence Request ID</label>
-              <div class="col-9">
-                <input id="arId" class="form-control" type="number" required [(ngModel)]="absenceRequest.ID" name="arId">
-              </div>
-            </div>
         <div class="form-group row">
           <label for="Status" class="col-3 col-form-label">Status</label>
           <div class="col-9">
@@ -34,8 +28,8 @@
           <label for="FromDate" class="col-3 col-form-label">From Date and Time</label>
           <div class="col-9">
             <div class="input-group">
-              <input id="FromDate" type="date" class="form-control" [(ngModel)]="absenceRequest.From_Date" name="FromDate">
-              <input id="FromTime" type="time" class="form-control">
+              <input id="FromDate" type="date" class="form-control" [(ngModel)]="absenceRequest.From_Date" name="FromDate" required>
+              <input id="FromTime" type="time" class="form-control" [(ngModel)]="absenceRequest.From_Time" name="FromTime" required>
             </div>
           </div>
         </div>
@@ -43,16 +37,16 @@
           <label for="ToDate" class="col-3 col-form-label">To Date and Time</label>
           <div class="col-9">
             <div class="input-group">
-              <input id="ToDate" type="date" class="form-control" [(ngModel)]="absenceRequest.To_Date" name="ToDate">
-              <input id="ToTime" type="time" class="form-control">
+              <input id="ToDate" type="date" class="form-control" [(ngModel)]="absenceRequest.To_Date" name="ToDate" required>
+              <input id="ToTime" type="time" class="form-control" [(ngModel)]="absenceRequest.To_Time" name="ToTime" required>
             </div>
           </div>
         </div>
         <div class="form-group row">
           <label for="Reason" class="col-3 col-form-label">Reason</label>
           <div class="col-9">
-            <select id="Reason" class="form-control" required [(ngModel)]="absenceRequest.Reason" name="Reason">
-              <option *ngFor="let reason of reasons" [value]="reason">{{reason}}</option>
+            <select id="Reason" class="form-control" [(ngModel)]="absenceRequest.Reason" name="Reason" required>
+              <option *ngFor="let reason of reasons" [value]="reason.ID">{{reason.Name}}</option>
             </select>
           </div>
         </div>

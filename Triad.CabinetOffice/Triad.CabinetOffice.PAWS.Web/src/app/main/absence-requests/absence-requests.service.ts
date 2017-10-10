@@ -17,6 +17,12 @@ export class AbsenceRequestsService {
     this.authHeader = new Headers( {'Authorization':'Bearer ' + this.adal4Service.userInfo.token});
   }
 
+  private convertTimesToXsdDuration(ar:AbsenceRequest):AbsenceRequest{
+    ar.From_Time = 'PT' + ar.From_Time.split(':')[0] + 'H' + ar.From_Time.split(':')[1] + 'M';
+    ar.To_Time = 'PT' + ar.To_Time.split(':')[0] + 'H' + ar.To_Time.split(':')[1] + 'M';
+    return ar;
+  }
+
   public getAbsenceRequests():Observable<IAbsenceRequest[]>{
     return this.adal4Http.get(`${environment.apiUrl}AbsenceRequest?$expand=Member_of_Parliament`)
     .map(response => {
@@ -33,11 +39,16 @@ export class AbsenceRequestsService {
     .catch(this.handleError);
   }
 
-  public createAbsenceRequest(absenceRequest:AbsenceRequest):Observable<AbsenceRequest>{
-    return this.adal4Http.post(`${environment.apiUrl}AbsenceRequest`, absenceRequest, {headers:this.authHeader})
+  public createAbsenceRequest(absenceRequest:AbsenceRequest):Observable<IAbsenceRequest>{
+    return this.adal4Http.post(`${environment.apiUrl}AbsenceRequest`, this.convertTimesToXsdDuration(absenceRequest))
       .map(response => {
         return <IAbsenceRequest>response;
       });
+  }
+
+  public updateAbsenceRequest(absenceRequest:AbsenceRequest):Observable<IAbsenceRequest>{
+    return this.adal4Http.patch(`${environment.apiUrl}AbsenceRequest(${absenceRequest.ID})`, this.convertTimesToXsdDuration(absenceRequest))
+    .map(response => { return <IAbsenceRequest>response; });
   }
 
   private handleError(error: any): Promise<any> {
