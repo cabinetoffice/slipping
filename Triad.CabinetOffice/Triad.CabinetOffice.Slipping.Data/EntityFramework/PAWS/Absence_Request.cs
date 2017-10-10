@@ -30,5 +30,6 @@ namespace Triad.CabinetOffice.Slipping.Data.EntityFramework.PAWS
     
         public virtual Absence_Request_Status Absence_Request_Status { get; set; }
         public virtual Absence_Request_Reason Absence_Request_Reason { get; set; }
+        public virtual Members_of_Parliament Member_of_Parliament { get; set; }
     }
 }
