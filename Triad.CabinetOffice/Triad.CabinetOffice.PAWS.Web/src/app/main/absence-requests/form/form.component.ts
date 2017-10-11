@@ -2,7 +2,10 @@ import { Component, OnInit } from '@angular/core';
 import { Router, ActivatedRoute, ParamMap } from '@angular/router';
 import { Observable } from 'rxjs/Observable';
 import { AbsenceRequestsService } from '../absence-requests.service';
-import { AbsenceRequest } from '../models/absence-request';
+import { AbsenceRequestReasonService } from '../absence-request-reason.service';
+import { AbsenceRequestStatusService } from '../absence-request-status.service';
+import { MembersOfParliamentService } from '../../members-of-parliament/members-of-parliament.service';
+import * as m from '../models/';
 
 import 'rxjs/add/operator/switchMap';
 
@@ -13,14 +16,19 @@ import 'rxjs/add/operator/switchMap';
 })
 export class FormComponent implements OnInit {
 
-  reasons = [{ID:5,Name:'Personal/Other'}, {ID:1,Name:'Government Work'}, {ID:2,Name:'Constituency Engagement'}];
+  reasons;
+  statuses;
+  mps;
 
-  absenceRequest: AbsenceRequest;
+  absenceRequest: m.AbsenceRequest;
 
   constructor(
     private route: ActivatedRoute,
     private router: Router,
-    private absenceRequestService: AbsenceRequestsService
+    private absenceRequestService: AbsenceRequestsService,
+    private absenceRequestReasonService: AbsenceRequestReasonService,
+    private absenceRequestStatusService: AbsenceRequestStatusService,
+    private membersOfParliamentService: MembersOfParliamentService
   ) { }
 
   ngOnInit() {
@@ -29,10 +37,16 @@ export class FormComponent implements OnInit {
       .switchMap((params: ParamMap) => this.absenceRequestService.getAbsenceRequest(+params.get('id')))
       .subscribe(ar => this.absenceRequest = ar);
     }
+    this.absenceRequestReasonService.getAbsenceRequestReasons()
+      .subscribe(arr => this.reasons = arr);
+    this.absenceRequestStatusService.getAbsenceRequestStatuses()
+      .subscribe(ars => this.statuses = ars);
+    this.membersOfParliamentService.getGovtMembersOfParliament()
+      .subscribe(mps => this.mps = mps);
   }
 
   public newAbsenceRequest():void {
-    this.absenceRequest = new AbsenceRequest();
+    this.absenceRequest = new m.AbsenceRequest();
   };
   
   submitted = false;
@@ -48,7 +62,7 @@ export class FormComponent implements OnInit {
     }
   };
 
-  gotoAbsenceRequests(absenceRequest: AbsenceRequest){
+  gotoAbsenceRequests(absenceRequest: m.AbsenceRequest){
     let absenceRequestId=absenceRequest?absenceRequest.ID:null;
     this.router.navigate(['/absence-requests',{id:absenceRequestId}]);
   }
