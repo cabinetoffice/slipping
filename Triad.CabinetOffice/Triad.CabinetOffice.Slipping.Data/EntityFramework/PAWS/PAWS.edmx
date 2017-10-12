@@ -122,7 +122,6 @@
           <Property Name="Decision_Notes" Type="String" MaxLength="220" FixedLength="false" Unicode="true" />
           <NavigationProperty Name="Absence_Request_Status" Relationship="Model.FK_Absence_Request_D3626684_2ADD_4611_BA06_3DBB23C03243" FromRole="Absence_Request" ToRole="Absence_Request_Status" />
           <NavigationProperty Name="Absence_Request_Reason" Relationship="Model.FK_Absence_Request_4D7AF5E8_BB24_42F4_B3E7_1B551FCABB1E" FromRole="Absence_Request" ToRole="Absence_Request_Reason" />
-          <NavigationProperty Name="Member_of_Parliament" Relationship="Model.Absence_Requests_Member_of_Parliament" FromRole="Absence_Request" ToRole="Members_of_Parliament" />
         </EntityType>
         <EntityContainer Name="PAWSEntities" annotation:LazyLoadingEnabled="true">
           <EntitySet Name="Absence_Requests" EntityType="Self.Absence_Request" />
@@ -136,10 +135,6 @@
           <AssociationSet Name="FK_Absence_Request_4D7AF5E8_BB24_42F4_B3E7_1B551FCABB1E" Association="Model.FK_Absence_Request_4D7AF5E8_BB24_42F4_B3E7_1B551FCABB1E">
             <End Role="Absence_Request_Reason" EntitySet="Absence_Request_Reasons" />
             <End Role="Absence_Request" EntitySet="Absence_Requests" />
-          </AssociationSet>
-          <AssociationSet Name="Absence_Requests_Member_of_Parliament" Association="Model.Absence_Requests_Member_of_Parliament">
-            <End Role="Absence_Request" EntitySet="Absence_Requests" />
-            <End Role="Members_of_Parliament" EntitySet="Members_of_Parliaments" />
           </AssociationSet>
         </EntityContainer>
         <EntityType Name="Members_of_Parliament">
@@ -165,7 +160,6 @@
           <Property Name="Dods_Id" Type="String" MaxLength="10" FixedLength="false" Unicode="true" />
           <Property Name="Pims_Id" Type="String" MaxLength="10" FixedLength="false" Unicode="true" />
           <Property Name="Full_Name" Type="String" MaxLength="322" FixedLength="false" Unicode="true" annotation:StoreGeneratedPattern="Computed" />
-          <NavigationProperty Name="Absence_Requests" Relationship="Model.Absence_Requests_Member_of_Parliament" FromRole="Members_of_Parliament" ToRole="Absence_Request" />
         </EntityType>
         <EntityType Name="Absence_Request_Status">
           <Key>
@@ -204,18 +198,6 @@
             </Principal>
             <Dependent Role="Absence_Request">
               <PropertyRef Name="Reason" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <Association Name="Absence_Requests_Member_of_Parliament">
-          <End Type="Model.Absence_Request" Role="Absence_Request" Multiplicity="*" />
-          <End Type="Model.Members_of_Parliament" Role="Members_of_Parliament" Multiplicity="1" />
-          <ReferentialConstraint>
-            <Principal Role="Members_of_Parliament">
-              <PropertyRef Name="ID" />
-            </Principal>
-            <Dependent Role="Absence_Request">
-              <PropertyRef Name="Govt_MP" />
             </Dependent>
           </ReferentialConstraint>
         </Association>
