@@ -6,6 +6,7 @@ using System.Web.Mvc;
 using Microsoft.Owin.Security.Cookies;
 using Microsoft.Owin.Security.OpenIdConnect;
 using Microsoft.Owin.Security;
+using System.Configuration;
 
 namespace Triad.CabinetOffice.Slipping.Web.Controllers
 {
@@ -23,7 +24,7 @@ namespace Triad.CabinetOffice.Slipping.Web.Controllers
 
         public void SignOut()
         {
-            string callbackUrl = Url.Action("Index", "Home", routeValues: null, protocol: Request.Url.Scheme);
+            string callbackUrl = ConfigurationManager.AppSettings["StartPageURL"];
 
             HttpContext.GetOwinContext().Authentication.SignOut(
                 new AuthenticationProperties { RedirectUri = callbackUrl },
