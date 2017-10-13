@@ -14,6 +14,8 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Reports", "Reports", "{9A9E
 		Reports\AbsenceRequest-AuditHistory.xlsx = Reports\AbsenceRequest-AuditHistory.xlsx
 	EndProjectSection
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Triad.CabinetOffice.Slipping.StartPage", "Triad.CabinetOffice.Slipping.StartPage\Triad.CabinetOffice.Slipping.StartPage.csproj", "{213F6F04-E78C-4475-AF8A-2ACF72AB1693}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -42,6 +44,12 @@ Global
 		{A18BAB86-4533-4E38-BEAE-93579AC8D313}.Test|Any CPU.ActiveCfg = Test|Any CPU
 		{A18BAB86-4533-4E38-BEAE-93579AC8D313}.Test|Any CPU.Build.0 = Test|Any CPU
 		{A18BAB86-4533-4E38-BEAE-93579AC8D313}.Test|Any CPU.Deploy.0 = Test|Any CPU
+		{213F6F04-E78C-4475-AF8A-2ACF72AB1693}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{213F6F04-E78C-4475-AF8A-2ACF72AB1693}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{213F6F04-E78C-4475-AF8A-2ACF72AB1693}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{213F6F04-E78C-4475-AF8A-2ACF72AB1693}.Release|Any CPU.Build.0 = Release|Any CPU
+		{213F6F04-E78C-4475-AF8A-2ACF72AB1693}.Test|Any CPU.ActiveCfg = Test|Any CPU
+		{213F6F04-E78C-4475-AF8A-2ACF72AB1693}.Test|Any CPU.Build.0 = Test|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
