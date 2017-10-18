@@ -18,8 +18,9 @@ export class AbsenceRequestsService {
   }
 
   private convertTimesToXsdDuration(ar:AbsenceRequest):AbsenceRequest{
-    ar.From_Time = 'PT' + ar.From_Time.split(':')[0] + 'H' + ar.From_Time.split(':')[1] + 'M';
-    ar.To_Time = 'PT' + ar.To_Time.split(':')[0] + 'H' + ar.To_Time.split(':')[1] + 'M';
+    
+    //ar.From_Time = 'PT' + ar.From_Time.split(':')[0] + 'H' + ar.From_Time.split(':')[1] + 'M';
+    //ar.To_Time = 'PT' + ar.To_Time.split(':')[0] + 'H' + ar.To_Time.split(':')[1] + 'M';
     return ar;
   }
 
@@ -47,6 +48,7 @@ export class AbsenceRequestsService {
   }
 
   public updateAbsenceRequest(absenceRequest:AbsenceRequest):Observable<IAbsenceRequest>{
+    absenceRequest.Member_of_Parliament=null;
     return this.adal4Http.patch(`${environment.apiUrl}AbsenceRequest(${absenceRequest.ID})`, this.convertTimesToXsdDuration(absenceRequest))
     .map(response => { return <IAbsenceRequest>response; });
   }
