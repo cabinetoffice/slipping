@@ -17,6 +17,13 @@
         <AssociationConnector Association="Model.FK_AbsenceRequestOppositionMP_AbsenceRequestID" />
         <AssociationConnector Association="Model.FK_AbsenceRequestOppositionMP_CreatedBy" />
         <AssociationConnector Association="Model.FK_AbsenceRequestOppositionMP_LastChangedBy" />
+        <EntityTypeShape EntityType="Model.Division" Width="1.5" PointX="6.25" PointY="7.375" />
+        <EntityTypeShape EntityType="Model.Session" Width="1.5" PointX="3" PointY="9.75" />
+        <AssociationConnector Association="Model.FK_Divisions_Sessions_SessionID" />
+        <AssociationConnector Association="Model.FK_Divisions_User_CreatedBy" />
+        <AssociationConnector Association="Model.FK_Divisions_User_LastChangedBy" />
+        <AssociationConnector Association="Model.FK_Sessions_User_CreatedBy" />
+        <AssociationConnector Association="Model.FK_Sessions_User_LastChangedBy" />
       </Diagram>
     </edmx:Diagrams>
   </edmx:Designer>

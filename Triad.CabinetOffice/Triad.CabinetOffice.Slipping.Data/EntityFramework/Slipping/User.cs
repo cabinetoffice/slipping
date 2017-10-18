@@ -24,6 +24,10 @@ namespace Triad.CabinetOffice.Slipping.Data.EntityFramework.Slipping
             this.UserMPs1 = new HashSet<UserMP>();
             this.AbsenceRequestOppositionMPs = new HashSet<AbsenceRequestOppositionMP>();
             this.AbsenceRequestOppositionMPs1 = new HashSet<AbsenceRequestOppositionMP>();
+            this.Divisions = new HashSet<Division>();
+            this.Divisions1 = new HashSet<Division>();
+            this.Sessions = new HashSet<Session>();
+            this.Sessions1 = new HashSet<Session>();
         }
     
         public int ID { get; set; }
@@ -49,5 +53,13 @@ namespace Triad.CabinetOffice.Slipping.Data.EntityFramework.Slipping
         public virtual ICollection<AbsenceRequestOppositionMP> AbsenceRequestOppositionMPs { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<AbsenceRequestOppositionMP> AbsenceRequestOppositionMPs1 { get; set; }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<Division> Divisions { get; set; }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<Division> Divisions1 { get; set; }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<Session> Sessions { get; set; }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<Session> Sessions1 { get; set; }
     }
 }

@@ -39,6 +39,43 @@
           <Property Name="LastChangedBy" Type="int" Nullable="false" />
           <Property Name="LastChangedDate" Type="datetime" Nullable="false" />
         </EntityType>
+        <EntityType Name="Divisions">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="DivisionNumber" Type="int" Nullable="false" />
+          <Property Name="DivisionDateTime" Type="datetime" Nullable="false" />
+          <Property Name="Title" Type="nvarchar" MaxLength="255" Nullable="false" />
+          <Property Name="GovtLine" Type="nvarchar" MaxLength="220" Nullable="false" />
+          <Property Name="Ayes" Type="decimal" Precision="18" Scale="0" />
+          <Property Name="Noes" Type="decimal" Precision="18" Scale="0" />
+          <Property Name="DeferredDivision" Type="bit" Nullable="false" />
+          <Property Name="SessionID" Type="int" Nullable="false" />
+          <Property Name="WhippingID" Type="int" Nullable="false" />
+          <Property Name="Subject" Type="nvarchar" MaxLength="220" />
+          <Property Name="Teller1ForAyes" Type="int" />
+          <Property Name="Teller2ForAyes" Type="int" />
+          <Property Name="Teller1ForNoes" Type="int" />
+          <Property Name="Teller2ForNoes" Type="int" />
+          <Property Name="CreatedBy" Type="int" Nullable="false" />
+          <Property Name="CreatedDate" Type="datetime" Nullable="false" />
+          <Property Name="LastChangedBy" Type="int" Nullable="false" />
+          <Property Name="LastChangedDate" Type="datetime" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Sessions">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="SessionTitle" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="FromDate" Type="datetime" Nullable="false" />
+          <Property Name="ToDate" Type="datetime" Nullable="false" />
+          <Property Name="CreatedBy" Type="int" Nullable="false" />
+          <Property Name="CreatedDate" Type="datetime" Nullable="false" />
+          <Property Name="LastChangedBy" Type="int" Nullable="false" />
+          <Property Name="LastChangedDate" Type="datetime" Nullable="false" />
+        </EntityType>
         <EntityType Name="User">
           <Key>
             <PropertyRef Name="ID" />
@@ -121,6 +158,66 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
+        <Association Name="FK_Divisions_Sessions_SessionID">
+          <End Role="Sessions" Type="Self.Sessions" Multiplicity="1" />
+          <End Role="Divisions" Type="Self.Divisions" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Sessions">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="Divisions">
+              <PropertyRef Name="SessionID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Divisions_User_CreatedBy">
+          <End Role="User" Type="Self.User" Multiplicity="1" />
+          <End Role="Divisions" Type="Self.Divisions" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="User">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="Divisions">
+              <PropertyRef Name="CreatedBy" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Divisions_User_LastChangedBy">
+          <End Role="User" Type="Self.User" Multiplicity="1" />
+          <End Role="Divisions" Type="Self.Divisions" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="User">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="Divisions">
+              <PropertyRef Name="LastChangedBy" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Sessions_User_CreatedBy">
+          <End Role="User" Type="Self.User" Multiplicity="1" />
+          <End Role="Sessions" Type="Self.Sessions" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="User">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="Sessions">
+              <PropertyRef Name="CreatedBy" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Sessions_User_LastChangedBy">
+          <End Role="User" Type="Self.User" Multiplicity="1" />
+          <End Role="Sessions" Type="Self.Sessions" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="User">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="Sessions">
+              <PropertyRef Name="LastChangedBy" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
         <Association Name="FK_User_User">
           <End Role="User" Type="Self.User" Multiplicity="1" />
           <End Role="User1" Type="Self.User" Multiplicity="*" />
@@ -160,6 +257,8 @@
         <EntityContainer Name="ModelStoreContainer">
           <EntitySet Name="AbsenceRequest" EntityType="Self.AbsenceRequest" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="AbsenceRequestOppositionMP" EntityType="Self.AbsenceRequestOppositionMP" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Divisions" EntityType="Self.Divisions" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Sessions" EntityType="Self.Sessions" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="User" EntityType="Self.User" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="UserMP" EntityType="Self.UserMP" Schema="dbo" store:Type="Tables" />
           <AssociationSet Name="FK_AbsenceRequest_User_CreatedBy" Association="Self.FK_AbsenceRequest_User_CreatedBy">
@@ -181,6 +280,26 @@
           <AssociationSet Name="FK_AbsenceRequestOppositionMP_LastChangedBy" Association="Self.FK_AbsenceRequestOppositionMP_LastChangedBy">
             <End Role="User" EntitySet="User" />
             <End Role="AbsenceRequestOppositionMP" EntitySet="AbsenceRequestOppositionMP" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Divisions_Sessions_SessionID" Association="Self.FK_Divisions_Sessions_SessionID">
+            <End Role="Sessions" EntitySet="Sessions" />
+            <End Role="Divisions" EntitySet="Divisions" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Divisions_User_CreatedBy" Association="Self.FK_Divisions_User_CreatedBy">
+            <End Role="User" EntitySet="User" />
+            <End Role="Divisions" EntitySet="Divisions" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Divisions_User_LastChangedBy" Association="Self.FK_Divisions_User_LastChangedBy">
+            <End Role="User" EntitySet="User" />
+            <End Role="Divisions" EntitySet="Divisions" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Sessions_User_CreatedBy" Association="Self.FK_Sessions_User_CreatedBy">
+            <End Role="User" EntitySet="User" />
+            <End Role="Sessions" EntitySet="Sessions" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Sessions_User_LastChangedBy" Association="Self.FK_Sessions_User_LastChangedBy">
+            <End Role="User" EntitySet="User" />
+            <End Role="Sessions" EntitySet="Sessions" />
           </AssociationSet>
           <AssociationSet Name="FK_User_User" Association="Self.FK_User_User">
             <End Role="User" EntitySet="User" />
@@ -236,6 +355,28 @@
             <End Role="User" EntitySet="Users" />
             <End Role="AbsenceRequestOppositionMP" EntitySet="AbsenceRequestOppositionMPs" />
           </AssociationSet>
+          <EntitySet Name="Divisions" EntityType="Model.Division" />
+          <EntitySet Name="Sessions" EntityType="Model.Session" />
+          <AssociationSet Name="FK_Divisions_Sessions_SessionID" Association="Model.FK_Divisions_Sessions_SessionID">
+            <End Role="Session" EntitySet="Sessions" />
+            <End Role="Division" EntitySet="Divisions" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Divisions_User_CreatedBy" Association="Model.FK_Divisions_User_CreatedBy">
+            <End Role="User" EntitySet="Users" />
+            <End Role="Division" EntitySet="Divisions" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Divisions_User_LastChangedBy" Association="Model.FK_Divisions_User_LastChangedBy">
+            <End Role="User" EntitySet="Users" />
+            <End Role="Division" EntitySet="Divisions" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Sessions_User_CreatedBy" Association="Model.FK_Sessions_User_CreatedBy">
+            <End Role="User" EntitySet="Users" />
+            <End Role="Session" EntitySet="Sessions" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Sessions_User_LastChangedBy" Association="Model.FK_Sessions_User_LastChangedBy">
+            <End Role="User" EntitySet="Users" />
+            <End Role="Session" EntitySet="Sessions" />
+          </AssociationSet>
         </EntityContainer>
         <EntityType Name="AbsenceRequest">
           <Key>
@@ -280,6 +421,10 @@
           <Property Name="Forenames" Type="String" MaxLength="255" FixedLength="false" Unicode="true" Nullable="false" />
           <Property Name="Surname" Type="String" MaxLength="255" FixedLength="false" Unicode="true" Nullable="false" />
           <Property Name="IsMP" Type="Boolean" Nullable="false" />
+          <NavigationProperty Name="Divisions" Relationship="Model.FK_Divisions_User_CreatedBy" FromRole="User" ToRole="Division" />
+          <NavigationProperty Name="Divisions1" Relationship="Model.FK_Divisions_User_LastChangedBy" FromRole="User" ToRole="Division" />
+          <NavigationProperty Name="Sessions" Relationship="Model.FK_Sessions_User_CreatedBy" FromRole="User" ToRole="Session" />
+          <NavigationProperty Name="Sessions1" Relationship="Model.FK_Sessions_User_LastChangedBy" FromRole="User" ToRole="Session" />
         </EntityType>
         <EntityType Name="UserMP">
           <Key>
@@ -405,6 +550,109 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
+        <EntityType Name="Division">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="DivisionNumber" Type="Int32" Nullable="false" />
+          <Property Name="DivisionDateTime" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="Title" Type="String" Nullable="false" MaxLength="255" FixedLength="false" Unicode="true" />
+          <Property Name="GovtLine" Type="String" Nullable="false" MaxLength="220" FixedLength="false" Unicode="true" />
+          <Property Name="Ayes" Type="Decimal" Precision="18" Scale="0" />
+          <Property Name="Noes" Type="Decimal" Precision="18" Scale="0" />
+          <Property Name="DeferredDivision" Type="Boolean" Nullable="false" />
+          <Property Name="SessionID" Type="Int32" Nullable="false" />
+          <Property Name="WhippingID" Type="Int32" Nullable="false" />
+          <Property Name="Subject" Type="String" MaxLength="220" FixedLength="false" Unicode="true" />
+          <Property Name="Teller1ForAyes" Type="Int32" />
+          <Property Name="Teller2ForAyes" Type="Int32" />
+          <Property Name="Teller1ForNoes" Type="Int32" />
+          <Property Name="Teller2ForNoes" Type="Int32" />
+          <Property Name="CreatedBy" Type="Int32" Nullable="false" />
+          <Property Name="CreatedDate" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="LastChangedBy" Type="Int32" Nullable="false" />
+          <Property Name="LastChangedDate" Type="DateTime" Nullable="false" Precision="3" />
+          <NavigationProperty Name="Session" Relationship="Model.FK_Divisions_Sessions_SessionID" FromRole="Division" ToRole="Session" />
+          <NavigationProperty Name="User" Relationship="Model.FK_Divisions_User_CreatedBy" FromRole="Division" ToRole="User" />
+          <NavigationProperty Name="User1" Relationship="Model.FK_Divisions_User_LastChangedBy" FromRole="Division" ToRole="User" />
+        </EntityType>
+        <EntityType Name="Session">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="SessionTitle" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="FromDate" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="ToDate" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="CreatedBy" Type="Int32" Nullable="false" />
+          <Property Name="CreatedDate" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="LastChangedBy" Type="Int32" Nullable="false" />
+          <Property Name="LastChangedDate" Type="DateTime" Nullable="false" Precision="3" />
+          <NavigationProperty Name="Divisions" Relationship="Model.FK_Divisions_Sessions_SessionID" FromRole="Session" ToRole="Division" />
+          <NavigationProperty Name="User" Relationship="Model.FK_Sessions_User_CreatedBy" FromRole="Session" ToRole="User" />
+          <NavigationProperty Name="User1" Relationship="Model.FK_Sessions_User_LastChangedBy" FromRole="Session" ToRole="User" />
+        </EntityType>
+        <Association Name="FK_Divisions_Sessions_SessionID">
+          <End Type="Model.Session" Role="Session" Multiplicity="1" />
+          <End Type="Model.Division" Role="Division" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Session">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="Division">
+              <PropertyRef Name="SessionID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Divisions_User_CreatedBy">
+          <End Type="Model.User" Role="User" Multiplicity="1" />
+          <End Type="Model.Division" Role="Division" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="User">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="Division">
+              <PropertyRef Name="CreatedBy" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Divisions_User_LastChangedBy">
+          <End Type="Model.User" Role="User" Multiplicity="1" />
+          <End Type="Model.Division" Role="Division" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="User">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="Division">
+              <PropertyRef Name="LastChangedBy" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Sessions_User_CreatedBy">
+          <End Type="Model.User" Role="User" Multiplicity="1" />
+          <End Type="Model.Session" Role="Session" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="User">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="Session">
+              <PropertyRef Name="CreatedBy" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Sessions_User_LastChangedBy">
+          <End Type="Model.User" Role="User" Multiplicity="1" />
+          <End Type="Model.Session" Role="Session" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="User">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="Session">
+              <PropertyRef Name="LastChangedBy" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
         </Schema>
     </edmx:ConceptualModels>
     <!-- C-S mapping content -->
@@ -467,6 +715,45 @@
                 <ScalarProperty Name="MPFullName" ColumnName="MPFullName" />
                 <ScalarProperty Name="MPID" ColumnName="MPID" />
                 <ScalarProperty Name="AbsenceRequestID" ColumnName="AbsenceRequestID" />
+                <ScalarProperty Name="ID" ColumnName="ID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Divisions">
+            <EntityTypeMapping TypeName="Model.Division">
+              <MappingFragment StoreEntitySet="Divisions">
+                <ScalarProperty Name="LastChangedDate" ColumnName="LastChangedDate" />
+                <ScalarProperty Name="LastChangedBy" ColumnName="LastChangedBy" />
+                <ScalarProperty Name="CreatedDate" ColumnName="CreatedDate" />
+                <ScalarProperty Name="CreatedBy" ColumnName="CreatedBy" />
+                <ScalarProperty Name="Teller2ForNoes" ColumnName="Teller2ForNoes" />
+                <ScalarProperty Name="Teller1ForNoes" ColumnName="Teller1ForNoes" />
+                <ScalarProperty Name="Teller2ForAyes" ColumnName="Teller2ForAyes" />
+                <ScalarProperty Name="Teller1ForAyes" ColumnName="Teller1ForAyes" />
+                <ScalarProperty Name="Subject" ColumnName="Subject" />
+                <ScalarProperty Name="WhippingID" ColumnName="WhippingID" />
+                <ScalarProperty Name="SessionID" ColumnName="SessionID" />
+                <ScalarProperty Name="DeferredDivision" ColumnName="DeferredDivision" />
+                <ScalarProperty Name="Noes" ColumnName="Noes" />
+                <ScalarProperty Name="Ayes" ColumnName="Ayes" />
+                <ScalarProperty Name="GovtLine" ColumnName="GovtLine" />
+                <ScalarProperty Name="Title" ColumnName="Title" />
+                <ScalarProperty Name="DivisionDateTime" ColumnName="DivisionDateTime" />
+                <ScalarProperty Name="DivisionNumber" ColumnName="DivisionNumber" />
+                <ScalarProperty Name="ID" ColumnName="ID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Sessions">
+            <EntityTypeMapping TypeName="Model.Session">
+              <MappingFragment StoreEntitySet="Sessions">
+                <ScalarProperty Name="LastChangedDate" ColumnName="LastChangedDate" />
+                <ScalarProperty Name="LastChangedBy" ColumnName="LastChangedBy" />
+                <ScalarProperty Name="CreatedDate" ColumnName="CreatedDate" />
+                <ScalarProperty Name="CreatedBy" ColumnName="CreatedBy" />
+                <ScalarProperty Name="ToDate" ColumnName="ToDate" />
+                <ScalarProperty Name="FromDate" ColumnName="FromDate" />
+                <ScalarProperty Name="SessionTitle" ColumnName="SessionTitle" />
                 <ScalarProperty Name="ID" ColumnName="ID" />
               </MappingFragment>
             </EntityTypeMapping>

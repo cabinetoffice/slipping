@@ -67,5 +67,15 @@
     <Build Include="dbo\Tables\AbsenceRequest.sql" />
     <Build Include="dbo\Tables\AbsenceRequestOppositionMPs.sql" />
     <Build Include="dbo\Views\AbsenceRequest_AuditHistory.sql" />
+    <Build Include="dbo\Tables\Divisions.sql" />
+    <Build Include="dbo\Tables\Sessions.sql" />
+    <Build Include="dbo\Tables\Whipping.sql" />
+    <Build Include="dbo\Tables\Region.sql" />
+    <Build Include="dbo\Tables\Party.sql" />
+    <Build Include="dbo\Tables\MPStatus.sql" />
+    <Build Include="dbo\Tables\MPRole.sql" />
+    <Build Include="dbo\Tables\MembersOfParliament.sql" />
+    <Build Include="dbo\Tables\Country.sql" />
+    <Build Include="dbo\Tables\Constituency.sql" />
   </ItemGroup>
 </Project>
