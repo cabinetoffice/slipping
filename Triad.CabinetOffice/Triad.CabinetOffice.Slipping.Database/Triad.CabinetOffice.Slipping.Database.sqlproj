@@ -77,5 +77,18 @@
     <Build Include="dbo\Tables\MembersOfParliament.sql" />
     <Build Include="dbo\Tables\Country.sql" />
     <Build Include="dbo\Tables\Constituency.sql" />
+    <Build Include="dbo\Tables\AbsenceRequestStatus.sql" />
+    <Build Include="dbo\Tables\AbsenceRequestReason.sql" />
+    <Build Include="dbo\Tables\Committee.sql" />
+    <Build Include="dbo\Tables\CommitteeAttendanceType.sql" />
+    <Build Include="dbo\Tables\CommitteeMeeting.sql" />
+    <Build Include="dbo\Tables\CommitteeMeetingAttendance.sql" />
+    <Build Include="dbo\Tables\CommitteeMember.sql" />
+    <Build Include="dbo\Tables\CommitteeType.sql" />
+    <Build Include="dbo\Tables\Flock.sql" />
+    <Build Include="dbo\Tables\FlockMembers.sql" />
+    <Build Include="dbo\Tables\MajorityRAGThreshholds.sql" />
+    <Build Include="dbo\Tables\VotingBehaviour.sql" />
+    <Build Include="dbo\Tables\Votes.sql" />
   </ItemGroup>
 </Project>
