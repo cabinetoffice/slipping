@@ -1,10 +1,7 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Web.Http;
+﻿using System.Web.Http;
 using System.Web.Http.OData.Builder;
 using System.Web.Http.OData.Extensions;
-using Triad.CabinetOffice.Slipping.Data.EntityFramework.PAWS;
+using Triad.CabinetOffice.Slipping.Data.EntityFramework.Slipping;
 
 namespace Triad.CabinetOffice.PAWS.API
 {
@@ -12,12 +9,12 @@ namespace Triad.CabinetOffice.PAWS.API
     {
         public static void Register(HttpConfiguration config)
         {
-            
+            config.EnableCors();
+
             ODataConventionModelBuilder builder = new ODataConventionModelBuilder();
-            builder.EntitySet<Absence_Request>("AbsenceRequest");
-            builder.EntitySet<Absence_Request_Status>("AbsenceRequestStatus");
-            builder.EntitySet<Absence_Request_Reason>("AbsenceRequestReason");
-            builder.EntitySet<Members_of_Parliament>("MemberOfParliament");
+            builder.EntitySet<Session>("Sessions");
+            builder.EntitySet<Division>("Divisions");
+            builder.EntitySet<User>("Users");
             config.Routes.MapODataServiceRoute("odata", "odata", builder.GetEdmModel());
 
         }
