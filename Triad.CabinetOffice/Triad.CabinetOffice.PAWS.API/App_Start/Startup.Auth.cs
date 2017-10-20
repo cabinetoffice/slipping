@@ -33,11 +33,7 @@ namespace Triad.CabinetOffice.PAWS.API
             app.UseWindowsAzureActiveDirectoryBearerAuthentication(
                 new WindowsAzureActiveDirectoryBearerAuthenticationOptions
                 {
-                    Tenant=tenantId,
-                    TokenValidationParameters=new System.IdentityModel.Tokens.TokenValidationParameters
-                    {
-                        ValidAudience=audience
-                    }
+                    Tenant = tenantId
                 });
         }
     }
