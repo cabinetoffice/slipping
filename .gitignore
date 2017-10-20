@@ -261,4 +261,4 @@ __pycache__/
 *.pyc
 
 # Hidden Configuration 1
-/HiddenSettings.config
+HiddenSettings.config
