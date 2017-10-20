@@ -260,5 +260,5 @@ paket-files/
 __pycache__/
 *.pyc
 
-# Hidden Configuration
+# Hidden Configuration 1
 /HiddenSettings.config
