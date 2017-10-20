@@ -189,7 +189,6 @@
     <Content Include="ApplicationInsights.config">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
-    <Content Include="HiddenSettings.config" />
     <None Include="packages.config" />
     <None Include="Properties\PublishProfiles\ZephyrPaws2Api - Web Deploy.pubxml" />
     <None Include="Web.Debug.config">
