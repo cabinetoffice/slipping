@@ -29,7 +29,5 @@ namespace Triad.CabinetOffice.Slipping.Data.EntityFramework.Slipping
         public virtual DbSet<User> Users { get; set; }
         public virtual DbSet<UserMP> UserMPs { get; set; }
         public virtual DbSet<AbsenceRequestOppositionMP> AbsenceRequestOppositionMPs { get; set; }
-        public virtual DbSet<Division> Divisions { get; set; }
-        public virtual DbSet<Session> Sessions { get; set; }
     }
 }

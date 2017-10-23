@@ -50,6 +50,30 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="EntityFramework\PAWS2\Division.cs">
+      <DependentUpon>PAWS2.tt</DependentUpon>
+    </Compile>
+    <Compile Include="EntityFramework\PAWS2\PAWS2.Context.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>PAWS2.Context.tt</DependentUpon>
+    </Compile>
+    <Compile Include="EntityFramework\PAWS2\PAWS2.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>PAWS2.tt</DependentUpon>
+    </Compile>
+    <Compile Include="EntityFramework\PAWS2\PAWS2.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>PAWS2.edmx</DependentUpon>
+    </Compile>
+    <Compile Include="EntityFramework\PAWS2\Session.cs">
+      <DependentUpon>PAWS2.tt</DependentUpon>
+    </Compile>
+    <Compile Include="EntityFramework\PAWS2\User.cs">
+      <DependentUpon>PAWS2.tt</DependentUpon>
+    </Compile>
     <Compile Include="EntityFramework\PAWS\Absence_Request.cs">
       <DependentUpon>PAWS.tt</DependentUpon>
     </Compile>
@@ -81,12 +105,6 @@
       <DependentUpon>Slipping.tt</DependentUpon>
     </Compile>
     <Compile Include="EntityFramework\Slipping\AbsenceRequestOppositionMP.cs">
-      <DependentUpon>Slipping.tt</DependentUpon>
-    </Compile>
-    <Compile Include="EntityFramework\Slipping\Division.cs">
-      <DependentUpon>Slipping.tt</DependentUpon>
-    </Compile>
-    <Compile Include="EntityFramework\Slipping\Session.cs">
       <DependentUpon>Slipping.tt</DependentUpon>
     </Compile>
     <Compile Include="EntityFramework\Slipping\Slipping.Context.cs">
@@ -133,12 +151,29 @@
       <Generator>EntityModelCodeGenerator</Generator>
       <LastGenOutput>PAWS.Designer.cs</LastGenOutput>
     </EntityDeploy>
+    <EntityDeploy Include="EntityFramework\PAWS2\PAWS2.edmx">
+      <Generator>EntityModelCodeGenerator</Generator>
+      <LastGenOutput>PAWS2.Designer.cs</LastGenOutput>
+    </EntityDeploy>
+    <None Include="EntityFramework\PAWS2\PAWS2.edmx.diagram">
+      <DependentUpon>PAWS2.edmx</DependentUpon>
+    </None>
     <None Include="EntityFramework\PAWS\PAWS.edmx.diagram">
       <DependentUpon>PAWS.edmx</DependentUpon>
     </None>
     <None Include="EntityFramework\Slipping\Slipping.edmx.diagram">
       <DependentUpon>Slipping.edmx</DependentUpon>
     </None>
+    <Content Include="EntityFramework\PAWS2\PAWS2.Context.tt">
+      <Generator>TextTemplatingFileGenerator</Generator>
+      <DependentUpon>PAWS2.edmx</DependentUpon>
+      <LastGenOutput>PAWS2.Context.cs</LastGenOutput>
+    </Content>
+    <Content Include="EntityFramework\PAWS2\PAWS2.tt">
+      <Generator>TextTemplatingFileGenerator</Generator>
+      <DependentUpon>PAWS2.edmx</DependentUpon>
+      <LastGenOutput>PAWS2.cs</LastGenOutput>
+    </Content>
     <Content Include="HiddenSettings.config" />
     <None Include="packages.config" />
   </ItemGroup>

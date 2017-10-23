@@ -2,7 +2,7 @@
 using System.Web.Http.Cors;
 using System.Web.Http.OData.Builder;
 using System.Web.Http.OData.Extensions;
-using Triad.CabinetOffice.Slipping.Data.EntityFramework.Slipping;
+using Triad.CabinetOffice.Slipping.Data.EntityFramework.PAWS2;
 
 namespace Triad.CabinetOffice.PAWS.API
 {
