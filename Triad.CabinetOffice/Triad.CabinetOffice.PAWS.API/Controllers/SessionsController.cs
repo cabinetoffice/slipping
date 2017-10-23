@@ -4,12 +4,12 @@ using System.Linq;
 using System.Net;
 using System.Threading.Tasks;
 using System.Web.Http;
-using System.Web.Http.Cors;
 using System.Web.Http.OData;
 using Triad.CabinetOffice.Slipping.Data.EntityFramework.Slipping;
 
 namespace Triad.CabinetOffice.PAWS.API.Controllers
 {
+    [Authorize]
     public class SessionsController : ODataController
     {
         private SlippingEntities db = new SlippingEntities();
