@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+ <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <edmx:Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <!-- Diagram content (shape and connector positions) -->
+    <edmx:Diagrams>
+      <Diagram DiagramId="286269c660914478a71ae4706eeda242" Name="Diagram1">
+        <EntityTypeShape EntityType="PAWS2.Division" Width="1.5" PointX="3" PointY="1.125" IsExpanded="true" />
+        <EntityTypeShape EntityType="PAWS2.Session" Width="1.5" PointX="0.75" PointY="2.125" IsExpanded="true" />
+        <AssociationConnector Association="PAWS2.FK_Divisions_Sessions_SessionID" ManuallyRouted="false" />
+        <EntityTypeShape EntityType="PAWS2.User" Width="1.5" PointX="2.125" PointY="6.875" />
+        <AssociationConnector Association="PAWS2.FK_Divisions_User_CreatedBy" />
+        <AssociationConnector Association="PAWS2.FK_Divisions_User_LastChangedBy" />
+        <AssociationConnector Association="PAWS2.FK_Sessions_User_CreatedBy" />
+        <AssociationConnector Association="PAWS2.FK_Sessions_User_LastChangedBy" />
+        <AssociationConnector Association="PAWS2.FK_User_User" />
+      </Diagram>
+    </edmx:Diagrams>
+  </edmx:Designer>
+</edmx:Edmx>
