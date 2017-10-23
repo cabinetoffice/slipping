@@ -15,7 +15,7 @@ using Triad.CabinetOffice.Slipping.Web.Exceptions;
 namespace Triad.CabinetOffice.Slipping.Web.Controllers
 {
     [Authorize]
-    public class SlippingController : Controller
+    public class SlipsController : Controller
     {
         #region Properties
 
