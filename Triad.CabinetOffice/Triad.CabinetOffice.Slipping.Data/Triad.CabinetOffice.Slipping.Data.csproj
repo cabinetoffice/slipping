@@ -142,7 +142,9 @@
     <Compile Include="Repositories\UserRepository.cs" />
   </ItemGroup>
   <ItemGroup>
-    <None Include="App.config" />
+    <None Include="App.config">
+      <SubType>Designer</SubType>
+    </None>
     <EntityDeploy Include="EntityFramework\Slipping\Slipping.edmx">
       <Generator>EntityModelCodeGenerator</Generator>
       <LastGenOutput>Slipping.Designer.cs</LastGenOutput>
