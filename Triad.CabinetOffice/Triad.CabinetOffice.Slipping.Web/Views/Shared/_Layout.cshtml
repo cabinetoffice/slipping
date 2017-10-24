@@ -63,15 +63,15 @@
                     <nav id="proposition-menu">
                         @if (Request.IsAuthenticated)
                         {
-                            <a id="proposition-name" href="/Slipping">Slipping</a>
+                            @Html.ActionLink("Slipping", "Index", "Slips", null, new { id = "proposition-name" })
                         }
                         else
                         {
-                           <a id="proposition-name" href="/">Slipping</a>    
+                            @Html.ActionLink("Slipping", "Index", "Home", null, new { id = "proposition-name" })
                         }
                         <ul id="proposition-links">
                             @if (Request.IsAuthenticated) {
-                                <li><a href="/Account/SignOut">Log out</a></li>
+                                <li>@Html.ActionLink("Log out", "SignOut", "Account", null, null)</li>
                             }
                         </ul>
                     </nav>

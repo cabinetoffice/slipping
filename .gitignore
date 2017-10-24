@@ -259,3 +259,5 @@ paket-files/
 # Python Tools for Visual Studio (PTVS)
 __pycache__/
 *.pyc
+/Triad.CabinetOffice/Triad.CabinetOffice.Slipping.Web/Properties/PublishProfiles/slipping-prod - FTP.pubxml
+/Triad.CabinetOffice/Triad.CabinetOffice.Slipping.Web/Properties/PublishProfiles/slipping-prod - Web Deploy.pubxml
