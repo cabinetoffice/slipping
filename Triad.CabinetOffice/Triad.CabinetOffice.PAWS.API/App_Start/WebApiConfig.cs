@@ -1,4 +1,5 @@
-﻿using System.Web.Http;
+﻿using System.Configuration;
+using System.Web.Http;
 using System.Web.Http.Cors;
 using System.Web.Http.OData.Builder;
 using System.Web.Http.OData.Extensions;
@@ -8,9 +9,10 @@ namespace Triad.CabinetOffice.PAWS.API
 {
     public static class WebApiConfig
     {
+        private static string pawsCorsOrigin = ConfigurationManager.AppSettings["PawsCorsOrigin"];
         public static void Register(HttpConfiguration config)
         {
-            config.EnableCors(new EnableCorsAttribute("https://localhost:4321", "*", "*") { SupportsCredentials = true });
+            config.EnableCors(new EnableCorsAttribute(pawsCorsOrigin, "*", "*") { SupportsCredentials = true });
 
             ODataConventionModelBuilder builder = new ODataConventionModelBuilder();
             builder.EntitySet<Session>("Sessions");

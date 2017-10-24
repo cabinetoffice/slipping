@@ -262,3 +262,5 @@ __pycache__/
 
 # Hidden Configuration 1
 HiddenSettings.config
+/Triad.CabinetOffice/Triad.CabinetOffice.PAWS.API/HiddenSetting.config
+/Triad.CabinetOffice/Triad.CabinetOffice.PAWS.API/Properties/PublishProfiles
