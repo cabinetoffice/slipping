@@ -9,6 +9,7 @@ import { DatePicker } from 'office-ui-fabric-react/lib/DatePicker';
 import { DefaultButton, IButtonProps } from 'office-ui-fabric-react/lib/Button';
 import { HttpClient, HttpClientResponse, SPHttpClient, SPHttpClientResponse,GraphHttpClient } from '@microsoft/sp-http';
 import { Session, ISession } from '../../../types/Session';
+import '../../../common/polyfillCustomEvent';
 
 export default class SessionForm extends React.Component<ISessionFormProps, ISessionFormState> {
   
@@ -89,7 +90,7 @@ export default class SessionForm extends React.Component<ISessionFormProps, ISes
   }
   private handleSubmit(e):void{
     e.preventDefault();
-    if(this.state.id === 0){
+    if(this.state.id === 0) {
       this.createSession(this.state).then((session:ISession)=>{
         this.setState({id:session.ID});
         this.setState({sessionTitle:session.SessionTitle});
@@ -97,8 +98,12 @@ export default class SessionForm extends React.Component<ISessionFormProps, ISes
         this.setState({toDate:new Date(session.ToDate)});
         this.setState({viewMode:true});
       });
-    }else{
-      this.saveSession(this.state).then((ok:boolean)=>{ this.setState({viewMode:true}); });
+    } else {
+      this.saveSession(this.state).then((ok:boolean)=>{ 
+        var event = new CustomEvent('pawsReload');
+        window.dispatchEvent(event);
+        this.setState({viewMode:true}); 
+      });
     }
   }
 

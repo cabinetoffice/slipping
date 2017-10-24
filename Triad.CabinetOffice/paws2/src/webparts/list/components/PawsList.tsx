@@ -20,6 +20,10 @@ export default class PawsList extends React.Component<IPawsListProps, IPawsListS
     this._handleNew = this._handleNew.bind(this);
 
     this.state = {items:[]};
+
+    window.addEventListener('pawsReload', (e) => {
+        this.componentDidMount();
+    });
   }
 
   public render(): React.ReactElement<IPawsListProps> {
