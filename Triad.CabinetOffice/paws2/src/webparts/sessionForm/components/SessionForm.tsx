@@ -1,12 +1,12 @@
 import * as React from 'react';
 import styles from './SessionForm.module.scss';
 import { ISessionFormProps } from './ISessionFormProps';
-import { ISessionFormState, SessionFormState } from './ISessionFormState';
+import { ISessionFormState, SessionFormState, ISessionFormData } from './ISessionFormState';
 import { escape } from '@microsoft/sp-lodash-subset';
 import { Label } from 'office-ui-fabric-react/lib/Label';
 import { TextField } from 'office-ui-fabric-react/lib/TextField';
-import { DatePicker } from 'office-ui-fabric-react/lib/DatePicker';
-import { DefaultButton, IButtonProps } from 'office-ui-fabric-react/lib/Button';
+import { DatePicker, IDatePickerProps } from 'office-ui-fabric-react/lib/DatePicker';
+import { DefaultButton, IButtonProps, PrimaryButton } from 'office-ui-fabric-react/lib/Button';
 import { HttpClient, HttpClientResponse, SPHttpClient, SPHttpClientResponse,GraphHttpClient } from '@microsoft/sp-http';
 import { Session, ISession } from '../../../types/Session';
 import '../../../common/polyfillCustomEvent';
@@ -17,8 +17,10 @@ export default class SessionForm extends React.Component<ISessionFormProps, ISes
     super(props);
     this.state = new SessionFormState();
     
+    this.validateSession = this.validateSession.bind(this);
     this.handleEdit = this.handleEdit.bind(this);
     this.handleCancel = this.handleCancel.bind(this);
+    this.handleDelete = this.handleDelete.bind(this);
     this.handleChangeSessionTitle = this.handleChangeSessionTitle.bind(this);
     this.handleChangeFromDate = this.handleChangeFromDate.bind(this);
     this.handleChangeToDate = this.handleChangeToDate.bind(this);
@@ -30,29 +32,35 @@ export default class SessionForm extends React.Component<ISessionFormProps, ISes
   }
   
   public render(): React.ReactElement<ISessionFormProps> {
+    const formData = this.state.formData;
+
     return (
       <form className={styles.sessionForm}>
-        <h2>{ this.state.id === 0 ? 'Add' : this.state.viewMode ? 'View' : 'Edit' } Session</h2>
+        <h2>{ formData.id === 0 ? 'Add' : this.state.viewMode ? 'View' : 'Edit' } Session</h2>
         <div>
           <div>
-            <Label required={true} className={styles.msLabel}>Session Title</Label>
-            <TextField disabled={ this.state.viewMode } required={true} value={this.state.sessionTitle} onChanged={this.handleChangeSessionTitle}  />
+            {/*<Label required={true} className={styles.msLabel}>Session Title</Label>*/}
+            <TextField label="Session Title" disabled={ this.state.viewMode } maxLength={ 50 } required={true} value={formData.sessionTitle} onChanged={this.handleChangeSessionTitle}  />
           </div>
           <div>
-            <Label required={true} className={styles.msLabel}>From Date</Label>
-            <DatePicker disabled={ this.state.viewMode } value={this.state.fromDate} formatDate={(date:Date)=>date.toLocaleDateString()} onSelectDate={this.handleChangeFromDate} placeholder="Select session from date..." />
+            {/*<Label required={true} className={styles.msLabel}>From Date</Label>*/}
+            <DatePicker label="From Date" isRequired={true} disabled={ this.state.viewMode } value={formData.fromDate} formatDate={(date:Date)=>date.toLocaleDateString()} onSelectDate={this.handleChangeFromDate} placeholder="Select session from date..." />
           </div>
           <div>
-            <Label required={true} className={styles.msLabel}>To Date</Label>
-            <DatePicker disabled={ this.state.viewMode } value={this.state.toDate} formatDate={(date:Date)=>date.toLocaleDateString()} onSelectDate={this.handleChangeToDate} placeholder="Select session end date..." />
+            {/*<Label required={true} className={styles.msLabel}>To Date</Label>*/}
+            <DatePicker label="To Date" isRequired={true} disabled={ this.state.viewMode } value={formData.toDate} formatDate={(date:Date)=>date.toLocaleDateString()} onSelectDate={this.handleChangeToDate} placeholder="Select session end date..." />
+            <p className="ms-TextField-errorMessage">{this.state.errors["toDate"]}</p>
           </div>
           <div>
             { this.state.viewMode ? (
-              <DefaultButton text="Edit" className={styles.buttonPrimary} onClick={this.handleEdit} />
+              <PrimaryButton text="Edit" onClick={this.handleEdit} />
             ) : (
-              <DefaultButton text="Save" className={styles.buttonPrimary} onClick={this.handleSubmit} />
+              <PrimaryButton text="Save" disabled={ !this.state.isValid } onClick={this.handleSubmit} />
             )}
-            &nbsp;<DefaultButton text="Cancel" onClick={this.handleCancel} />
+            &nbsp;<DefaultButton text="Cancel" onClick={this.handleCancel} />&nbsp;
+            { this.state.formData.id !== 0 ? (
+            <DefaultButton text="Delete" onClick={this.handleDelete} />
+            ):(null)}
           </div>
         </div>
       </form>
@@ -62,15 +70,33 @@ export default class SessionForm extends React.Component<ISessionFormProps, ISes
   public componentDidMount():void {
     var id = parseInt(location.hash.substring(1));
     if(!isNaN(id)) {
-      this.getSession(id).then((session:ISession):void=>{
-        this.setState({id:session.ID});
-        this.setState({sessionTitle:session.SessionTitle});
-        this.setState({fromDate:new Date(session.FromDate)});
-        this.setState({toDate:new Date(session.ToDate)});
-        this.setState({viewMode:true});
+      this.getSession(id).then((session:ISession):void => {
+        this.setState({formData:{
+          id: session.ID,
+          sessionTitle: session.SessionTitle,
+          fromDate: new Date(session.FromDate),
+          toDate: new Date(session.ToDate)
+        },
+        viewMode:true});
       });
     } else {
       this.setState(new SessionFormState());
+    }
+  }
+  private validateSession(state:ISessionFormState):void {
+    const formData = state.formData;
+    const errors = state.errors;
+
+    if(formData.fromDate && formData.toDate && formData.fromDate > formData.toDate){
+      errors['toDate'] = 'To Date must be before From Date';
+    } else {
+      errors['toDate'] = '';
+    }
+
+    if(formData.sessionTitle !== null && formData.sessionTitle.length > 0 && formData.fromDate < formData.toDate) {
+      this.setState({isValid:true, errors:errors});
+    } else {
+      this.setState({isValid:false, errors:errors});
     }
   }
   private handleEdit(e):void{
@@ -79,28 +105,45 @@ export default class SessionForm extends React.Component<ISessionFormProps, ISes
   private handleCancel(e):void{
     this.componentDidMount();
   }
-  private handleChangeSessionTitle(e):void{
-    this.setState({sessionTitle:e});
+  private handleDelete(e):void{
+    var event = new CustomEvent('pawsReload');
+    this.deleteSession(this.state.formData).then((ok:boolean)=>{
+      if(ok){
+        window.dispatchEvent(event);
+        this.setState(new SessionFormState());
+      }
+    })
   }
-  private handleChangeFromDate(e):void{
-    this.setState({fromDate:e});
+  private handleChangeSessionTitle(e):void {
+    const d = this.state.formData;
+    d.sessionTitle = e;
+    this.setState({formData:d});
+    this.validateSession(this.state);
   }
-  private handleChangeToDate(e):void{
-    this.setState({toDate:e});
+  private handleChangeFromDate(e):void {
+    const d = this.state.formData;
+    d.fromDate = e;
+    this.setState({formData:d});
+    this.validateSession(this.state);
+  }
+  private handleChangeToDate(e):void {
+    const d = this.state.formData;
+    d.toDate = e;
+    this.setState({formData:d});
+    this.validateSession(this.state);
   }
   private handleSubmit(e):void{
     e.preventDefault();
-    if(this.state.id === 0) {
-      this.createSession(this.state).then((session:ISession)=>{
-        this.setState({id:session.ID});
-        this.setState({sessionTitle:session.SessionTitle});
-        this.setState({fromDate:new Date(session.FromDate)});
-        this.setState({toDate:new Date(session.ToDate)});
-        this.setState({viewMode:true});
+    var event = new CustomEvent('pawsReload');
+    if(this.state.formData.id === 0) {
+      this.createSession(this.state.formData).then((session:ISession)=>{
+        window.dispatchEvent(event);
+        const d = this.state.formData;
+        d.id = session.ID;
+        this.setState({formData: d, viewMode:true});
       });
     } else {
-      this.saveSession(this.state).then((ok:boolean)=>{ 
-        var event = new CustomEvent('pawsReload');
+      this.saveSession(this.state.formData).then((ok:boolean)=>{ 
         window.dispatchEvent(event);
         this.setState({viewMode:true}); 
       });
@@ -122,7 +165,7 @@ export default class SessionForm extends React.Component<ISessionFormProps, ISes
     });
   }
 
-  private createSession(session:ISessionFormState):Promise<ISession>{
+  private createSession(session:ISessionFormData):Promise<ISession>{
     var postSession = {
       CreatedBy: 1,
       CreatedDate: new Date(),
@@ -145,7 +188,7 @@ export default class SessionForm extends React.Component<ISessionFormProps, ISes
     });
   }
 
-  private saveSession(session:ISessionFormState): Promise<boolean>{
+  private saveSession(session:ISessionFormData): Promise<boolean>{
     var patchSession = {
       FromDate: session.fromDate,
       ID: session.id,
@@ -159,6 +202,15 @@ export default class SessionForm extends React.Component<ISessionFormProps, ISes
     .then((response:Response):boolean => {
         return response.ok;
     }, (error:any):void => {
+        return error;
+    });
+  }
+
+  private deleteSession(session:ISessionFormData): Promise<boolean>{
+    return this.props.httpClient.fetch(`${this.props.apiUrl}(${session.id})`, HttpClient.configurations.v1, { method:'DELETE', credentials:'include' })
+    .then((response:Response):boolean => {
+      return response.ok;
+    },(error:any):void=>{
         return error;
     });
   }

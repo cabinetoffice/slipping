@@ -6,7 +6,7 @@ import { escape } from '@microsoft/sp-lodash-subset';
 import { TextField } from 'office-ui-fabric-react/lib/TextField';
 import { Icon } from 'office-ui-fabric-react/lib/Icon';
 import { List } from 'office-ui-fabric-react/lib/List';
-import { DefaultButton, IButtonProps } from 'office-ui-fabric-react/lib/Button';
+import { PrimaryButton, IButtonProps } from 'office-ui-fabric-react/lib/Button';
 import { HttpClient } from '@microsoft/sp-http';
 import { ListItem, IListItem } from '../../../types/ListItem';
 
@@ -16,8 +16,8 @@ export default class PawsList extends React.Component<IPawsListProps, IPawsListS
   constructor(props:IPawsListProps){
     super(props);
 
-    this._onFilterChanged = this._onFilterChanged.bind(this);
-    this._handleNew = this._handleNew.bind(this);
+    this.onFilterChanged = this.onFilterChanged.bind(this);
+    this.handleNew = this.handleNew.bind(this);
 
     this.state = {items:[]};
 
@@ -34,21 +34,23 @@ export default class PawsList extends React.Component<IPawsListProps, IPawsListS
     return (
       <div>
         <h2>{this.props.title}</h2>
-        <DefaultButton text="Add new session" onClick={ this._handleNew } />
-        <TextField label={'Filter by title' + resultCountText } onBeforeChange={ this._onFilterChanged } />
-        <List items={items} onRenderCell={this._onRenderCell} className="pawsList" />
+        <PrimaryButton text="Add new session" onClick={ this.handleNew } />
+        <TextField label={'Filter by title' + resultCountText } onBeforeChange={ this.onFilterChanged } />
+        <List items={items} onRenderCell={this.onRenderCell} className="pawsList" />
       </div>
     );
   }
 
   public componentDidMount():void {
-    this.getItems().then((items:IListItem[]):void=>{
-      this.allItems = items;
-      this.setState({ items: items });
-    });
+    if(this.props.itemsUrl !== undefined && this.props.nameProperty !== undefined){
+      this.getItems().then((items:IListItem[]):void=>{
+        this.allItems = items;
+        this.setState({ items: items });
+      });
+    }
   }
 
-  private _onFilterChanged(text: string) {
+  private onFilterChanged(text: string) {
     let items = this.allItems;
 
     this.setState({
@@ -59,7 +61,7 @@ export default class PawsList extends React.Component<IPawsListProps, IPawsListS
     });
   }
 
-  private _onRenderCell(item: IListItem, index: number | undefined): JSX.Element {
+  private onRenderCell(item: IListItem, index: number | undefined): JSX.Element {
     return (
         <a href={'#' + item.id} className="noLinkDecoration">
         <div className='ms-ListBasicExample-itemCell' data-is-focusable={ true }>
@@ -76,7 +78,7 @@ export default class PawsList extends React.Component<IPawsListProps, IPawsListS
     );
   }
 
-  private _handleNew(e):void{
+  private handleNew(e):void{
     e.preventDefault();
     location.hash='';
   }
