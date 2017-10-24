@@ -1,7 +1,7 @@
 declare interface ISessionFormWebPartStrings {
   PropertyPaneDescription: string;
   BasicGroupName: string;
-  DescriptionFieldLabel: string;
+  ApiUrlFieldLabel: string;
 }
 
 declare module 'SessionFormWebPartStrings' {

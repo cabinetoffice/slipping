@@ -1,7 +1,7 @@
 define([], function() {
   return {
-    "PropertyPaneDescription": "Description",
-    "BasicGroupName": "Group Name",
-    "DescriptionFieldLabel": "Description Field"
+    "PropertyPaneDescription": "Form for adding and editing Sessions",
+    "BasicGroupName": "Settings",
+    "ApiUrlFieldLabel": "Sessions API URL"
   }
 });

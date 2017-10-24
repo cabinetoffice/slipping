@@ -4,6 +4,7 @@ export interface ISessionFormState {
     fromDate:Date;
     toDate:Date;
     isValid:boolean;
+    viewMode:boolean;
 }
 
 export class SessionFormState {
@@ -12,6 +13,7 @@ export class SessionFormState {
     public fromDate:Date;
     public toDate:Date;
     public isValid:boolean;
+    public viewMode:boolean;
     
     constructor(){
         this.id=0;
@@ -19,5 +21,6 @@ export class SessionFormState {
         this.fromDate=null;
         this.toDate=null;
         this.isValid=true;
+        this.viewMode=false;
     }
 }

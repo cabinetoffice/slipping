@@ -10,10 +10,7 @@ import {
 import * as strings from 'SessionFormWebPartStrings';
 import SessionForm from './components/SessionForm';
 import { ISessionFormProps } from './components/ISessionFormProps';
-
-export interface ISessionFormWebPartProps {
-  description: string;
-}
+import { ISessionFormWebPartProps } from './ISessionFormWebPartProps';
 
 export default class SessionFormWebPart extends BaseClientSideWebPart<ISessionFormWebPartProps> {
   private apiLoaded:boolean = false;
@@ -23,14 +20,12 @@ export default class SessionFormWebPart extends BaseClientSideWebPart<ISessionFo
     const element: React.ReactElement<ISessionFormProps > = React.createElement(
       SessionForm,
       {
-        description: this.properties.description,
-        apiUrl: this.apiUrl,
+        apiUrl: this.properties.apiUrl,
         httpClient: this. context.httpClient
       }
     );
 
     this.domElement.innerHTML += `
-      <h2>Edit Session</h2>
       <iframe src="${this.apiUrl}" style="display:none;"></iframe>
       <div id="seshForm"></div>
     `;
@@ -67,8 +62,8 @@ export default class SessionFormWebPart extends BaseClientSideWebPart<ISessionFo
             {
               groupName: strings.BasicGroupName,
               groupFields: [
-                PropertyPaneTextField('description', {
-                  label: strings.DescriptionFieldLabel
+                PropertyPaneTextField('apiUrl', {
+                  label: strings.ApiUrlFieldLabel
                 })
               ]
             }

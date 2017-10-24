@@ -10,43 +10,46 @@ import {
 import * as strings from 'ListWebPartStrings';
 import PawsList from './components/PawsList';
 import { IPawsListProps } from './components/IPawsListProps';
-
-export interface IListWebPartProps {
-  title: string;
-  itemsUrl: string;
-}
+import { IListWebPartProps } from './IListWebPartProps';
 
 export default class ListWebPart extends BaseClientSideWebPart<IListWebPartProps> {
-  private remoteApiLoaded:boolean = false;
-  private apiUrl:string = "https://paws-api-dev.azurewebsites.net"; // TODO: get this from web part props
+  private apiLoaded:boolean = false;
 
   public render(): void {
-    this.properties.title='Sessions';
     const element: React.ReactElement<IPawsListProps > = React.createElement(
       PawsList,
       {
-        itemsUrl: this.apiUrl + '/odata/Sessions', // TODO: get this from web part props
+        title: this.properties.title,
+        itemsUrl: this.properties.itemsUrl,
+        nameProperty: this.properties.nameProperty,
+        descProperty: this.properties.descriptionProperty,
         httpClient: this.context.httpClient
       }
     );
 
     this.domElement.innerHTML += `
-      <h2>${this.properties.title}</h2>
-      <iframe src="${this.apiUrl}/odata/Sessions" style="display:none;"></iframe>
+      <div class="loading"></div>
+      <iframe src="${this.properties.itemsUrl}" style="display:none;"></iframe>
       <div id="paws-list"></div>
     `;
 
+    this.context.statusRenderer.displayLoadingIndicator(this.domElement.querySelector(".loading"), "items");
+
     this.domElement.querySelector('iframe').addEventListener('load', ():void => {
-      this.remoteApiLoaded = true;
+      this.apiLoaded = true;
     });
+
     this.executeOrDelayUntilRemoteApiLoaded(():void=>{
       ReactDom.render(element, this.domElement.querySelector('#paws-list'));
+      this.context.statusRenderer.clearLoadingIndicator(this.domElement.querySelector(".loading"));
     });
   }
 
   protected get dataVersion(): Version {
     return Version.parse('1.0');
   }
+  
+  protected get disableReactivePropertyChanges(): boolean { return true; }
 
   protected getPropertyPaneConfiguration(): IPropertyPaneConfiguration {
     return {
@@ -63,7 +66,13 @@ export default class ListWebPart extends BaseClientSideWebPart<IListWebPartProps
                   label: strings.TitleFieldLabel
                 }),
                 PropertyPaneTextField('itemsUrl', {
-                  label: 'Items URL'
+                  label: strings.ItemsUrlFieldLabel
+                }),
+                PropertyPaneTextField('nameProperty', {
+                  label: strings.NamePropertyFieldLabel
+                }),
+                PropertyPaneTextField('descriptionProperty', {
+                  label: strings.DescriptionPropertyFieldLabel
                 })
               ]
             }
@@ -73,11 +82,11 @@ export default class ListWebPart extends BaseClientSideWebPart<IListWebPartProps
     };
   }
 
-  private executeOrDelayUntilRemoteApiLoaded(func:Function):void{
-    if(this.remoteApiLoaded){
+  private executeOrDelayUntilRemoteApiLoaded(func:Function):void {
+    if(this.apiLoaded) {
       func();
-    }else{
-      setTimeout(():void=> {this.executeOrDelayUntilRemoteApiLoaded(func);}, 100);
+    } else {
+      setTimeout(():void => {this.executeOrDelayUntilRemoteApiLoaded(func);}, 100);
     }
   }
 }

@@ -1,7 +1,10 @@
 define([], function() {
   return {
-    "PropertyPaneDescription": "Description",
-    "BasicGroupName": "Group Name",
-    "DescriptionFieldLabel": "Description Field"
+    "PropertyPaneDescription": "Configure the PAWS list web part",
+    "BasicGroupName": "Settings",
+    "TitleFieldLabel": "Title",
+    "ItemsUrlFieldLabel": "List Items URL",
+    "NamePropertyFieldLabel": "Name Property",
+    "DescriptionPropertyFieldLabel": "Description Property"
   }
 });

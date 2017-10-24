@@ -5,6 +5,10 @@
     text-decoration: none;
     color: black;
   }
+  .pawsList {
+    height: 50vh;
+    overflow: auto;
+  }
 
   .ms-ListBasicExample-itemCell {
     @include focus-border();

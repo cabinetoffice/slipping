@@ -1,28 +1,14 @@
 import * as React from 'react';
 import './PawsList.module.scss';
 import { IPawsListProps } from './IPawsListProps';
+import { IPawsListState } from './IPawsListState';
 import { escape } from '@microsoft/sp-lodash-subset';
 import { TextField } from 'office-ui-fabric-react/lib/TextField';
 import { Icon } from 'office-ui-fabric-react/lib/Icon';
 import { List } from 'office-ui-fabric-react/lib/List';
+import { DefaultButton, IButtonProps } from 'office-ui-fabric-react/lib/Button';
 import { HttpClient } from '@microsoft/sp-http';
-
-export interface IListItem {
-  id: number;
-  name: string;
-  description?: string;
-}
-
-export class ListItem {
-  public id: number;
-  public name: string;
-  public description?: string;
-}
-
-export interface IPawsListState {
-  filterText?: string;
-  items?: IListItem[];
-}
+import { ListItem, IListItem } from '../../../types/ListItem';
 
 export default class PawsList extends React.Component<IPawsListProps, IPawsListState> {
   private allItems: IListItem[];
@@ -31,6 +17,7 @@ export default class PawsList extends React.Component<IPawsListProps, IPawsListS
     super(props);
 
     this._onFilterChanged = this._onFilterChanged.bind(this);
+    this._handleNew = this._handleNew.bind(this);
 
     this.state = {items:[]};
   }
@@ -42,8 +29,10 @@ export default class PawsList extends React.Component<IPawsListProps, IPawsListS
     
     return (
       <div>
+        <h2>{this.props.title}</h2>
+        <DefaultButton text="Add new session" onClick={ this._handleNew } />
         <TextField label={'Filter by title' + resultCountText } onBeforeChange={ this._onFilterChanged } />
-        <List items={items} onRenderCell={this._onRenderCell} />
+        <List items={items} onRenderCell={this._onRenderCell} className="pawsList" />
       </div>
     );
   }
@@ -83,9 +72,15 @@ export default class PawsList extends React.Component<IPawsListProps, IPawsListS
     );
   }
 
+  private _handleNew(e):void{
+    e.preventDefault();
+    location.hash='';
+  }
+
+  //#region Service Functions
   private getItems(): Promise<IListItem[]>{
     return new Promise<IListItem[]>((resolve: (items:IListItem[])=>void, reject:(error:any)=>void):void=>{
-      this.props.httpClient.get(this.props.itemsUrl, HttpClient.configurations.v1, { credentials:'include' })
+      this.props.httpClient.get(`${this.props.itemsUrl}?$select=ID,${this.props.nameProperty},${this.props.descProperty}`, HttpClient.configurations.v1, { credentials:'include' })
       .then((response:Response):Promise<IListItem[]> => {
         return response.json();
       })
@@ -94,8 +89,8 @@ export default class PawsList extends React.Component<IPawsListProps, IPawsListS
         data.value.forEach(element => {
           var item = {
             id: element['ID'],
-            name: element['SessionTitle'],
-            description: element['FromDate']
+            name: element[this.props.nameProperty],
+            description: element[this.props.descProperty]
           };
           items.push(item);
         });
@@ -105,4 +100,5 @@ export default class PawsList extends React.Component<IPawsListProps, IPawsListS
       });
     });
   }
+  //#endregion
 }
