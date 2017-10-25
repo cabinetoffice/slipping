@@ -22,6 +22,7 @@ namespace Triad.CabinetOffice.Slipping.Data.EntityFramework.PAWS2
             this.Sessions = new HashSet<Session>();
             this.Sessions1 = new HashSet<Session>();
             this.User1 = new HashSet<User>();
+            this.Parties = new HashSet<Party>();
         }
     
         public int ID { get; set; }
@@ -43,5 +44,7 @@ namespace Triad.CabinetOffice.Slipping.Data.EntityFramework.PAWS2
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<User> User1 { get; set; }
         public virtual User User2 { get; set; }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<Party> Parties { get; set; }
     }
 }

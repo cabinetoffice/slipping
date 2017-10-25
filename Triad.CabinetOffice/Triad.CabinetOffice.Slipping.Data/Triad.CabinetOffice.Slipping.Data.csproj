@@ -53,6 +53,9 @@
     <Compile Include="EntityFramework\PAWS2\Division.cs">
       <DependentUpon>PAWS2.tt</DependentUpon>
     </Compile>
+    <Compile Include="EntityFramework\PAWS2\Party.cs">
+      <DependentUpon>PAWS2.tt</DependentUpon>
+    </Compile>
     <Compile Include="EntityFramework\PAWS2\PAWS2.Context.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
