@@ -1,5 +1,4 @@
 import * as React from 'react';
-import styles from './SessionForm.module.scss';
 import { ISessionFormProps } from './ISessionFormProps';
 import { ISessionFormState, SessionFormState, ISessionFormData } from './ISessionFormState';
 import { escape } from '@microsoft/sp-lodash-subset';
@@ -39,7 +38,7 @@ export default class SessionForm extends React.Component<ISessionFormProps, ISes
     const formData = this.state.formData;
 
     return (
-      <form className={styles.sessionForm}>
+      <form>
         <h2>{formData.id === 0 ? 'Add' : this.state.viewMode ? 'View' : 'Edit'} Session</h2>
         <div>
           <div>

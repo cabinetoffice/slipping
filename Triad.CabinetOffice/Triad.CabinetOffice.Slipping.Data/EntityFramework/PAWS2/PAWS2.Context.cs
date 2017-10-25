@@ -28,5 +28,6 @@ namespace Triad.CabinetOffice.Slipping.Data.EntityFramework.PAWS2
         public virtual DbSet<Division> Divisions { get; set; }
         public virtual DbSet<Session> Sessions { get; set; }
         public virtual DbSet<User> Users { get; set; }
+        public virtual DbSet<Party> Parties { get; set; }
     }
 }

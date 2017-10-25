@@ -14,6 +14,8 @@
         <AssociationConnector Association="PAWS2.FK_Sessions_User_CreatedBy" />
         <AssociationConnector Association="PAWS2.FK_Sessions_User_LastChangedBy" />
         <AssociationConnector Association="PAWS2.FK_User_User" />
+        <EntityTypeShape EntityType="PAWS2.Party" Width="1.5" PointX="4.375" PointY="7.5" />
+        <AssociationConnector Association="PAWS2.FK_Party_User_CreatedBy" />
       </Diagram>
     </edmx:Diagrams>
   </edmx:Designer>

@@ -29,6 +29,17 @@
           <Property Name="LastChangedBy" Type="int" Nullable="false" />
           <Property Name="LastChangedDate" Type="datetime" Nullable="false" />
         </EntityType>
+        <EntityType Name="Party">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Party" Type="nvarchar" MaxLength="10" />
+          <Property Name="PartyName" Type="nvarchar" MaxLength="50" />
+          <Property Name="GovtFlag" Type="bit" Nullable="false" />
+          <Property Name="CreatedBy" Type="int" Nullable="false" />
+          <Property Name="CreatedDate" Type="datetime" Nullable="false" />
+        </EntityType>
         <EntityType Name="Sessions">
           <Key>
             <PropertyRef Name="ID" />
@@ -90,6 +101,18 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
+        <Association Name="FK_Party_User_CreatedBy">
+          <End Role="User" Type="Self.User" Multiplicity="1" />
+          <End Role="Party" Type="Self.Party" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="User">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="Party">
+              <PropertyRef Name="CreatedBy" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
         <Association Name="FK_Sessions_User_CreatedBy">
           <End Role="User" Type="Self.User" Multiplicity="1" />
           <End Role="Sessions" Type="Self.Sessions" Multiplicity="*" />
@@ -128,6 +151,7 @@
         </Association>
         <EntityContainer Name="PAWS2StoreContainer">
           <EntitySet Name="Divisions" EntityType="Self.Divisions" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Party" EntityType="Self.Party" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Sessions" EntityType="Self.Sessions" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="User" EntityType="Self.User" Schema="dbo" store:Type="Tables" />
           <AssociationSet Name="FK_Divisions_Sessions_SessionID" Association="Self.FK_Divisions_Sessions_SessionID">
@@ -141,6 +165,10 @@
           <AssociationSet Name="FK_Divisions_User_LastChangedBy" Association="Self.FK_Divisions_User_LastChangedBy">
             <End Role="User" EntitySet="User" />
             <End Role="Divisions" EntitySet="Divisions" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Party_User_CreatedBy" Association="Self.FK_Party_User_CreatedBy">
+            <End Role="User" EntitySet="User" />
+            <End Role="Party" EntitySet="Party" />
           </AssociationSet>
           <AssociationSet Name="FK_Sessions_User_CreatedBy" Association="Self.FK_Sessions_User_CreatedBy">
             <End Role="User" EntitySet="User" />
@@ -242,6 +270,11 @@
             <End Role="User" EntitySet="Users" />
             <End Role="User1" EntitySet="Users" />
           </AssociationSet>
+          <EntitySet Name="Parties" EntityType="PAWS2.Party" />
+          <AssociationSet Name="FK_Party_User_CreatedBy" Association="PAWS2.FK_Party_User_CreatedBy">
+            <End Role="User" EntitySet="Users" />
+            <End Role="Party" EntitySet="Parties" />
+          </AssociationSet>
         </EntityContainer>
         <EntityType Name="User">
           <Key>
@@ -260,6 +293,7 @@
           <NavigationProperty Name="Sessions1" Relationship="PAWS2.FK_Sessions_User_LastChangedBy" FromRole="User" ToRole="Session" />
           <NavigationProperty Name="User1" Relationship="PAWS2.FK_User_User" FromRole="User" ToRole="User1" />
           <NavigationProperty Name="User2" Relationship="PAWS2.FK_User_User" FromRole="User1" ToRole="User" />
+          <NavigationProperty Name="Parties" Relationship="PAWS2.FK_Party_User_CreatedBy" FromRole="User" ToRole="Party" />
         </EntityType>
         <Association Name="FK_Divisions_User_CreatedBy">
           <End Type="PAWS2.User" Role="User" Multiplicity="1" />
@@ -321,6 +355,30 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
+        <EntityType Name="Party">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Party1" Type="String" MaxLength="10" FixedLength="false" Unicode="true" />
+          <Property Name="PartyName" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="GovtFlag" Type="Boolean" Nullable="false" />
+          <Property Name="CreatedBy" Type="Int32" Nullable="false" />
+          <Property Name="CreatedDate" Type="DateTime" Nullable="false" Precision="3" />
+          <NavigationProperty Name="User" Relationship="PAWS2.FK_Party_User_CreatedBy" FromRole="Party" ToRole="User" />
+        </EntityType>
+        <Association Name="FK_Party_User_CreatedBy">
+          <End Type="PAWS2.User" Role="User" Multiplicity="1" />
+          <End Type="PAWS2.Party" Role="Party" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="User">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="Party">
+              <PropertyRef Name="CreatedBy" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
       </Schema>
     </edmx:ConceptualModels>
     <!-- C-S mapping content -->
@@ -375,6 +433,18 @@
                 <ScalarProperty Name="CreatedDate" ColumnName="CreatedDate" />
                 <ScalarProperty Name="CreatedBy" ColumnName="CreatedBy" />
                 <ScalarProperty Name="Username" ColumnName="Username" />
+                <ScalarProperty Name="ID" ColumnName="ID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Parties">
+            <EntityTypeMapping TypeName="PAWS2.Party">
+              <MappingFragment StoreEntitySet="Party">
+                <ScalarProperty Name="CreatedDate" ColumnName="CreatedDate" />
+                <ScalarProperty Name="CreatedBy" ColumnName="CreatedBy" />
+                <ScalarProperty Name="GovtFlag" ColumnName="GovtFlag" />
+                <ScalarProperty Name="PartyName" ColumnName="PartyName" />
+                <ScalarProperty Name="Party1" ColumnName="Party" />
                 <ScalarProperty Name="ID" ColumnName="ID" />
               </MappingFragment>
             </EntityTypeMapping>

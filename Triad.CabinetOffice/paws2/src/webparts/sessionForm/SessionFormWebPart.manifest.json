@@ -16,11 +16,11 @@
   "preconfiguredEntries": [{
     "groupId": "5c03119e-3074-46fd-976b-c60198311f70", // Other
     "group": { "default": "Other" },
-    "title": { "default": "Session Form" },
-    "description": { "default": "Add and edit Sessions" },
+    "title": { "default": "Session form" },
+    "description": { "default": "Add and edit sessions" },
     "officeFabricIconFontName": "Questionnaire",
     "properties": {
-      "description": "Session Form"
+      "description": "Session form"
     }
   }]
 }

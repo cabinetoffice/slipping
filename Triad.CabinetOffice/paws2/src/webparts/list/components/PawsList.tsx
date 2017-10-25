@@ -1,5 +1,5 @@
 import * as React from 'react';
-import './PawsList.module.scss';
+import styles from './PawsList.module.scss';
 import { IPawsListProps } from './IPawsListProps';
 import { IPawsListState } from './IPawsListState';
 import { escape } from '@microsoft/sp-lodash-subset';
@@ -53,11 +53,11 @@ export default class PawsList extends React.Component<IPawsListProps, IPawsListS
     let resultCountText = items.length === originalItems.length ? '' : ` (${items.length} of ${originalItems.length} shown)`;
 
     return (
-      <div>
+      <div className={styles.pawsList}>
         <h2>{this.props.title}</h2>
         <PrimaryButton text="Add new session" onClick={this.handleNew} />
         <TextField label={'Filter by title' + resultCountText} onBeforeChange={this.onFilterChanged} />
-        <List items={items} onRenderCell={this.onRenderCell} className="pawsList" />
+        <List items={items} onRenderCell={this.onRenderCell} className={styles.pawsListItemContainer} />
       </div>
     );
   }
@@ -88,14 +88,14 @@ export default class PawsList extends React.Component<IPawsListProps, IPawsListS
 
   private onRenderCell(item: IListItem, index: number | undefined): JSX.Element {
     return (
-      <a href={'#' + item.id} className="noLinkDecoration">
-        <div className='ms-ListBasicExample-itemCell' data-is-focusable={true}>
-          <div className='ms-ListBasicExample-itemContent'>
-            <div className='ms-ListBasicExample-itemName'>{item.name}</div>
-            <div className='ms-ListBasicExample-itemDesc'>{item.description}</div>
+      <a href={'#' + item.id} className={styles.noLinkDecoration}>
+        <div className={styles.msListBasicExampleItemCell} data-is-focusable={true}>
+          <div className={styles.msListBasicExampleItemContent}>
+            <div className={styles.msListBasicExampleItemName}>{item.name}</div>
+            <div>{item.description}</div>
           </div>
           <Icon
-            className='ms-ListBasicExample-chevron'
+            className={styles.msListBasicExampleChevron}
             iconName={'ChevronRight'}
           />
         </div>
