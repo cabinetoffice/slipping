@@ -16,10 +16,10 @@
             <p>@User.Identity.Name</p>
             <p>Please contact the Whips Office Admin Team providing your name and email address via email or telephone:</p>
             <p>
-                <strong class="bold-small">Email:</strong> <a href="mailto:GWAU@parliament.uk">GWAU@parliament.uk</a><br />
-                <strong class="bold-small">Telephone:</strong> 0208 123 4567
+                <strong class="bold-small">Email:</strong> <a href="@string.Format("mailto:{0}", ViewBag.ContactEmail)">@ViewBag.ContactEmail</a><br />
+                <strong class="bold-small">Telephone:</strong> @ViewBag.ContactTelephone
             </p>
-            <p><a href="#">Guidance on how to access the Slipping Request System</a></p>
+            <p><a href="@ViewBag.GuidanceUrl">Guidance on how to access the Slipping Request System</a></p>
         }
         else
         {

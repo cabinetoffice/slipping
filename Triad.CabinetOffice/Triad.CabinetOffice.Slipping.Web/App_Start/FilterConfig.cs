@@ -9,6 +9,7 @@ namespace Triad.CabinetOffice.Slipping.Web
         public static void RegisterGlobalFilters(GlobalFilterCollection filters)
         {
             filters.Add(new LoggingHandleErrorAttribute());
+            filters.Add(new PopulateViewBagAttribute());
         }
     }
 }

@@ -12,6 +12,11 @@ namespace Triad.CabinetOffice.Slipping.Web.Attributes
         {
             base.OnException(filterContext);
             Logger.LogException(filterContext.Exception);
+
+            if (filterContext.Result is ViewResult)
+            {
+                PopulateViewBagAttribute.PopulateViewBag((filterContext.Result as ViewResult).ViewBag);
+            }
         }
     }
 }

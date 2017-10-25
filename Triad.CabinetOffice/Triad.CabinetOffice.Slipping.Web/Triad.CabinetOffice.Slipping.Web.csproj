@@ -186,6 +186,7 @@
     <Compile Include="Attributes\FutureDateValidationAttribute.cs" />
     <Compile Include="Attributes\LoggingHandleErrorAttribute.cs" />
     <Compile Include="Attributes\PastDateValidationAttribute.cs" />
+    <Compile Include="Attributes\PopulateViewBagAttribute.cs" />
     <Compile Include="Controllers\AccountController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\SlipsController.cs" />
