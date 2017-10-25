@@ -1,6 +1,7 @@
 import * as React from 'react';
 import { ISessionFormProps } from './ISessionFormProps';
-import { ISessionFormState, SessionFormState, ISessionFormData } from './ISessionFormState';
+import { IFormState } from '../../../types/IFormState';
+import { SessionFormState, ISessionFormData } from './ISessionFormState';
 import { escape } from '@microsoft/sp-lodash-subset';
 import { Label } from 'office-ui-fabric-react/lib/Label';
 import { TextField } from 'office-ui-fabric-react/lib/TextField';
@@ -11,10 +12,10 @@ import { Session, ISession } from '../../../types/Session';
 import '../../../common/polyfillCustomEvent';
 import { SessionService } from './SessionService';
 
-export default class SessionForm extends React.Component<ISessionFormProps, ISessionFormState> {
+export default class SessionForm extends React.Component<ISessionFormProps, IFormState> {
   private dataService: SessionService;
 
-  constructor(props: ISessionFormProps, state: ISessionFormState) {
+  constructor(props: ISessionFormProps, state: IFormState) {
     super(props);
     this.state = new SessionFormState();
 
@@ -88,7 +89,7 @@ export default class SessionForm extends React.Component<ISessionFormProps, ISes
       this.setState(new SessionFormState());
     }
   }
-  private validateSession(state: ISessionFormState): void {
+  private validateSession(state: IFormState): void {
     const formData = state.formData;
     const errors = state.errors;
 

@@ -1,3 +1,6 @@
+import { HttpClient } from '@microsoft/sp-http';
+
 export interface IMemberOfParliamentFormProps {
-  description: string;
+  apiUrl: string;
+  httpClient: HttpClient;
 }

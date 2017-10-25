@@ -1,25 +1,44 @@
 import * as React from 'react';
 import styles from './MemberOfParliamentForm.module.scss';
+import { IFormState } from '../../../types/IFormState';
 import { IMemberOfParliamentFormProps } from './IMemberOfParliamentFormProps';
+import { MemberOfParliamentFormState } from './IMemberOfParliamentFormState';
 import { escape } from '@microsoft/sp-lodash-subset';
+import { MemberOfParliamentService } from './MemberOfParliamentService';
+import { TextField } from 'office-ui-fabric-react/lib/TextField';
 
-export default class MemberOfParliamentForm extends React.Component<IMemberOfParliamentFormProps, {}> {
+export default class MemberOfParliamentForm extends React.Component<IMemberOfParliamentFormProps, IFormState> {
+  private dataService: MemberOfParliamentService;
+
+  constructor(props: IMemberOfParliamentFormProps, state: IFormState) {
+    super(props);
+    this.state = new MemberOfParliamentFormState();
+
+    this.dataService = new MemberOfParliamentService(this.props.httpClient, this.props.apiUrl);
+
+    window.addEventListener('hashchange', (e) => {
+      this.componentDidMount();
+    });
+  }
+
   public render(): React.ReactElement<IMemberOfParliamentFormProps> {
+    const formData = this.state.formData;
+
     return (
-      <div className={styles.memberOfParliamentForm}>
-        <div className={styles.container}>
-          <div className={`ms-Grid-row ms-bgColor-themeDark ms-fontColor-white ${styles.row}`}>
-            <div className="ms-Grid-col ms-lg10 ms-xl8 ms-xlPush2 ms-lgPush1">
-              <span className="ms-font-xl ms-fontColor-white">Welcome to SharePoint!</span>
-              <p className="ms-font-l ms-fontColor-white">Customize SharePoint experiences using Web Parts.</p>
-              <p className="ms-font-l ms-fontColor-white">{escape(this.props.description)}</p>
-              <a href="https://aka.ms/spfx" className={styles.button}>
-                <span className={styles.label}>Learn more</span>
-              </a>
-            </div>
+      <form className={styles.memberOfParliamentForm}>
+        <h2>{formData.id === 0 ? 'Add' : this.state.viewMode ? 'View' : 'Edit'} Member of Parliament</h2>
+        <div>
+          <div>
+            <TextField label="Title" disabled={this.state.viewMode} maxLength={10} required={true} value={formData.Title} />
+          </div>
+          <div>
+            <TextField label="Forenames" disabled={this.state.viewMode} maxLength={100} required={true} value={formData.Title} />
+          </div>
+          <div>
+            <TextField label="Surname" disabled={this.state.viewMode} maxLength={100} required={true} value={formData.Title} />
           </div>
         </div>
-      </div>
+      </form>
     );
   }
 }

@@ -10,22 +10,40 @@ import {
 import * as strings from 'MemberOfParliamentFormWebPartStrings';
 import MemberOfParliamentForm from './components/MemberOfParliamentForm';
 import { IMemberOfParliamentFormProps } from './components/IMemberOfParliamentFormProps';
-
-export interface IMemberOfParliamentFormWebPartProps {
-  description: string;
-}
+import { IMemberOfParliamentFormWebPartProps } from './IMemberOfParliamentFormWebPartProps';
 
 export default class MemberOfParliamentFormWebPart extends BaseClientSideWebPart<IMemberOfParliamentFormWebPartProps> {
+  private apiLoaded:boolean = false;
+  private apiUrl:string = "https://paws-api-dev.azurewebsites.net";
 
   public render(): void {
-    const element: React.ReactElement<IMemberOfParliamentFormProps > = React.createElement(
+    const element: React.ReactElement<IMemberOfParliamentFormProps> = React.createElement(
       MemberOfParliamentForm,
       {
-        description: this.properties.description
+        apiUrl: this.properties.apiUrl,
+        httpClient: this.context.httpClient
       }
     );
+    this.domElement.innerHTML += `
+      <iframe src="${this.apiUrl}" style="display:none;"></iframe>
+      <div id="mpForm"></div>
+    `;
 
-    ReactDom.render(element, this.domElement);
+    this.domElement.querySelector('iframe').addEventListener('load', ():void => {
+      this.apiLoaded = true;
+    });
+
+    this.executeOrDelayUntilRemoteApiLoaded(():void=>{
+      ReactDom.render(element, this.domElement.querySelector('#mpForm'));
+    });
+  }
+
+  private executeOrDelayUntilRemoteApiLoaded(func:Function):void{
+    if(this.apiLoaded){
+      func();
+    }else{
+      setTimeout(():void=> {this.executeOrDelayUntilRemoteApiLoaded(func);}, 100);
+    }
   }
 
   protected get dataVersion(): Version {
@@ -43,8 +61,8 @@ export default class MemberOfParliamentFormWebPart extends BaseClientSideWebPart
             {
               groupName: strings.BasicGroupName,
               groupFields: [
-                PropertyPaneTextField('description', {
-                  label: strings.DescriptionFieldLabel
+                PropertyPaneTextField('apiUrl', {
+                  label: strings.ApiUrlFieldLabel
                 })
               ]
             }
