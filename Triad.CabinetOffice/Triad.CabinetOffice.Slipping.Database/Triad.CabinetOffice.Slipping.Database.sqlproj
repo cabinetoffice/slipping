@@ -90,5 +90,7 @@
     <Build Include="dbo\Tables\MajorityRAGThreshholds.sql" />
     <Build Include="dbo\Tables\VotingBehaviour.sql" />
     <Build Include="dbo\Tables\Votes.sql" />
+    <Build Include="dbo\Tables\AbsenceRequestExceptions.sql" />
+    <Build Include="dbo\Tables\AbsenceException.sql" />
   </ItemGroup>
 </Project>
