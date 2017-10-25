@@ -12,7 +12,6 @@ namespace Triad.CabinetOffice.Slipping.Web.Attributes
         internal static void PopulateViewBag(dynamic viewBag)
         {
             viewBag.FeedbackUrl = WebConfigurationManager.AppSettings["FeedbackUrl"];
-            viewBag.GuidanceUrl = WebConfigurationManager.AppSettings["GuidanceUrl"];
             viewBag.ContactEmail = WebConfigurationManager.AppSettings["ContactEmail"];
             viewBag.ContactTelephone = WebConfigurationManager.AppSettings["ContactTelephone"];
             viewBag.GoogleAnalyticsID = WebConfigurationManager.AppSettings["GoogleAnalyticsID"];
