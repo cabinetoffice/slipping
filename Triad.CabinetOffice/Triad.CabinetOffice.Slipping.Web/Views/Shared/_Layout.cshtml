@@ -5,13 +5,13 @@
 <!--<![endif]-->
 <head>
     <!-- Global Site Tag (gtag.js) - Google Analytics -->
-    <script async src="https://www.googletagmanager.com/gtag/js?id=UA-69921843-4"></script>
+    <script async src="https://www.googletagmanager.com/gtag/js?id=@ViewBag.GoogleAnalyticsID"></script>
     <script>
         window.dataLayer = window.dataLayer || [];
         function gtag(){dataLayer.push(arguments)};
         gtag('js', new Date());
 
-        gtag('config', 'UA-69921843-4');
+        gtag('config', '@ViewBag.GoogleAnalyticsID');
     </script>
     <meta charset="utf-8" />
     <title>@ViewBag.Title</title>

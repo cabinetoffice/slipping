@@ -15,6 +15,7 @@ namespace Triad.CabinetOffice.Slipping.Web.Attributes
             viewBag.GuidanceUrl = WebConfigurationManager.AppSettings["GuidanceUrl"];
             viewBag.ContactEmail = WebConfigurationManager.AppSettings["ContactEmail"];
             viewBag.ContactTelephone = WebConfigurationManager.AppSettings["ContactTelephone"];
+            viewBag.GoogleAnalyticsID = WebConfigurationManager.AppSettings["GoogleAnalyticsID"];
         }
 
         public override void OnActionExecuting(ActionExecutingContext filterContext)
