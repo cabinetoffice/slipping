@@ -16,7 +16,7 @@
   "preconfiguredEntries": [{
     "groupId": "5c03119e-3074-46fd-976b-c60198311f70", // Other
     "group": { "default": "Other" },
-    "title": { "default": "PAWS List" },
+    "title": { "default": "PAWS list" },
     "description": { "default": "Display a list of items from the PAWS database" },
     "officeFabricIconFontName": "CustomList",
     "properties": {

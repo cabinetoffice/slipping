@@ -1,5 +1,4 @@
 import * as React from 'react';
-import styles from './SessionForm.module.scss';
 import { ISessionFormProps } from './ISessionFormProps';
 import { ISessionFormState, SessionFormState, ISessionFormData } from './ISessionFormState';
 import { escape } from '@microsoft/sp-lodash-subset';
