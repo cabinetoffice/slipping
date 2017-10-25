@@ -5,7 +5,7 @@
     [Surname]            NVARCHAR (50)  NOT NULL,
     [FromDate]           DATETIME       NOT NULL,
     [ToDate]             DATETIME       NULL,
-    [Email Address]      NVARCHAR (100) NULL,
+    [EmailAddress]      NVARCHAR (100) NULL,
     [Mobile]             NVARCHAR (20)  NULL,
     [GovernmentPosition] NVARCHAR (150) NULL,
     [Notes]              NVARCHAR (MAX) NULL,
