@@ -38,7 +38,7 @@ export default class SessionForm extends React.Component<ISessionFormProps, ISes
     const formData = this.state.formData;
 
     return (
-      <form className={styles.sessionForm}>
+      <form>
         <h2>{formData.id === 0 ? 'Add' : this.state.viewMode ? 'View' : 'Edit'} Session</h2>
         <div>
           <div>
