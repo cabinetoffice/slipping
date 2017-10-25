@@ -21,31 +21,30 @@ namespace Triad.CabinetOffice.PAWS.API.Controllers
     using System.Web.Http.OData.Extensions;
     using Triad.CabinetOffice.Slipping.Data.EntityFramework.PAWS2;
     ODataConventionModelBuilder builder = new ODataConventionModelBuilder();
-    builder.EntitySet<Session>("Sessions");
-    builder.EntitySet<Division>("Divisions"); 
+    builder.EntitySet<Party>("Parties");
     builder.EntitySet<User>("Users"); 
     config.Routes.MapODataServiceRoute("odata", "odata", builder.GetEdmModel());
     */
-    public class SessionsController : ODataController
+    public class PartiesController : ODataController
     {
         private PAWS2Entities db = new PAWS2Entities();
 
-        // GET: odata/Sessions
+        // GET: odata/Parties
         [EnableQuery]
-        public IQueryable<Session> GetSessions()
+        public IQueryable<Party> GetParties()
         {
-            return db.Sessions;
+            return db.Parties;
         }
 
-        // GET: odata/Sessions(5)
+        // GET: odata/Parties(5)
         [EnableQuery]
-        public SingleResult<Session> GetSession([FromODataUri] int key)
+        public SingleResult<Party> GetParty([FromODataUri] int key)
         {
-            return SingleResult.Create(db.Sessions.Where(session => session.ID == key));
+            return SingleResult.Create(db.Parties.Where(party => party.ID == key));
         }
 
-        // PUT: odata/Sessions(5)
-        public IHttpActionResult Put([FromODataUri] int key, Delta<Session> patch)
+        // PUT: odata/Parties(5)
+        public IHttpActionResult Put([FromODataUri] int key, Delta<Party> patch)
         {
             Validate(patch.GetEntity());
 
@@ -54,13 +53,13 @@ namespace Triad.CabinetOffice.PAWS.API.Controllers
                 return BadRequest(ModelState);
             }
 
-            Session session = db.Sessions.Find(key);
-            if (session == null)
+            Party party = db.Parties.Find(key);
+            if (party == null)
             {
                 return NotFound();
             }
 
-            patch.Put(session);
+            patch.Put(party);
 
             try
             {
@@ -68,7 +67,7 @@ namespace Triad.CabinetOffice.PAWS.API.Controllers
             }
             catch (DbUpdateConcurrencyException)
             {
-                if (!SessionExists(key))
+                if (!PartyExists(key))
                 {
                     return NotFound();
                 }
@@ -78,26 +77,26 @@ namespace Triad.CabinetOffice.PAWS.API.Controllers
                 }
             }
 
-            return Updated(session);
+            return Updated(party);
         }
 
-        // POST: odata/Sessions
-        public IHttpActionResult Post(Session session)
+        // POST: odata/Parties
+        public IHttpActionResult Post(Party party)
         {
             if (!ModelState.IsValid)
             {
                 return BadRequest(ModelState);
             }
 
-            db.Sessions.Add(session);
+            db.Parties.Add(party);
             db.SaveChanges();
 
-            return Created(session);
+            return Created(party);
         }
 
-        // PATCH: odata/Sessions(5)
+        // PATCH: odata/Parties(5)
         [AcceptVerbs("PATCH", "MERGE")]
-        public IHttpActionResult Patch([FromODataUri] int key, Delta<Session> patch)
+        public IHttpActionResult Patch([FromODataUri] int key, Delta<Party> patch)
         {
             Validate(patch.GetEntity());
 
@@ -106,13 +105,13 @@ namespace Triad.CabinetOffice.PAWS.API.Controllers
                 return BadRequest(ModelState);
             }
 
-            Session session = db.Sessions.Find(key);
-            if (session == null)
+            Party party = db.Parties.Find(key);
+            if (party == null)
             {
                 return NotFound();
             }
 
-            patch.Patch(session);
+            patch.Patch(party);
 
             try
             {
@@ -120,7 +119,7 @@ namespace Triad.CabinetOffice.PAWS.API.Controllers
             }
             catch (DbUpdateConcurrencyException)
             {
-                if (!SessionExists(key))
+                if (!PartyExists(key))
                 {
                     return NotFound();
                 }
@@ -130,43 +129,29 @@ namespace Triad.CabinetOffice.PAWS.API.Controllers
                 }
             }
 
-            return Updated(session);
+            return Updated(party);
         }
 
-        // DELETE: odata/Sessions(5)
+        // DELETE: odata/Parties(5)
         public IHttpActionResult Delete([FromODataUri] int key)
         {
-            Session session = db.Sessions.Find(key);
-            if (session == null)
+            Party party = db.Parties.Find(key);
+            if (party == null)
             {
                 return NotFound();
             }
 
-            db.Sessions.Remove(session);
+            db.Parties.Remove(party);
             db.SaveChanges();
 
             return StatusCode(HttpStatusCode.NoContent);
         }
 
-        // GET: odata/Sessions(5)/Divisions
-        [EnableQuery]
-        public IQueryable<Division> GetDivisions([FromODataUri] int key)
-        {
-            return db.Sessions.Where(m => m.ID == key).SelectMany(m => m.Divisions);
-        }
-
-        // GET: odata/Sessions(5)/User
+        // GET: odata/Parties(5)/User
         [EnableQuery]
         public SingleResult<User> GetUser([FromODataUri] int key)
         {
-            return SingleResult.Create(db.Sessions.Where(m => m.ID == key).Select(m => m.User));
-        }
-
-        // GET: odata/Sessions(5)/User1
-        [EnableQuery]
-        public SingleResult<User> GetUser1([FromODataUri] int key)
-        {
-            return SingleResult.Create(db.Sessions.Where(m => m.ID == key).Select(m => m.User1));
+            return SingleResult.Create(db.Parties.Where(m => m.ID == key).Select(m => m.User));
         }
 
         protected override void Dispose(bool disposing)
@@ -178,9 +163,9 @@ namespace Triad.CabinetOffice.PAWS.API.Controllers
             base.Dispose(disposing);
         }
 
-        private bool SessionExists(int key)
+        private bool PartyExists(int key)
         {
-            return db.Sessions.Count(e => e.ID == key) > 0;
+            return db.Parties.Count(e => e.ID == key) > 0;
         }
     }
 }
