@@ -11,6 +11,7 @@ import { HttpClient, HttpClientResponse, SPHttpClient, SPHttpClientResponse, Gra
 import { Session, ISession } from '../../../types/Session';
 import '../../../common/polyfillCustomEvent';
 import { SessionService } from './SessionService';
+import { autobind } from 'office-ui-fabric-react/lib/Utilities';
 
 export default class SessionForm extends React.Component<ISessionFormProps, IFormState> {
   private dataService: SessionService;
@@ -20,15 +21,6 @@ export default class SessionForm extends React.Component<ISessionFormProps, IFor
     this.state = new SessionFormState();
 
     this.dataService = new SessionService(this.props.httpClient, this.props.apiUrl);
-
-    this.validateSession = this.validateSession.bind(this);
-    this.handleEdit = this.handleEdit.bind(this);
-    this.handleCancel = this.handleCancel.bind(this);
-    this.handleDelete = this.handleDelete.bind(this);
-    this.handleChangeSessionTitle = this.handleChangeSessionTitle.bind(this);
-    this.handleChangeFromDate = this.handleChangeFromDate.bind(this);
-    this.handleChangeToDate = this.handleChangeToDate.bind(this);
-    this.handleSubmit = this.handleSubmit.bind(this);
 
     window.addEventListener('hashchange', (e) => {
       this.componentDidMount();
@@ -40,32 +32,33 @@ export default class SessionForm extends React.Component<ISessionFormProps, IFor
 
     return (
       <form>
-        <h2>{formData.id === 0 ? 'Add' : this.state.viewMode ? 'View' : 'Edit'} Session</h2>
+        <h1>{formData.id === 0 ? 'Create new session' : this.state.viewMode ? `View session - ${formData.sessionTitle}` : `Edit session - ${formData.sessionTitle}`}</h1>
+        {this.state.viewMode ?
+          <div>
+            <PrimaryButton text="Edit session" onClick={this.handleEdit} />&nbsp;
+            <DefaultButton text="Delete session" onClick={this.handleDelete} />
+          </div> :
+          <div>
+            <PrimaryButton text="Save" disabled={!this.state.isValid} onClick={this.handleSubmit} />&nbsp;
+            <DefaultButton text="Cancel" onClick={this.handleCancel} />
+          </div>
+        }
         <div>
           <div>
-            {/*<Label required={true} className={styles.msLabel}>Session Title</Label>*/}
             <TextField label="Session Title" disabled={this.state.viewMode} maxLength={50} required={true} value={formData.sessionTitle} onChanged={this.handleChangeSessionTitle} />
           </div>
           <div>
-            {/*<Label required={true} className={styles.msLabel}>From Date</Label>*/}
-            <DatePicker label="From Date" isRequired={true} disabled={this.state.viewMode} value={formData.fromDate} formatDate={(date: Date) => date.toLocaleDateString()} onSelectDate={this.handleChangeFromDate} placeholder="Select session from date..." />
+            <DatePicker label="From Date" isRequired={true} disabled={this.state.viewMode} value={formData.fromDate} allowTextInput={ true } formatDate={(date: Date) => date.toLocaleDateString()} onSelectDate={this.handleChangeFromDate} placeholder="Select session from date..." />
           </div>
           <div>
-            {/*<Label required={true} className={styles.msLabel}>To Date</Label>*/}
-            <DatePicker label="To Date" isRequired={true} disabled={this.state.viewMode} value={formData.toDate} formatDate={(date: Date) => date.toLocaleDateString()} onSelectDate={this.handleChangeToDate} placeholder="Select session end date..." />
+            <DatePicker label="To Date" isRequired={true} disabled={this.state.viewMode} value={formData.toDate} allowTextInput={ true } formatDate={(date: Date) => date.toLocaleDateString()} onSelectDate={this.handleChangeToDate} placeholder="Select session end date..." />
             <p className="ms-TextField-errorMessage">{this.state.errors["toDate"]}</p>
           </div>
-          <div>
-            {this.state.viewMode ? (
-              <PrimaryButton text="Edit" onClick={this.handleEdit} />
-            ) : (
-                <PrimaryButton text="Save" disabled={!this.state.isValid} onClick={this.handleSubmit} />
-              )}
-            &nbsp;<DefaultButton text="Cancel" onClick={this.handleCancel} />&nbsp;
-            {this.state.formData.id !== 0 ? (
-              <DefaultButton text="Delete" onClick={this.handleDelete} />
-            ) : (null)}
-          </div>
+          {this.state.viewMode ||
+            <div>
+              <PrimaryButton text="Save" disabled={!this.state.isValid} onClick={this.handleSubmit} />&nbsp;
+              <DefaultButton text="Cancel" onClick={this.handleCancel} />
+            </div>}
         </div>
       </form>
     );
@@ -89,6 +82,8 @@ export default class SessionForm extends React.Component<ISessionFormProps, IFor
       this.setState(new SessionFormState());
     }
   }
+
+  @autobind
   private validateSession(state: IFormState): void {
     const formData = state.formData;
     const errors = state.errors;
@@ -105,12 +100,18 @@ export default class SessionForm extends React.Component<ISessionFormProps, IFor
       this.setState({ isValid: false, errors: errors });
     }
   }
+
+  @autobind
   private handleEdit(e): void {
     this.setState({ viewMode: false });
   }
+
+  @autobind
   private handleCancel(e): void {
     this.componentDidMount();
   }
+
+  @autobind
   private handleDelete(e): void {
     this.dataService.deleteSession(this.state.formData).then((ok: boolean) => {
       if (ok) {
@@ -120,24 +121,32 @@ export default class SessionForm extends React.Component<ISessionFormProps, IFor
       }
     });
   }
+
+  @autobind
   private handleChangeSessionTitle(e): void {
     const d = this.state.formData;
     d.sessionTitle = e;
     this.setState({ formData: d });
     this.validateSession(this.state);
   }
+
+  @autobind
   private handleChangeFromDate(e): void {
     const d = this.state.formData;
     d.fromDate = e;
     this.setState({ formData: d });
     this.validateSession(this.state);
   }
+
+  @autobind
   private handleChangeToDate(e): void {
     const d = this.state.formData;
     d.toDate = e;
     this.setState({ formData: d });
     this.validateSession(this.state);
   }
+
+  @autobind
   private handleSubmit(e): void {
     e.preventDefault();
     if (this.state.formData.id === 0) {

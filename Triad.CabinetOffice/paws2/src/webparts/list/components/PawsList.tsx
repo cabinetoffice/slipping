@@ -45,6 +45,9 @@ export default class PawsList extends React.Component<IPawsListProps, IPawsListS
         // this.onFilterChanged(this.state.filterText);
       }
     });
+    window.addEventListener('hashchange', (e) => {
+      this.highlightSelectedItem();
+    });
   }
 
   public render(): React.ReactElement<IPawsListProps> {
@@ -53,8 +56,8 @@ export default class PawsList extends React.Component<IPawsListProps, IPawsListS
     let resultCountText = items.length === originalItems.length ? '' : ` (${items.length} of ${originalItems.length} shown)`;
 
     return (
-      <div className={styles.pawsList}>
-        <h2>{this.props.title}</h2>
+      <div className={styles.pawsList} >
+        <h1>{this.props.title}</h1>
         <PrimaryButton text={`Create a new ${this.props.createNewText || '...'}`} onClick={this.handleNew} />
         <TextField label={'Filter by title' + resultCountText} onBeforeChange={this.onFilterChanged} />
         <List items={items} onRenderCell={this.onRenderCell} className={styles.pawsListItemContainer} />
@@ -67,12 +70,24 @@ export default class PawsList extends React.Component<IPawsListProps, IPawsListS
       this.dataService.getItems().then((items: IListItem[]): void => {
         this.allItems = items;
         this.setState({ items: items });
+        this.highlightSelectedItem();
       });
     }
   }
 
   private settingsConfigured(): boolean {
     return this.props.itemsUrl !== undefined && this.props.nameProperty !== undefined;
+  }
+
+  private highlightSelectedItem(): void {
+    var id = parseInt(location.hash.substring(1));
+    if (!isNaN(id)) {
+      var items = document.getElementsByClassName(styles.msListBasicExampleItemCell);
+      for (var i = 0; i < items.length; i++) {
+        items[i].classList.remove(styles.msListBasicExampleItemCellSelected);
+      }
+      document.getElementById(`pawsItem${id}`).classList.add(styles.msListBasicExampleItemCellSelected);
+    }
   }
 
   private onFilterChanged(text: string) {
@@ -89,7 +104,7 @@ export default class PawsList extends React.Component<IPawsListProps, IPawsListS
   private onRenderCell(item: IListItem, index: number | undefined): JSX.Element {
     return (
       <a href={'#' + item.id} className={styles.noLinkDecoration}>
-        <div className={styles.msListBasicExampleItemCell} data-is-focusable={true}>
+        <div className={styles.msListBasicExampleItemCell} data-is-focusable={true} id={`pawsItem${item.id}`}>
           <div className={styles.msListBasicExampleItemContent}>
             <div className={styles.msListBasicExampleItemName}>{item.name}</div>
             <div>{item.description}</div>
