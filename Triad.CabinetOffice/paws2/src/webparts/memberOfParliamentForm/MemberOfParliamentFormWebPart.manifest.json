@@ -14,8 +14,8 @@
   "requiresCustomScript": false,
 
   "preconfiguredEntries": [{
-    "groupId": "5c03119e-3074-46fd-976b-c60198311f70", // Other
-    "group": { "default": "Other" },
+    "groupId": "29111422-e6fd-4081-b9a0-f145dde07f6b",
+    "group": { "default": "PAWS" },
     "title": { "default": "Member of Parliament form" },
     "description": { "default": "Add and edit members of parliament" },
     "officeFabricIconFontName": "Questionnaire",

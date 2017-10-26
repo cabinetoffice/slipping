@@ -55,7 +55,7 @@ export default class PawsList extends React.Component<IPawsListProps, IPawsListS
     return (
       <div className={styles.pawsList}>
         <h2>{this.props.title}</h2>
-        <PrimaryButton text="Add new session" onClick={this.handleNew} />
+        <PrimaryButton text={`Add new ${this.props.createNewText || '...'}`} onClick={this.handleNew} />
         <TextField label={'Filter by title' + resultCountText} onBeforeChange={this.onFilterChanged} />
         <List items={items} onRenderCell={this.onRenderCell} className={styles.pawsListItemContainer} />
       </div>
