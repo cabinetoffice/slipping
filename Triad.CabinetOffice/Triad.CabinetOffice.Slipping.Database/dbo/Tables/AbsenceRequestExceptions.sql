@@ -1,6 +1,6 @@
 ﻿CREATE TABLE [dbo].[AbsenceRequestExceptions]
 (
-	[ID] INT NOT NULL IDENTITY(1,1) PRIMARY KEY,
+	[ID] INT NOT NULL IDENTITY(1,1),
 	[AbsenceRequestID] INT NOT NULL,
 	[ExceptionID] INT NOT NULL,
 	[OppositionMPID] INT NULL,
