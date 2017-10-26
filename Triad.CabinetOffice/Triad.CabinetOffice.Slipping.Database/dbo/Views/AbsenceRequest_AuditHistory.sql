@@ -13,7 +13,7 @@ FROM [dbo].[AbsenceRequest] AR
  LEFT JOIN [dbo].[AbsenceRequestOppositionMP] ARMP ON AR.ID=ARMP.AbsenceRequestID
  LEFT JOIN [dbo].[User] U1 on U1.ID=AR.CreatedBy
  LEFT JOIN [dbo].[User] U2 on U2.ID=AR.LastChangedBy
-WHERE AR.PAWSABSENCEREQUESTID IS NOT NULL
+WHERE AR.PAWSAbsenceRequestID IS NOT NULL
 Group by AR.ID,AR.MPID,AR.FromDate,AR.ToDate,
        Case AR.ReasonID
 			When 1 Then 'Government Work (Secretaries of State / Ministers of State only)'
