@@ -17,9 +17,11 @@
         <p>We have sent you a confirmation email.</p>
         <h2 class="heading-medium">What do you want to do next?</h2>
         <p>
-            <a class="button" role="button" href="/Slipping/Create">Create a new slip</a>
+            @Html.ActionLink("Create a new slip", "FromDate", null, new { @class = "button", role = "button" })
         </p>
-        <p><a href="/Slipping">Take me back to my slip requests</a></p>
+        <p>
+            @Html.ActionLink("Take me back to my slip requests", "Index", null, null)
+        </p>
         <h2 class="heading-medium">Want to nominate a user to fill in your slips?</h2>
         <p>We need their name and email address. You can send us these details by email or by telephone.</p>
         <p><strong class="bold-small">Email:</strong> GWAU@parliament.uk</p>
