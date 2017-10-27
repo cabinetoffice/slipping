@@ -1,22 +1,25 @@
 import * as React from 'react';
+
 import { ISessionFormProps } from './ISessionFormProps';
-import { IFormState } from '../../../types/IFormState';
 import { SessionFormState, ISessionFormData } from './ISessionFormState';
+import { SessionService } from './SessionService';
+
+import * as types from '../../../types/index';
+import '../../../common/polyfillCustomEvent';
+
 import { escape } from '@microsoft/sp-lodash-subset';
+import { HttpClient, HttpClientResponse, SPHttpClient, SPHttpClientResponse, GraphHttpClient } from '@microsoft/sp-http';
+
 import { Label } from 'office-ui-fabric-react/lib/Label';
 import { TextField } from 'office-ui-fabric-react/lib/TextField';
-import { DatePicker, IDatePickerProps } from 'office-ui-fabric-react/lib/DatePicker';
+import { DatePicker, IDatePickerProps, IDatePickerStrings } from 'office-ui-fabric-react/lib/DatePicker';
 import { DefaultButton, IButtonProps, PrimaryButton } from 'office-ui-fabric-react/lib/Button';
-import { HttpClient, HttpClientResponse, SPHttpClient, SPHttpClientResponse, GraphHttpClient } from '@microsoft/sp-http';
-import { Session, ISession } from '../../../types/Session';
-import '../../../common/polyfillCustomEvent';
-import { SessionService } from './SessionService';
 import { autobind } from 'office-ui-fabric-react/lib/Utilities';
 
-export default class SessionForm extends React.Component<ISessionFormProps, IFormState> {
+export default class SessionForm extends React.Component<ISessionFormProps, types.IFormState> {
   private dataService: SessionService;
 
-  constructor(props: ISessionFormProps, state: IFormState) {
+  constructor(props: ISessionFormProps, state: types.IFormState) {
     super(props);
     this.state = new SessionFormState();
 
@@ -45,13 +48,13 @@ export default class SessionForm extends React.Component<ISessionFormProps, IFor
         }
         <div>
           <div>
-            <TextField label="Session Title" disabled={this.state.viewMode} maxLength={50} required={true} value={formData.sessionTitle} onChanged={this.handleChangeSessionTitle} />
+            <TextField label="Session Title" disabled={this.state.viewMode} maxLength={50} required={!this.state.viewMode} value={formData.sessionTitle} onChanged={this.handleChangeSessionTitle} errorMessage={this.state.errors["sessionTitle"]} />
           </div>
           <div>
-            <DatePicker label="From Date" isRequired={true} disabled={this.state.viewMode} value={formData.fromDate} allowTextInput={ true } formatDate={(date: Date) => date.toLocaleDateString()} onSelectDate={this.handleChangeFromDate} placeholder="Select session from date..." />
+            <DatePicker label="From Date" disabled={this.state.viewMode} value={formData.fromDate} formatDate={(date: Date) => date.toLocaleDateString()} onSelectDate={this.handleChangeFromDate} placeholder="Select session from date..." />
           </div>
           <div>
-            <DatePicker label="To Date" isRequired={true} disabled={this.state.viewMode} value={formData.toDate} allowTextInput={ true } formatDate={(date: Date) => date.toLocaleDateString()} onSelectDate={this.handleChangeToDate} placeholder="Select session end date..." />
+            <DatePicker label="To Date" disabled={this.state.viewMode} value={formData.toDate} formatDate={(date: Date) => date.toLocaleDateString()} onSelectDate={this.handleChangeToDate} placeholder="Select session end date..." />
             <p className="ms-TextField-errorMessage">{this.state.errors["toDate"]}</p>
           </div>
           {this.state.viewMode ||
@@ -67,7 +70,7 @@ export default class SessionForm extends React.Component<ISessionFormProps, IFor
   public componentDidMount(): void {
     var id = parseInt(location.hash.substring(1));
     if (!isNaN(id)) {
-      this.dataService.getSession(id).then((session: ISession): void => {
+      this.dataService.getSession(id).then((session: types.ISession): void => {
         this.setState({
           formData: {
             id: session.ID,
@@ -75,8 +78,12 @@ export default class SessionForm extends React.Component<ISessionFormProps, IFor
             fromDate: new Date(session.FromDate),
             toDate: new Date(session.ToDate)
           },
-          viewMode: true
+          viewMode: true,
+          errors: {}
         });
+      }).catch((err: any): void => {
+        if (err === 'Not Found') { }
+          //location.hash = '';
       });
     } else {
       this.setState(new SessionFormState());
@@ -84,9 +91,15 @@ export default class SessionForm extends React.Component<ISessionFormProps, IFor
   }
 
   @autobind
-  private validateSession(state: IFormState): void {
+  private validateSession(state: types.IFormState): void {
     const formData = state.formData;
     const errors = state.errors;
+
+    if (formData.sessionTitle === null || formData.sessionTitle === '') {
+      errors['sessionTitle'] = 'Session title is required';
+    } else {
+      errors['sessionTitle'] = '';
+    }
 
     if (formData.fromDate && formData.toDate && formData.fromDate > formData.toDate) {
       errors['toDate'] = 'To Date must be before From Date';
@@ -150,7 +163,7 @@ export default class SessionForm extends React.Component<ISessionFormProps, IFor
   private handleSubmit(e): void {
     e.preventDefault();
     if (this.state.formData.id === 0) {
-      this.dataService.createSession(this.state.formData).then((session: ISession) => {
+      this.dataService.createSession(this.state.formData).then((session: types.ISession) => {
         var event = new CustomEvent('pawsReload', { detail: { id: session.ID, change: 'add' } });
         window.dispatchEvent(event);
         const d = this.state.formData;

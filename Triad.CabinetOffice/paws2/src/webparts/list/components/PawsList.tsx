@@ -1,19 +1,23 @@
 import * as React from 'react';
+
 import styles from './PawsList.module.scss';
 import { IPawsListProps } from './IPawsListProps';
 import { IPawsListState } from './IPawsListState';
+import { PawsListService } from './PawsListService';
+
 import { escape } from '@microsoft/sp-lodash-subset';
+import { HttpClient } from '@microsoft/sp-http';
+
 import { TextField } from 'office-ui-fabric-react/lib/TextField';
 import { Icon } from 'office-ui-fabric-react/lib/Icon';
 import { List } from 'office-ui-fabric-react/lib/List';
 import { PrimaryButton, IButtonProps } from 'office-ui-fabric-react/lib/Button';
-import { HttpClient } from '@microsoft/sp-http';
-import { ListItem, IListItem } from '../../../types/ListItem';
-import { PawsListService } from './PawsListService';
 import { autobind } from 'office-ui-fabric-react/lib/Utilities';
 
+import * as types from '../../../types/index';
+
 export default class PawsList extends React.Component<IPawsListProps, IPawsListState> {
-  private allItems: IListItem[];
+  private allItems: types.IListItem[];
   private dataService: PawsListService;
 
   constructor(props: IPawsListProps) {
@@ -65,7 +69,7 @@ export default class PawsList extends React.Component<IPawsListProps, IPawsListS
 
   public componentDidMount(): void {
     if (this.settingsConfigured()) {
-      this.dataService.getItems().then((items: IListItem[]): void => {
+      this.dataService.getItems().then((items: types.IListItem[]): void => {
         this.allItems = items;
         this.setState({ items: items });
         this.highlightSelectedItem();
@@ -84,7 +88,8 @@ export default class PawsList extends React.Component<IPawsListProps, IPawsListS
       for (var i = 0; i < items.length; i++) {
         items[i].classList.remove(styles.msListBasicExampleItemCellSelected);
       }
-      document.getElementById(`pawsItem${id}`).classList.add(styles.msListBasicExampleItemCellSelected);
+      var item = document.getElementById(`pawsItem${id}`);
+      if (item) item.classList.add(styles.msListBasicExampleItemCellSelected);
     }
   }
 
@@ -100,7 +105,7 @@ export default class PawsList extends React.Component<IPawsListProps, IPawsListS
     });
   }
 
-  private onRenderCell(item: IListItem, index: number | undefined): JSX.Element {
+  private onRenderCell(item: types.IListItem, index: number | undefined): JSX.Element {
     return (
       <a href={'#' + item.id} className={styles.noLinkDecoration}>
         <div className={styles.msListBasicExampleItemCell} data-is-focusable={true} id={`pawsItem${item.id}`}>
@@ -123,7 +128,7 @@ export default class PawsList extends React.Component<IPawsListProps, IPawsListS
     location.hash = '';
   }
 
-  private indexOfItem(arr: Array<IListItem>, id: number): number {
+  private indexOfItem(arr: Array<types.IListItem>, id: number): number {
     for (var i = 0; i < arr.length; i++) {
       if (arr[i].id === id)
         return i;
