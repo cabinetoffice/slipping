@@ -16,9 +16,9 @@
   "preconfiguredEntries": [{
     "groupId": "29111422-e6fd-4081-b9a0-f145dde07f6b",
     "group": { "default": "PAWS" },
-    "title": { "default": "PartyForm" },
+    "title": { "default": "Party form" },
     "description": { "default": "Add and edit parties" },
-    "officeFabricIconFontName": "Page",
+    "officeFabricIconFontName": "Questionnaire",
     "properties": {
       "description": "PartyForm"
     }
