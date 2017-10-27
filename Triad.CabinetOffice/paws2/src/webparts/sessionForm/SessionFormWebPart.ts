@@ -13,37 +13,36 @@ import { ISessionFormProps } from './components/ISessionFormProps';
 import { ISessionFormWebPartProps } from './ISessionFormWebPartProps';
 
 export default class SessionFormWebPart extends BaseClientSideWebPart<ISessionFormWebPartProps> {
-  private apiLoaded:boolean = false;
-  private apiUrl:string = "https://paws-api-dev.azurewebsites.net";
+  private apiLoaded: boolean = false;
 
   public render(): void {
-    const element: React.ReactElement<ISessionFormProps > = React.createElement(
+    const element: React.ReactElement<ISessionFormProps> = React.createElement(
       SessionForm,
       {
         apiUrl: this.properties.apiUrl,
-        httpClient: this. context.httpClient
+        httpClient: this.context.httpClient
       }
     );
 
     this.domElement.innerHTML += `
-      <iframe src="${this.apiUrl}" style="display:none;"></iframe>
+      <iframe src="${this.properties.apiUrl}" style="display:none;"></iframe>
       <div id="seshForm"></div>
     `;
 
-    this.domElement.querySelector('iframe').addEventListener('load', ():void => {
+    this.domElement.querySelector('iframe').addEventListener('load', (): void => {
       this.apiLoaded = true;
     });
 
-    this.executeOrDelayUntilRemoteApiLoaded(():void=>{
+    this.executeOrDelayUntilRemoteApiLoaded((): void => {
       ReactDom.render(element, this.domElement.querySelector('#seshForm'));
     });
   }
 
-  private executeOrDelayUntilRemoteApiLoaded(func:Function):void{
-    if(this.apiLoaded){
+  private executeOrDelayUntilRemoteApiLoaded(func: Function): void {
+    if (this.apiLoaded) {
       func();
-    }else{
-      setTimeout(():void=> {this.executeOrDelayUntilRemoteApiLoaded(func);}, 100);
+    } else {
+      setTimeout((): void => { this.executeOrDelayUntilRemoteApiLoaded(func); }, 100);
     }
   }
 
