@@ -10,6 +10,7 @@ import { PrimaryButton, IButtonProps } from 'office-ui-fabric-react/lib/Button';
 import { HttpClient } from '@microsoft/sp-http';
 import { ListItem, IListItem } from '../../../types/ListItem';
 import { PawsListService } from './PawsListService';
+import { autobind } from 'office-ui-fabric-react/lib/Utilities';
 
 export default class PawsList extends React.Component<IPawsListProps, IPawsListState> {
   private allItems: IListItem[];
@@ -19,9 +20,6 @@ export default class PawsList extends React.Component<IPawsListProps, IPawsListS
     super(props);
 
     this.dataService = new PawsListService(this.props.httpClient, this.props.itemsUrl, this.props.nameProperty, this.props.descProperty);
-
-    this.onFilterChanged = this.onFilterChanged.bind(this);
-    this.handleNew = this.handleNew.bind(this);
 
     this.state = { items: [] };
 
@@ -90,13 +88,14 @@ export default class PawsList extends React.Component<IPawsListProps, IPawsListS
     }
   }
 
+  @autobind
   private onFilterChanged(text: string) {
     let items = this.allItems;
 
     this.setState({
       filterText: text,
       items: text ?
-        items.filter(item => item.name.toLowerCase().indexOf(text.toLowerCase()) >= 0) :
+        items.filter(item => item.name.toLowerCase().indexOf(text.toLowerCase()) >= 0 || item.description.toLowerCase().indexOf(text.toLowerCase()) >= 0) :
         items
     });
   }
@@ -118,6 +117,7 @@ export default class PawsList extends React.Component<IPawsListProps, IPawsListS
     );
   }
 
+  @autobind
   private handleNew(e): void {
     e.preventDefault();
     location.hash = '';
