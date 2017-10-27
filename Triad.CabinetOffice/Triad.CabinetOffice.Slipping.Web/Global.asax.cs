@@ -19,6 +19,7 @@ namespace Triad.CabinetOffice.Slipping.Web
             RouteConfig.RegisterRoutes(RouteTable.Routes);
             BundleConfig.RegisterBundles(BundleTable.Bundles);
             AntiForgeryConfig.UniqueClaimTypeIdentifier = ClaimTypes.NameIdentifier;
+            AntiForgeryConfig.SuppressXFrameOptionsHeader = true;
         }
 
         protected void Application_Error(object sender, EventArgs e)
