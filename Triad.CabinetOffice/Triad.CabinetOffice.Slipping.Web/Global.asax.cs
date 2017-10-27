@@ -20,6 +20,7 @@ namespace Triad.CabinetOffice.Slipping.Web
             BundleConfig.RegisterBundles(BundleTable.Bundles);
             AntiForgeryConfig.UniqueClaimTypeIdentifier = ClaimTypes.NameIdentifier;
             AntiForgeryConfig.SuppressXFrameOptionsHeader = true;
+            MvcHandler.DisableMvcResponseHeader = true;
         }
 
         protected void Application_Error(object sender, EventArgs e)
