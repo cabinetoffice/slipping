@@ -63,11 +63,6 @@ export default class SessionForm extends React.Component<ISessionFormProps, type
             {this.state.errors["toDate"] &&
               <p className={styles.errorMessage}><i role="presentation" aria-hidden="true" data-icon-name="Error" className="ms-Icon css-liugll errorIcon_73637f28"></i><span data-automation-id="error-message">{this.state.errors["toDate"]}</span></p>}
           </div>
-          {this.state.viewMode ||
-            <div>
-              <PrimaryButton text="Save" disabled={!this.state.isValid} onClick={this.handleSubmit} />&nbsp;
-              <DefaultButton text="Cancel" onClick={this.handleCancel} />
-            </div>}
         </div>
       </form>
     );
