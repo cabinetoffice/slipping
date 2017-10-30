@@ -4,7 +4,7 @@ import { Version } from '@microsoft/sp-core-library';
 import {
   BaseClientSideWebPart,
   IPropertyPaneConfiguration,
-  PropertyPaneTextField
+  PropertyPaneTextField, IPropertyPaneTextFieldProps
 } from '@microsoft/sp-webpart-base';
 
 import * as strings from 'ListWebPartStrings';
@@ -70,7 +70,8 @@ export default class ListWebPart extends BaseClientSideWebPart<IListWebPartProps
                   label: strings.CreateNewText
                 }),
                 PropertyPaneTextField('itemsUrl', {
-                  label: strings.ItemsUrlFieldLabel
+                  label: strings.ItemsUrlFieldLabel,
+                  description: strings.ItemsUrlFieldDescription
                 }),
                 PropertyPaneTextField('nameProperty', {
                   label: strings.NamePropertyFieldLabel

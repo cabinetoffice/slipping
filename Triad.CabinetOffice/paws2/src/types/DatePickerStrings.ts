@@ -6,4 +6,5 @@ export class DatePickerStrings implements IDatePickerStrings {
     public days = ['Sunday', 'Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday'];
     public shortDays = ['S', 'M', 'T', 'W', 'T', 'F', 'S'];
     public goToToday = 'Go to today';
+    public isRequiredErrorMessage = '';
 }

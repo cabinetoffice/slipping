@@ -8,17 +8,19 @@ export interface ISessionFormData {
 }
 
 export class SessionFormState implements IFormState {
+    public timestamp: string;
     public isValid: boolean;
     public viewMode: boolean;
     public formData: ISessionFormData;
     public errors: object;
 
     constructor() {
+        this.timestamp = new Date().toISOString();
         this.isValid = false;
         this.viewMode = false;
         this.formData = {
             id: 0,
-            sessionTitle: '',
+            sessionTitle: null,
             fromDate: null,
             toDate: null
         };

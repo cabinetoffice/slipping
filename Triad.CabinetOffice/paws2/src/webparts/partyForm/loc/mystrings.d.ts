@@ -1,7 +1,7 @@
 declare interface IPartyFormWebPartStrings {
   PropertyPaneDescription: string;
   BasicGroupName: string;
-  DescriptionFieldLabel: string;
+  ApiUrlFieldLabel: string;
 }
 
 declare module 'PartyFormWebPartStrings' {
