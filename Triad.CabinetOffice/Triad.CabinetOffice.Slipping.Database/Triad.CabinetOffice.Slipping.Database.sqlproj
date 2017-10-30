@@ -88,5 +88,30 @@
     <Build Include="dbo\Tables\AbsenceRequest.sql" />
     <Build Include="dbo\Tables\AbsenceRequestOppositionMPs.sql" />
     <Build Include="dbo\Views\AbsenceRequest_AuditHistory.sql" />
+    <Build Include="dbo\Tables\Divisions.sql" />
+    <Build Include="dbo\Tables\Sessions.sql" />
+    <Build Include="dbo\Tables\Whipping.sql" />
+    <Build Include="dbo\Tables\Region.sql" />
+    <Build Include="dbo\Tables\Party.sql" />
+    <Build Include="dbo\Tables\MPStatus.sql" />
+    <Build Include="dbo\Tables\MPRole.sql" />
+    <Build Include="dbo\Tables\MembersOfParliament.sql" />
+    <Build Include="dbo\Tables\Country.sql" />
+    <Build Include="dbo\Tables\Constituency.sql" />
+    <Build Include="dbo\Tables\AbsenceRequestStatus.sql" />
+    <Build Include="dbo\Tables\AbsenceRequestReason.sql" />
+    <Build Include="dbo\Tables\Committee.sql" />
+    <Build Include="dbo\Tables\CommitteeAttendanceType.sql" />
+    <Build Include="dbo\Tables\CommitteeMeeting.sql" />
+    <Build Include="dbo\Tables\CommitteeMeetingAttendance.sql" />
+    <Build Include="dbo\Tables\CommitteeMember.sql" />
+    <Build Include="dbo\Tables\CommitteeType.sql" />
+    <Build Include="dbo\Tables\Flock.sql" />
+    <Build Include="dbo\Tables\FlockMembers.sql" />
+    <Build Include="dbo\Tables\MajorityRAGThreshholds.sql" />
+    <Build Include="dbo\Tables\VotingBehaviour.sql" />
+    <Build Include="dbo\Tables\Votes.sql" />
+    <Build Include="dbo\Tables\AbsenceRequestExceptions.sql" />
+    <Build Include="dbo\Tables\AbsenceException.sql" />
   </ItemGroup>
 </Project>

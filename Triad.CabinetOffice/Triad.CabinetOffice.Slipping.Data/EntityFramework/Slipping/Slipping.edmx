@@ -236,7 +236,7 @@
             <End Role="User" EntitySet="Users" />
             <End Role="AbsenceRequestOppositionMP" EntitySet="AbsenceRequestOppositionMPs" />
           </AssociationSet>
-        </EntityContainer>
+          </EntityContainer>
         <EntityType Name="AbsenceRequest">
           <Key>
             <PropertyRef Name="ID" />
@@ -280,7 +280,7 @@
           <Property Name="Forenames" Type="String" MaxLength="255" FixedLength="false" Unicode="true" Nullable="false" />
           <Property Name="Surname" Type="String" MaxLength="255" FixedLength="false" Unicode="true" Nullable="false" />
           <Property Name="IsMP" Type="Boolean" Nullable="false" />
-        </EntityType>
+          </EntityType>
         <EntityType Name="UserMP">
           <Key>
             <PropertyRef Name="ID" />

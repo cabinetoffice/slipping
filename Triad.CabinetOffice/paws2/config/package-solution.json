@@ -1,0 +1,11 @@
+{
+  "$schema": "https://dev.office.com/json-schemas/spfx-build/package-solution.schema.json",
+  "solution": {
+    "name": "paws-2-client-side-solution",
+    "id": "0b20fc17-ec11-43d3-9f7c-5020c0d1842a",
+    "version": "0.0.0.3"
+  },
+  "paths": {
+    "zippedPackage": "solution/paws-2.sppkg"
+  }
+}

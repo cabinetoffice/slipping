@@ -259,5 +259,11 @@ paket-files/
 # Python Tools for Visual Studio (PTVS)
 __pycache__/
 *.pyc
+
+# Hidden Configuration 1
+HiddenSettings.config
+/Triad.CabinetOffice/Triad.CabinetOffice.PAWS.API/HiddenSetting.config
+/Triad.CabinetOffice/Triad.CabinetOffice.PAWS.API/Properties/PublishProfiles
+*.pyc
 /Triad.CabinetOffice/Triad.CabinetOffice.Slipping.Web/Properties/PublishProfiles/slipping-prod - FTP.pubxml
 /Triad.CabinetOffice/Triad.CabinetOffice.Slipping.Web/Properties/PublishProfiles/slipping-prod - Web Deploy.pubxml

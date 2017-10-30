@@ -1,0 +1,26 @@
+{
+  "$schema": "https://dev.office.com/json-schemas/spfx/client-side-web-part-manifest.schema.json",
+  "id": "d8b6cc77-1c5a-4f42-9880-0926446fcd1a",
+  "alias": "PartyFormWebPart",
+  "componentType": "WebPart",
+
+  // The "*" signifies that the version should be taken from the package.json
+  "version": "*",
+  "manifestVersion": 2,
+
+  // If true, the component can only be installed on sites where Custom Script is allowed.
+  // Components that allow authors to embed arbitrary script code should set this to true.
+  // https://support.office.com/en-us/article/Turn-scripting-capabilities-on-or-off-1f2c515f-5d7e-448a-9fd7-835da935584f
+  "requiresCustomScript": false,
+
+  "preconfiguredEntries": [{
+    "groupId": "29111422-e6fd-4081-b9a0-f145dde07f6b",
+    "group": { "default": "PAWS" },
+    "title": { "default": "PartyForm" },
+    "description": { "default": "Add and edit parties" },
+    "officeFabricIconFontName": "Page",
+    "properties": {
+      "description": "PartyForm"
+    }
+  }]
+}

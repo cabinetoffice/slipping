@@ -5,13 +5,13 @@
 <!--<![endif]-->
 <head>
     <!-- Global Site Tag (gtag.js) - Google Analytics -->
-    <script async src="https://www.googletagmanager.com/gtag/js?id=@ViewBag.GoogleAnalyticsID"></script>
+    <script async src="https://www.googletagmanager.com/gtag/js?id=UA-69921843-4"></script>
     <script>
         window.dataLayer = window.dataLayer || [];
         function gtag(){dataLayer.push(arguments)};
         gtag('js', new Date());
 
-        gtag('config', '@ViewBag.GoogleAnalyticsID');
+        gtag('config', 'UA-69921843-4');
     </script>
     <meta charset="utf-8" />
     <title>@ViewBag.Title</title>
@@ -24,21 +24,20 @@
     <!--[if lt IE 9]><script src="/public/javascripts/ie.js?0.22.1"></script><![endif]-->
     <link rel="shortcut icon" href="/public/images/favicon.ico?0.22.1" type="image/x-icon" />
 
-    <link rel="mask-icon" href="/public/images/gov.uk_logotype_crown.svg?0.22.1" color="#0b0c0c" />
-    <link rel="apple-touch-icon" sizes="180x180" href="/public/images/apple-touch-icon-180x180.png?0.22.1" />
-    <link rel="apple-touch-icon" sizes="167x167" href="/public/images/apple-touch-icon-167x167.png?0.22.1" />
-    <link rel="apple-touch-icon" sizes="152x152" href="/public/images/apple-touch-icon-152x152.png?0.22.1" />
-    <link rel="apple-touch-icon" href="/public/images/apple-touch-icon.png?0.22.1" />
+    <link rel="mask-icon" href="/public/images/gov.uk_logotype_crown.svg?0.22.1" color="#0b0c0c">
+    <link rel="apple-touch-icon" sizes="180x180" href="/public/images/apple-touch-icon-180x180.png?0.22.1">
+    <link rel="apple-touch-icon" sizes="167x167" href="/public/images/apple-touch-icon-167x167.png?0.22.1">
+    <link rel="apple-touch-icon" sizes="152x152" href="/public/images/apple-touch-icon-152x152.png?0.22.1">
+    <link rel="apple-touch-icon" href="/public/images/apple-touch-icon.png?0.22.1">
 
     <meta name="theme-color" content="#0b0c0c" />
-    <meta name="viewport" content="width=device-width, initial-scale=1" />
-    <meta property="og:image" content="/public/images/opengraph-image.png?0.22.1" />
-    <meta name="robots" content="NOINDEX" />
-    <meta name="robots" content="NOFOLLOW" />
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta property="og:image" content="/public/images/opengraph-image.png?0.22.1">
     
     <!--[if lte IE 8]><link href="/public/stylesheets/application-ie8.css" rel="stylesheet" type="text/css" /><![endif]-->
     <!--[if gt IE 8]><!-->
     <link href="/public/stylesheets/application.css" media="screen" rel="stylesheet" type="text/css" /><!--<![endif]-->
+
 </head>
 <body>
     <script>document.body.className = ((document.body.className) ? document.body.className + ' js-enabled' : 'js-enabled');</script>
@@ -55,7 +54,7 @@
         <div class="header-wrapper">
             <div class="header-global">
                 <div class="header-logo" >
-                    <img src="/public/images/cabinet-office-logo@1x.png" srcset="/public/images/cabinet-office-logo@2x.png 2x" alt="Cabinet Office logo" style="display:inline-block;padding-left:15px;max-width:100%;"> 
+                    <img src="/public/images/cabinet_office_logo.png?0.22.1" height="56" alt="Cabinet Office logo" style="display: inline-block;padding-left:15px"> 
                 </div>
             </div>
             <div class="header-proposition">
@@ -64,15 +63,15 @@
                     <nav id="proposition-menu">
                         @if (Request.IsAuthenticated)
                         {
-                            @Html.ActionLink("Slipping", "Index", "Slips", null, new { id = "proposition-name" })
+                            <a id="proposition-name" href="/Slipping">Slipping</a>
                         }
                         else
                         {
-                            @Html.ActionLink("Slipping", "Index", "Home", null, new { id = "proposition-name" })
+                           <a id="proposition-name" href="/">Slipping</a>    
                         }
                         <ul id="proposition-links">
                             @if (Request.IsAuthenticated) {
-                                <li>@Html.ActionLink("Log out", "SignOut", "Account", null, null)</li>
+                                <li><a href="/Account/SignOut">Log out</a></li>
                             }
                         </ul>
                     </nav>
@@ -88,7 +87,7 @@
                     <div class="phase-banner">
                         <p>
                             <strong class="phase-tag">ALPHA</strong>
-                            <span>This is a new service – your <a href="@ViewBag.FeedbackUrl">feedback</a> will help us to improve it.</span>
+                            <span>This is a new service – your <a href="#">feedback</a> will help us to improve it.</span>
                         </p>
                     </div>
                     @RenderBody()

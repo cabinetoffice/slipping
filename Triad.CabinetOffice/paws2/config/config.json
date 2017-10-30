@@ -1,0 +1,81 @@
+{
+  "$schema": "https://dev.office.com/json-schemas/spfx-build/config.2.0.schema.json",
+  "version": "2.0",
+  "bundles": {
+    "list-web-part": {
+      "components": [
+        {
+          "entrypoint": "./lib/webparts/list/ListWebPart.js",
+          "manifest": "./src/webparts/list/ListWebPart.manifest.json"
+        }
+      ]
+    },
+    "session-form-web-part": {
+      "components": [
+        {
+          "entrypoint": "./lib/webparts/sessionForm/SessionFormWebPart.js",
+          "manifest": "./src/webparts/sessionForm/SessionFormWebPart.manifest.json"
+        }
+      ]
+    },
+    "member-of-parliament-form-web-part": {
+      "components": [
+        {
+          "entrypoint": "./lib/webparts/memberOfParliamentForm/MemberOfParliamentFormWebPart.js",
+          "manifest": "./src/webparts/memberOfParliamentForm/MemberOfParliamentFormWebPart.manifest.json"
+        }
+      ]
+    },
+    "division-form-web-part": {
+      "components": [
+        {
+          "entrypoint": "./lib/webparts/divisionForm/DivisionFormWebPart.js",
+          "manifest": "./src/webparts/divisionForm/DivisionFormWebPart.manifest.json"
+        }
+      ]
+    },
+    "party-form-web-part": {
+      "components": [
+        {
+          "entrypoint": "./lib/webparts/partyForm/PartyFormWebPart.js",
+          "manifest": "./src/webparts/partyForm/PartyFormWebPart.manifest.json"
+        }
+      ]
+    },
+    "absence-request-form-web-part": {
+      "components": [
+        {
+          "entrypoint": "./lib/webparts/absenceRequestForm/AbsenceRequestFormWebPart.js",
+          "manifest": "./src/webparts/absenceRequestForm/AbsenceRequestFormWebPart.manifest.json"
+        }
+      ]
+    },
+    "committee-form-web-part": {
+      "components": [
+        {
+          "entrypoint": "./lib/webparts/committeeForm/CommitteeFormWebPart.js",
+          "manifest": "./src/webparts/committeeForm/CommitteeFormWebPart.manifest.json"
+        }
+      ]
+    },
+    "whips-flock-form-web-part": {
+      "components": [
+        {
+          "entrypoint": "./lib/webparts/whipsFlockForm/WhipsFlockFormWebPart.js",
+          "manifest": "./src/webparts/whipsFlockForm/WhipsFlockFormWebPart.manifest.json"
+        }
+      ]
+    }
+  },
+  "externals": {},
+  "localizedResources": {
+    "ListWebPartStrings": "lib/webparts/list/loc/{locale}.js",
+    "SessionFormWebPartStrings": "lib/webparts/sessionForm/loc/{locale}.js",
+    "MemberOfParliamentFormWebPartStrings": "lib/webparts/memberOfParliamentForm/loc/{locale}.js",
+    "DivisionFormWebPartStrings": "lib/webparts/divisionForm/loc/{locale}.js",
+    "PartyFormWebPartStrings": "lib/webparts/partyForm/loc/{locale}.js",
+    "AbsenceRequestFormWebPartStrings": "lib/webparts/absenceRequestForm/loc/{locale}.js",
+    "CommitteeFormWebPartStrings": "lib/webparts/committeeForm/loc/{locale}.js",
+    "WhipsFlockFormWebPartStrings": "lib/webparts/whipsFlockForm/loc/{locale}.js"
+  }
+}

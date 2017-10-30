@@ -17,7 +17,7 @@
         <AssociationConnector Association="Model.FK_AbsenceRequestOppositionMP_AbsenceRequestID" />
         <AssociationConnector Association="Model.FK_AbsenceRequestOppositionMP_CreatedBy" />
         <AssociationConnector Association="Model.FK_AbsenceRequestOppositionMP_LastChangedBy" />
-      </Diagram>
+        </Diagram>
     </edmx:Diagrams>
   </edmx:Designer>
 </edmx:Edmx>
