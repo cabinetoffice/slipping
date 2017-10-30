@@ -1,8 +1,10 @@
 import * as React from 'react';
+import * as ReactDom from 'react-dom';
 
 import { ISessionFormProps } from './ISessionFormProps';
 import { SessionFormState, ISessionFormData } from './ISessionFormState';
 import { SessionService } from './SessionService';
+import styles from './SessionForm.module.scss';
 
 import * as types from '../../../types/index';
 import '../../../common/polyfillCustomEvent';
@@ -32,9 +34,12 @@ export default class SessionForm extends React.Component<ISessionFormProps, type
 
   public render(): React.ReactElement<ISessionFormProps> {
     const formData = this.state.formData;
-
+    const fromDatePickerStrings = new types.DatePickerStrings();
+    fromDatePickerStrings.isRequiredErrorMessage = 'From date is required';
+    const toDatePickerStrings = new types.DatePickerStrings();
+    toDatePickerStrings.isRequiredErrorMessage = 'To date is required';
     return (
-      <form>
+      <form key={this.state.timestamp} className={styles.sessionForm}>
         <h1>{formData.id === 0 ? 'Create new session' : this.state.viewMode ? `View session - ${formData.sessionTitle}` : `Edit session - ${formData.sessionTitle}`}</h1>
         {this.state.viewMode ?
           <div>
@@ -48,20 +53,16 @@ export default class SessionForm extends React.Component<ISessionFormProps, type
         }
         <div>
           <div>
-            <TextField label="Session Title" disabled={this.state.viewMode} maxLength={50} required={!this.state.viewMode} value={formData.sessionTitle} onChanged={this.handleChangeSessionTitle} errorMessage={this.state.errors["sessionTitle"]} />
+            <TextField label="Session Title" disabled={this.state.viewMode} maxLength={50} required={!this.state.viewMode} value={formData.sessionTitle} onChanged={this.handleChangeSessionTitle} validateOnLoad={formData.id !== 0} onGetErrorMessage={this.validateSessionTitle} />
           </div>
           <div>
-            <DatePicker label="From Date" disabled={this.state.viewMode} value={formData.fromDate} formatDate={(date: Date) => date.toLocaleDateString()} onSelectDate={this.handleChangeFromDate} placeholder="Select session from date..." />
+            <DatePicker label="From Date" disabled={this.state.viewMode} isRequired={!this.state.viewMode} value={formData.fromDate} formatDate={(date: Date) => date.toLocaleDateString()} onSelectDate={this.handleChangeFromDate} placeholder="Select session from date..." strings={fromDatePickerStrings} />
           </div>
           <div>
-            <DatePicker label="To Date" disabled={this.state.viewMode} value={formData.toDate} formatDate={(date: Date) => date.toLocaleDateString()} onSelectDate={this.handleChangeToDate} placeholder="Select session end date..." />
-            <p className="ms-TextField-errorMessage">{this.state.errors["toDate"]}</p>
+            <DatePicker label="To Date" disabled={this.state.viewMode} isRequired={!this.state.viewMode} value={formData.toDate} formatDate={(date: Date) => date.toLocaleDateString()} onSelectDate={this.handleChangeToDate} placeholder="Select session end date..." strings={toDatePickerStrings} />
+            {this.state.errors["toDate"] &&
+              <p className={styles.errorMessage}><i role="presentation" aria-hidden="true" data-icon-name="Error" className="ms-Icon css-liugll errorIcon_73637f28"></i><span data-automation-id="error-message">{this.state.errors["toDate"]}</span></p>}
           </div>
-          {this.state.viewMode ||
-            <div>
-              <PrimaryButton text="Save" disabled={!this.state.isValid} onClick={this.handleSubmit} />&nbsp;
-              <DefaultButton text="Cancel" onClick={this.handleCancel} />
-            </div>}
         </div>
       </form>
     );
@@ -72,6 +73,7 @@ export default class SessionForm extends React.Component<ISessionFormProps, type
     if (!isNaN(id)) {
       this.dataService.getSession(id).then((session: types.ISession): void => {
         this.setState({
+          timestamp: new Date().toISOString(),
           formData: {
             id: session.ID,
             sessionTitle: session.SessionTitle,
@@ -83,7 +85,7 @@ export default class SessionForm extends React.Component<ISessionFormProps, type
         });
       }).catch((err: any): void => {
         if (err === 'Not Found') { }
-          //location.hash = '';
+        //location.hash = '';
       });
     } else {
       this.setState(new SessionFormState());
@@ -91,18 +93,18 @@ export default class SessionForm extends React.Component<ISessionFormProps, type
   }
 
   @autobind
+  private validateSessionTitle(value: string): string {
+    return value === '' ? 'Session title is required' : '';
+  }
+
+  @autobind
   private validateSession(state: types.IFormState): void {
     const formData = state.formData;
     const errors = state.errors;
 
-    if (formData.sessionTitle === null || formData.sessionTitle === '') {
-      errors['sessionTitle'] = 'Session title is required';
-    } else {
-      errors['sessionTitle'] = '';
-    }
 
     if (formData.fromDate && formData.toDate && formData.fromDate > formData.toDate) {
-      errors['toDate'] = 'To Date must be before From Date';
+      errors['toDate'] = 'To Date must be after From Date';
     } else {
       errors['toDate'] = '';
     }
@@ -140,7 +142,7 @@ export default class SessionForm extends React.Component<ISessionFormProps, type
     const d = this.state.formData;
     d.sessionTitle = e;
     this.setState({ formData: d });
-    this.validateSession(this.state);
+    //this.validateSession(this.state);
   }
 
   @autobind
@@ -148,7 +150,7 @@ export default class SessionForm extends React.Component<ISessionFormProps, type
     const d = this.state.formData;
     d.fromDate = e;
     this.setState({ formData: d });
-    this.validateSession(this.state);
+    //this.validateSession(this.state);
   }
 
   @autobind
@@ -156,7 +158,7 @@ export default class SessionForm extends React.Component<ISessionFormProps, type
     const d = this.state.formData;
     d.toDate = e;
     this.setState({ formData: d });
-    this.validateSession(this.state);
+    //this.validateSession(this.state);
   }
 
   @autobind

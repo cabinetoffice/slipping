@@ -16,9 +16,9 @@
   "preconfiguredEntries": [{
     "groupId": "29111422-e6fd-4081-b9a0-f145dde07f6b",
     "group": { "default": "PAWS" },
-    "title": { "default": "WhipsFlockForm" },
+    "title": { "default": "Whips flock form" },
     "description": { "default": "Add and edit whips flocks" },
-    "officeFabricIconFontName": "Page",
+    "officeFabricIconFontName": "Questionnaire",
     "properties": {
       "description": "WhipsFlockForm"
     }

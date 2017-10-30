@@ -13,7 +13,7 @@ export class MemberOfParliamentService {
 
     public getMemberOfParliament(id: number): Promise<IMemberOfParliament> {
         return new Promise<IMemberOfParliament>((resolve: (mp: IMemberOfParliament) => void, reject: (error: any) => void): void => {
-            this.httpClient.get(`${this.apiUrl}(${id})`, HttpClient.configurations.v1, { credentials: 'include' })
+            this.httpClient.get(`${this.apiUrl}(${id})?$select=ID,Title,Forenames,Surname,FromDate,ToDate,ConstituencyID`, HttpClient.configurations.v1, { credentials: 'include' })
                 .then((response: Response): Promise<IMemberOfParliament> => {
                     if (response.ok) {
                         return response.json();
