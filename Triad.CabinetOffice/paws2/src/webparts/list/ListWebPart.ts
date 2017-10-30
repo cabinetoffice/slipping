@@ -20,6 +20,7 @@ export default class ListWebPart extends BaseClientSideWebPart<IListWebPartProps
       PawsList,
       {
         title: this.properties.title,
+        createNewText: this.properties.createNewText,
         itemsUrl: this.properties.itemsUrl,
         nameProperty: this.properties.nameProperty,
         descProperty: this.properties.descriptionProperty,
@@ -64,6 +65,9 @@ export default class ListWebPart extends BaseClientSideWebPart<IListWebPartProps
               groupFields: [
                 PropertyPaneTextField('title', {
                   label: strings.TitleFieldLabel
+                }),
+                PropertyPaneTextField('createNewText', {
+                  label: strings.CreateNewText
                 }),
                 PropertyPaneTextField('itemsUrl', {
                   label: strings.ItemsUrlFieldLabel

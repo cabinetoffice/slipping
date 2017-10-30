@@ -2,6 +2,7 @@ declare interface IListWebPartStrings {
   PropertyPaneDescription: string;
   BasicGroupName: string;
   TitleFieldLabel: string;
+  CreateNewText: string;
   ItemsUrlFieldLabel: string;
   NamePropertyFieldLabel: string;
   DescriptionPropertyFieldLabel: string;

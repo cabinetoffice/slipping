@@ -1,27 +1,29 @@
 import * as React from 'react';
+
 import styles from './PawsList.module.scss';
 import { IPawsListProps } from './IPawsListProps';
 import { IPawsListState } from './IPawsListState';
+import { PawsListService } from './PawsListService';
+
 import { escape } from '@microsoft/sp-lodash-subset';
+import { HttpClient } from '@microsoft/sp-http';
+
 import { TextField } from 'office-ui-fabric-react/lib/TextField';
 import { Icon } from 'office-ui-fabric-react/lib/Icon';
 import { List } from 'office-ui-fabric-react/lib/List';
 import { PrimaryButton, IButtonProps } from 'office-ui-fabric-react/lib/Button';
-import { HttpClient } from '@microsoft/sp-http';
-import { ListItem, IListItem } from '../../../types/ListItem';
-import { PawsListService } from './PawsListService';
+import { autobind } from 'office-ui-fabric-react/lib/Utilities';
+
+import * as types from '../../../types/index';
 
 export default class PawsList extends React.Component<IPawsListProps, IPawsListState> {
-  private allItems: IListItem[];
+  private allItems: types.IListItem[];
   private dataService: PawsListService;
 
   constructor(props: IPawsListProps) {
     super(props);
 
     this.dataService = new PawsListService(this.props.httpClient, this.props.itemsUrl, this.props.nameProperty, this.props.descProperty);
-
-    this.onFilterChanged = this.onFilterChanged.bind(this);
-    this.handleNew = this.handleNew.bind(this);
 
     this.state = { items: [] };
 
@@ -45,6 +47,9 @@ export default class PawsList extends React.Component<IPawsListProps, IPawsListS
         // this.onFilterChanged(this.state.filterText);
       }
     });
+    window.addEventListener('hashchange', (e) => {
+      this.highlightSelectedItem();
+    });
   }
 
   public render(): React.ReactElement<IPawsListProps> {
@@ -53,9 +58,9 @@ export default class PawsList extends React.Component<IPawsListProps, IPawsListS
     let resultCountText = items.length === originalItems.length ? '' : ` (${items.length} of ${originalItems.length} shown)`;
 
     return (
-      <div className={styles.pawsList}>
-        <h2>{this.props.title}</h2>
-        <PrimaryButton text="Add new session" onClick={this.handleNew} />
+      <div className={styles.pawsList} >
+        <h1>{this.props.title}</h1>
+        <PrimaryButton text={`Create a new ${this.props.createNewText || '...'}`} onClick={this.handleNew} />
         <TextField label={'Filter by title' + resultCountText} onBeforeChange={this.onFilterChanged} />
         <List items={items} onRenderCell={this.onRenderCell} className={styles.pawsListItemContainer} />
       </div>
@@ -64,9 +69,10 @@ export default class PawsList extends React.Component<IPawsListProps, IPawsListS
 
   public componentDidMount(): void {
     if (this.settingsConfigured()) {
-      this.dataService.getItems().then((items: IListItem[]): void => {
+      this.dataService.getItems().then((items: types.IListItem[]): void => {
         this.allItems = items;
         this.setState({ items: items });
+        this.highlightSelectedItem();
       });
     }
   }
@@ -75,21 +81,34 @@ export default class PawsList extends React.Component<IPawsListProps, IPawsListS
     return this.props.itemsUrl !== undefined && this.props.nameProperty !== undefined;
   }
 
+  private highlightSelectedItem(): void {
+    var id = parseInt(location.hash.substring(1));
+    if (!isNaN(id)) {
+      var items = document.getElementsByClassName(styles.msListBasicExampleItemCell);
+      for (var i = 0; i < items.length; i++) {
+        items[i].classList.remove(styles.msListBasicExampleItemCellSelected);
+      }
+      var item = document.getElementById(`pawsItem${id}`);
+      if (item) item.classList.add(styles.msListBasicExampleItemCellSelected);
+    }
+  }
+
+  @autobind
   private onFilterChanged(text: string) {
     let items = this.allItems;
 
     this.setState({
       filterText: text,
       items: text ?
-        items.filter(item => item.name.toLowerCase().indexOf(text.toLowerCase()) >= 0) :
+        items.filter(item => item.name.toLowerCase().indexOf(text.toLowerCase()) >= 0 || item.description.toLowerCase().indexOf(text.toLowerCase()) >= 0) :
         items
     });
   }
 
-  private onRenderCell(item: IListItem, index: number | undefined): JSX.Element {
+  private onRenderCell(item: types.IListItem, index: number | undefined): JSX.Element {
     return (
       <a href={'#' + item.id} className={styles.noLinkDecoration}>
-        <div className={styles.msListBasicExampleItemCell} data-is-focusable={true}>
+        <div className={styles.msListBasicExampleItemCell} data-is-focusable={true} id={`pawsItem${item.id}`}>
           <div className={styles.msListBasicExampleItemContent}>
             <div className={styles.msListBasicExampleItemName}>{item.name}</div>
             <div>{item.description}</div>
@@ -103,12 +122,13 @@ export default class PawsList extends React.Component<IPawsListProps, IPawsListS
     );
   }
 
+  @autobind
   private handleNew(e): void {
     e.preventDefault();
     location.hash = '';
   }
 
-  private indexOfItem(arr: Array<IListItem>, id: number): number {
+  private indexOfItem(arr: Array<types.IListItem>, id: number): number {
     for (var i = 0; i < arr.length; i++) {
       if (arr[i].id === id)
         return i;
