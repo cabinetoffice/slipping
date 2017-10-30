@@ -10,22 +10,41 @@ import {
 import * as strings from 'PartyFormWebPartStrings';
 import PartyForm from './components/PartyForm';
 import { IPartyFormProps } from './components/IPartyFormProps';
-
-export interface IPartyFormWebPartProps {
-  description: string;
-}
+import { IPartyFormWebPartProps } from './IPartyFormWebPartProps';
 
 export default class PartyFormWebPart extends BaseClientSideWebPart<IPartyFormWebPartProps> {
+  private apiLoaded:boolean = false;
+  private apiUrl:string = "https://paws-api-dev.azurewebsites.net";
 
   public render(): void {
     const element: React.ReactElement<IPartyFormProps > = React.createElement(
       PartyForm,
       {
-        description: this.properties.description
+        apiUrl: this.properties.apiUrl,
+        httpClient: this. context.httpClient
       }
     );
 
-    ReactDom.render(element, this.domElement);
+    this.domElement.innerHTML += `
+      <iframe src="${this.apiUrl}" style="display:none;"></iframe>
+      <div id="seshForm"></div>
+    `;
+
+    this.domElement.querySelector('iframe').addEventListener('load', ():void => {
+      this.apiLoaded = true;
+    });
+
+    this.executeOrDelayUntilRemoteApiLoaded(():void=>{
+      ReactDom.render(element, this.domElement.querySelector('#seshForm'));
+    });
+  }
+
+  private executeOrDelayUntilRemoteApiLoaded(func:Function):void{
+    if(this.apiLoaded){
+      func();
+    }else{
+      setTimeout(():void=> {this.executeOrDelayUntilRemoteApiLoaded(func);}, 100);
+    }
   }
 
   protected get dataVersion(): Version {
@@ -43,8 +62,8 @@ export default class PartyFormWebPart extends BaseClientSideWebPart<IPartyFormWe
             {
               groupName: strings.BasicGroupName,
               groupFields: [
-                PropertyPaneTextField('description', {
-                  label: strings.DescriptionFieldLabel
+                PropertyPaneTextField('apiUrl', {
+                  label: strings.ApiUrlFieldLabel
                 })
               ]
             }

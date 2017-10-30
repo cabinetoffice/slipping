@@ -18,6 +18,7 @@ namespace Triad.CabinetOffice.PAWS.API
             builder.EntitySet<Session>("Sessions");
             builder.EntitySet<Division>("Divisions");
             builder.EntitySet<User>("Users");
+            builder.EntitySet<Party>("Parties");
             config.Routes.MapODataServiceRoute("odata", "odata", builder.GetEdmModel());
         }
     }

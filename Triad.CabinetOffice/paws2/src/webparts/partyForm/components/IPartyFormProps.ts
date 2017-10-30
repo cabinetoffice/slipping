@@ -1,3 +1,8 @@
+
+import { HttpClient } from '@microsoft/sp-http';
+
 export interface IPartyFormProps {
-  description: string;
+  apiUrl: string;
+  httpClient: HttpClient;
 }
+
