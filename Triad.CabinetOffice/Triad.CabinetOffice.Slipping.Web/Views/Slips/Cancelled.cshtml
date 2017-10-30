@@ -1,0 +1,28 @@
+﻿@model Triad.CabinetOffice.Slipping.Data.Models.SlipSummary
+
+@{
+    ViewBag.Title = "Slip cancelled";
+}
+
+<div class="grid-row">
+    <div class="column-two-thirds column-minimum">
+        <div class="govuk-box-highlight">
+            <h1 class="bold-large">Slip cancelled</h1>
+            <p>
+                Date and time<br>
+                <strong class="heading-medium">@string.Format("{0} at {1}", Model.FromDate.ToString("dd/MM/yyyy"), Model.FromDate.ToString("HH:mm"))</strong>
+            </p>
+        </div>
+        <p>We have sent you a confirmation email.</p>
+        <h2 class="heading-medium">What do you want to do next?</h2>
+        <p>
+            <a class="button" role="button" href="/Slipping/Create">Create a new slip</a>
+        </p>
+        <p><a href="/Slipping">Take me back to my slips</a></p>
+        <h2 class="heading-medium">Want to nominate a user to fill in your slip?</h2>
+        <p>We need their name and email address. You can send us these details by email or by telephone.</p>
+        <p><strong class="bold-small">Email:</strong> GWAU@parliament.uk</p>
+        <p><strong class="bold-small">Telephone:</strong> 0208 123 4567</p>
+    </div>
+</div>
+

@@ -1,0 +1,45 @@
+﻿@model Triad.CabinetOffice.Slipping.Web.ViewModels.SlippingHistory
+@using Triad.CabinetOffice.Slipping.Data.Models
+
+@{
+    ViewBag.Title = string.Format("{0} MP slips", Model.MPName);
+}
+
+<div class="grid-row">
+    <div class="column-two-thirds column-minimum">
+        <h1 class="heading-large">
+            @Model.MPName MP slips
+        </h1>
+        <ul class="task-list-items">
+            @foreach (SlipSummary slip in Model.Slips)
+            {
+                <li class="task-list-item">
+                    @Html.ActionLink(string.Format("Slip - {0}", @slip.FromDate.ToString("dd/MM/yyyy - HH:mm")), @slip.IsUnsubmitted ? "CheckYourAnswers" : "Review", new { id = @slip.ID }, new { @class="task-name", @aria_describedby = string.Format("task-status-{0}", @slip.ID) })
+                    <strong class="task-completed" id="@string.Format("task-status-{0}", @slip.ID)">@slip.Status</strong>
+                </li>
+            }
+            @if (ViewBag.ShowViewAll)
+            {
+
+                if (ViewBag.ViewAllStatus)
+                {
+                    <p style="float:right;clear:both; margin-top:10px;">@Html.ActionLink("View All", "Index", new { viewAll = true })</p>
+                }
+                else
+                {
+                    <p style="float:right;clear:both; margin-top:10px;">@Html.ActionLink("Close", "Index", new { viewAll = false })</p>
+                }
+            }
+        </ul>
+        <p>
+            @Html.ActionLink("Create a new slip", "FromDate", null, new { @class = "button", @role = "button" })
+        </p>
+        <h2 class="heading-medium">Want to nominate a user to fill in your slips?</h2>
+        <p>We need their name and email address. You can send us these details by email or by telephone.</p>
+        <p><strong class="bold-small">Email:</strong> GWAU@parliament.uk</p>
+        <p><strong class="bold-small">Telephone:</strong> 0208 123 4567</p>
+    </div>
+    <div class="column-third"></div>
+</div>
+
+

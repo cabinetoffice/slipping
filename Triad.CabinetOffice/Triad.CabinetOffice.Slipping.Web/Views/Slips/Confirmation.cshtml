@@ -1,0 +1,31 @@
+﻿@model Triad.CabinetOffice.Slipping.Data.Models.SlippingRequest
+
+@{
+    ViewBag.Title = "Slip submitted";
+}
+
+<div class="grid-row">
+    <div class="column-two-thirds column-minimum">
+
+        <div class="govuk-box-highlight">
+            <h1 class="bold-large">Slip submitted</h1>
+            <p>
+                Date and time<br>
+                <strong class="heading-medium">@Model.FromDate.ToString("d") at @Model.FromDate.ToShortTimeString()</strong>
+            </p>
+        </div>
+        <p>We have sent you a confirmation email.</p>
+        <h2 class="heading-medium">What do you want to do next?</h2>
+        <p>
+            @Html.ActionLink("Create a new slip", "FromDate", null, new { @class = "button", role = "button" })
+        </p>
+        <p>
+            @Html.ActionLink("Take me back to my slip requests", "Index", null, null)
+        </p>
+        <h2 class="heading-medium">Want to nominate a user to fill in your slips?</h2>
+        <p>We need their name and email address. You can send us these details by email or by telephone.</p>
+        <p><strong class="bold-small">Email:</strong> GWAU@parliament.uk</p>
+        <p><strong class="bold-small">Telephone:</strong> 0208 123 4567</p>
+    </div>
+</div>
+

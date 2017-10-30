@@ -1,9 +1,38 @@
-﻿@model System.Web.Mvc.HandleErrorInfo
+﻿@using Triad.CabinetOffice.Slipping.Web.Exceptions
+@model System.Web.Mvc.HandleErrorInfo
 
 @{
     ViewBag.Title = "Error";
 }
 
-<h1 class="text-danger">Error.</h1>
-<h2 class="text-danger">An error occurred while processing your request.</h2>
+<div class="grid-row">
+    <div class="column-two-thirds column-minimum">
+        @if (Model.Exception.GetType() == typeof(SlippingUserNotFoundException))
+        {
+            <h1 class="heading-xlarge">
+                Your details were not recognised
+            </h1>
+            <p>Your details were not recognised by the Slipping Request System.</p>
+            <p>@User.Identity.Name</p>
+            <p>Please contact the Whips Office Admin Team providing your name and email address via email or telephone:</p>
+            <p>
+                <strong class="bold-small">Email:</strong> <a href="@string.Format("mailto:{0}", ViewBag.ContactEmail)">@ViewBag.ContactEmail</a><br />
+                <strong class="bold-small">Telephone:</strong> @ViewBag.ContactTelephone
+            </p>
+        }
+        else
+        {
+            <h1 class="heading-xlarge">
+                Error
+            </h1>
+            <p>We apologise that an error has occurred.</p>
+            <p>
+                Please report the date and time of this incident (@string.Format("{0:dd/MM/yyyy} {0:HH:mm:ss}", DateTime.Now)) with details of what you were doing when the error occurred to the Whips Admin Team.
+            </p>
+            <p>
+                @Html.ActionLink("Continue", "Index", "Slips", null, new { @class = "button", @role = "button" })
+            </p>
+        }
+    </div>
+</div>
 

@@ -1,0 +1,293 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+  <!-- EF Runtime content -->
+  <edmx:Runtime>
+    <!-- SSDL content -->
+    <edmx:StorageModels>
+    <Schema Namespace="Model.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012.Azure" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+        <EntityType Name="Absence Request">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Govt MP" Type="int" Nullable="false" />
+          <Property Name="Reason" Type="int" Nullable="false" />
+          <Property Name="Details" Type="nvarchar" MaxLength="220" />
+          <Property Name="Date Created" Type="datetime2" Precision="3" Nullable="false" />
+          <Property Name="Status" Type="int" Nullable="false" />
+          <Property Name="From Time" Type="time" Precision="3" Nullable="false" />
+          <Property Name="To Time" Type="time" Precision="3" Nullable="false" />
+          <Property Name="From Date" Type="date" Nullable="false" />
+          <Property Name="To Date" Type="date" Nullable="false" />
+          <Property Name="From Date Time" Type="datetime2" Precision="0" StoreGeneratedPattern="Computed" />
+          <Property Name="To Date Time" Type="datetime2" Precision="0" StoreGeneratedPattern="Computed" />
+          <Property Name="Decision Notes" Type="nvarchar" MaxLength="220" />
+        </EntityType>
+        <EntityType Name="Absence Request Reason">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Reason" Type="nvarchar" MaxLength="255" />
+        </EntityType>
+        <EntityType Name="Absence Request Status">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Status" Type="nvarchar" MaxLength="255" />
+        </EntityType>
+        <EntityType Name="Members of Parliament">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Title" Type="nvarchar" MaxLength="220" />
+          <Property Name="Forenames" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="Surname" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="From Date" Type="datetime2" Precision="3" Nullable="false" />
+          <Property Name="To Date" Type="datetime2" Precision="3" />
+          <Property Name="Email Address" Type="nvarchar" MaxLength="100" />
+          <Property Name="Mobile" Type="nvarchar" MaxLength="20" />
+          <Property Name="Government Position" Type="nvarchar" MaxLength="150" />
+          <Property Name="Notes" Type="nvarchar(max)" />
+          <Property Name="Status" Type="int" />
+          <Property Name="Role" Type="int" />
+          <Property Name="Constituency" Type="int" />
+          <Property Name="Party" Type="int" Nullable="false" />
+          <Property Name="List As" Type="nvarchar" MaxLength="102" StoreGeneratedPattern="Computed" Nullable="false" />
+          <Property Name="Member_Id" Type="nvarchar" MaxLength="10" />
+          <Property Name="Dods_Id" Type="nvarchar" MaxLength="10" />
+          <Property Name="Pims_Id" Type="nvarchar" MaxLength="10" />
+          <Property Name="Full Name" Type="nvarchar" MaxLength="322" StoreGeneratedPattern="Computed" />
+        </EntityType>
+        <Association Name="FK_Absence_Request_4D7AF5E8_BB24_42F4_B3E7_1B551FCABB1E">
+          <End Role="Absence Request Reason" Type="Self.Absence Request Reason" Multiplicity="1" />
+          <End Role="Absence Request" Type="Self.Absence Request" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Absence Request Reason">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="Absence Request">
+              <PropertyRef Name="Reason" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Absence_Request_D3626684_2ADD_4611_BA06_3DBB23C03243">
+          <End Role="Absence Request Status" Type="Self.Absence Request Status" Multiplicity="1" />
+          <End Role="Absence Request" Type="Self.Absence Request" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Absence Request Status">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="Absence Request">
+              <PropertyRef Name="Status" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityContainer Name="ModelStoreContainer">
+          <EntitySet Name="Absence Request" EntityType="Self.Absence Request" Schema="Access" store:Type="Tables" />
+          <EntitySet Name="Absence Request Reason" EntityType="Self.Absence Request Reason" Schema="Access" store:Type="Tables" />
+          <EntitySet Name="Absence Request Status" EntityType="Self.Absence Request Status" Schema="Access" store:Type="Tables" />
+          <EntitySet Name="Members of Parliament" EntityType="Self.Members of Parliament" Schema="Access" store:Type="Tables" />
+          <AssociationSet Name="FK_Absence_Request_4D7AF5E8_BB24_42F4_B3E7_1B551FCABB1E" Association="Self.FK_Absence_Request_4D7AF5E8_BB24_42F4_B3E7_1B551FCABB1E">
+            <End Role="Absence Request Reason" EntitySet="Absence Request Reason" />
+            <End Role="Absence Request" EntitySet="Absence Request" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Absence_Request_D3626684_2ADD_4611_BA06_3DBB23C03243" Association="Self.FK_Absence_Request_D3626684_2ADD_4611_BA06_3DBB23C03243">
+            <End Role="Absence Request Status" EntitySet="Absence Request Status" />
+            <End Role="Absence Request" EntitySet="Absence Request" />
+          </AssociationSet>
+        </EntityContainer>
+      </Schema></edmx:StorageModels>
+    <!-- CSDL content -->
+    <edmx:ConceptualModels>
+      <Schema Namespace="Model" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+        <EntityType Name="Absence_Request">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Govt_MP" Type="Int32" Nullable="false" />
+          <Property Name="Reason" Type="Int32" Nullable="false" />
+          <Property Name="Details" Type="String" MaxLength="220" FixedLength="false" Unicode="true" />
+          <Property Name="Date_Created" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="Status" Type="Int32" Nullable="false" />
+          <Property Name="From_Time" Type="Time" Nullable="false" Precision="3" />
+          <Property Name="To_Time" Type="Time" Nullable="false" Precision="3" />
+          <Property Name="From_Date" Type="DateTime" Nullable="false" Precision="0" />
+          <Property Name="To_Date" Type="DateTime" Nullable="false" Precision="0" />
+          <Property Name="From_Date_Time" Type="DateTime" annotation:StoreGeneratedPattern="Computed" Precision="0" />
+          <Property Name="To_Date_Time" Type="DateTime" annotation:StoreGeneratedPattern="Computed" Precision="0" />
+          <Property Name="Decision_Notes" Type="String" MaxLength="220" FixedLength="false" Unicode="true" />
+          <NavigationProperty Name="Absence_Request_Status" Relationship="Model.FK_Absence_Request_D3626684_2ADD_4611_BA06_3DBB23C03243" FromRole="Absence_Request" ToRole="Absence_Request_Status" />
+          <NavigationProperty Name="Absence_Request_Reason" Relationship="Model.FK_Absence_Request_4D7AF5E8_BB24_42F4_B3E7_1B551FCABB1E" FromRole="Absence_Request" ToRole="Absence_Request_Reason" />
+        </EntityType>
+        <EntityContainer Name="PAWSEntities" annotation:LazyLoadingEnabled="true">
+          <EntitySet Name="Absence_Requests" EntityType="Self.Absence_Request" />
+          <EntitySet Name="Members_of_Parliaments" EntityType="Model.Members_of_Parliament" />
+          <EntitySet Name="Absence_Request_Status" EntityType="Model.Absence_Request_Status" />
+          <AssociationSet Name="FK_Absence_Request_D3626684_2ADD_4611_BA06_3DBB23C03243" Association="Model.FK_Absence_Request_D3626684_2ADD_4611_BA06_3DBB23C03243">
+            <End Role="Absence_Request_Status" EntitySet="Absence_Request_Status" />
+            <End Role="Absence_Request" EntitySet="Absence_Requests" />
+          </AssociationSet>
+          <EntitySet Name="Absence_Request_Reasons" EntityType="Model.Absence_Request_Reason" />
+          <AssociationSet Name="FK_Absence_Request_4D7AF5E8_BB24_42F4_B3E7_1B551FCABB1E" Association="Model.FK_Absence_Request_4D7AF5E8_BB24_42F4_B3E7_1B551FCABB1E">
+            <End Role="Absence_Request_Reason" EntitySet="Absence_Request_Reasons" />
+            <End Role="Absence_Request" EntitySet="Absence_Requests" />
+          </AssociationSet>
+        </EntityContainer>
+        <EntityType Name="Members_of_Parliament">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Title" Type="String" MaxLength="220" FixedLength="false" Unicode="true" />
+          <Property Name="Forenames" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="Surname" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="From_Date" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="To_Date" Type="DateTime" Precision="3" />
+          <Property Name="Email_Address" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
+          <Property Name="Mobile" Type="String" MaxLength="20" FixedLength="false" Unicode="true" />
+          <Property Name="Government_Position" Type="String" MaxLength="150" FixedLength="false" Unicode="true" />
+          <Property Name="Notes" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="Status" Type="Int32" />
+          <Property Name="Role" Type="Int32" />
+          <Property Name="Constituency" Type="Int32" />
+          <Property Name="Party" Type="Int32" Nullable="false" />
+          <Property Name="List_As" Type="String" Nullable="false" MaxLength="102" FixedLength="false" Unicode="true" annotation:StoreGeneratedPattern="Computed" />
+          <Property Name="Member_Id" Type="String" MaxLength="10" FixedLength="false" Unicode="true" />
+          <Property Name="Dods_Id" Type="String" MaxLength="10" FixedLength="false" Unicode="true" />
+          <Property Name="Pims_Id" Type="String" MaxLength="10" FixedLength="false" Unicode="true" />
+          <Property Name="Full_Name" Type="String" MaxLength="322" FixedLength="false" Unicode="true" annotation:StoreGeneratedPattern="Computed" />
+        </EntityType>
+        <EntityType Name="Absence_Request_Status">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Status" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
+          <NavigationProperty Name="Absence_Request" Relationship="Model.FK_Absence_Request_D3626684_2ADD_4611_BA06_3DBB23C03243" FromRole="Absence_Request_Status" ToRole="Absence_Request" />
+        </EntityType>
+        <Association Name="FK_Absence_Request_D3626684_2ADD_4611_BA06_3DBB23C03243">
+          <End Type="Model.Absence_Request_Status" Role="Absence_Request_Status" Multiplicity="1" />
+          <End Type="Model.Absence_Request" Role="Absence_Request" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Absence_Request_Status">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="Absence_Request">
+              <PropertyRef Name="Status" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityType Name="Absence_Request_Reason">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Reason" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
+          <NavigationProperty Name="Absence_Request" Relationship="Model.FK_Absence_Request_4D7AF5E8_BB24_42F4_B3E7_1B551FCABB1E" FromRole="Absence_Request_Reason" ToRole="Absence_Request" />
+        </EntityType>
+        <Association Name="FK_Absence_Request_4D7AF5E8_BB24_42F4_B3E7_1B551FCABB1E">
+          <End Type="Model.Absence_Request_Reason" Role="Absence_Request_Reason" Multiplicity="1" />
+          <End Type="Model.Absence_Request" Role="Absence_Request" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Absence_Request_Reason">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="Absence_Request">
+              <PropertyRef Name="Reason" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+      </Schema>
+    </edmx:ConceptualModels>
+    <!-- C-S mapping content -->
+    <edmx:Mappings>
+      <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+        <EntityContainerMapping StorageEntityContainer="ModelStoreContainer" CdmEntityContainer="PAWSEntities">
+          <EntitySetMapping Name="Absence_Requests">
+            <EntityTypeMapping TypeName="Model.Absence_Request">
+              <MappingFragment StoreEntitySet="Absence Request">
+                <ScalarProperty Name="ID" ColumnName="ID" />
+                <ScalarProperty Name="Govt_MP" ColumnName="Govt MP" />
+                <ScalarProperty Name="Reason" ColumnName="Reason" />
+                <ScalarProperty Name="Details" ColumnName="Details" />
+                <ScalarProperty Name="Date_Created" ColumnName="Date Created" />
+                <ScalarProperty Name="Status" ColumnName="Status" />
+                <ScalarProperty Name="From_Time" ColumnName="From Time" />
+                <ScalarProperty Name="To_Time" ColumnName="To Time" />
+                <ScalarProperty Name="From_Date" ColumnName="From Date" />
+                <ScalarProperty Name="To_Date" ColumnName="To Date" />
+                <ScalarProperty Name="From_Date_Time" ColumnName="From Date Time" />
+                <ScalarProperty Name="To_Date_Time" ColumnName="To Date Time" />
+                <ScalarProperty Name="Decision_Notes" ColumnName="Decision Notes" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Members_of_Parliaments">
+            <EntityTypeMapping TypeName="Model.Members_of_Parliament">
+              <MappingFragment StoreEntitySet="Members of Parliament">
+                <ScalarProperty Name="Full_Name" ColumnName="Full Name" />
+                <ScalarProperty Name="Pims_Id" ColumnName="Pims_Id" />
+                <ScalarProperty Name="Dods_Id" ColumnName="Dods_Id" />
+                <ScalarProperty Name="Member_Id" ColumnName="Member_Id" />
+                <ScalarProperty Name="List_As" ColumnName="List As" />
+                <ScalarProperty Name="Party" ColumnName="Party" />
+                <ScalarProperty Name="Constituency" ColumnName="Constituency" />
+                <ScalarProperty Name="Role" ColumnName="Role" />
+                <ScalarProperty Name="Status" ColumnName="Status" />
+                <ScalarProperty Name="Notes" ColumnName="Notes" />
+                <ScalarProperty Name="Government_Position" ColumnName="Government Position" />
+                <ScalarProperty Name="Mobile" ColumnName="Mobile" />
+                <ScalarProperty Name="Email_Address" ColumnName="Email Address" />
+                <ScalarProperty Name="To_Date" ColumnName="To Date" />
+                <ScalarProperty Name="From_Date" ColumnName="From Date" />
+                <ScalarProperty Name="Surname" ColumnName="Surname" />
+                <ScalarProperty Name="Forenames" ColumnName="Forenames" />
+                <ScalarProperty Name="Title" ColumnName="Title" />
+                <ScalarProperty Name="ID" ColumnName="ID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Absence_Request_Status">
+            <EntityTypeMapping TypeName="Model.Absence_Request_Status">
+              <MappingFragment StoreEntitySet="Absence Request Status">
+                <ScalarProperty Name="Status" ColumnName="Status" />
+                <ScalarProperty Name="ID" ColumnName="ID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Absence_Request_Reasons">
+            <EntityTypeMapping TypeName="Model.Absence_Request_Reason">
+              <MappingFragment StoreEntitySet="Absence Request Reason">
+                <ScalarProperty Name="Reason" ColumnName="Reason" />
+                <ScalarProperty Name="ID" ColumnName="ID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+        </EntityContainerMapping>
+      </Mapping>
+    </edmx:Mappings>
+  </edmx:Runtime>
+  <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <Connection>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="MetadataArtifactProcessing" Value="EmbedInOutputAssembly" />
+      </DesignerInfoPropertySet>
+    </Connection>
+    <Options>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="ValidateOnBuild" Value="true" />
+        <DesignerProperty Name="EnablePluralization" Value="true" />
+        <DesignerProperty Name="IncludeForeignKeysInModel" Value="true" />
+        <DesignerProperty Name="UseLegacyProvider" Value="false" />
+        <DesignerProperty Name="CodeGenerationStrategy" Value="None" />
+      </DesignerInfoPropertySet>
+    </Options>
+    <!-- Diagram content (shape and connector positions) -->
+    <Diagrams></Diagrams>
+  </Designer>
+</edmx:Edmx>

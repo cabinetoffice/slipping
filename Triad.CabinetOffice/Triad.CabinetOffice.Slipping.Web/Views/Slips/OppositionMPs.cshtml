@@ -1,0 +1,82 @@
+﻿@model Triad.CabinetOffice.Slipping.Web.ViewModels.OppositionMPs
+@using Triad.CabinetOffice.Slipping.Web.Extensions
+
+@{
+    ViewBag.Title = (ViewData.ModelState.IsValid ? "" : "Error: ") + "Are there any opposition MPs in attendance?";
+}
+
+<div class="grid-row">
+    <div class="column-two-thirds column-minimum">
+        @Html.BackLink("Reason", new { id = Model.ID }, "link-back")
+
+        @Html.Partial("_ValidationSummary")
+
+        <h1 class="heading-large">
+            Are there any opposition MPs in attendance?
+        </h1>
+        @using (Html.BeginForm(null, null, FormMethod.Post, new { id = "form-opposition-mps" }))
+        {
+            @Html.AntiForgeryToken()
+
+            <div class="form-group @Html.ValidationErrorClassFor(model => model.YesNo, "form-group-error")">
+                <fieldset>
+                    <span class="error-message">@Html.ValidationMessageFor(model => model.YesNo)</span>
+                    <div class="multiple-choice" data-target="yes-add-mps">
+                        @Html.RadioButtonFor(model => model.YesNo, true, new { @id = "yes", @name = "radio-group-add-mps" })
+                        <label for="yes">Yes</label>
+                    </div>
+                    
+                    <div class="panel panel-border-narrow js-hidden" id="yes-add-mps">
+                        <div id="opposition-mp-list">
+                        @for (var i = 0; i < Model.MPs.Count; i++)
+                        {
+                            <div class="grid-row opposition-mp-item">
+                                <div class="form-group-compound list-item-wrapper">
+                                    <fieldset>
+                                        <legend>
+                                            <h2 class="heading-medium">MP @(i + 1)</h2>
+                                        </legend>
+                                        <div class="column-one-third no-padding">
+                                            <div class="form-group list-item @Html.ValidationErrorClassFor(string.Format("MPs[{0}].FullName", i), "form-group-error")">
+                                                @Html.LabelFor(model => model.MPs[i].FullName, new { @class = "form-label" })
+                                                <span class="error-message">@Html.ValidationMessageFor(model => model.MPs[i].FullName)</span>
+                                                @Html.TextBoxWithErrorClassFor(model => model.MPs[i].FullName, new { @class = "form-control" }, string.Format("MPs[{0}].FullName", i), "form-control-error")
+                                                @Html.HiddenFor(model => model.MPs[i].ID)
+                                                @Html.HiddenFor(model => model.MPs[i].MPID)
+                                            </div>
+                                        </div>
+                                        <div class="column-one-third no-padding">
+                                            <div class="list-item">
+                                                @if (Model.MPs.Count != 1)
+                                                {
+                                                    <a class="remove-list-item" id="remove-item-@(i + 1)" href="#">Remove this</a>
+                                                }
+                                            </div>
+                                        </div>
+                                    </fieldset>
+                                    <hr />
+                                </div>
+                            </div>
+                        }
+                        </div>
+                        <div class="grid-row">
+                            <div class="column-two-thirds">
+                                <div class="form-group">
+                                    <button class="button button-add-another" id="add-button">Add another MP</button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="multiple-choice">
+                        @Html.RadioButtonFor(model => model.YesNo, false, new { @id = "no", @name = "radio.group-add-mps" })
+                        <label for="no">No</label>
+                    </div>
+                </fieldset>
+            </div>
+
+            <div class="form-group">
+                <input class="button" type="submit" value="Continue" />
+            </div>
+        }
+    </div>
+</div>

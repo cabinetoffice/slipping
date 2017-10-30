@@ -1,0 +1,22 @@
+[
+  {
+    "outputFile": "Content/govuk-template.css",
+    "inputFile": "Content/govuk-template.scss",
+    "sourceMap": false
+  },
+  {
+    "outputFile": "Content/styleguide/_print.css",
+    "inputFile": "Content/styleguide/_print.scss",
+    "sourceMap": false
+  },
+  {
+    "outputFile": "Content/_basic.css",
+    "inputFile": "Content/_basic.scss",
+    "sourceMap": false
+  },
+  {
+    "outputFile": "Content/styleguide/_colours.css",
+    "inputFile": "Content/styleguide/_colours.scss",
+    "sourceMap": false
+  }
+]

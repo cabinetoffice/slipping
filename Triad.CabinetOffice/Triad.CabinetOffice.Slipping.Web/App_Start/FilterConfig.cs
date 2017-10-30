@@ -1,5 +1,6 @@
 ﻿using System.Web;
 using System.Web.Mvc;
+using Triad.CabinetOffice.Slipping.Web.Attributes;
 
 namespace Triad.CabinetOffice.Slipping.Web
 {
@@ -7,7 +8,8 @@ namespace Triad.CabinetOffice.Slipping.Web
     {
         public static void RegisterGlobalFilters(GlobalFilterCollection filters)
         {
-            filters.Add(new HandleErrorAttribute());
+            filters.Add(new LoggingHandleErrorAttribute());
+            filters.Add(new PopulateViewBagAttribute());
         }
     }
 }

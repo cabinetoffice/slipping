@@ -1,0 +1,124 @@
+﻿@model Triad.CabinetOffice.Slipping.Data.Models.SlippingRequest
+@using Triad.CabinetOffice.Slipping.Data.Models
+@using Triad.CabinetOffice.Slipping.Web.Extensions
+
+@{
+    ViewBag.Title = "Check your answers";
+}
+
+<div class="grid-row">
+    <div class="column-two-thirds column-minimum">
+        @Html.BackLink("OppositionMPs", new { id = Model.ID }, "link-back")
+        <h1 class="heading-large">
+            Check your answers before submitting your slip request
+        </h1>
+        @using (Html.BeginForm())
+        {
+            @Html.AntiForgeryToken()
+
+            <br>
+            <br>
+        <!-- use additional modifier class to change column widths for multiple groups of questions and answers: -->
+        <!--   * `cya-questions-short` for short questions -->
+        <!--   * `cya-questions-long` for long questions -->
+        <!--   * none for single group of q&a -->
+            <dl class="govuk-check-your-answers cya-questions-short">
+                <div>
+                    <dt class="cya-question">
+                        From
+                    </dt>
+                    <dd class="cya-answer">
+                        @Model.FromDate.ToString("dd/MM/yyyy HH:mm")
+                        <span class="error-message">@Html.ValidationMessageFor(model => model.FromDate)</span>
+                    </dd>
+                    <dd class="cya-change">
+                        @Html.ActionLink("Change", "FromDate", new { id = Model.ID })
+                    </dd>
+                </div>
+                <div>
+                    <dt class="cya-question">
+                        To
+                    </dt>
+                    <dd class="cya-answer">
+                        @if (Model.ToDate.HasValue)
+                        {
+                            @Model.ToDate.Value.ToString("dd/MM/yyyy HH:mm")
+                        }
+                        <span class="error-message">@Html.ValidationMessageFor(model => model.ToDate)</span>
+                    </dd>
+                    <dd class="cya-change">
+                        @Html.ActionLink("Change", "ToDate", new { id = Model.ID })
+                    </dd>
+                </div>
+                <div>
+                    <dt class="cya-question">
+                        Location
+                    </dt>
+                    <dd class="cya-answer">
+                        @Model.Location
+                        <span class="error-message">@Html.ValidationMessageFor(model => model.Location)</span>
+                    </dd>
+                    <dd class="cya-change">
+                        @Html.ActionLink("Change", "Location", new { id = Model.ID })
+                    </dd>
+                </div>
+                <div>
+                    <dt class="cya-question">
+                        Reason
+                    </dt>
+                    <dd class="cya-answer">
+                        @Model.Reason
+                        <span class="error-message">@Html.ValidationMessageFor(model => model.Reason)</span>
+                    </dd>
+                    <dd class="cya-change">
+                        @Html.ActionLink("Change", "Reason", new { id = Model.ID })
+                    </dd>
+                </div>
+                <div>
+                    <dt class="cya-question">
+                        Details
+                    </dt>
+                    <dd class="cya-answer">
+                        @Model.Details
+                        <span class="error-message">@Html.ValidationMessageFor(model => model.Details)</span>
+                    </dd>
+                    <dd class="cya-change">
+                        @Html.ActionLink("Change", "Reason", new { id = Model.ID })
+                    </dd>
+                </div>
+                <div>
+                    <dt class="cya-question">
+                        Any opposition MPs in attendance?
+                    </dt>
+                    <dd class="cya-answer">
+                        @if (Model.OppositionMPsAttending.HasValue)
+                        {
+                            @Html.Encode(Model.OppositionMPsAttending.Value ? "Yes" : "No")
+                            <br />
+                            if (Model.OppositionMPsAttending.Value)
+                            {
+                                foreach (OppositionMP mp in Model.OppositionMPs)
+                                {
+                                    @Html.Encode(mp.FullName);
+                                    <br />
+                                }
+                            }
+                        }
+                        <span class="error-message">@Html.ValidationMessageFor(model => model.OppositionMPsAttending)</span>
+                    </dd>
+                    <dd class="cya-change">
+                        @Html.ActionLink("Change", "OppositionMPs", new { id = Model.ID })
+                    </dd>
+                </div>
+            </dl>
+
+            <br>
+            <br>
+
+            <div class="form-group">
+                <button class="button" type="submit">Submit slip</button>
+            </div>
+        }
+    </div>
+
+</div>
