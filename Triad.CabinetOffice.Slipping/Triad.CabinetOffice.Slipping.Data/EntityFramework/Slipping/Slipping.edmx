@@ -50,6 +50,7 @@
           <Property Name="Forenames" Type="nvarchar" MaxLength="255" Nullable="false" />
           <Property Name="Surname" Type="nvarchar" MaxLength="255" Nullable="false" />
           <Property Name="IsMP" Type="bit" Nullable="false" />
+          <Property Name="EmailAddress" Type="nvarchar" MaxLength="255" />
         </EntityType>
         <EntityType Name="UserMP">
           <Key>
@@ -280,6 +281,7 @@
           <Property Name="Forenames" Type="String" MaxLength="255" FixedLength="false" Unicode="true" Nullable="false" />
           <Property Name="Surname" Type="String" MaxLength="255" FixedLength="false" Unicode="true" Nullable="false" />
           <Property Name="IsMP" Type="Boolean" Nullable="false" />
+          <Property Name="EmailAddress" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
           </EntityType>
         <EntityType Name="UserMP">
           <Key>
@@ -436,6 +438,7 @@
           <EntitySetMapping Name="Users">
             <EntityTypeMapping TypeName="Model.User">
               <MappingFragment StoreEntitySet="User">
+                <ScalarProperty Name="EmailAddress" ColumnName="EmailAddress" />
                 <ScalarProperty Name="IsMP" ColumnName="IsMP" />
                 <ScalarProperty Name="Surname" ColumnName="Surname" />
                 <ScalarProperty Name="Forenames" ColumnName="Forenames" />

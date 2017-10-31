@@ -2,13 +2,11 @@
 using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Web;
 using System.Web.Configuration;
 using System.Web.Mvc;
 using Triad.CabinetOffice.Slipping.Data.EntityFramework.Slipping;
 using Triad.CabinetOffice.Slipping.Data.Models;
 using Triad.CabinetOffice.Slipping.Data.Repositories;
-using Triad.CabinetOffice.Slipping.Web.Attributes;
 using Triad.CabinetOffice.Slipping.Web.ViewModels;
 using Triad.CabinetOffice.Slipping.Web.Exceptions;
 
@@ -112,11 +110,6 @@ namespace Triad.CabinetOffice.Slipping.Web.Controllers
                 throw new Exception("GOV.UK Notify API Key in web.config missing or invalid.");
             }
 
-        }
-        
-        private string GetUserEmailAddress(User user)
-        {
-            return user.Username.Replace("live.com#", string.Empty);
         }
 
         private string GetMPEmailAddress(int MPID, int userId)
@@ -637,7 +630,7 @@ namespace Triad.CabinetOffice.Slipping.Web.Controllers
                     {
                         if (!SlippingUser.IsMP)
                         {
-                            SendNotification(NotifyTemplateId_SlippingRequestReceivedUser, GetUserEmailAddress(SlippingUser), new Dictionary<string, dynamic>()
+                            SendNotification(NotifyTemplateId_SlippingRequestReceivedUser, SlippingUser.EmailAddress, new Dictionary<string, dynamic>()
                             {
                                 { "name", SlippingUser.Forenames },
                                 { "absence_date", slippingRequest.FromDate.ToString("dd/MM/yyyy") },
@@ -734,7 +727,7 @@ namespace Triad.CabinetOffice.Slipping.Web.Controllers
                     {
                         if (!SlippingUser.IsMP)
                         {
-                            SendNotification(NotifyTemplateId_SlippingRequestCancelledUser, GetUserEmailAddress(SlippingUser), parameters);
+                            SendNotification(NotifyTemplateId_SlippingRequestCancelledUser, SlippingUser.EmailAddress, parameters);
                         }
                         SendNotification(NotifyTemplateId_SlippingRequestCancelledUser, GetMPEmailAddress(slip.MPID, SlippingUser.ID), parameters);
                     }
