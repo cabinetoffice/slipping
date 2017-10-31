@@ -296,7 +296,6 @@
     <Content Include="Views\Slips\CheckYourAnswers.cshtml" />
     <Content Include="Views\Slips\Confirmation.cshtml" />
     <Content Include="Views\Slips\Review.cshtml" />
-    <Content Include="Views\Slips\Deleted.cshtml" />
     <Content Include="Views\Slips\Cancelled.cshtml" />
     <Content Include="Views\Shared\_ValidationSummary.cshtml" />
     <None Include="Web.Dev.config">

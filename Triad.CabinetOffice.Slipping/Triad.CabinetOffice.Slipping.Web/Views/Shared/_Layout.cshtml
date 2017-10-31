@@ -54,7 +54,7 @@
         <div class="header-wrapper">
             <div class="header-global">
                 <div class="header-logo" >
-                    <img src="/public/images/cabinet_office_logo.png?0.22.1" height="56" alt="Cabinet Office logo" style="display: inline-block;padding-left:15px"> 
+                    <img src="/public/images/cabinet-office-logo@1x.png" srcset="/public/images/cabinet-office-logo@2x.png 2x" alt="Cabinet Office logo" style="display:inline-block;padding-left:15px;max-width:100%;">
                 </div>
             </div>
             <div class="header-proposition">
@@ -63,15 +63,17 @@
                     <nav id="proposition-menu">
                         @if (Request.IsAuthenticated)
                         {
-                            <a id="proposition-name" href="/Slipping">Slipping</a>
+                            @Html.ActionLink("Slipping", "Index", "Slips", null, new { id = "proposition-name" })
                         }
                         else
                         {
-                           <a id="proposition-name" href="/">Slipping</a>    
+                            @Html.ActionLink("Slipping", "Index", "Home", null, new { id = "proposition-name" })
                         }
                         <ul id="proposition-links">
                             @if (Request.IsAuthenticated) {
-                                <li><a href="/Account/SignOut">Log out</a></li>
+                                <li>
+                                    @Html.ActionLink("Log out", "SignOut", "Account", null, null)
+                                </li>
                             }
                         </ul>
                     </nav>
@@ -87,7 +89,7 @@
                     <div class="phase-banner">
                         <p>
                             <strong class="phase-tag">ALPHA</strong>
-                            <span>This is a new service – your <a href="#">feedback</a> will help us to improve it.</span>
+                            <span>This is a new service – your <a href="@ViewBag.FeedbackUrl">feedback</a> will help us to improve it.</span>
                         </p>
                     </div>
                     @RenderBody()

@@ -151,7 +151,7 @@ namespace Triad.CabinetOffice.Slipping.Web.Controllers
 
         #region Action Methods
 
-        // GET: Slipping
+        // GET: Slips
         public ActionResult Index(bool viewAll = false)
         {
             MP mp = MPRepository.Get(this.MPID, SlippingUser.ID);
@@ -173,7 +173,7 @@ namespace Triad.CabinetOffice.Slipping.Web.Controllers
             return View(model);
         }
 
-        // GET: Slipping/Create or Slipping/Edit/ID/FromDate
+        // GET: Slips/Create or Slips/Edit/ID/FromDate
         [HttpGet]
         public ActionResult FromDate(int? id)
         {
@@ -200,7 +200,7 @@ namespace Triad.CabinetOffice.Slipping.Web.Controllers
             return View(model);
         }
 
-        // POST: Slipping/Create
+        // POST: Slips/Create
         // To protect from overposting attacks, please enable the specific properties you want to bind to, for 
         // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
@@ -254,7 +254,7 @@ namespace Triad.CabinetOffice.Slipping.Web.Controllers
             }
         }
 
-        // GET: Slipping/Edit/ID/ToDate
+        // GET: Slips/Edit/ID/ToDate
         [HttpGet]
         public ActionResult ToDate(int id)
         {
@@ -277,7 +277,7 @@ namespace Triad.CabinetOffice.Slipping.Web.Controllers
             }
         }
 
-        // POST: Slipping/Edit/ID/ToDate
+        // POST: Slips/Edit/ID/ToDate
         // To protect from overposting attacks, please enable the specific properties you want to bind to, for 
         // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
@@ -326,7 +326,7 @@ namespace Triad.CabinetOffice.Slipping.Web.Controllers
             }
         }
 
-        // GET: Slipping/Edit/ID/Location
+        // GET: Slips/Edit/ID/Location
         [HttpGet]
         public ActionResult Location(int id)
         {
@@ -347,7 +347,7 @@ namespace Triad.CabinetOffice.Slipping.Web.Controllers
             }
         }
 
-        // POST: Slipping/Edit/ID/Location
+        // POST: Slips/Edit/ID/Location
         // To protect from overposting attacks, please enable the specific properties you want to bind to, for 
         // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
@@ -376,7 +376,7 @@ namespace Triad.CabinetOffice.Slipping.Web.Controllers
             }
         }
 
-        // GET: Slipping/Edit/ID/Reason
+        // GET: Slips/Edit/ID/Reason
         [HttpGet]
         public ActionResult Reason(int id)
         {
@@ -414,7 +414,7 @@ namespace Triad.CabinetOffice.Slipping.Web.Controllers
             }
         }
 
-        // POST: Slipping/Edit/ID/Reason
+        // POST: Slips/Edit/ID/Reason
         // To protect from overposting attacks, please enable the specific properties you want to bind to, for 
         // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
@@ -489,7 +489,7 @@ namespace Triad.CabinetOffice.Slipping.Web.Controllers
         }
 
 
-        // GET: Slipping/Edit/ID/OppositionMPs
+        // GET: Slips/Edit/ID/OppositionMPs
         [HttpGet]
         public ActionResult OppositionMPs(int id)
         {
@@ -521,7 +521,7 @@ namespace Triad.CabinetOffice.Slipping.Web.Controllers
             }
         }
 
-        // POST: Slipping/Edit/ID/OppositionMPs
+        // POST: Slips/Edit/ID/OppositionMPs
         [HttpPost]
         [ValidateAntiForgeryToken]
         public ActionResult OppositionMPs(int id, OppositionMPs model)
@@ -552,7 +552,7 @@ namespace Triad.CabinetOffice.Slipping.Web.Controllers
             }
         }
 
-        // GET: Slipping/Edit/ID/CheckYourAnswers
+        // GET: Slips/Edit/ID/CheckYourAnswers
         [HttpGet]
         public ActionResult CheckYourAnswers(int id)
         {
@@ -568,7 +568,7 @@ namespace Triad.CabinetOffice.Slipping.Web.Controllers
             }
         }
 
-        // POST: Slipping/Edit/ID/CheckYourAnswers
+        // POST: Slips/Edit/ID/CheckYourAnswers
         // To protect from overposting attacks, please enable the specific properties you want to bind to, for 
         // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
@@ -681,7 +681,7 @@ namespace Triad.CabinetOffice.Slipping.Web.Controllers
             }
         }
 
-        // GET: Slipping/Edit/ID/Confirmation
+        // GET: Slips/Edit/ID/Confirmation
         [HttpGet]
         public ActionResult Confirmation(int id)
         {
@@ -697,7 +697,7 @@ namespace Triad.CabinetOffice.Slipping.Web.Controllers
             }
         }
 
-        // GET: Slipping/Review/ID
+        // GET: Slips/Review/ID
         [HttpGet]
         public ActionResult Review(int id)
         {
@@ -713,7 +713,7 @@ namespace Triad.CabinetOffice.Slipping.Web.Controllers
             }
         }
 
-        // POST: Slipping/Review/ID
+        // POST: Slips/Review/ID
         [HttpPost]
         [ValidateAntiForgeryToken]
         public ActionResult Review(int id, SlipSummary model)
@@ -760,22 +760,7 @@ namespace Triad.CabinetOffice.Slipping.Web.Controllers
             }
         }
 
-        // GET: Slipping/Deleted/Date
-        [HttpGet]
-        public ActionResult Deleted(string date)
-        {
-            DateTime validatedDate;
-            if (DateTime.TryParse(date.Replace("!", ":"), out validatedDate))
-            {
-                return View(new DeletedSlippingRequest(validatedDate));
-            }
-            else
-            {
-                return RedirectToAction("NotFound", "Home");
-            }
-        }
-
-        // GET: Slipping/Review/ID/Cancelled
+        // GET: Slips/Review/ID/Cancelled
         [HttpGet]
         public ActionResult Cancelled(int id)
         {
