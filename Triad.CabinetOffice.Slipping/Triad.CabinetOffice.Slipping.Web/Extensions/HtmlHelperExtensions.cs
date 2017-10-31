@@ -1,6 +1,5 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Linq;
 using System.Linq.Expressions;
 using System.Web;
 using System.Web.Mvc;
@@ -40,22 +39,17 @@ namespace Triad.CabinetOffice.Slipping.Web.Extensions
 
         public static MvcHtmlString BackLink(this HtmlHelper helper, string defaultAction, object routeValues, string cssClass)
         {
-            var returnUrl = HttpContext.Current.Request["returnUrl"];
             var backLink = "<a href=\"{0}\" class=\"{1}\">Back</a>";
+            var referrer = HttpContext.Current.Request.UrlReferrer;
 
-            if (!String.IsNullOrEmpty(returnUrl))
+            if (referrer != null && referrer.ToString().EndsWith("CheckYourAnswers"))
             {
-                return new MvcHtmlString(string.Format(backLink, returnUrl, cssClass));
+                return new MvcHtmlString(string.Format(backLink, referrer.ToString(), cssClass));
             }
-            else if (HttpContext.Current.Request.HttpMethod == "POST" || (HttpContext.Current.Request.UrlReferrer != null && HttpContext.Current.Request.UrlReferrer.ToString().EndsWith("Create")))
+            else
             {
                 return helper.ActionLink("Back", defaultAction, routeValues, new { @class = cssClass });
             }
-            else if (HttpContext.Current.Request.UrlReferrer != null)
-            {
-                return new MvcHtmlString(string.Format(backLink, HttpContext.Current.Request.UrlReferrer.ToString(), cssClass));
-            }
-            return null;
         }
 
         public static MvcHtmlString DropDownListWithErrorClassFor<TModel, TProperty>(this HtmlHelper<TModel> htmlHelper, Expression<Func<TModel, TProperty>> expression, IEnumerable<SelectListItem> selectList, object htmlAttributes, string errorClass)
