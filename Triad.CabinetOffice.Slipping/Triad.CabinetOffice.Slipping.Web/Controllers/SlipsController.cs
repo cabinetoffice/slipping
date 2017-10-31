@@ -723,15 +723,20 @@ namespace Triad.CabinetOffice.Slipping.Web.Controllers
             {
                 if (CancelSlip(slip, SlippingUser.ID))
                 {
+                    Dictionary<string, dynamic> parameters = new Dictionary<string, dynamic>()
+                    {
+                        { "absence_date", slip.FromDate.ToString("dd/MM/yyyy") },
+                        { "name", string.Format("{0} {1}", SlippingUser.Forenames, SlippingUser.Surname) },
+                        { "reference", slip.ID }
+                    };
+
                     if (!string.IsNullOrEmpty(NotifyTemplateId_SlippingRequestCancelledUser))
                     {
                         if (!SlippingUser.IsMP)
                         {
-                            SendNotification(NotifyTemplateId_SlippingRequestCancelledUser, GetUserEmailAddress(SlippingUser), new Dictionary<string, dynamic>()
-                            { });
+                            SendNotification(NotifyTemplateId_SlippingRequestCancelledUser, GetUserEmailAddress(SlippingUser), parameters);
                         }
-                        SendNotification(NotifyTemplateId_SlippingRequestCancelledUser, GetMPEmailAddress(slip.MPID, SlippingUser.ID), new Dictionary<string, dynamic>()
-                        { });
+                        SendNotification(NotifyTemplateId_SlippingRequestCancelledUser, GetMPEmailAddress(slip.MPID, SlippingUser.ID), parameters);
                     }
                     else
                     {
@@ -739,8 +744,7 @@ namespace Triad.CabinetOffice.Slipping.Web.Controllers
                     }
                     if (!string.IsNullOrEmpty(NotifyTemplateId_SlippingRequestCancelledAdmin) && !string.IsNullOrEmpty(SlippingRequestReviewersEmailAddress))
                     {
-                        SendNotification(NotifyTemplateId_SlippingRequestCancelledAdmin, SlippingRequestReviewersEmailAddress, new Dictionary<string, dynamic>()
-                        { });
+                        SendNotification(NotifyTemplateId_SlippingRequestCancelledAdmin, SlippingRequestReviewersEmailAddress, parameters);
                     }
                     else
                     {
