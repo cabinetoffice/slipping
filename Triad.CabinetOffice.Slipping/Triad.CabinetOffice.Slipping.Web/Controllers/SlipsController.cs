@@ -632,22 +632,33 @@ namespace Triad.CabinetOffice.Slipping.Web.Controllers
                         {
                             SendNotification(NotifyTemplateId_SlippingRequestReceivedUser, SlippingUser.EmailAddress, new Dictionary<string, dynamic>()
                             {
-                                { "name", SlippingUser.Forenames },
+                                { "name", string.Format("{0} {1}", SlippingUser.Forenames, SlippingUser.Surname) },
                                 { "absence_date", slippingRequest.FromDate.ToString("dd/MM/yyyy") },
                                 { "reference", slippingRequest.PawsAbsenceRequestID }
                             });
                         }
-                        SendNotification(NotifyTemplateId_SlippingRequestReceivedUser, GetMPEmailAddress(slippingRequest.MPID, SlippingUser.ID), new Dictionary<string, dynamic>()
+
+                        MP mp = this.MPRepository.Get(slippingRequest.MPID, SlippingUser.ID);
+
+                        if (mp != null)
                         {
-                            { "name", SlippingUser.Forenames },
-                            { "absence_date", slippingRequest.FromDate.ToString("dd/MM/yyyy") },
-                            { "reference", slippingRequest.PawsAbsenceRequestID }
-                        });
+                            SendNotification(NotifyTemplateId_SlippingRequestReceivedUser, GetMPEmailAddress(slippingRequest.MPID, SlippingUser.ID), new Dictionary<string, dynamic>()
+                            {
+                                { "name", mp.Name },
+                                { "absence_date", slippingRequest.FromDate.ToString("dd/MM/yyyy") },
+                                { "reference", slippingRequest.PawsAbsenceRequestID }
+                            });
+                        }
+                        else
+                        {
+                            throw new Exception(string.Format("Unable to find MP for Slip {0}", slippingRequest.ID));
+                        }
                     }
                     else
                     {
                         throw new Exception("NotifyTemplateId_SlippingRequestReceivedUser in web.config missing or invalid");
                     }
+
                     if (!string.IsNullOrEmpty(NotifyTemplateId_SlippingRequestReceivedAdmin) && !string.IsNullOrEmpty(SlippingRequestReviewersEmailAddress))
                     {
                         SendNotification(NotifyTemplateId_SlippingRequestReceivedAdmin, SlippingRequestReviewersEmailAddress, new Dictionary<string, dynamic>()
@@ -727,17 +738,43 @@ namespace Triad.CabinetOffice.Slipping.Web.Controllers
                     {
                         if (!SlippingUser.IsMP)
                         {
-                            SendNotification(NotifyTemplateId_SlippingRequestCancelledUser, SlippingUser.EmailAddress, parameters);
+                            SendNotification(NotifyTemplateId_SlippingRequestCancelledUser, SlippingUser.EmailAddress, new Dictionary<string, dynamic>()
+                            {
+                                { "absence_date", slip.FromDate.ToString("dd/MM/yyyy") },
+                                { "name", string.Format("{0} {1}", SlippingUser.Forenames, SlippingUser.Surname) },
+                                { "reference", slip.ID }
+                            });
                         }
-                        SendNotification(NotifyTemplateId_SlippingRequestCancelledUser, GetMPEmailAddress(slip.MPID, SlippingUser.ID), parameters);
+
+                        MP mp = this.MPRepository.Get(slip.MPID, SlippingUser.ID);
+
+                        if (mp != null)
+                        {
+                            SendNotification(NotifyTemplateId_SlippingRequestCancelledUser, GetMPEmailAddress(slip.MPID, SlippingUser.ID), new Dictionary<string, dynamic>()
+                            {
+                                { "absence_date", slip.FromDate.ToString("dd/MM/yyyy") },
+                                { "name", mp.Name },
+                                { "reference", slip.ID }
+                            });
+                        }
+                        else
+                        {
+                            throw new Exception(string.Format("Cannot find MP for Slip {0}.", slip.ID));
+                        }
                     }
                     else
                     {
                         throw new Exception("NotifyTemplateId_SlippingRequestCancelledUser in web.config missing or invalid");
                     }
+
                     if (!string.IsNullOrEmpty(NotifyTemplateId_SlippingRequestCancelledAdmin) && !string.IsNullOrEmpty(SlippingRequestReviewersEmailAddress))
                     {
-                        SendNotification(NotifyTemplateId_SlippingRequestCancelledAdmin, SlippingRequestReviewersEmailAddress, parameters);
+                        SendNotification(NotifyTemplateId_SlippingRequestCancelledAdmin, SlippingRequestReviewersEmailAddress, new Dictionary<string, dynamic>()
+                        {
+                            { "absence_date", slip.FromDate.ToString("dd/MM/yyyy") },
+                            { "name", string.Format("{0} {1}", SlippingUser.Forenames, SlippingUser.Surname) },
+                            { "reference", slip.ID }
+                        });
                     }
                     else
                     {
