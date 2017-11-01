@@ -2,8 +2,6 @@
 using System.Collections.Generic;
 using System.Data.Entity;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Web.Configuration;
 using Triad.CabinetOffice.Slipping.Data.EntityFramework.PAWS;
 using Triad.CabinetOffice.Slipping.Data.EntityFramework.Slipping;
@@ -14,8 +12,10 @@ namespace Triad.CabinetOffice.Slipping.Data.Repositories
 {
     public class SlippingRepository : RepositoryBase
     {
-        private const string SlipDetailsFormat = "Location: {0} \nTravel Time to Westminster (hours): {1} \nDetails: {2} {3}";
+        private const string SlipDetailsFormat = "Location: {0} \nDetails: {1} {2}";
+        private const string SlipDetailsOppositionMPsFormat = "\nOpposition MPs attending: {0}";
         private int DefaultSlipStatusId = Convert.ToInt32(WebConfigurationManager.AppSettings["DefaultAbsenceRequestStatusID"]);
+
         public SlippingRepository() : base()
         {
             this.PAWSDB = new PAWSEntities();
@@ -238,10 +238,9 @@ namespace Triad.CabinetOffice.Slipping.Data.Repositories
                         Reason = (int)slippingRequest.ReasonID,
                         Details = string.Format(SlipDetailsFormat,
                                         slippingRequest.Location,
-                                        slippingRequest.TravelTimeInHours,
                                         slippingRequest.Details,
                                         ((bool)slippingRequest.OppositionMPsAttending) ?
-                                            string.Format("\nOpposition MPs attending: {0}", string.Join(", ", slippingRequest.OppositionMPs.Select(mp => mp.FullName))) :
+                                            string.Format(SlipDetailsOppositionMPsFormat, string.Join(", ", slippingRequest.OppositionMPs.Select(mp => mp.FullName))) :
                                             string.Empty
                                         ).Left(220),
                         Date_Created = DateTime.Now,
@@ -270,7 +269,7 @@ namespace Triad.CabinetOffice.Slipping.Data.Repositories
                     PAWSDB.SaveChanges();
                     return true;
                 }
-                catch (Exception ex)
+                catch
                 {
                     return false;
                 }
