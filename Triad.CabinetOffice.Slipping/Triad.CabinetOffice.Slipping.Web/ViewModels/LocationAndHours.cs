@@ -1,9 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.ComponentModel.DataAnnotations;
-using System.Linq;
-using System.Web;
-using System.Web.Mvc;
+﻿using System.ComponentModel.DataAnnotations;
 
 namespace Triad.CabinetOffice.Slipping.Web.ViewModels
 {
@@ -14,7 +9,7 @@ namespace Triad.CabinetOffice.Slipping.Web.ViewModels
 
         [Display(Name = "Location")]
         [Required(ErrorMessage = "Location is required")]
-        [RegularExpression("^(?=.*[a-zA-Z].*)([a-zA-Z0-9,_@./#&+\\s-]){1,20}$", ErrorMessage = "Location must be valid and must not exceed 20 characters")]
+        [RegularExpression("^(?=.*[a-zA-Z].*)([a-zA-Z0-9,_@./#&+\\s-]){1,100}$", ErrorMessage = "Location must be valid and must not exceed 100 characters")]
         public string Location { get; set; }
 
         [Display(Name = "hours")]
