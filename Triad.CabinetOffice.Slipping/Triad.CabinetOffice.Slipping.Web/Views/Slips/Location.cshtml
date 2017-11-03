@@ -22,7 +22,7 @@
                     <span class="form-hint">This can be a city, town or village</span>
                 </label>
                 <span class="error-message">@Html.ValidationMessageFor(model => model.Location)</span>
-                @Html.TextBoxWithErrorClassFor(model => model.Location, new { @class = "form-control", @type = "text", @maxlength = "20" }, "form-control-error")
+                @Html.TextBoxWithErrorClassFor(model => model.Location, new { @class = "form-control", @type = "text", @maxlength = "100" }, "form-control-error")
             </div>
             <div class="form-group @Html.ValidationErrorClassFor(model => model.Hours, "form-group-error") " style="display:none">
                 <label class="form-label" for="Hours">
