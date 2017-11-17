@@ -260,6 +260,10 @@
     <Content Include="Scripts\errors.json" />
     <None Include="Properties\PublishProfiles\slipping-prod - FTP.pubxml" />
     <None Include="Properties\PublishProfiles\slipping-prod - Web Deploy.pubxml" />
+    <None Include="Properties\PublishProfiles\slipping-prod-next - FTP.pubxml" />
+    <None Include="Properties\PublishProfiles\slipping-prod-next - Web Deploy.pubxml" />
+    <None Include="Properties\PublishProfiles\slipping-test - FTP.pubxml" />
+    <None Include="Properties\PublishProfiles\slipping-test - Web Deploy.pubxml" />
     <None Include="Scripts\jquery-1.10.2.intellisense.js" />
     <Content Include="Scripts\jquery-1.10.2.js" />
     <Content Include="Scripts\jquery-1.10.2.min.js" />
