@@ -1,7 +1,7 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio 15
-VisualStudioVersion = 15.0.27004.2008
+VisualStudioVersion = 15.0.26228.4
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Triad.CabinetOffice.Slipping.Web", "Triad.CabinetOffice.Slipping.Web\Triad.CabinetOffice.Slipping.Web.csproj", "{728747C0-EEE2-43CF-8C39-D7DBE494B97D}"
 EndProject
@@ -14,7 +14,7 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Reports", "Reports", "{9A9E
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "PowerShell", "PowerShell", "{B149B221-4319-47DA-B7E2-688E06C97F08}"
 	ProjectSection(SolutionItems) = preProject
-		..\..\..\..\Desktop\paws invites\Send-Slipping-Invites.ps1 = ..\..\..\..\Desktop\paws invites\Send-Slipping-Invites.ps1
+		PowerShell\Send-Slipping-Invites.ps1 = PowerShell\Send-Slipping-Invites.ps1
 	EndProjectSection
 EndProject
 Global
