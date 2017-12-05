@@ -1,0 +1,17 @@
+﻿
+@{
+    ViewBag.Title = "Slip not found";
+}
+
+<div class="grid-row">
+    <div class="column-two-thirds column-minimum">
+        <h1 class="heading-xlarge">
+            Slip not found
+        </h1>
+        <p>The system could not find the slip.  Please click the link below to see your slips.</p>
+        <p>
+            @Html.ActionLink("View Slips", "Index", "Slips", null, new { @class = "button button-start", @role = "button" })
+        </p>
+    </div>
+</div>
+

@@ -9,12 +9,12 @@
     <ProductVersion>
     </ProductVersion>
     <SchemaVersion>2.0</SchemaVersion>
-    <ProjectGuid>{728747C0-EEE2-43CF-8C39-D7DBE494B97D}</ProjectGuid>
+    <ProjectGuid>{429F6ED5-538E-4802-B8BB-DD99B3B9EEED}</ProjectGuid>
     <ProjectTypeGuids>{349c5851-65df-11da-9384-00065b846f21};{fae04ec0-301f-11d3-bf4b-00c04f79efbc}</ProjectTypeGuids>
     <OutputType>Library</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
-    <RootNamespace>Triad.CabinetOffice.Slipping.Web</RootNamespace>
-    <AssemblyName>Triad.CabinetOffice.Slipping.Web</AssemblyName>
+    <RootNamespace>Triad.CabinetOffice.SlippingPublic.Web</RootNamespace>
+    <AssemblyName>Triad.CabinetOffice.SlippingPublic.Web</AssemblyName>
     <TargetFrameworkVersion>v4.5.2</TargetFrameworkVersion>
     <MvcBuildViews>false</MvcBuildViews>
     <UseIISExpress>true</UseIISExpress>
@@ -183,14 +183,10 @@
     <Compile Include="App_Start\FilterConfig.cs" />
     <Compile Include="App_Start\RouteConfig.cs" />
     <Compile Include="App_Start\Startup.Auth.cs" />
-    <Compile Include="Attributes\FutureDateValidationAttribute.cs" />
     <Compile Include="Attributes\LoggingHandleErrorAttribute.cs" />
-    <Compile Include="Attributes\PastDateValidationAttribute.cs" />
     <Compile Include="Attributes\PopulateViewBagAttribute.cs" />
-    <Compile Include="Controllers\AccountController.cs" />
-    <Compile Include="Controllers\SlipsController.cs" />
-    <Compile Include="Exceptions\SlippingException.cs" />
-    <Compile Include="Exceptions\SlippingUserNotFoundException.cs" />
+    <Compile Include="Controllers\HelpController.cs" />
+    <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Extensions\HtmlHelperExtensions.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
@@ -198,13 +194,6 @@
     <Compile Include="Logger.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Startup.cs" />
-    <Compile Include="ViewModels\DateAndTime.cs" />
-    <Compile Include="ViewModels\DeletedSlippingRequest.cs" />
-    <Compile Include="ViewModels\OppositionMPs.cs" />
-    <Compile Include="ViewModels\LocationAndHours.cs" />
-    <Compile Include="ViewModels\ReasonAndDetails.cs" />
-    <Compile Include="ViewModels\SlippingHistory.cs" />
-    <Compile Include="ViewModels\SlippingUser.cs" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="public\images\cabinet-office-logo%401x.png" />
@@ -252,7 +241,6 @@
     <None Include="compilerconfig.json.defaults">
       <DependentUpon>compilerconfig.json</DependentUpon>
     </None>
-    <Content Include="NuGet.config" />
     <None Include="Properties\PublishProfiles\slipping-dev - FTP.pubxml" />
     <None Include="Properties\PublishProfiles\slipping-dev - Web Deploy.pubxml" />
     <Content Include="Scripts\errors.json" />
@@ -285,21 +273,13 @@
     <Content Include="Views\_ViewStart.cshtml" />
     <Content Include="Views\Shared\Error.cshtml" />
     <Content Include="Views\Shared\_Layout.cshtml" />
+    <Content Include="Views\Home\Index.cshtml" />
     <Content Include="Views\Shared\_LoginPartial.cshtml" />
     <Content Include="Scripts\version.json" />
-    <Content Include="Views\Slips\FromDate.cshtml" />
     <Content Include="Views\View.cshtml" />
-    <Content Include="Views\Slips\ToDate.cshtml" />
-    <Content Include="Views\Slips\Index.cshtml" />
     <Content Include="Views\Shared\NotFound.cshtml" />
-    <Content Include="Views\Slips\Location.cshtml" />
-    <Content Include="Views\Slips\OppositionMPs.cshtml" />
-    <Content Include="Views\Slips\Reason.cshtml" />
-    <Content Include="Views\Slips\CheckYourAnswers.cshtml" />
-    <Content Include="Views\Slips\Confirmation.cshtml" />
-    <Content Include="Views\Slips\Review.cshtml" />
-    <Content Include="Views\Slips\Cancelled.cshtml" />
     <Content Include="Views\Shared\_ValidationSummary.cshtml" />
+    <Content Include="Views\Help\Cookies.cshtml" />
     <None Include="Web.Dev.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>
@@ -318,12 +298,6 @@
   </ItemGroup>
   <ItemGroup>
     <Service Include="{508349B6-6B84-4DF5-91F0-309BEEBAD82D}" />
-  </ItemGroup>
-  <ItemGroup>
-    <ProjectReference Include="..\Triad.CabinetOffice.Slipping.Data\Triad.CabinetOffice.Slipping.Data.csproj">
-      <Project>{75ed7b5b-513f-47ac-806f-b881e05200ee}</Project>
-      <Name>Triad.CabinetOffice.Slipping.Data</Name>
-    </ProjectReference>
   </ItemGroup>
   <PropertyGroup>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>
@@ -362,7 +336,7 @@
           <AutoAssignPort>True</AutoAssignPort>
           <DevelopmentServerPort>1183</DevelopmentServerPort>
           <DevelopmentServerVPath>/</DevelopmentServerVPath>
-          <IISUrl>http://localhost:1183/</IISUrl>
+          <IISUrl>http://localhost:1184/</IISUrl>
           <NTLMAuthentication>False</NTLMAuthentication>
           <UseCustomServer>False</UseCustomServer>
           <CustomServerUrl>

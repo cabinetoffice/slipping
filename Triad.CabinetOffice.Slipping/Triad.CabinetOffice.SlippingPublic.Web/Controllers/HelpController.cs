@@ -1,6 +1,6 @@
 ﻿using System.Web.Mvc;
 
-namespace Triad.CabinetOffice.Slipping.Web.Controllers
+namespace Triad.CabinetOffice.SlippingPublic.Web.Controllers
 {
     public class HelpController : Controller
     {
