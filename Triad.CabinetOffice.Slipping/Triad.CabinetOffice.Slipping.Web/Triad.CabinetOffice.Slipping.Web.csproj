@@ -253,9 +253,9 @@
       <DependentUpon>compilerconfig.json</DependentUpon>
     </None>
     <Content Include="NuGet.config" />
+    <Content Include="Scripts\errors.json" />
     <None Include="Properties\PublishProfiles\slipping-dev - FTP.pubxml" />
     <None Include="Properties\PublishProfiles\slipping-dev - Web Deploy.pubxml" />
-    <Content Include="Scripts\errors.json" />
     <None Include="Properties\PublishProfiles\slipping-prod - FTP.pubxml" />
     <None Include="Properties\PublishProfiles\slipping-prod - Web Deploy.pubxml" />
     <None Include="Properties\PublishProfiles\slipping-prod-next - FTP.pubxml" />
@@ -302,6 +302,7 @@
     <Content Include="Views\Shared\_ValidationSummary.cshtml" />
     <None Include="Web.Dev.config">
       <DependentUpon>Web.config</DependentUpon>
+      <SubType>Designer</SubType>
     </None>
     <None Include="Web.Test.config">
       <DependentUpon>Web.config</DependentUpon>
