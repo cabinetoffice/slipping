@@ -1,26 +1,15 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Web;
-using System.Threading.Tasks;
+﻿using System.Linq;
 using Triad.CabinetOffice.Slipping.Data.EntityFramework.Slipping;
-using Triad.CabinetOffice.Slipping.Data.EntityFramework.PAWS;
 
 namespace Triad.CabinetOffice.Slipping.Data.Repositories
 {
     public class RepositoryBase
     {
         protected SlippingEntities db { get; set; }
-        protected PAWSEntities PAWSDB { get; set; }
 
-        public RepositoryBase(SlippingEntities slippingContext, PAWSEntities pawsContext)
+        public RepositoryBase(SlippingEntities slippingContext)
         {
             this.db = slippingContext;
-            this.PAWSDB = pawsContext;
-        }
-
-        public RepositoryBase(SlippingEntities context) : this(context, new PAWSEntities())
-        {
         }
 
         public RepositoryBase() : this(new SlippingEntities())

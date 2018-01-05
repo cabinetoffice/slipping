@@ -20,7 +20,7 @@ namespace Triad.CabinetOffice.Slipping.Web
         private static string postLogoutRedirectUri = ConfigurationManager.AppSettings["ida:PostLogoutRedirectUri"];
         private static string authority = aadInstance + tenantId;
 
-        private static string appGatewayHostName
+        private static string AppGatewayHostName
         {
             get
             {
@@ -48,7 +48,7 @@ namespace Triad.CabinetOffice.Slipping.Web
                 PostLogoutRedirectUri = postLogoutRedirectUri,
             };
 
-            if (!string.IsNullOrEmpty(appGatewayHostName))
+            if (!string.IsNullOrEmpty(AppGatewayHostName))
             {
                 options.Notifications = new OpenIdConnectAuthenticationNotifications()
                 {
@@ -57,7 +57,7 @@ namespace Triad.CabinetOffice.Slipping.Web
                         // The default RedirectUri on the Authentication Ticket uses the host name of the App Service, e.g. slipping-dev.azurewebsites.net
                         // We need to change the RedirectUri to use the host name for the App Gateway, e.g. slipping.cabinetoffice.gov.uk
                         Uri uri = new Uri(ctx.AuthenticationTicket.Properties.RedirectUri);
-                        ctx.AuthenticationTicket.Properties.RedirectUri = string.Format("{0}{1}", appGatewayHostName, uri.AbsolutePath);
+                        ctx.AuthenticationTicket.Properties.RedirectUri = string.Format("{0}{1}", AppGatewayHostName, uri.AbsolutePath);
                     }
                 };
             }

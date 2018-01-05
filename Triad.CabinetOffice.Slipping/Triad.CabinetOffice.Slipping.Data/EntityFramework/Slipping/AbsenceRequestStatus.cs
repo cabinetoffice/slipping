@@ -7,23 +7,26 @@
 // </auto-generated>
 //------------------------------------------------------------------------------
 
-namespace Triad.CabinetOffice.Slipping.Data.EntityFramework.PAWS
+namespace Triad.CabinetOffice.Slipping.Data.EntityFramework.Slipping
 {
     using System;
     using System.Collections.Generic;
     
-    public partial class Absence_Request_Status
+    public partial class AbsenceRequestStatus
     {
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
-        public Absence_Request_Status()
+        public AbsenceRequestStatus()
         {
-            this.Absence_Request = new HashSet<Absence_Request>();
+            this.AbsenceRequests = new HashSet<AbsenceRequest>();
         }
     
         public int ID { get; set; }
         public string Status { get; set; }
+        public int CreatedBy { get; set; }
+        public System.DateTime CreatedDate { get; set; }
     
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<Absence_Request> Absence_Request { get; set; }
+        public virtual ICollection<AbsenceRequest> AbsenceRequests { get; set; }
+        public virtual User User { get; set; }
     }
 }

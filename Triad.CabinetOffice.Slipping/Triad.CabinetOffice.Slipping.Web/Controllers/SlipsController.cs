@@ -48,13 +48,13 @@ namespace Triad.CabinetOffice.Slipping.Web.Controllers
         {
             get
             {
-                string username = this.User.Identity.Name;
-                UserRepository repository = new UserRepository();
-                User user = repository.GetByUsername(username);
+                var username = User.Identity.Name;
+                var repository = new UserRepository();
+                var user = repository.GetByUsername(username);
 
                 if (user != null)
                 {
-                    return user.UserMPs1.First().MPID;
+                    return user.UserMPs.First().MPID;
                 }
                 else
                 {
@@ -86,7 +86,7 @@ namespace Triad.CabinetOffice.Slipping.Web.Controllers
 
         private int CreateOrUpdate(SlippingRequest slippingRequest)
         {
-            return SlippingRepository.CreateOrUpdate(slippingRequest, this.MPID, SlippingUser.ID);
+            return SlippingRepository.CreateOrUpdate(slippingRequest, MPID, SlippingUser.ID);
         }
         private int SubmitSlippingRequest(SlippingRequest slippingRequest)
         {
@@ -95,7 +95,7 @@ namespace Triad.CabinetOffice.Slipping.Web.Controllers
 
         private bool IsSubmitted(SlippingRequest slippingRequest)
         {
-            return slippingRequest.PawsAbsenceRequestID != null;
+            return slippingRequest.StatusID != 0;
         }
 
         private void SendNotification(string templateId, string emailAddress, Dictionary<string,dynamic> personalisations)
@@ -223,7 +223,7 @@ namespace Triad.CabinetOffice.Slipping.Web.Controllers
                     {
                         slippingRequest.FromDate = model.GetDateTime();
                         CreateOrUpdate(slippingRequest);
-                        return RedirectToAction("ToDate", new { id = id });
+                        return RedirectToAction("ToDate", new { id });
                     }
                     else
                     {
@@ -306,7 +306,7 @@ namespace Triad.CabinetOffice.Slipping.Web.Controllers
                 {
                     slippingRequest.ToDate = model.GetDateTime();
                     CreateOrUpdate(slippingRequest);
-                    return RedirectToAction("Location", new { id = id });
+                    return RedirectToAction("Location", new { id });
                 }
                 else
                 {
@@ -634,7 +634,7 @@ namespace Triad.CabinetOffice.Slipping.Web.Controllers
                             {
                                 { "name", string.Format("{0} {1}", SlippingUser.Forenames, SlippingUser.Surname) },
                                 { "absence_date", slippingRequest.FromDate.ToString("dd/MM/yyyy") },
-                                { "reference", slippingRequest.PawsAbsenceRequestID }
+                                { "reference", slippingRequest.ID }
                             });
                         }
 
@@ -646,7 +646,7 @@ namespace Triad.CabinetOffice.Slipping.Web.Controllers
                             {
                                 { "name", mp.Name },
                                 { "absence_date", slippingRequest.FromDate.ToString("dd/MM/yyyy") },
-                                { "reference", slippingRequest.PawsAbsenceRequestID }
+                                { "reference", slippingRequest.ID }
                             });
                         }
                         else
@@ -665,7 +665,7 @@ namespace Triad.CabinetOffice.Slipping.Web.Controllers
                         {
                             { "name", string.Format("{0} {1}", SlippingUser.Forenames, SlippingUser.Surname) },
                             { "absence_date", slippingRequest.FromDate.ToString("dd/MM/yyyy") },
-                            { "reference", slippingRequest.PawsAbsenceRequestID }
+                            { "reference", slippingRequest.ID }
                         });
                     }
                     else
