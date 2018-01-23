@@ -249,14 +249,8 @@ namespace Triad.CabinetOffice.Slipping.Data.Repositories
             
         }
 
-        public bool DatesOverlapExistingSlip(int MPID, DateTime fromDate)
-        {
-            return db.AbsenceRequests.Where(ar => ar.MPID == MPID && ar.StatusID != 7 && fromDate > ar.FromDate && fromDate < ar.ToDate).Count() > 0;
-        }
+        public bool DatesOverlapExistingSlip(int MPID, DateTime fromDate) => db.AbsenceRequests.Where(ar => ar.MPID == MPID && ar.StatusID != 0 && ar.StatusID != 7 && fromDate >= ar.FromDate && fromDate < ar.ToDate).Count() > 0;
 
-        public bool DatesOverlapExistingSlip(int MPID, DateTime fromDate, DateTime toDate)
-        {
-            return db.AbsenceRequests.Where(ar => ar.MPID == MPID && ar.StatusID != 7 && fromDate < ar.ToDate && ar.FromDate < toDate).Count() > 0;
-        }
+        public bool DatesOverlapExistingSlip(int MPID, DateTime fromDate, DateTime toDate) => db.AbsenceRequests.Where(ar => ar.MPID == MPID && ar.StatusID != 0 && ar.StatusID != 7 && fromDate < ar.ToDate && ar.FromDate < toDate).Count() > 0;
     }
 }
