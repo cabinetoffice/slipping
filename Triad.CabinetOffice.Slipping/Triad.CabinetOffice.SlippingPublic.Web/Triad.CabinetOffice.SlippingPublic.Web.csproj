@@ -252,6 +252,8 @@
     <None Include="Properties\PublishProfiles\slipping-test - Web Deploy.pubxml" />
     <None Include="Properties\PublishProfiles\slippingpublic-dev - FTP.pubxml" />
     <None Include="Properties\PublishProfiles\slippingpublic-dev - Web Deploy.pubxml" />
+    <None Include="Properties\PublishProfiles\slippingpublic-prod - FTP.pubxml" />
+    <None Include="Properties\PublishProfiles\slippingpublic-prod - Web Deploy.pubxml" />
     <None Include="Scripts\jquery-1.10.2.intellisense.js" />
     <Content Include="Scripts\jquery-1.10.2.js" />
     <Content Include="Scripts\jquery-1.10.2.min.js" />

@@ -205,7 +205,7 @@ namespace Triad.CabinetOffice.Slipping.Data.Repositories
                     MPID = ar.MPID,
                     Details = ar.Details,
                     Location = ar.Location,
-                    TravelTimeInHours = (int)ar.TravelTimeInHours,
+                    TravelTimeInHours = ar.TravelTimeInHours.HasValue ? (int)ar.TravelTimeInHours : 0,
                     Reason = ar.AbsenceRequestReason.Reason,
                     OppositionMPsAttending = (bool)ar.OppositionMPsAttending,
                     OppositionMPs = ar.AbsenceRequestOppositionMPs.Count > 0 ? ar.AbsenceRequestOppositionMPs.Select(a => new OppositionMP { ID = a.ID, MPID = a.MPID, FullName = a.MPFullName }).ToList() : new List<OppositionMP>(),
