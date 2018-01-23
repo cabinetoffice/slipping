@@ -1,5 +1,6 @@
 ﻿@model Triad.CabinetOffice.Slipping.Web.ViewModels.DateAndTime
 @using Triad.CabinetOffice.Slipping.Web.Extensions
+@using Triad.CabinetOffice.Slipping.Data.Extensions
 
 @{
     ViewBag.Title = (ViewData.ModelState.IsValid ? "" : "Error: ") + "When are you coming back?";
@@ -28,18 +29,18 @@
                 }
                 else
                 {
-                    @Html.TextBoxWithErrorClassFor(model => model.Date, new { @class = "form-control", @type = "date", @Value = Model.Date.ToString("yyyy-MM-dd"), @min = DateTime.Now.ToString("yyyy-MM-dd") }, "form-control-error")
+                    @Html.TextBoxWithErrorClassFor(model => model.Date, new { @class = "form-control", @type = "date", @Value = Model.Date.ToString("yyyy-MM-dd"), @min = DateTime.UtcNow.ToUkTimeFromUtc().ToString("yyyy-MM-dd") }, "form-control-error")
                 }
             </div>
 
             <label class="form-label" style="margin-bottom:10px;">What time will you be getting back?</label>
             <div class="form-group @Html.ValidationErrorClassFor(model => model.Hour, "form-group-error") ">
-                @Html.LabelFor(model=>model.Hour, new { @class = "form-label" })
+                @Html.LabelFor(model => model.Hour, new { @class = "form-label" })
                 <span class="error-message">@Html.ValidationMessageFor(model => model.Hour)</span>
                 @Html.DropDownListWithErrorClassFor(model => model.Hour, Model.Hours, new { @class = "form-control" }, "form-control-error")
                 <br />
                 <br />
-                @Html.LabelFor(model=>model.Minute, "Minutes", new { @class = "form-label" })
+                @Html.LabelFor(model => model.Minute, "Minutes", new { @class = "form-label" })
                 @Html.DropDownListWithErrorClassFor(model => model.Minute, Model.Minutes, new { @class = "form-control" }, "form-control-error")
             </div>
 

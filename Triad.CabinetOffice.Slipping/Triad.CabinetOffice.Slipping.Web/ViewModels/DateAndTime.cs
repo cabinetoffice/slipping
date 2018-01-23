@@ -1,10 +1,9 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
-using System.Linq;
-using System.Web;
 using System.Web.Mvc;
 using Triad.CabinetOffice.Slipping.Web.Attributes;
+using Triad.CabinetOffice.Slipping.Data.Extensions;
 
 namespace Triad.CabinetOffice.Slipping.Web.ViewModels
 {
@@ -68,28 +67,28 @@ namespace Triad.CabinetOffice.Slipping.Web.ViewModels
 
         public DateAndTime()
         {
-            this.Date = DateTime.Now;
-            this.Hour = DateTime.Now.AddHours(1).ToString("HH");
-            this.Minute = "00";
+            Date = DateTime.UtcNow.ToUkTimeFromUtc();
+            Hour = DateTime.UtcNow.ToUkTimeFromUtc().AddHours(1).ToString("HH");
+            Minute = "00";
         }
 
         public DateTime GetDateTime()
         {
-            DateTime result = this.Date;
+            DateTime result = Date;
 
-            if (!string.IsNullOrEmpty(this.Hour))
+            if (!string.IsNullOrEmpty(Hour))
             {
                 int hours;
-                if (int.TryParse(this.Hour, out hours))
+                if (int.TryParse(Hour, out hours))
                 {
                     result = result.AddHours(hours);
                 }
             }
 
-            if (!string.IsNullOrEmpty(this.Minute))
+            if (!string.IsNullOrEmpty(Minute))
             {
                 int minutes;
-                if (int.TryParse(this.Minute, out minutes))
+                if (int.TryParse(Minute, out minutes))
                 {
                     result = result.AddMinutes(minutes);
                 }

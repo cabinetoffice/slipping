@@ -9,6 +9,7 @@ using Triad.CabinetOffice.Slipping.Data.Models;
 using Triad.CabinetOffice.Slipping.Data.Repositories;
 using Triad.CabinetOffice.Slipping.Web.ViewModels;
 using Triad.CabinetOffice.Slipping.Web.Exceptions;
+using Triad.CabinetOffice.Slipping.Data.Extensions;
 
 namespace Triad.CabinetOffice.Slipping.Web.Controllers
 {
@@ -152,7 +153,7 @@ namespace Triad.CabinetOffice.Slipping.Web.Controllers
             IEnumerable<SlipSummary> slips = this.SlippingRepository.GetSummaries(this.MPID, SlippingUser.ID);
 
             IEnumerable<SlipSummary> visibleSlips = slips
-                .Where(s => s.ToDate.Date >= DateTime.Now.Date)
+                .Where(s => s.ToDate.Date >= DateTime.UtcNow.ToUkTimeFromUtc().Date)
                 .OrderBy(s => s.ToDate);
 
             ViewBag.ShowViewAll = visibleSlips.Count() > initialSlippingRequestListLength;
@@ -201,7 +202,7 @@ namespace Triad.CabinetOffice.Slipping.Web.Controllers
         public ActionResult FromDate(int? id, DateAndTime model)
         {
             var fromDate = model.GetDateTime();
-            if (fromDate < DateTime.Now.AddMinutes(15))
+            if (fromDate < DateTime.UtcNow.ToUkTimeFromUtc().AddMinutes(15))
             {
                 ModelState.AddModelError("Hour", "Start time must be at least 15 minutes from now");
                 ModelState.AddModelError("Minute", string.Empty);
@@ -572,7 +573,7 @@ namespace Triad.CabinetOffice.Slipping.Web.Controllers
 
             if (slippingRequest != null && !IsSubmitted(slippingRequest))
             {
-                if (slippingRequest.FromDate < DateTime.Now.AddMinutes(15))
+                if (slippingRequest.FromDate < DateTime.UtcNow.ToUkTimeFromUtc().AddMinutes(15))
                 {
                     ModelState.AddModelError("FromDate", "From Time must be at least 15 minutes from now");
                 }

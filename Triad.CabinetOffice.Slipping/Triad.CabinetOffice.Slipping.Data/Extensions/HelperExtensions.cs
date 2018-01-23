@@ -1,8 +1,4 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace Triad.CabinetOffice.Slipping.Data.Extensions
 {
@@ -17,6 +13,20 @@ namespace Triad.CabinetOffice.Slipping.Data.Extensions
                    ? value
                    : value.Substring(0, maxLength)
                    );
+        }
+    }
+
+    public static class DateTimeExtensions
+    {
+        public const string UkTimeZoneSystemId = "GMT Standard Time";
+        public static DateTime ToUkTimeFromUtc(this DateTime dt)
+        {
+            return TimeZoneInfo.ConvertTimeFromUtc(dt, TimeZoneInfo.FindSystemTimeZoneById(UkTimeZoneSystemId));
+        }
+
+        public static DateTime ToUtcFromUkTime(this DateTime dt)
+        {
+            return TimeZoneInfo.ConvertTimeToUtc(dt, TimeZoneInfo.FindSystemTimeZoneById(UkTimeZoneSystemId));
         }
     }
 }

@@ -5,6 +5,7 @@ using System.Linq;
 using System.Web.Configuration;
 using Triad.CabinetOffice.Slipping.Data.EntityFramework.Slipping;
 using Triad.CabinetOffice.Slipping.Data.Models;
+using Triad.CabinetOffice.Slipping.Data.Extensions;
 
 namespace Triad.CabinetOffice.Slipping.Data.Repositories
 {
@@ -50,7 +51,7 @@ namespace Triad.CabinetOffice.Slipping.Data.Repositories
             {
                 db.Entry(absenceRequest).State = EntityState.Modified;
             }
-
+            
             if (absenceRequest.OppositionMPsAttending == true)
             {
                 var removedMPs = new List<AbsenceRequestOppositionMP>();
@@ -95,7 +96,7 @@ namespace Triad.CabinetOffice.Slipping.Data.Repositories
                 absenceRequest = new AbsenceRequest()
                 {
                     CreatedBy = userId,
-                    CreatedDate = DateTime.Now,
+                    CreatedDate = DateTime.UtcNow,
                     MPID = MPID
                 };
             }
@@ -107,12 +108,12 @@ namespace Triad.CabinetOffice.Slipping.Data.Repositories
             if (absenceRequest != null)
             {
                 absenceRequest.LastChangedBy = userId;
-                absenceRequest.LastChangedDate = DateTime.Now;
+                absenceRequest.LastChangedDate = DateTime.UtcNow;
                 absenceRequest.ReasonID = slippingRequest.ReasonID;
                 absenceRequest.Details = slippingRequest.Details;
                 absenceRequest.StatusID = slippingRequest.StatusID;
-                absenceRequest.FromDate = slippingRequest.FromDate;
-                absenceRequest.ToDate = slippingRequest.ToDate;
+                absenceRequest.FromDate = slippingRequest.FromDate.ToUtcFromUkTime();
+                absenceRequest.ToDate = slippingRequest.ToDate.HasValue ? ((DateTime)slippingRequest.ToDate).ToUtcFromUkTime() : slippingRequest.ToDate;
                 absenceRequest.DecisionNotes = slippingRequest.DecisionNotes;
                 absenceRequest.Location = slippingRequest.Location;
                 absenceRequest.TravelTimeInHours = slippingRequest.TravelTimeInHours;
@@ -129,7 +130,7 @@ namespace Triad.CabinetOffice.Slipping.Data.Repositories
                 absenceRequestOppositionMP = new AbsenceRequestOppositionMP()
                 {
                     CreatedBy = userId,
-                    CreatedDate = DateTime.Now,
+                    CreatedDate = DateTime.UtcNow,
                     MPFullName = oppositionMP.FullName,
                     MPID = oppositionMP.MPID
                 };
@@ -143,7 +144,7 @@ namespace Triad.CabinetOffice.Slipping.Data.Repositories
             {
                 absenceRequestOppositionMP.AbsenceRequestID = absenceRequestId;
                 absenceRequestOppositionMP.LastChangedBy = userId;
-                absenceRequestOppositionMP.LastChangedDate = DateTime.Now;
+                absenceRequestOppositionMP.LastChangedDate = DateTime.UtcNow;
                 absenceRequestOppositionMP.MPFullName = oppositionMP.FullName;
                 absenceRequestOppositionMP.MPID = oppositionMP.MPID;
             }
@@ -175,8 +176,8 @@ namespace Triad.CabinetOffice.Slipping.Data.Repositories
                 Details = absenceRequest.Details,
                 StatusID = absenceRequest.StatusID,
                 Status = absenceRequest.AbsenceRequestStatus.Status,
-                FromDate = absenceRequest.FromDate,
-                ToDate = absenceRequest.ToDate,
+                FromDate = absenceRequest.FromDate.ToUkTimeFromUtc(),
+                ToDate = absenceRequest.ToDate.HasValue ? ((DateTime)absenceRequest.ToDate).ToUkTimeFromUtc() : absenceRequest.ToDate,
                 DecisionNotes = absenceRequest.DecisionNotes,
                 CreatedBy = (int)absenceRequest.CreatedBy,
                 LastChangedBy = absenceRequest.LastChangedBy,
