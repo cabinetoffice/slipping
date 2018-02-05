@@ -1,3 +1,16 @@
+# Send-Slipping-Invites.ps1
+# 
+# PowerShell script to invite MPs and diary secretaries to the Slipping web site
+# 
+# Requirements: Azure Active Directory PowerShell for Graph (PS> Install-Module AzureAD)
+#
+# Instructions: On line 1, set the filename to point to a text file containing a list of email addresses to be
+# invited, one email address per line with no other content or formatting. E.g.:
+#
+# jane.smith.mp@parliament.uk
+# bob.jones.mp@parliament.uk
+#
+
 $emails = Get-Content .\slipping-users2.txt;
 $redirectUrl = "https://slipping.cabinetoffice.gov.uk";
 $messageInfo = New-Object Microsoft.Open.MSGraph.Model.InvitedUserMessageInfo;
