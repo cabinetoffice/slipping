@@ -242,6 +242,9 @@
       <DependentUpon>compilerconfig.json</DependentUpon>
     </None>
     <Content Include="Scripts\errors.json" />
+    <None Include="hiddenAppSettings.config" />
+    <None Include="Properties\PublishProfiles\slippingpublic-dev - FTP.pubxml" />
+    <None Include="Properties\PublishProfiles\slippingpublic-dev - Web Deploy.pubxml" />
     <None Include="Properties\PublishProfiles\slippingpublic-prod - FTP.pubxml" />
     <None Include="Properties\PublishProfiles\slippingpublic-prod - Web Deploy.pubxml" />
     <None Include="Scripts\jquery-1.10.2.intellisense.js" />

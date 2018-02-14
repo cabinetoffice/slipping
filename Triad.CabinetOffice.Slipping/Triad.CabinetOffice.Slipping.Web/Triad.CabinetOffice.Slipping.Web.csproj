@@ -254,6 +254,10 @@
     </None>
     <Content Include="NuGet.config" />
     <Content Include="Scripts\errors.json" />
+    <None Include="hiddenAppSettings.config" />
+    <None Include="hiddenConnectionStrings.config" />
+    <None Include="Properties\PublishProfiles\slipping-dev - FTP.pubxml" />
+    <None Include="Properties\PublishProfiles\slipping-dev - Web Deploy.pubxml" />
     <None Include="Properties\PublishProfiles\slipping-prod-next - FTP.pubxml" />
     <None Include="Properties\PublishProfiles\slipping-prod-next - Web Deploy.pubxml" />
     <None Include="Properties\PublishProfiles\slipping-test - FTP.pubxml" />

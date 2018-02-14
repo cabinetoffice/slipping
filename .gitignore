@@ -273,3 +273,10 @@ HiddenSettings.config
 /Triad.CabinetOffice.Slipping/Triad.CabinetOffice.Slipping.Web/Properties/PublishProfiles/slipping-test - Web Deploy.pubxml
 /Triad.CabinetOffice.Slipping/Triad.CabinetOffice.SlippingPublic.Web/Properties/PublishProfiles/slippingpublic-prod - FTP.pubxml
 /Triad.CabinetOffice.Slipping/Triad.CabinetOffice.SlippingPublic.Web/Properties/PublishProfiles/slippingpublic-prod - Web Deploy.pubxml
+/Triad.CabinetOffice.Slipping/Triad.CabinetOffice.Slipping.Web/hiddenAppSettings.config
+/Triad.CabinetOffice.Slipping/Triad.CabinetOffice.SlippingPublic.Web/hiddenAppSettings.config
+/Triad.CabinetOffice.Slipping/Triad.CabinetOffice.Slipping.Web/hiddenConnectionStrings.config
+/Triad.CabinetOffice.Slipping/Triad.CabinetOffice.Slipping.Web/Properties/PublishProfiles/slipping-dev - FTP.pubxml
+/Triad.CabinetOffice.Slipping/Triad.CabinetOffice.Slipping.Web/Properties/PublishProfiles/slipping-dev - Web Deploy.pubxml
+/Triad.CabinetOffice.Slipping/Triad.CabinetOffice.SlippingPublic.Web/Properties/PublishProfiles/slippingpublic-dev - FTP.pubxml
+/Triad.CabinetOffice.Slipping/Triad.CabinetOffice.SlippingPublic.Web/Properties/PublishProfiles/slippingpublic-dev - Web Deploy.pubxml
