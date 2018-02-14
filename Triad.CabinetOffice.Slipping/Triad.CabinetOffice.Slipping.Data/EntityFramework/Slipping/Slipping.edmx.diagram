@@ -4,20 +4,30 @@
   <edmx:Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
     <!-- Diagram content (shape and connector positions) -->
     <edmx:Diagrams>
-      <Diagram DiagramId="a739a7f6c5484f14874b98568e3fa6ec" Name="Diagram1" >
-        <EntityTypeShape EntityType="Model.AbsenceRequest" Width="2.5" PointX="3" PointY="3.875" />
-        <EntityTypeShape EntityType="Model.User" Width="1.5" PointX="0.75" PointY="3" />
-        <EntityTypeShape EntityType="Model.UserMP" Width="1.5" PointX="4.125" PointY="0.625" />
+      <Diagram DiagramId="a739a7f6c5484f14874b98568e3fa6ec" Name="Diagram1" ZoomLevel="85" >
+        <EntityTypeShape EntityType="Model.AbsenceRequest" Width="4.125" PointX="10.125" PointY="6.375" />
+        <EntityTypeShape EntityType="Model.AbsenceRequestOppositionMP" Width="1.5" PointX="8.25" PointY="11.875" />
+        <EntityTypeShape EntityType="Model.AbsenceRequestReason" Width="1.5" PointX="3.75" PointY="4.75" />
+        <EntityTypeShape EntityType="Model.AbsenceRequestStatus" Width="1.5" PointX="3.75" PointY="7.5" />
+        <EntityTypeShape EntityType="Model.MembersOfParliament" Width="1.5" PointX="3.75" PointY="16.25" />
+        <EntityTypeShape EntityType="Model.User" Width="2.25" PointX="0.75" PointY="9.5" />
+        <EntityTypeShape EntityType="Model.UserMP" Width="1.5" PointX="3.75" PointY="23" />
+        <AssociationConnector Association="Model.FK_AbsenceRequest_AbsenceRequestStatus" />
+        <AssociationConnector Association="Model.FK_AbsenceRequest_MembersOfParliament_MPID" />
         <AssociationConnector Association="Model.FK_AbsenceRequest_User_CreatedBy" />
         <AssociationConnector Association="Model.FK_AbsenceRequest_User_LastChangedBy" />
-        <AssociationConnector Association="Model.FK_User_User" />
-        <AssociationConnector Association="Model.FK_UserMP_User" />
-        <AssociationConnector Association="Model.FK_UserMP_UserID" />
-        <EntityTypeShape EntityType="Model.AbsenceRequestOppositionMP" Width="1.5" PointX="7.625" PointY="3" />
         <AssociationConnector Association="Model.FK_AbsenceRequestOppositionMP_AbsenceRequestID" />
         <AssociationConnector Association="Model.FK_AbsenceRequestOppositionMP_CreatedBy" />
         <AssociationConnector Association="Model.FK_AbsenceRequestOppositionMP_LastChangedBy" />
-        </Diagram>
+        <AssociationConnector Association="Model.FK_AbsenceRequestReason_User_CreatedBy" />
+        <AssociationConnector Association="Model.FK_AbsenceRequestStatus_User_CreatedBy" />
+        <AssociationConnector Association="Model.FK_MembersOfParliament_User_CreatedBy" />
+        <AssociationConnector Association="Model.FK_MembersOfParliament_User_LastChangedBy" />
+        <AssociationConnector Association="Model.FK_User_User" />
+        <AssociationConnector Association="Model.FK_UserMP_CreatedBy" />
+        <AssociationConnector Association="Model.FK_UserMP_UserID" />
+        <AssociationConnector Association="Model.FK_AbsenceRequest_AbsenceRequestReason" />
+      </Diagram>
     </edmx:Diagrams>
   </edmx:Designer>
 </edmx:Edmx>

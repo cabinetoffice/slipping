@@ -12,8 +12,6 @@
             <h1 class="heading-xlarge">
                 Your details were not recognised
             </h1>
-            <p>Your details were not recognised by the Slipping Request System.</p>
-            <p>@User.Identity.Name</p>
             <p>Please contact the Whips Office Admin Team providing your name and email address via email or telephone:</p>
             <p>
                 <strong class="bold-small">Email:</strong> <a href="@string.Format("mailto:{0}", ViewBag.ContactEmail)">@ViewBag.ContactEmail</a><br />
@@ -27,7 +25,7 @@
             </h1>
             <p>We apologise that an error has occurred.</p>
             <p>
-                Please report the date and time of this incident (@string.Format("{0:dd/MM/yyyy} {0:HH:mm:ss}", DateTime.Now)) with details of what you were doing when the error occurred to the Whips Admin Team.
+                Please report the date and time of this incident (@string.Format("{0:dd/MM/yyyy} {0:HH:mm:ss}", DateTime.UtcNow) UTC) with details of what you were doing when the error occurred to the Whips Admin Team.
             </p>
             <p>
                 @Html.ActionLink("Continue", "Index", "Slips", null, new { @class = "button", @role = "button" })

@@ -8,7 +8,7 @@
 
 <div class="grid-row">
     <div class="column-two-thirds column-minimum">
-        @Html.BackLink("Index", new { id = Model.ID }, "link-back")
+        @Html.BackLink("Index", null, "link-back")
         <h1 class="heading-large">
             Slip @Model.FromDate.ToString("dd/MM/yyyy HH:mm")
         </h1>
@@ -47,14 +47,6 @@
                     </dt>
                     <dd class="cya-answer">
                         @Model.Location
-                    </dd>
-                </div>
-                <div>
-                    <dt class="cya-question">
-                        Travel time to Westminster
-                    </dt>
-                    <dd class="cya-answer">
-                        @Html.Encode(string.Format("{0} hours", Model.TravelTimeInHours))
                     </dd>
                 </div>
                 <div>
@@ -114,6 +106,6 @@
             }
 
         }
-        <a href="/Slipping">Take me back to my slips</a>
+        @Html.ActionLink("Take me back to my slips", "Index")
      </div>
 </div>

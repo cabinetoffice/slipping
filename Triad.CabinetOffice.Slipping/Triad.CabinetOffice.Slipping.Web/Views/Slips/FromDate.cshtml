@@ -1,5 +1,6 @@
 ﻿@model Triad.CabinetOffice.Slipping.Web.ViewModels.DateAndTime
 @using Triad.CabinetOffice.Slipping.Web.Extensions
+@using Triad.CabinetOffice.Slipping.Data.Extensions
 
 @{
     ViewBag.Title = (ViewData.ModelState.IsValid ? "" : "Error: ") + "When will you be going?";
@@ -17,10 +18,10 @@
         @using (Html.BeginForm())
         {
             @Html.AntiForgeryToken()
-            
+
             <div class="form-group @Html.ValidationErrorClassFor(model => model.Date, "form-group-error") ">
-                @Html.LabelFor(model=>model.Date, new { @class = "form-label" })
-                <span class="form-hint">for example: 12/04/2017</span>
+                @Html.LabelFor(model => model.Date, new { @class = "form-label" })
+                <span class="form-hint">for example: 15/12/@DateTime.Now.Year</span>
                 <span class="error-message">@Html.ValidationMessageFor(model => model.Date)</span>
                 @if (Request.Browser.Browser == "IE" || Request.Browser.Browser == "InternetExplorer" || Request.Browser.Browser == "Firefox")
                 {
@@ -28,7 +29,7 @@
                 }
                 else
                 {
-                    @Html.TextBoxWithErrorClassFor(model => model.Date, new { @class = "form-control", @type = "date", @Value = Model.Date.ToString("yyyy-MM-dd"), @min = DateTime.Now.ToString("yyyy-MM-dd") }, "form-control-error")
+                    @Html.TextBoxWithErrorClassFor(model => model.Date, new { @class = "form-control", @type = "date", @Value = Model.Date.ToString("yyyy-MM-dd"), @min = DateTime.UtcNow.ToUkTimeFromUtc().ToString("yyyy-MM-dd") }, "form-control-error")
                 }
             </div>
 
@@ -44,9 +45,8 @@
             </div>
 
             <div class="form-group">
-                <input  class="button" type="submit" value="Continue" />
+                <input class="button" type="submit" value="Continue" />
             </div>
         }
     </div>
 </div>
-  

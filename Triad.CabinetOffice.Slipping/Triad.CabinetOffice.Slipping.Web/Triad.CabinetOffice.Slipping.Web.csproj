@@ -188,7 +188,6 @@
     <Compile Include="Attributes\PastDateValidationAttribute.cs" />
     <Compile Include="Attributes\PopulateViewBagAttribute.cs" />
     <Compile Include="Controllers\AccountController.cs" />
-    <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\SlipsController.cs" />
     <Compile Include="Exceptions\SlippingException.cs" />
     <Compile Include="Exceptions\SlippingUserNotFoundException.cs" />
@@ -210,6 +209,7 @@
   <ItemGroup>
     <Content Include="public\images\cabinet-office-logo%401x.png" />
     <Content Include="public\images\cabinet-office-logo%402x.png" />
+    <Content Include="public\images\cabinet-office-logo%405x.png" />
     <Content Include="public\images\cabinet_office_logo.png" />
     <Content Include="public\stylesheets\application-ie8.css" />
     <Content Include="public\stylesheets\application.css" />
@@ -253,12 +253,11 @@
       <DependentUpon>compilerconfig.json</DependentUpon>
     </None>
     <Content Include="NuGet.config" />
-    <Content Include="HiddenSettings.config" />
-    <None Include="Properties\PublishProfiles\slipping-dev - FTP.pubxml" />
-    <None Include="Properties\PublishProfiles\slipping-dev - Web Deploy.pubxml" />
     <Content Include="Scripts\errors.json" />
-    <None Include="Properties\PublishProfiles\slipping-prod - FTP.pubxml" />
-    <None Include="Properties\PublishProfiles\slipping-prod - Web Deploy.pubxml" />
+    <None Include="Properties\PublishProfiles\slipping-prod-next - FTP.pubxml" />
+    <None Include="Properties\PublishProfiles\slipping-prod-next - Web Deploy.pubxml" />
+    <None Include="Properties\PublishProfiles\slipping-test - FTP.pubxml" />
+    <None Include="Properties\PublishProfiles\slipping-test - Web Deploy.pubxml" />
     <None Include="Scripts\jquery-1.10.2.intellisense.js" />
     <Content Include="Scripts\jquery-1.10.2.js" />
     <Content Include="Scripts\jquery-1.10.2.min.js" />
@@ -271,9 +270,6 @@
     <Content Include="Web.config">
       <SubType>Designer</SubType>
     </Content>
-    <Content Include="Web.Debug.config">
-      <DependentUpon>Web.config</DependentUpon>
-    </Content>
     <Content Include="Web.Release.config">
       <DependentUpon>Web.config</DependentUpon>
       <SubType>Designer</SubType>
@@ -282,11 +278,9 @@
     <Content Include="Views\_ViewStart.cshtml" />
     <Content Include="Views\Shared\Error.cshtml" />
     <Content Include="Views\Shared\_Layout.cshtml" />
-    <Content Include="Views\Home\Index.cshtml" />
     <Content Include="Views\Shared\_LoginPartial.cshtml" />
     <Content Include="Scripts\version.json" />
     <Content Include="Views\Slips\FromDate.cshtml" />
-    <Content Include="Views\View.cshtml" />
     <Content Include="Views\Slips\ToDate.cshtml" />
     <Content Include="Views\Slips\Index.cshtml" />
     <Content Include="Views\Shared\NotFound.cshtml" />
@@ -296,11 +290,11 @@
     <Content Include="Views\Slips\CheckYourAnswers.cshtml" />
     <Content Include="Views\Slips\Confirmation.cshtml" />
     <Content Include="Views\Slips\Review.cshtml" />
-    <Content Include="Views\Slips\Deleted.cshtml" />
     <Content Include="Views\Slips\Cancelled.cshtml" />
     <Content Include="Views\Shared\_ValidationSummary.cshtml" />
     <None Include="Web.Dev.config">
       <DependentUpon>Web.config</DependentUpon>
+      <SubType>Designer</SubType>
     </None>
     <None Include="Web.Test.config">
       <DependentUpon>Web.config</DependentUpon>

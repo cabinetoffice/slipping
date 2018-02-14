@@ -1,8 +1,6 @@
 ﻿using System;
-using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
-using System.Linq;
-using System.Web;
+using Triad.CabinetOffice.Slipping.Data.Extensions;
 
 namespace Triad.CabinetOffice.Slipping.Web.Attributes
 {
@@ -14,7 +12,7 @@ namespace Triad.CabinetOffice.Slipping.Web.Attributes
             if (value is DateTime)
             {
                 DateTime dateValue = Convert.ToDateTime(value);
-                return dateValue < DateTime.Now.AddYears(5).Date;
+                return dateValue < DateTime.UtcNow.ToUkTimeFromUtc().AddYears(5).Date;
             }
             else
             {

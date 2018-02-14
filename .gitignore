@@ -267,3 +267,9 @@ HiddenSettings.config
 *.pyc
 /Triad.CabinetOffice/Triad.CabinetOffice.Slipping.Web/Properties/PublishProfiles/slipping-prod - FTP.pubxml
 /Triad.CabinetOffice/Triad.CabinetOffice.Slipping.Web/Properties/PublishProfiles/slipping-prod - Web Deploy.pubxml
+/Triad.CabinetOffice.Slipping/Triad.CabinetOffice.Slipping.Web/Properties/PublishProfiles/slipping-prod-next - FTP.pubxml
+/Triad.CabinetOffice.Slipping/Triad.CabinetOffice.Slipping.Web/Properties/PublishProfiles/slipping-prod-next - Web Deploy.pubxml
+/Triad.CabinetOffice.Slipping/Triad.CabinetOffice.Slipping.Web/Properties/PublishProfiles/slipping-test - FTP.pubxml
+/Triad.CabinetOffice.Slipping/Triad.CabinetOffice.Slipping.Web/Properties/PublishProfiles/slipping-test - Web Deploy.pubxml
+/Triad.CabinetOffice.Slipping/Triad.CabinetOffice.SlippingPublic.Web/Properties/PublishProfiles/slippingpublic-prod - FTP.pubxml
+/Triad.CabinetOffice.Slipping/Triad.CabinetOffice.SlippingPublic.Web/Properties/PublishProfiles/slippingpublic-prod - Web Deploy.pubxml

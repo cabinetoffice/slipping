@@ -28,18 +28,21 @@ namespace Triad.CabinetOffice.Slipping.Data.EntityFramework.Slipping
         public System.DateTime FromDate { get; set; }
         public Nullable<System.DateTime> ToDate { get; set; }
         public string DecisionNotes { get; set; }
-        public int CreatedBy { get; set; }
+        public Nullable<int> CreatedBy { get; set; }
         public System.DateTime CreatedDate { get; set; }
         public int LastChangedBy { get; set; }
         public System.DateTime LastChangedDate { get; set; }
+        public Nullable<bool> OppositionMPsAttending { get; set; }
         public string Location { get; set; }
         public Nullable<int> TravelTimeInHours { get; set; }
-        public Nullable<bool> OppositionMPsAttending { get; set; }
-        public Nullable<int> PawsAbsenceRequestID { get; set; }
+        public Nullable<int> PAWSAbsenceRequestID { get; set; }
     
+        public virtual AbsenceRequestStatus AbsenceRequestStatus { get; set; }
+        public virtual MembersOfParliament MembersOfParliament { get; set; }
         public virtual User User { get; set; }
         public virtual User User1 { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<AbsenceRequestOppositionMP> AbsenceRequestOppositionMPs { get; set; }
+        public virtual AbsenceRequestReason AbsenceRequestReason { get; set; }
     }
 }
