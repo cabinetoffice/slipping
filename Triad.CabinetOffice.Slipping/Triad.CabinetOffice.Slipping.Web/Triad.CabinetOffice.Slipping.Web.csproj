@@ -258,6 +258,8 @@
     <None Include="hiddenConnectionStrings.config" />
     <None Include="Properties\PublishProfiles\slipping-dev - FTP.pubxml" />
     <None Include="Properties\PublishProfiles\slipping-dev - Web Deploy.pubxml" />
+    <None Include="Properties\PublishProfiles\slipping-prod - FTP.pubxml" />
+    <None Include="Properties\PublishProfiles\slipping-prod - Web Deploy.pubxml" />
     <None Include="Properties\PublishProfiles\slipping-prod-next - FTP.pubxml" />
     <None Include="Properties\PublishProfiles\slipping-prod-next - Web Deploy.pubxml" />
     <None Include="Properties\PublishProfiles\slipping-test - FTP.pubxml" />
