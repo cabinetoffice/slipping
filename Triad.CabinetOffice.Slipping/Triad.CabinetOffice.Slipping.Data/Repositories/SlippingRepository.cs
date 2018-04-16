@@ -198,8 +198,8 @@ namespace Triad.CabinetOffice.Slipping.Data.Repositories
             {
                 result = db.AbsenceRequests.Where(a => a.MPID == MPID && a.StatusID != 0).ToList().Select(ar => new SlipSummary
                 {
-                    FromDate = ar.FromDate,
-                    ToDate = (DateTime)ar.ToDate,
+                    FromDate = ar.FromDate.ToUkTimeFromUtc(),
+                    ToDate = ar.ToDate.HasValue ? ar.ToDate.Value.ToUkTimeFromUtc() : ar.FromDate.ToUkTimeFromUtc(),
                     ID = ar.ID,
                     Status = ar.AbsenceRequestStatus.Status,
                     IsUnsubmitted = false,
