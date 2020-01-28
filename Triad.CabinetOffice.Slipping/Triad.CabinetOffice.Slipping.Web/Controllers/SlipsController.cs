@@ -126,6 +126,16 @@ namespace Triad.CabinetOffice.Slipping.Web.Controllers
             }
         }
 
+        private string GetDateForEmail(DateTime fromDate, DateTime toDate)
+        {
+            string displayDate = fromDate.ToString("dd/MM/yyyy");
+            if (fromDate.Date != toDate.Date)
+            {
+                displayDate += " - " + toDate.ToString("dd/MM/yyyy");
+            }
+            return displayDate;
+        }
+
         private bool CancelSlip(SlipSummary slip, int userId)
         {
             return SlippingRepository.CancelSlip(userId, slip);
@@ -627,6 +637,8 @@ namespace Triad.CabinetOffice.Slipping.Web.Controllers
                 {
                     SubmitSlippingRequest(slippingRequest);
 
+                    string displayDate = GetDateForEmail(slippingRequest.FromDate, (DateTime)slippingRequest.ToDate);
+
                     if (!string.IsNullOrEmpty(NotifyTemplateId_SlippingRequestReceivedUser))
                     {
                         if (!SlippingUser.IsMP)
@@ -634,7 +646,7 @@ namespace Triad.CabinetOffice.Slipping.Web.Controllers
                             SendNotification(NotifyTemplateId_SlippingRequestReceivedUser, SlippingUser.EmailAddress, new Dictionary<string, dynamic>()
                             {
                                 { "name", string.Format("{0} {1}", SlippingUser.Forenames, SlippingUser.Surname) },
-                                { "absence_date", slippingRequest.FromDate.ToString("dd/MM/yyyy") },
+                                { "absence_date", displayDate },
                                 { "reference", slippingRequest.ID }
                             });
                         }
@@ -646,7 +658,7 @@ namespace Triad.CabinetOffice.Slipping.Web.Controllers
                             SendNotification(NotifyTemplateId_SlippingRequestReceivedUser, GetMPEmailAddress(slippingRequest.MPID, SlippingUser.ID), new Dictionary<string, dynamic>()
                             {
                                 { "name", mp.Name },
-                                { "absence_date", slippingRequest.FromDate.ToString("dd/MM/yyyy") },
+                                { "absence_date", displayDate },
                                 { "reference", slippingRequest.ID }
                             });
                         }
@@ -665,7 +677,7 @@ namespace Triad.CabinetOffice.Slipping.Web.Controllers
                         SendNotification(NotifyTemplateId_SlippingRequestReceivedAdmin, SlippingRequestReviewersEmailAddress, new Dictionary<string, dynamic>()
                         {
                             { "name", string.Format("{0} {1}", SlippingUser.Forenames, SlippingUser.Surname) },
-                            { "absence_date", slippingRequest.FromDate.ToString("dd/MM/yyyy") },
+                            { "absence_date", displayDate },
                             { "reference", slippingRequest.ID }
                         });
                     }
@@ -726,11 +738,13 @@ namespace Triad.CabinetOffice.Slipping.Web.Controllers
             var slip = SlippingRepository.GetSummaries(MPID, SlippingUser.ID).FirstOrDefault(s => s.ID == id);
             if (slip != null && slip.Status != "Refused" && slip.Status != "Revoked" && slip.Status != "Cancelled")
             {
+                string displayDate = GetDateForEmail(slip.FromDate, slip.ToDate);
+
                 if (CancelSlip(slip, SlippingUser.ID))
                 {
                     Dictionary<string, dynamic> parameters = new Dictionary<string, dynamic>()
                     {
-                        { "absence_date", slip.FromDate.ToString("dd/MM/yyyy") },
+                        { "absence_date", displayDate },
                         { "name", string.Format("{0} {1}", SlippingUser.Forenames, SlippingUser.Surname) },
                         { "reference", slip.ID }
                     };
@@ -741,7 +755,7 @@ namespace Triad.CabinetOffice.Slipping.Web.Controllers
                         {
                             SendNotification(NotifyTemplateId_SlippingRequestCancelledUser, SlippingUser.EmailAddress, new Dictionary<string, dynamic>()
                             {
-                                { "absence_date", slip.FromDate.ToString("dd/MM/yyyy") },
+                                { "absence_date", displayDate },
                                 { "name", string.Format("{0} {1}", SlippingUser.Forenames, SlippingUser.Surname) },
                                 { "reference", slip.ID }
                             });
@@ -753,7 +767,7 @@ namespace Triad.CabinetOffice.Slipping.Web.Controllers
                         {
                             SendNotification(NotifyTemplateId_SlippingRequestCancelledUser, GetMPEmailAddress(slip.MPID, SlippingUser.ID), new Dictionary<string, dynamic>()
                             {
-                                { "absence_date", slip.FromDate.ToString("dd/MM/yyyy") },
+                                { "absence_date", displayDate },
                                 { "name", mp.Name },
                                 { "reference", slip.ID }
                             });
@@ -772,7 +786,7 @@ namespace Triad.CabinetOffice.Slipping.Web.Controllers
                     {
                         SendNotification(NotifyTemplateId_SlippingRequestCancelledAdmin, SlippingRequestReviewersEmailAddress, new Dictionary<string, dynamic>()
                         {
-                            { "absence_date", slip.FromDate.ToString("dd/MM/yyyy") },
+                            { "absence_date", displayDate },
                             { "name", string.Format("{0} {1}", SlippingUser.Forenames, SlippingUser.Surname) },
                             { "reference", slip.ID }
                         });
