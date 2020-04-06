@@ -111,6 +111,7 @@
     <Compile Include="Models\RequestReason.cs" />
     <Compile Include="Models\SlipSummary.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Repositories\HealthCheckRepository.cs" />
     <Compile Include="Repositories\MPRepository.cs" />
     <Compile Include="Repositories\ReasonRepository.cs" />
     <Compile Include="Repositories\SlippingRepository.cs" />
